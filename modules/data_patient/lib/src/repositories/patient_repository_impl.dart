@@ -1073,6 +1073,11 @@ class PatientRepositoryIml extends PatientRepository {
    return remote.putMedicalRecordVisa(id, request);
   }
 
+  @override
+  Future<Paginated<Patient>> newChatPatients() {
+    return remote.newChatPatients();
+  }
+
 
   
  

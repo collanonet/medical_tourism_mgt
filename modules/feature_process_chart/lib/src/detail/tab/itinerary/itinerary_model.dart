@@ -236,6 +236,14 @@ class ItineraryModel {
     Type(type: '変更'),
     Type(type: 'キャンセル'),
     Type(type: 'Final'),
+    Type(type: '種別'),
+  ]);
+
+  ValueNotifier<List<TransportationType>> transportation = ValueNotifier([
+    TransportationType(type: '電車'),
+    TransportationType(type: 'バス'),
+    TransportationType(type: 'タクシー'),
+    TransportationType(type: 'モノレール'),
   ]);
 }
 
@@ -243,4 +251,9 @@ class Type {
   final String type;
 
   Type({required this.type});
+}
+
+class TransportationType {
+  final String type;
+  TransportationType({required this.type});
 }

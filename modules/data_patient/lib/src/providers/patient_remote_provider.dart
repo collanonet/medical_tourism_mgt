@@ -837,4 +837,8 @@ class PatientRemoteProvider {
     return apiService.putMedicalRecordVisa(id,request);
   }
 
+  Future<Paginated<Patient>> newChatPatients() {
+    return apiService.newChatPatients();
+  }
+
 }

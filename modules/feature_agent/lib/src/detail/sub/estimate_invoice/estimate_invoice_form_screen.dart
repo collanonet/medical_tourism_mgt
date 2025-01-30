@@ -12,17 +12,20 @@ import 'package:reactive_forms/reactive_forms.dart';
 // Project imports:
 import 'estimate_invoice_model.dart';
 
-class Popup extends StatelessWidget {
-  const Popup({super.key, this.title});
+class EstimateInvoiceFormScreen extends StatelessWidget {
+  const EstimateInvoiceFormScreen({super.key, this.title});
 
   final String? title;
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
-    final formatter = InputFormatter();
-    return Column(
+    return ColumnSeparated(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
+      separatorBuilder: (BuildContext context, int index) {
+        return const SizedBox(height: 16);
+      },
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,8 +51,11 @@ class Popup extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Column(
+              child: ColumnSeparated(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 16);
+                },
                 children: [
                   Text(
                     '書類名',
@@ -71,8 +77,11 @@ class Popup extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             Expanded(
-              child: Column(
+              child: ColumnSeparated(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 16);
+                },
                 children: [
                   Text(
                     '発行元',
@@ -96,23 +105,17 @@ class Popup extends StatelessWidget {
             const Expanded(
               child: SizedBox.shrink(),
             ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            const Expanded(
-              child: SizedBox.shrink(),
-            )
           ],
-        ),
-        SizedBox(
-          height: context.appTheme.spacing.marginMedium,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Column(
+              child: ColumnSeparated(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 16);
+                },
                 children: [
                   Text(
                     '発行日',
@@ -123,7 +126,6 @@ class Popup extends StatelessWidget {
                     child: ReactiveDatePickerField(
                       formControlName: 'dateOfIssue',
                       label: '発行日',
-
                     ),
                   ),
                 ],
@@ -132,9 +134,12 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-           Expanded(
-              child: Column(
+            Expanded(
+              child: ColumnSeparated(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 16);
+                },
                 children: [
                   Text(
                     '支払期限',
@@ -156,23 +161,18 @@ class Popup extends StatelessWidget {
             const Expanded(
               child: SizedBox.shrink(),
             ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            const Expanded(
-              child: SizedBox.shrink(),
-            )
           ],
         ),
-        SizedBox(
-          height: context.appTheme.spacing.marginMedium,
-        ),
+
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Column(
+              child: ColumnSeparated(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 16);
+                },
                 children: [
                   Text(
                     '入金日',
@@ -191,9 +191,12 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-           Expanded(
-              child: Column(
+            Expanded(
+              child: ColumnSeparated(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 16);
+                },
                 children: [
                   Text(
                     '支払い方法',
@@ -217,17 +220,9 @@ class Popup extends StatelessWidget {
             const Expanded(
               child: SizedBox.shrink(),
             ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            const Expanded(
-              child: SizedBox.shrink(),
-            )
           ],
         ),
-         SizedBox(
-          height: context.appTheme.spacing.marginMedium,
-        ),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,

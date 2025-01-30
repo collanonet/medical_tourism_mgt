@@ -144,7 +144,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                       children: [
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospitalType1',
+                            formControlName: 'universityHospitalType',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,
@@ -159,7 +159,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                         ),
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospitalType2',
+                            formControlName: 'nationalAndPublicHospitalsType',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,
@@ -174,7 +174,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                         ),
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospitalType3',
+                            formControlName: 'privateHospitalType',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,
@@ -189,7 +189,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                         ),
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospitalType4',
+                            formControlName: 'clinicType',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,
@@ -203,6 +203,14 @@ class _HospitalFilterState extends State<HospitalFilter> {
                           ),
                         ),
                         const Spacer(),
+                        OutlinedButton(
+                          onPressed: () {
+                            model.fetchHospitals();
+                            formGroup.reset();
+                          },
+                          child: const Text('クリア'),
+                        ),
+                        SizedBox(width: 16),
                         ElevatedButton(
                           onPressed: () {
                             model.fetchHospitals(form: formGroup);

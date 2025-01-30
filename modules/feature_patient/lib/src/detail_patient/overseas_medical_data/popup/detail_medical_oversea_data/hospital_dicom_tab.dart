@@ -1,18 +1,39 @@
 // Flutter imports:
+import 'package:core_utils/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:provider/provider.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class HospitalDICOMTab extends StatelessWidget {
-  const HospitalDICOMTab({
+import '../../overseas_medical_data_model.dart';
+import 'detail_medical_oversea_form.dart';
+
+class HospitalDICOMTab extends StatefulWidget {
+  HospitalDICOMTab({
     super.key,
-    this.medicalRecordOverseaData,
+    required this.medicalRecordOverseaData,
   });
 
-  final MedicalRecordOverseaData? medicalRecordOverseaData;
+  final MedicalRecordOverseaData medicalRecordOverseaData;
+
+  @override
+  State<HospitalDICOMTab> createState() => _HospitalDICOMTabState();
+}
+
+class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
+  late MedicalRecordOverseaData medicalRecordOverseaData;
+
+  @override
+  void initState() {
+    super.initState();
+    medicalRecordOverseaData = widget.medicalRecordOverseaData;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,40 +48,91 @@ class HospitalDICOMTab extends StatelessWidget {
             return const SizedBox(height: 8);
           },
           children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                isDense: true,
-                hintText: 'コメント 大阪府済生会吹田病院',
-              ),
-              enabled: false,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                isDense: true,
-                hintText: 'コメント 自社',
-              ),
-              enabled: false,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                isDense: true,
-                hintText: 'コメント 大阪府済生会吹田病院',
-              ),
-              enabled: false,
-            ),
-            if (medicalRecordOverseaData?.file != null &&
-                medicalRecordOverseaData?.file?.isNotEmpty == true)
+            if (medicalRecordOverseaData.commentDicomFile != null &&
+                medicalRecordOverseaData.commentDicomFile?.isNotEmpty == true)
+              ...medicalRecordOverseaData.commentDicomFile!
+                  .map((e) => TextFormField(
+                        controller: TextEditingController(
+                          text: e.comment ?? '',
+                        ),
+                        decoration: InputDecoration(
+                          isDense: true,
+                          label: Text(
+                            e.role == 'Admin'
+                                ? '管理者'
+                                : e.role == 'Hospital'
+                                    ? '病院'
+                                    : e.role == 'Agent'
+                                        ? 'エージェント'
+                                        : '',
+                          ),
+                        ),
+                        enabled: false,
+                        readOnly: true,
+                      )),
+            ValueListenableBuilder(
+                valueListenable:
+                    context.watch<OverseasMedicalDataModel>().submitComment,
+                builder: (context, value, _) {
+                  return Skeletonizer(
+                    enabled: value.data == true,
+                    child: ReactiveFormBuilder(
+                        form: () => detailMedicalOverseaForm()..markAllAsTouched(),
+                        builder: (context, form, __) {
+                          return ValueListenableListener(
+                            valueListenable: context
+                                .read<OverseasMedicalDataModel>()
+                                .submitComment,
+                            onListen: () {
+                              var data = context
+                                  .read<OverseasMedicalDataModel>()
+                                  .submitComment
+                                  .value;
+
+                              if (data.hasData) {
+                                form.reset();
+                                medicalRecordOverseaData = data.requireData;
+                                setState(() {});
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('コメントが送信されました'),
+                                  ),
+                                );
+                              }
+                            },
+                            child: ReactiveTextField(
+                              formControlName: 'comment',
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                hintText: '病院名',
+                              ),
+                              onSubmitted: (control) {
+                                context
+                                    .read<OverseasMedicalDataModel>()
+                                    .commentDicomFile(
+                                      widget.medicalRecordOverseaData?.id ?? '',
+                                      control.value?.toString() ?? '',
+                                    );
+                              },
+                            ),
+                          );
+                        }),
+                  );
+                }),
+            if (widget.medicalRecordOverseaData.file != null &&
+                widget.medicalRecordOverseaData.file?.isNotEmpty == true)
               Expanded(
                 child: DicomWebViewer(
-                    seriesId:
-                        medicalRecordOverseaData?.file?.first.parentSeries ??
-                            ''),
+                    seriesId: widget.medicalRecordOverseaData.file?.first
+                            .parentSeries ??
+                        ''),
               ),
-            if (medicalRecordOverseaData?.sharedUrl != null &&
-                medicalRecordOverseaData?.sharedUrl?.isNotEmpty == true)
+            if (widget.medicalRecordOverseaData.sharedUrl != null &&
+                widget.medicalRecordOverseaData.sharedUrl?.isNotEmpty == true)
               Expanded(
                 child: WebView(
-                  uri: Uri.parse(medicalRecordOverseaData?.sharedUrl ?? ''),
+                  uri: Uri.parse(
+                      widget.medicalRecordOverseaData.sharedUrl ?? ''),
                 ),
               ),
           ],

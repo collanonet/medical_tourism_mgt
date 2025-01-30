@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,6 +9,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -91,8 +93,8 @@ class _AgentBasicInformationScreenState
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -113,8 +115,8 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -146,8 +148,8 @@ class _AgentBasicInformationScreenState
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -168,8 +170,7 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      Expanded(
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -201,8 +202,8 @@ class _AgentBasicInformationScreenState
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -234,8 +235,8 @@ class _AgentBasicInformationScreenState
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -275,8 +276,8 @@ class _AgentBasicInformationScreenState
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -292,9 +293,9 @@ class _AgentBasicInformationScreenState
                                                   context.textTheme.bodyMedium,
                                             ),
                                             const ReactiveDatePickerField(
-                                                formControlName:
-                                                    'transactionStartDate',
-                                                ),
+                                              formControlName:
+                                                  'transactionStartDate',
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -320,8 +321,8 @@ class _AgentBasicInformationScreenState
                                               return const SizedBox(width: 16);
                                             },
                                             children: [
-                                              IntrinsicWidth(
-                                                stepWidth: 300,
+                                              SizedBox(
+                                                width: 300,
                                                 child: ColumnSeparated(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment
@@ -364,8 +365,8 @@ class _AgentBasicInformationScreenState
                                                     ),
                                                     Row(
                                                       children: [
-                                                        IntrinsicWidth(
-                                                          stepWidth: 300,
+                                                        SizedBox(
+                                                          width: 300,
                                                           child:
                                                               ReactiveTextField(
                                                             formControlName:
@@ -468,8 +469,8 @@ class _AgentBasicInformationScreenState
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -491,8 +492,8 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -601,8 +602,8 @@ class _AgentBasicInformationScreenState
                                           return const SizedBox(width: 16);
                                         },
                                         children: [
-                                          IntrinsicWidth(
-                                            stepWidth: 300,
+                                          SizedBox(
+                                            width: 300,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -637,8 +638,8 @@ class _AgentBasicInformationScreenState
                                           return const SizedBox(width: 16);
                                         },
                                         children: [
-                                          IntrinsicWidth(
-                                            stepWidth: 300,
+                                          SizedBox(
+                                            width: 300,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -661,8 +662,8 @@ class _AgentBasicInformationScreenState
                                               ],
                                             ),
                                           ),
-                                          IntrinsicWidth(
-                                            stepWidth: 300,
+                                          SizedBox(
+                                            width: 300,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -685,8 +686,8 @@ class _AgentBasicInformationScreenState
                                               ],
                                             ),
                                           ),
-                                          IntrinsicWidth(
-                                            stepWidth: 300,
+                                          SizedBox(
+                                            width: 300,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -721,8 +722,8 @@ class _AgentBasicInformationScreenState
                                           return const SizedBox(width: 16);
                                         },
                                         children: [
-                                          IntrinsicWidth(
-                                            stepWidth: 300,
+                                          SizedBox(
+                                            width: 300,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -757,8 +758,8 @@ class _AgentBasicInformationScreenState
                                           return const SizedBox(width: 16);
                                         },
                                         children: [
-                                          IntrinsicWidth(
-                                            stepWidth: 300,
+                                          SizedBox(
+                                            width: 300,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -789,8 +790,8 @@ class _AgentBasicInformationScreenState
                                               ],
                                             ),
                                           ),
-                                          IntrinsicWidth(
-                                            stepWidth: 300,
+                                          SizedBox(
+                                            width: 300,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -841,8 +842,8 @@ class _AgentBasicInformationScreenState
                                                       width: 16);
                                                 },
                                                 children: [
-                                                  IntrinsicWidth(
-                                                    stepWidth: 300,
+                                                  SizedBox(
+                                                    width: 300,
                                                     child: ColumnSeparated(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -891,8 +892,8 @@ class _AgentBasicInformationScreenState
                                                       ],
                                                     ),
                                                   ),
-                                                  IntrinsicWidth(
-                                                    stepWidth: 300,
+                                                  SizedBox(
+                                                    width: 300,
                                                     child: ColumnSeparated(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -912,8 +913,8 @@ class _AgentBasicInformationScreenState
                                                         ),
                                                         Row(
                                                           children: [
-                                                            IntrinsicWidth(
-                                                              stepWidth: 300,
+                                                            SizedBox(
+                                                              width: 300,
                                                               child:
                                                                   ReactiveTextField(
                                                                 formControlName:

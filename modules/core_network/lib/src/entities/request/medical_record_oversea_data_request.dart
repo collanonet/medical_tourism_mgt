@@ -9,6 +9,7 @@ part 'medical_record_oversea_data_request.g.dart';
 @JsonSerializable()
 class MedicalRecordOverseaDataRequest {
   List<DicomDetailResponse>? file;
+  List<CommentDicomFile>? commentDicomFile;
   String? hospitalName;
   String? category;
   String? documentName;
@@ -24,6 +25,7 @@ class MedicalRecordOverseaDataRequest {
 
   MedicalRecordOverseaDataRequest({
     this.file,
+    this.commentDicomFile,
     this.hospitalName,
     this.category,
     this.documentName,

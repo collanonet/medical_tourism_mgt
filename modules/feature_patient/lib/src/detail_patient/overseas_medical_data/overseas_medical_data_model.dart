@@ -102,8 +102,6 @@ class OverseasMedicalDataModel {
     FormGroup formGroup,
   ) async {
     try {
-      final token = await GetIt.I<AuthRepository>().getAccessToken();
-      logger.d('token: $token');
       createMedicalOverseaData.value = const AsyncData(loading: true);
 
       String? qrCode;
@@ -175,6 +173,62 @@ class OverseasMedicalDataModel {
     } catch (e) {
       logger.e(e);
       delete.value = AsyncData(error: e.toString());
+    }
+  }
+
+  ValueNotifier<AsyncData<MedicalRecordOverseaData>> submitComment =
+      ValueNotifier(const AsyncData());
+
+  void commentDicomFile(
+    String id,
+    String comment,
+  ) async {
+    try {
+      submitComment.value = const AsyncData(loading: true);
+      MedicalRecordOverseaData data = medicalRecordsOverseasData
+          .value.requireData
+          .firstWhere((element) => element.id == id);
+
+      CommentDicomFile commentDicomFile = CommentDicomFile(
+        comment: comment,
+        role: 'Admin',
+      );
+
+      if (data.commentDicomFile != null) {
+        data.commentDicomFile!.add(commentDicomFile);
+      } else {
+        data.commentDicomFile = [commentDicomFile];
+      }
+
+      var request = MedicalRecordOverseaDataRequest(
+        file: data.file,
+        commentDicomFile: data.commentDicomFile,
+        hospitalName: data.hospitalName,
+        category: data.category,
+        documentName: data.documentName,
+        issueDate: data.issueDate,
+        sharedUrl: data.sharedUrl,
+        password: data.password,
+        expirationDate: data.expirationDate,
+        qrCode: data.qrCode,
+        medicalRecord: data.medicalRecord,
+        commentHospital1: data.commentHospital1,
+        commentOurCompany: data.commentOurCompany,
+        commentHospital2: data.commentHospital2,
+      );
+      var response = await patientRepository.putMedicalRecordOverseaData(
+        id,
+        request,
+      );
+      medicalRecordsOverseasData.value = AsyncData(
+        data: medicalRecordsOverseasData.value.requireData
+          ..removeWhere((element) => element.id == id)
+          ..add(response),
+      );
+      submitComment.value = AsyncData(data: response);
+    } catch (e) {
+      logger.e(e);
+      submitComment.value = AsyncData(error: e.toString());
     }
   }
 }

@@ -17,7 +17,9 @@ import 'contrant_file.dart';
 
 class ContractScreen extends StatefulWidget {
   const ContractScreen({super.key, required this.id});
+
   final String id;
+
   @override
   State<ContractScreen> createState() => _ContractScreenState();
 }
@@ -180,12 +182,13 @@ class _ContractScreenState extends State<ContractScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                          value.requireData[index].updatedAt ==
+                                          value.requireData[index].uploadOn ==
                                                   null
-                                              ? ''
+                                              ? Dates.formShortDate(value
+                                                  .requireData[index].updatedAt)
                                               : Dates.formShortDate(value
                                                   .requireData[index]
-                                                  .updatedAt)),
+                                                  .uploadOn)),
                                     ),
                                   ],
                                 ),
@@ -241,64 +244,63 @@ class _ContractScreenState extends State<ContractScreen> {
                             }
                           },
                           child: ValueListenableBuilder(
-                              valueListenable:
-                                  context.read<ContractModel>().delete,
-                              builder: (context, value, _) {
-                                return OutlinedButton(
-                                    onPressed: sels.isEmpty || value.loading
-                                        ? null
-                                        : () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (_) {
-                                                return Provider.value(
-                                                  value: context
-                                                      .read<ContractModel>(),
-                                                  child: AlertDialog(
-                                                    title: const Text('削除確認'),
-                                                    content: const Text(
-                                                        '選択した書類を削除しますか？'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child:
-                                                            const Text('キャンセル'),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          context
-                                                              .read<
-                                                                  ContractModel>()
-                                                              .deleteContractAgent(
-                                                                  sels);
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child:
-                                                            const Text('削除する'),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                    child: WithLoadingButton(
-                                      isLoading: value.loading,
-                                      loadingColor:
-                                          context.appTheme.primaryColor,
-                                      child: Text(
-                                        '削除する',
-                                        style: context.textTheme.labelLarge
-                                            ?.copyWith(
-                                                color: context
-                                                    .appTheme.primaryColor),
-                                      ),
-                                    ));
-                              },),
+                            valueListenable:
+                                context.read<ContractModel>().delete,
+                            builder: (context, value, _) {
+                              return OutlinedButton(
+                                  onPressed: sels.isEmpty || value.loading
+                                      ? null
+                                      : () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) {
+                                              return Provider.value(
+                                                value: context
+                                                    .read<ContractModel>(),
+                                                child: AlertDialog(
+                                                  title: const Text('削除確認'),
+                                                  content: const Text(
+                                                      '選択した書類を削除しますか？'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child:
+                                                          const Text('キャンセル'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<
+                                                                ContractModel>()
+                                                            .deleteContractAgent(
+                                                                sels);
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text('削除する'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                  child: WithLoadingButton(
+                                    isLoading: value.loading,
+                                    loadingColor: context.appTheme.primaryColor,
+                                    child: Text(
+                                      '削除する',
+                                      style: context.textTheme.labelLarge
+                                          ?.copyWith(
+                                              color: context
+                                                  .appTheme.primaryColor),
+                                    ),
+                                  ));
+                            },
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,

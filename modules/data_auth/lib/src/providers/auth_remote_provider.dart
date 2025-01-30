@@ -62,4 +62,9 @@ class AuthRemoteProvider extends AuthProvider {
   Future<void> clearStore() {
     throw UnimplementedError();
   }
+
+  @override
+  Future<User> getUser() {
+    return apiService.getUser();
+  }
 }

@@ -141,6 +141,11 @@ FormGroup basicInformationForm() {
         'faxNumber': FormControl<String>(),
       }),
     ]),
+    'deleteDoctors': FormArray([
+      FormGroup({
+        '_id': FormControl<String>(),
+      }),
+    ]),
     'addDoctorProfile': FormArray([
       FormGroup({
         '_id': FormControl<String>(),

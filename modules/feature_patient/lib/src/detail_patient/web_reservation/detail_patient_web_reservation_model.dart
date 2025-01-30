@@ -115,7 +115,7 @@ class DetailPatientWebReservationModel {
       hospital.value = AsyncData(data: result.first);
 
       if (hospital.value.hasData) {
-        insertHospitalSchedule();
+        insertHospitalSchedule(search: search);
         getDoctorsByHospitalId(hospital.value.requireData.id);
       }
     } catch (e) {
@@ -124,10 +124,10 @@ class DetailPatientWebReservationModel {
     }
   }
 
-  void insertHospitalSchedule() {
+  void insertHospitalSchedule({String? search}) {
     var data = hospital.value.requireData;
     formGroup.control('medicalInstitutionName').value =
-        data.hospitalNameKatakana;
+        search ?? data.hospitalNameChinese;
     formGroup.control('department1').value = data.department1;
     formGroup.control('department2').value = data.department2;
     formGroup.control('shift1').value = data.shift1;

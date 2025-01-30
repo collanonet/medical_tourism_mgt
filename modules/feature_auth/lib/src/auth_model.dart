@@ -19,13 +19,17 @@ class AuthModel extends ChangeNotifier {
 
   PermissionRole get userRole => _userRole;
 
+  User? get user => _user;
+  User? _user;
+
   Future<void> initialize() async {
     logger.d('auth initialize');
     try {
       _userRole = await authRepository.getPermissionRole();
+      _user = await authRepository.getUser();
+      notifyListeners();
     } catch (e) {
       _userRole = PermissionRole.guest;
-    } finally {
       notifyListeners();
     }
   }
@@ -46,6 +50,7 @@ class AuthModel extends ChangeNotifier {
   }
 
   AsyncData<AuthData> _loginData = const AsyncData<AuthData>();
+
   AsyncData<AuthData> get loginData => _loginData;
 
   Future<void> logIn(String email, String password) async {

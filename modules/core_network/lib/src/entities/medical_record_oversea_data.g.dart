@@ -13,6 +13,9 @@ MedicalRecordOverseaData _$MedicalRecordOverseaDataFromJson(
       file: (json['file'] as List<dynamic>?)
           ?.map((e) => DicomDetailResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      commentDicomFile: (json['commentDicomFile'] as List<dynamic>?)
+          ?.map((e) => CommentDicomFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
       hospitalName: json['hospitalName'] as String?,
       category: json['category'] as String?,
       documentName: json['documentName'] as String?,
@@ -38,6 +41,7 @@ Map<String, dynamic> _$MedicalRecordOverseaDataToJson(
     <String, dynamic>{
       '_id': instance.id,
       'file': instance.file,
+      'commentDicomFile': instance.commentDicomFile,
       'hospitalName': instance.hospitalName,
       'category': instance.category,
       'documentName': instance.documentName,
@@ -52,4 +56,16 @@ Map<String, dynamic> _$MedicalRecordOverseaDataToJson(
       'medicalRecord': instance.medicalRecord,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
+    };
+
+CommentDicomFile _$CommentDicomFileFromJson(Map<String, dynamic> json) =>
+    CommentDicomFile(
+      role: json['role'] as String?,
+      comment: json['comment'] as String?,
+    );
+
+Map<String, dynamic> _$CommentDicomFileToJson(CommentDicomFile instance) =>
+    <String, dynamic>{
+      'role': instance.role,
+      'comment': instance.comment,
     };

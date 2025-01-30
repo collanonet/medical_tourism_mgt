@@ -7,6 +7,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
 import '../g_and_a_model.dart';
@@ -25,254 +26,334 @@ class _QAndANewRegistrationSectionState
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup)
         .control('newRegistrationSection') as FormGroup;
-    return ReactiveForm(
-      formGroup: formGroup,
-      child: ColumnSeparated(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        separatorBuilder: (context, index) => SizedBox(
-          height: context.appTheme.spacing.marginMedium,
-        ),
-        children: [
-          Text(
-            'Q＆A新規登録',
-            style: context.textTheme.bodyLarge,
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: const Color(0xffF8F8D9),
-                borderRadius: BorderRadius.circular(6)),
-            padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-            child: ColumnSeparated(
-                separatorBuilder: (context, index) => SizedBox(
-                      height: context.appTheme.spacing.marginMedium,
-                    ),
-                children: [
-                  RowSeparated(
-                      separatorBuilder: (context, index) => SizedBox(
-                            width: context.appTheme.spacing.formSpacing,
+    return ReactiveFormConsumer(
+      builder: (context, form, child) {
+        return ValueListenableBuilder(
+            valueListenable:
+                context.watch<QAndAModel>().newRegistrationHospitalData,
+            builder: (context, value, child) {
+              return ValueListenableBuilder(
+                valueListenable: context.watch<QAndAModel>().editData,
+                builder: (context, data, child) {
+                  return Skeletonizer(
+                    enabled: value.loading || data.loading,
+                    child: ReactiveForm(
+                      formGroup: formGroup,
+                      child: ColumnSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: context.appTheme.spacing.marginMedium,
+                        ),
+                        children: [
+                          Text(
+                            'Q＆A新規登録',
+                            style: context.textTheme.bodyLarge,
                           ),
-                      children: [
-                        Expanded(
-                          //flex: 2,
-                          child: ColumnSeparated(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              separatorBuilder: (context, index) => SizedBox(
-                                    height: context
-                                        .appTheme.spacing.marginExtraSmall,
-                                  ),
-                              children: const [
-                                ReactiveDatePickerField(
-                                  formControlName: 'updatedDate',
-                                  label: '更新日',
-                                )
-                              ]),
-                        ),
-                        Expanded(
-                          // flex: 2,
-                          child: ColumnSeparated(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              separatorBuilder: (context, index) => SizedBox(
-                                    height: context
-                                        .appTheme.spacing.marginExtraSmall,
-                                  ),
-                              children: [
-                                Text(
-                                  '更新者',
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                                ReactiveTextField(
-                                  formControlName: 'updatedBy',
-                                )
-                              ]),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: ColumnSeparated(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              separatorBuilder: (context, index) => SizedBox(
-                                    height: context
-                                        .appTheme.spacing.marginExtraSmall,
-                                  ),
-                              children: [
-                                Text(
-                                  '分類',
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                                ReactiveDropdownField(
-                                  formControlName: 'classification',
-                                  items: [
-                                    ...[
-                                      '予約方法について',
-                                      '受診前によくあるお問い合わせ',
-                                      '人間ドッグ予約確定後のお問い合わせ',
-                                      '受診後によくあるお問い合わせ',
-                                      '受診日当日について',
-                                      '胃カメラ検査について',
-                                      '婦人科検査について',
-                                      '結果について'
-                                    ].map((e) => DropdownMenuItem(
-                                          value: e,
-                                          child: Text(e),
-                                        )),
-                                  ],
-                                )
-                              ]),
-                        ),
-                        ColumnSeparated(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            separatorBuilder: (context, index) => SizedBox(
-                                  height:
-                                      context.appTheme.spacing.marginExtraSmall,
-                                ),
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 12),
-                                child: Text(
-                                  '病院とこのQAデータを共有',
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                              ),
-                              RowSeparated(
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginExtraSmall,
-                                      ),
-                                  children: [
-                                    IntrinsicWidth(
-                                      child: ReactiveRadioListTile(
-                                        value: true,
-                                        formControlName:
-                                            'shareThisQADataWithHospitals',
-                                        title: const Text('する'),
-                                      ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: const Color(0xffF8F8D9),
+                                borderRadius: BorderRadius.circular(6)),
+                            padding: EdgeInsets.all(
+                                context.appTheme.spacing.marginMedium),
+                            child: ColumnSeparated(
+                                separatorBuilder: (context, index) => SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      child: ReactiveRadioListTile(
-                                        value: false,
-                                        formControlName:
-                                            'shareThisQADataWithHospitals',
-                                        title: const Text('しない'),
-                                      ),
-                                    )
-                                  ])
-                            ])
-                      ]),
-                  ColumnSeparated(
-                    separatorBuilder: ((context, index) => SizedBox(
-                          height: context.appTheme.spacing.marginExtraSmall,
-                        )),
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        '質問',
-                      ),
-                      ReactiveTextField(
-                        formControlName: 'question',
-                        maxLines: 2,
-                      )
-                    ],
-                  ),
-                  ColumnSeparated(
-                    separatorBuilder: ((context, index) => SizedBox(
-                          height: context.appTheme.spacing.marginExtraSmall,
-                        )),
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        '回答',
-                      ),
-                      ReactiveTextField(
-                        formControlName: 'answer',
-                        maxLines: 4,
-                      )
-                    ],
-                  ),
-                  ValueListenableListener(
-                    valueListenable: context.read<QAndAModel>().submit,
-                    onListen: () {
-                      final value = context.read<QAndAModel>().submit.value;
-
-                      if (value.hasError) {
-                        snackBarWidget(
-                          message: '保存できませんでした。 もう一度試してください。',
-                          backgroundColor: Colors.red,
-                          prefixIcon:
-                              const Icon(Icons.error, color: Colors.white),
-                        );
-                      }
-
-                      if (value.hasData) {
-                        // reset form only when success
-                        formGroup.reset();
-                        snackBarWidget(
-                          message: '正常に保存されました',
-                          prefixIcon: const Icon(Icons.check_circle,
-                              color: Colors.white),
-                        );
-                      }
-                    },
-                    child: ValueListenableBuilder(
-                      valueListenable: context.read<QAndAModel>().submit,
-                      builder: (context, value, _) {
-                        return ReactiveFormConsumer(
-                          builder: (context, formGroup, child) {
-                            return RowSeparated(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: context.appTheme.spacing.formSpacing,
-                              ),
-                              children: [
-                                OutlinedButton(
-                                    style: OutlinedButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: context
-                                              .appTheme.spacing.marginSmall,
-                                          vertical: context
-                                              .appTheme.spacing.buttonVertical,
+                                children: [
+                                  RowSeparated(
+                                      separatorBuilder: (context, index) =>
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.formSpacing,
+                                          ),
+                                      children: [
+                                        Expanded(
+                                          //flex: 2,
+                                          child: ColumnSeparated(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              separatorBuilder:
+                                                  (context, index) => SizedBox(
+                                                        height: context
+                                                            .appTheme
+                                                            .spacing
+                                                            .marginExtraSmall,
+                                                      ),
+                                              children: const [
+                                                ReactiveDatePickerField(
+                                                  formControlName:
+                                                      'updatedDate',
+                                                  label: '更新日',
+                                                )
+                                              ]),
                                         ),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20))),
-                                    onPressed: () {},
-                                    child: Text(
-                                      'キャンセル',
-                                      style: context.textTheme.labelLarge
-                                          ?.copyWith(
-                                              color: context
-                                                  .appTheme.primaryColor),
-                                    )),
-                                ElevatedButton(
-                                  onPressed: value.loading
-                                      ? null
-                                      : () {
-                                          context
-                                              .read<QAndAModel>()
-                                              .submitNewRegistrationHospital(
-                                                  formGroup);
-                                        },
-                                  child: WithLoadingButton(
-                                    isLoading: value.loading,
-                                    child: const Text(
-                                      '保存する',
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                        Expanded(
+                                          // flex: 2,
+                                          child: ColumnSeparated(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              separatorBuilder:
+                                                  (context, index) => SizedBox(
+                                                        height: context
+                                                            .appTheme
+                                                            .spacing
+                                                            .marginExtraSmall,
+                                                      ),
+                                              children: [
+                                                Text(
+                                                  '更新者',
+                                                  style: context
+                                                      .textTheme.bodyMedium,
+                                                ),
+                                                ReactiveTextField(
+                                                  formControlName: 'updatedBy',
+                                                )
+                                              ]),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: ColumnSeparated(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              separatorBuilder:
+                                                  (context, index) => SizedBox(
+                                                        height: context
+                                                            .appTheme
+                                                            .spacing
+                                                            .marginExtraSmall,
+                                                      ),
+                                              children: [
+                                                Text(
+                                                  '分類',
+                                                  style: context
+                                                      .textTheme.bodyMedium,
+                                                ),
+                                                ReactiveDropdownField(
+                                                  formControlName:
+                                                      'classification',
+                                                  items: [
+                                                    ...[
+                                                      '予約方法について',
+                                                      '受診前によくあるお問い合わせ',
+                                                      '人間ドッグ予約確定後のお問い合わせ',
+                                                      '受診後によくあるお問い合わせ',
+                                                      '受診日当日について',
+                                                      '胃カメラ検査について',
+                                                      '婦人科検査について',
+                                                      '結果について'
+                                                    ].map(
+                                                        (e) => DropdownMenuItem(
+                                                              value: e,
+                                                              child: Text(e),
+                                                            )),
+                                                  ],
+                                                )
+                                              ]),
+                                        ),
+                                        ColumnSeparated(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            separatorBuilder:
+                                                (context, index) => SizedBox(
+                                                      height: context
+                                                          .appTheme
+                                                          .spacing
+                                                          .marginExtraSmall,
+                                                    ),
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12),
+                                                child: Text(
+                                                  '病院とこのQAデータを共有',
+                                                  style: context
+                                                      .textTheme.bodyMedium,
+                                                ),
+                                              ),
+                                              RowSeparated(
+                                                  separatorBuilder:
+                                                      (context, index) =>
+                                                          SizedBox(
+                                                            width: context
+                                                                .appTheme
+                                                                .spacing
+                                                                .marginExtraSmall,
+                                                          ),
+                                                  children: [
+                                                    IntrinsicWidth(
+                                                      child:
+                                                          ReactiveRadioListTile(
+                                                        value: true,
+                                                        formControlName:
+                                                            'shareThisQADataWithHospitals',
+                                                        title: const Text('する'),
+                                                      ),
+                                                    ),
+                                                    IntrinsicWidth(
+                                                      child:
+                                                          ReactiveRadioListTile(
+                                                        value: false,
+                                                        formControlName:
+                                                            'shareThisQADataWithHospitals',
+                                                        title:
+                                                            const Text('しない'),
+                                                      ),
+                                                    )
+                                                  ])
+                                            ])
+                                      ]),
+                                  ColumnSeparated(
+                                    separatorBuilder: ((context, index) =>
+                                        SizedBox(
+                                          height: context.appTheme.spacing
+                                              .marginExtraSmall,
+                                        )),
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        '質問',
                                       ),
-                                    ),
+                                      ReactiveTextField(
+                                        formControlName: 'question',
+                                        maxLines: 2,
+                                      )
+                                    ],
                                   ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
+                                  ColumnSeparated(
+                                    separatorBuilder: ((context, index) =>
+                                        SizedBox(
+                                          height: context.appTheme.spacing
+                                              .marginExtraSmall,
+                                        )),
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        '回答',
+                                      ),
+                                      ReactiveTextField(
+                                        formControlName: 'answer',
+                                        maxLines: 4,
+                                      )
+                                    ],
+                                  ),
+                                  ValueListenableListener(
+                                    valueListenable:
+                                        context.read<QAndAModel>().submit,
+                                    onListen: () {
+                                      final value = context
+                                          .read<QAndAModel>()
+                                          .submit
+                                          .value;
+
+                                      if (value.hasError) {
+                                        snackBarWidget(
+                                          message: '保存できませんでした。 もう一度試してください。',
+                                          backgroundColor: Colors.red,
+                                          prefixIcon: const Icon(Icons.error,
+                                              color: Colors.white),
+                                        );
+                                      }
+
+                                      if (value.hasData) {
+                                        // reset form only when success
+                                        formGroup.reset();
+                                        snackBarWidget(
+                                          message: '正常に保存されました',
+                                          prefixIcon: const Icon(
+                                              Icons.check_circle,
+                                              color: Colors.white),
+                                        );
+                                      }
+                                    },
+                                    child: ValueListenableBuilder(
+                                      valueListenable:
+                                          context.read<QAndAModel>().submit,
+                                      builder: (context, value, _) {
+                                        return ReactiveFormConsumer(
+                                          builder: (context, formGroup, child) {
+                                            return RowSeparated(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              separatorBuilder:
+                                                  (context, index) => SizedBox(
+                                                width: context.appTheme.spacing
+                                                    .formSpacing,
+                                              ),
+                                              children: [
+                                                OutlinedButton(
+                                                    style: OutlinedButton
+                                                        .styleFrom(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                              horizontal: context
+                                                                  .appTheme
+                                                                  .spacing
+                                                                  .marginSmall,
+                                                              vertical: context
+                                                                  .appTheme
+                                                                  .spacing
+                                                                  .buttonVertical,
+                                                            ),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20))),
+                                                    onPressed: () {
+                                                      context
+                                                          .read<QAndAModel>()
+                                                          .resetEditData();
+                                                    },
+                                                    child: Text(
+                                                      'キャンセル',
+                                                      style: context
+                                                          .textTheme.labelLarge
+                                                          ?.copyWith(
+                                                              color: context
+                                                                  .appTheme
+                                                                  .primaryColor),
+                                                    )),
+                                                ElevatedButton(
+                                                  onPressed: value.loading
+                                                      ? null
+                                                      : () {
+                                                          context
+                                                              .read<
+                                                                  QAndAModel>()
+                                                              .submitNewRegistrationHospital(
+                                                                  formGroup);
+                                                        },
+                                                  child: WithLoadingButton(
+                                                    isLoading: value.loading,
+                                                    child: const Text(
+                                                      '保存する',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  )
+                                ]),
+                          ),
+                        ],
+                      ),
                     ),
-                  )
-                ]),
-          ),
-        ],
-      ),
+                  );
+                },
+              );
+            });
+      },
     );
   }
 }

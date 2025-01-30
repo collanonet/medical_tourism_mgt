@@ -1238,7 +1238,7 @@ class _DetailPatientWebReservationScreenState
                                                       .primaryColor),
                                         ),
                                         Text(
-                                          '${data.hospital?.hospitalNameKatakana ?? '-'}${data.hospital?.hospitalNameKatakana == null ? '' : '\n'}${data.hospital?.hospitalNameChinese ?? ' - '}',
+                                          data.hospital?.hospitalNameChinese ?? ' - ',
                                           style: context.textTheme.titleSmall
                                               ?.copyWith(
                                                   color: context

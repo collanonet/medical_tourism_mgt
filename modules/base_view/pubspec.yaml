@@ -15,8 +15,13 @@ dependencies:
   core_storage: 0.0.1-alpha.1
   core_ui: 0.0.1-alpha.1
   core_utils: 0.0.1-alpha.1
+  data_patient: 0.0.1-alpha.1
   data_auth: 0.0.1-alpha.1
   feature_auth: 0.0.1-alpha.1
+  feature_chats: 0.0.1-alpha.1
+  data_chats: 0.0.1-alpha.1
+  socket_chat: 0.0.1-alpha.1
+  data_hospital: 0.0.1-alpha.1
 
   auto_route: any
   provider: any

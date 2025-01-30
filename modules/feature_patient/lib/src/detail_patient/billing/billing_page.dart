@@ -26,7 +26,7 @@ class BillingPage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-        form: () => billingForm(),
+        form: () => billingForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) => GetIt.I<BillingModel>()

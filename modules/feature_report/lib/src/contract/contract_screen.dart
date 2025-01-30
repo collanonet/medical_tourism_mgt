@@ -26,7 +26,7 @@ class ContractScreen extends StatelessWidget {
         return ReactiveFormConfig(
           validationMessages: validationMessages,
           child: ReactiveFormBuilder(
-            form: () => contractForm(),
+            form: () => contractForm()..markAllAsTouched(),
             builder: (context, formGroup, child) {
               return Skeletonizer(
                 enabled: value.filterData.value.loading,

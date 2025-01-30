@@ -8,6 +8,7 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
+import 'entities/chat_group_request.dart';
 
 part 'api_service.g.dart';
 
@@ -26,6 +27,9 @@ abstract class ApiService {
     @Field('email') String email,
     @Field('password') String password,
   );
+
+  @GET(EndPoints.PROFILE)
+  Future<User> getUser();
 
   @POST(EndPoints.REFRESH_TOKEN)
   Future<AuthData> refreshToken(
@@ -86,6 +90,9 @@ abstract class ApiService {
     @Query('returnDatefrom') String? returnDatefrom,
     @Query('returnDateto') String? returnDateto,
   });
+
+  @GET(EndPoints.GET_PATIENTS)
+  Future<Paginated<Patient>> newChatPatients();
 
   @GET('${EndPoints.GET_PATIENT}/{id}')
   Future<Patient> patient(
@@ -996,6 +1003,11 @@ abstract class ApiService {
     @Body() DoctorProfileHospitalRequest doctorInformationHospitalRequest,
   );
 
+  @DELETE('${EndPoints.DOCTOR_INFORMATION_HOSPITAL}/{id}')
+  Future<void> deleteDoctorInformationHospital(
+    @Path('id') String id,
+  );
+
   @GET('${EndPoints.ADDITIONALINFORMATION_HOSPITAL}/{hospitalId}')
   Future<AdditionalInformationSectionResponse> getAdditionalInformationHospital(
     @Path('hospitalId') String hospitalId,
@@ -1055,6 +1067,12 @@ abstract class ApiService {
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
 
+  @PUT('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/{id}')
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
+    @Path('id') String id,
+    @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  );
+
   @GET('${EndPoints.GET_LIST_SECTION_HOSPITAL}/{hospitalId}')
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
     @Path('hospitalId') String hospitalId,
@@ -1090,6 +1108,12 @@ abstract class ApiService {
     @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 
+  @PUT('${EndPoints.GET_MEMO_MATERIAL_HOSPITAL}/{id}')
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(
+    @Path('id') String id,
+    @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
+
   @GET('${EndPoints.GET_WEB_RESERVATION_PATIENT}/{hospitalId}')
   Future<PatientSectionHospitalResponse> getPatientSectionHospital(
     @Path('hospitalId') String hospitalId,
@@ -1105,14 +1129,24 @@ abstract class ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
-    @Query('hospitalName') String? hospitalName,
-    @Query('type') String? type,
+    @Query('hospitalNameChinese') String? hospitalNameChinese,
+    @Query('hospitalNameKatakana') String? hospitalNameKatakana,
+    // type search
+    @Query('healthCheckup') bool? healthCheckup,
+    @Query('treatment') bool? treatment,
+    @Query('heavyIonBeam') bool? heavyIonBeam,
+    @Query('protonBeam') bool? protonBeam,
+    @Query('regenerativeMedicine') bool? regenerativeMedicine,
+    @Query('beauty') bool? beauty,
+
     @Query('location') String? location,
     @Query('rHave') String? rHave,
-    @Query('hospitalType1') bool? hospitalType1,
-    @Query('hospitalType2') bool? hospitalType2,
-    @Query('hospitalType3') bool? hospitalType3,
-    @Query('hospitalType4') bool? hospitalType4,
+    // 病院種別 hospitalType
+    @Query('universityHospitalType') bool? universityHospitalType,
+    @Query('nationalAndPublicHospitalsType')
+    bool? nationalAndPublicHospitalsType,
+    @Query('privateHospitalType') bool? privateHospitalType,
+    @Query('clinicType') bool? clinicType,
   });
 
   /// end get basic information of hospital C3 Page
@@ -1638,6 +1672,29 @@ abstract class ApiService {
   @POST(EndPoints.BILLING)
   Future<BillingResponse> postBilling(
     @Body() BillingRequest billingRequest,
+  );
+
+  @GET(EndPoints.CHAT)
+  Future<List<Chat>> getChats();
+
+  @POST('${EndPoints.CHAT}/group')
+  Future<Chat> postChatGroup(
+    @Body() ChatGroupRequest chatGroupRequest,
+  );
+
+  @POST('${EndPoints.CHAT}/private')
+  Future<Chat> postChatPrivate(
+    @Field('user1Id') String user1Id,
+  );
+
+  @DELETE('${EndPoints.CHAT}/{chatId}')
+  Future<void> deleteChat(
+    @Path('chatId') String chatId,
+  );
+
+  @GET('${EndPoints.CHAT_MESSAGE}/{chatId}/messages')
+  Future<List<Message>> getMessagesByChatId(
+    @Path('chatId') String chatId,
   );
 }
 

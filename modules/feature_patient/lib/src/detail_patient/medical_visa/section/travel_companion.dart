@@ -1190,7 +1190,7 @@ class TravelCompanion extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                            content: PreviewFile(fileSelect: control.value),
+                            content: PreviewFile(fileSelect: control.value!),
                           ),
                         );
                       },

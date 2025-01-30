@@ -159,14 +159,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .leading,
-                                              // onChanged: (value) {
-                                              //   formGroup
-                                              //       .control('gender')
-                                              //       .value = value.value == true;
-                                              //   formGroup
-                                              //       .control('isFemale')
-                                              //       .value = value.value == false;
-                                              // },
                                               title: const Text('男性'),
                                             ),
                                           ),
@@ -178,14 +170,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .leading,
-                                              // onChanged: (value) {
-                                              //   formGroup
-                                              //       .control('gender')
-                                              //       .value = value.value == false;
-                                              //   formGroup
-                                              //       .control('isMale')
-                                              //       .value = value.value == false;
-                                              // },
                                               title: const Text('女性'),
                                             ),
                                           )
@@ -199,7 +183,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                child: ReactiveTextField<int?>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'height',
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
@@ -211,8 +195,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     suffixText: 'cm',
                                   ),
                                   inputFormatters: [
+                                    SingleDotInputFormatter(),
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                      RegExp(r'^[0-9]*\.?[0-9]*$'),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -220,9 +206,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                child: ReactiveTextField<int?>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'weight',
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -232,24 +219,27 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     suffixText: 'kg',
                                   ),
                                   inputFormatters: [
+                                    SingleDotInputFormatter(),
+                                    // allow only number and .
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                      RegExp(r'^[0-9]*\.?[0-9]*$'),
+                                    ),
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              IntrinsicWidth(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    snackBarWidget(message: 'まだ開発中');
-                                  },
-                                  child: const Text(
-                                    'パスポートを表示する',
-                                  ),
-                                ),
-                              )
+                              // SizedBox(
+                              //   width: context.appTheme.spacing.marginMedium,
+                              // ),
+                              // IntrinsicWidth(
+                              //   child: ElevatedButton(
+                              //     onPressed: () {
+                              //       snackBarWidget(message: 'まだ開発中');
+                              //     },
+                              //     child: const Text(
+                              //       'パスポートを表示する',
+                              //     ),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),
@@ -260,27 +250,27 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       children: [
                         const Expanded(
                           child: ReactiveDatePickerField(
-                              formControlName: 'arrivalDate',
-                              label: '来日日',
-                              ),
+                            formControlName: 'arrivalDate',
+                            label: '来日日',
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         const Expanded(
                           child: ReactiveDatePickerField(
-                              formControlName: 'consultationDate',
-                              label: '受診日',
-                              ),
+                            formControlName: 'consultationDate',
+                            label: '受診日',
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         const Expanded(
                           child: ReactiveDatePickerField(
-                              formControlName: 'returnDate',
-                              label: '帰国日',
-                              ),
+                            formControlName: 'returnDate',
+                            label: '帰国日',
+                          ),
                         ),
                       ],
                     ),
@@ -304,9 +294,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         ),
                         const Expanded(
                           child: ReactiveDatePickerField(
-                              formControlName: 'receptionDate',
-                              label: '受付日',
-                              ),
+                            formControlName: 'receptionDate',
+                            label: '受付日',
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
@@ -492,9 +482,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       children: [
                         const Expanded(
                           child: ReactiveDatePickerField(
-                              formControlName: 'advancePaymentDate',
-                              label: '前金受取日',
-                              ),
+                            formControlName: 'advancePaymentDate',
+                            label: '前金受取日',
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,

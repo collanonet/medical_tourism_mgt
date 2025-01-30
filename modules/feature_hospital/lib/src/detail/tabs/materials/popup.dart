@@ -58,7 +58,7 @@ class Popup extends StatelessWidget {
                     child: ReactiveTextField<String>(
                       formControlName: 'brochureName',
                       decoration: const InputDecoration(
-                        hintText: '病院名を入力',
+                        hintText: 'パンフレット名を入力',
                       ),
                     ),
                   ),

@@ -21,7 +21,7 @@ class NormalSummaryPage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-          form: () => normalSummaryForm(),
+          form: () => normalSummaryForm()..markAllAsTouched(),
           builder: (context, formGroup, child) {
             return Provider(
                 create: (context) => GetIt.I<NormalSummaryModel>()

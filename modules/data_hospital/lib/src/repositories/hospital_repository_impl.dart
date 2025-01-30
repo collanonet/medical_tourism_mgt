@@ -161,25 +161,38 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
-    String? hospitalName,
-    String? type,
+    String? hospitalNameChinese,
+    String? hospitalNameKatakana,
+    bool? healthCheckup,
+    bool? treatment,
+    bool? heavyIonBeam,
+    bool? protonBeam,
+    bool? regenerativeMedicine,
+    bool? beauty,
     String? location,
     String? rHave,
-    bool? hospitalType1,
-    bool? hospitalType2,
-    bool? hospitalType3,
-    bool? hospitalType4,
+    bool? universityHospitalType,
+    bool? nationalAndPublicHospitalsType,
+    bool? privateHospitalType,
+    bool? clinicType,
   }) {
     return remote.getHospitals(
       page: page,
       pageSize: pageSize,
-      hospitalName: hospitalName,
-      type: type,
+      hospitalNameChinese: hospitalNameChinese,
+      hospitalNameKatakana: hospitalNameKatakana,
+      healthCheckup: healthCheckup,
+      treatment: treatment,
+      heavyIonBeam: heavyIonBeam,
+      protonBeam: protonBeam,
+      regenerativeMedicine: regenerativeMedicine,
+      beauty: beauty,
       location: location,
       rHave: rHave,
-      hospitalType1: hospitalType1,
-      hospitalType2: hospitalType2,
-      hospitalType3: hospitalType3,
+      universityHospitalType: universityHospitalType,
+      nationalAndPublicHospitalsType: nationalAndPublicHospitalsType,
+      privateHospitalType: privateHospitalType,
+      clinicType: clinicType,
     );
   }
 
@@ -249,6 +262,11 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
       NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
     return remote.postNewRegistrationHospital(newRegistrationHospitalRequest);
+  }
+
+   @override
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(String id, NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
+    return remote.putNewRegistrationHospital(id, newRegistrationHospitalRequest);
   }
 
   @override
@@ -412,4 +430,16 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<void> deleteMedicalRecordBasicInfoHospital(String id) {
     return remote.deleteMedicalRecordBasicInfoHospital(id);
   }
+
+  @override
+  Future<void> deleteDoctorInformationHospital(String id) {
+    return remote.deleteDoctorInformationHospital(id);
+  }
+  
+  @override
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(String id, MemoMaterialHospitalRequest memoMaterialHospitalRequest) {
+    return remote.putMemoMaterialHospital(id, memoMaterialHospitalRequest);
+  }
+  
+ 
 }

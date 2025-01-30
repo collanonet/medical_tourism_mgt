@@ -21,7 +21,7 @@ class PatientResponseOtherPage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-          form: () => otherForm(),
+          form: () => otherForm()..markAllAsTouched(),
           builder: (context, formGroup, child) {
             return Provider(
                 create: (context) => GetIt.I<PatientResponseOtherModel>()

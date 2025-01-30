@@ -19,7 +19,9 @@ import 'view_popup.dart';
 
 class DomesticMedicalDataScreen extends StatefulWidget {
   const DomesticMedicalDataScreen({super.key, this.id});
+
   final String? id;
+
   @override
   State<DomesticMedicalDataScreen> createState() =>
       _DomesticMedicalDataScreenState();
@@ -232,8 +234,10 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                               Expanded(child: Text(item.remarks ?? '')),
                               Expanded(
                                 child: Text(
-                                  dateFormat
-                                      .format(item.dateOfIssue as DateTime),
+                                  item.dateOfIssue == null
+                                      ? '-'
+                                      : dateFormat
+                                          .format(item.dateOfIssue as DateTime),
                                 ),
                               ),
                               const Expanded(

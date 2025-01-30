@@ -18,6 +18,7 @@ class ItineraryScreen extends StatefulWidget {
 }
 
 class _ItineraryScreenState extends State<ItineraryScreen> {
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     return ValueListenableListener(
@@ -47,6 +48,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                         );
                       },
                       children: [
+                        const SizedBox(height: 10),
                         ReactiveFormArray(
                           formArrayName: 'patient',
                           builder: (context, formArray, child) {
@@ -649,46 +651,90 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                          child: ReactiveTextField(
+                          child: ReactiveValueListenableBuilder<String>(
                             formControlName: 'timeFrom',
-                            decoration: const InputDecoration(
-                              label: Text(
-                                '時刻（自）',
-                              ),
-                            ),
+                            builder: (context, control, _) {
+                              return ReactiveTextField<String>(
+                                formControlName: 'timeFrom',
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  formatter.timeFormatter,
+                                ],
+                                decoration: const InputDecoration(
+                                  label: Text(
+                                    '時刻（自）',
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                          child: ReactiveTextField(
+                          child: ReactiveValueListenableBuilder<String>(
                             formControlName: 'timeTo',
-                            decoration: const InputDecoration(
-                              label: Text(
-                                '時刻（至）',
-                              ),
-                            ),
+                            builder: (context, control, _) {
+                              return ReactiveTextField<String>(
+                                formControlName: 'timeTo',
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  formatter.timeFormatter,
+                                ],
+                                decoration: const InputDecoration(
+                                  label: Text(
+                                    '時刻（至）',
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'transportation',
-                            decoration: const InputDecoration(
-                              label: Text(
-                                '交通',
-                              ),
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ValueListenableBuilder(
+                                  valueListenable: context
+                                      .read<ItineraryModel>()
+                                      .transportation,
+                                  builder: (context, value, _) {
+                                    return ReactiveDropdownFormField(
+                                      decoration:
+                                          const InputDecoration(hintText: '交通'),
+                                      formControlName: 'transportation',
+                                      items: value
+                                          .map((e) => DropdownMenuItem(
+                                                value: e.type,
+                                                child: Text(
+                                                  e.type,
+                                                ),
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
+                            ],
                           ),
                         ),
+                        // Expanded(
+                        //   child: ReactiveTextField(
+                        //     formControlName: 'transportation',
+                        //     decoration: const InputDecoration(
+                        //       label: Text(
+                        //         '交通',
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                          flex: 4,
+                          flex: 3,
                           child: ReactiveTextField(
                             formControlName: 'itinerary',
                             decoration: const InputDecoration(

@@ -223,16 +223,19 @@ class MaterialSectionState extends State<MaterialSection> {
                               final data = value.data?[index];
                               return InkWell(
                                 onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => AlertDialog(
-                                      content: PreviewFile(
-                                        fileSelect: FileSelect(
-                                          url: data?.file,
-                                        ),
-                                      ),
-                                    ),
-                                  );
+                                  if(data?.file != null) {
+                                    openUrlInBrowser(fileName: data?.file ?? '');
+                                  }
+                                  // showDialog(
+                                  //   context: context,
+                                  //   builder: (_) => AlertDialog(
+                                  //     content: PreviewFile(
+                                  //       fileSelect: FileSelect(
+                                  //         url: data?.file,
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // );
                                 },
                                 child: Row(
                                   children: [
@@ -405,7 +408,15 @@ class MaterialSectionState extends State<MaterialSection> {
                     child: const Text('閲覧する'),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: sels.length == 1 ? () {
+                      var data = context
+                          .read<MaterialsModel>()
+                          .materialsData
+                          .value
+                          .requireData
+                          .firstWhere((element) => element.id == sels.first);
+                      openUrlInBrowser(fileName: data.file ?? '');
+                    } : null,
                     child: const Text('印刷する'),
                   ),
                 ],

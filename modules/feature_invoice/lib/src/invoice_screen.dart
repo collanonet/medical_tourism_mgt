@@ -18,7 +18,7 @@ class InvoiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormBuilder(
-      form: () => formInvoice(),
+      form: () => formInvoice()..markAllAsTouched(),
       builder: (context, formGroup, child) {
         return Column(
           children: [

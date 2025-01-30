@@ -81,8 +81,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 300,
+                              SizedBox(
+                                width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'hospitalNameChinese',
                                   decoration: const InputDecoration(
@@ -97,8 +97,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 300,
+                              SizedBox(
+                                width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'hospitalNameKatakana',
                                   decoration: const InputDecoration(
@@ -115,8 +115,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 300,
+                              SizedBox(
+                                width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'zipCode',
                                   decoration: const InputDecoration(
@@ -173,8 +173,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 300,
+                              SizedBox(
+                                width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'phoneNumber',
                                   keyboardType: TextInputType.number,
@@ -193,8 +193,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 300,
+                              SizedBox(
+                                width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'faxNumber',
                                   decoration: const InputDecoration(
@@ -211,8 +211,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 300,
+                              SizedBox(
+                                width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'homepage',
                                   decoration: InputDecoration(
@@ -506,8 +506,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                   context.textTheme.labelLarge),
                                         ),
                                       ),
-                                      IntrinsicWidth(
-                                        stepWidth: 300,
+                                      SizedBox(
+                                        width: 300,
                                         child: ReactiveTextField(
                                           formControlName: 'note',
                                           decoration: const InputDecoration(
@@ -656,8 +656,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                           .labelLarge),
                                                 ),
                                               ),
-                                              IntrinsicWidth(
-                                                stepWidth: 120,
+                                              SizedBox(
+                                                width: 120,
                                                 child: ReactiveTextField(
                                                   formControlName: 'languages',
                                                   decoration:
@@ -1109,8 +1109,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: boxText(
                                   context,
                                   '月',
@@ -1121,8 +1121,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: boxText(
                                   context,
                                   '火',
@@ -1133,8 +1133,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: boxText(
                                   context,
                                   '水',
@@ -1145,8 +1145,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: boxText(
                                   context,
                                   '木',
@@ -1157,8 +1157,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: boxText(
                                   context,
                                   '金',
@@ -1169,8 +1169,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: boxText(
                                   context,
                                   '土',
@@ -1181,8 +1181,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: boxText(
                                   context,
                                   '日',
@@ -1215,8 +1215,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Mon',
                                   items: [
@@ -1234,8 +1234,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Tue',
                                   items: [
@@ -1253,8 +1253,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Wed',
                                   items: [
@@ -1272,8 +1272,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Thu',
                                   items: [
@@ -1291,8 +1291,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Fri',
                                   items: [
@@ -1310,8 +1310,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sat',
                                   items: [
@@ -1329,8 +1329,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sun',
                                   items: [
@@ -1370,8 +1370,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Mon',
                                   items: [
@@ -1389,8 +1389,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Tue',
                                   items: [
@@ -1408,8 +1408,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Wed',
                                   items: [
@@ -1427,8 +1427,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Thu',
                                   items: [
@@ -1446,8 +1446,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Fri',
                                   items: [
@@ -1465,8 +1465,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sat',
                                   items: [
@@ -1484,8 +1484,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 80,
+                              const SizedBox(
+                                width: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sun',
                                   items: [

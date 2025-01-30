@@ -42,6 +42,7 @@ class MaterialsModel {
       memoMaterialsData.value = const AsyncData(loading: true);
       final resultMenu =
           await hospitalRepository.getMemoMaterialHospital(hospitalId);
+      formGroup.control('_id').value = resultMenu.id;
       formGroup.control('memo').value = resultMenu.memo;
       formGroup.control('hospitalRecord').value = hospitalId;
       memoMaterialsData.value = AsyncData(data: resultMenu);
@@ -54,13 +55,19 @@ class MaterialsModel {
   Future<void> submitMemoData(FormGroup formGroup) async {
     try {
       memoMaterialsData.value = const AsyncData(loading: true);
-      final response = await hospitalRepository.postMemoMaterialHospital(
-        MemoMaterialHospitalRequest(
-          hospitalRecord: formGroup.control('hospitalRecord').value,
-          memo: formGroup.control('memo').value,
-        ),
+      MemoMaterialHospitalRequest request = MemoMaterialHospitalRequest(
+        hospitalRecord: formGroup.control('hospitalRecord').value,
+        memo: formGroup.control('memo').value,
       );
-      memoMaterialsData.value = AsyncData(data: response);
+      if (formGroup.control('_id').value != null) {
+        final response = await hospitalRepository.putMemoMaterialHospital(
+            formGroup.control('_id').value, request);
+        memoMaterialsData.value = AsyncData(data: response);
+      } else {
+        final response =
+            await hospitalRepository.postMemoMaterialHospital(request);
+        memoMaterialsData.value = AsyncData(data: response);
+      }
     } catch (e) {
       logger.d(e);
       memoMaterialsData.value = AsyncData(error: e);

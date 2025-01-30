@@ -25,7 +25,7 @@ class ProgressListPage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-          form: () => progressListForm(),
+          form: () => progressListForm()..markAllAsTouched(),
           builder: (context, form, _) {
             return Provider(
               create: (context) => GetIt.I<ProgressListModel>()

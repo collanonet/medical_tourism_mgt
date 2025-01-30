@@ -26,15 +26,20 @@ class _QAndAListSectionState extends State<QAndAListSection> {
 
   @override
   Widget build(BuildContext context) {
+    final form = (ReactiveForm.of(context) as FormGroup)
+        .control('newRegistrationSection') as FormGroup;
     final formGroup = (ReactiveForm.of(context) as FormGroup)
         .control('listSection') as FormGroup;
-    return ReactiveForm(
-        formGroup: formGroup,
-        child: ColumnSeparated(
+    return ValueListenableBuilder(
+      valueListenable: context.watch<QAndAModel>().newRegistrationHospitalData,
+      builder: (context, value, child) {
+        return ReactiveForm(
+          formGroup: formGroup,
+          child: ColumnSeparated(
             crossAxisAlignment: CrossAxisAlignment.start,
             separatorBuilder: (context, index) => SizedBox(
-                  height: context.appTheme.spacing.formSpacing,
-                ),
+              height: context.appTheme.spacing.formSpacing,
+            ),
             children: [
               RowSeparated(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -257,7 +262,15 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                                   }),
                                                         ),
                                                         OutlinedButton(
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              context
+                                                                  .read<
+                                                                      QAndAModel>()
+                                                                  .edite(
+                                                                      form,
+                                                                      value.requireData[
+                                                                          index]);
+                                                            },
                                                             child: Text(
                                                               '編集する',
                                                               style: context
@@ -273,9 +286,9 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                             Clipboard.setData(
                                                               ClipboardData(
                                                                 text: '''
-                                                        質問：${value.requireData[index].question}
-                                                        回答：${value.requireData[index].answer}
-                                                        ''',
+                                                          質問：${value.requireData[index].question}
+                                                          回答：${value.requireData[index].answer}
+                                                          ''',
                                                               ),
                                                             );
                                                             snackBarWidget(
@@ -311,6 +324,10 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                       ),
                     );
                   }),
-            ]));
+            ],
+          ),
+        );
+      },
+    );
   }
 }

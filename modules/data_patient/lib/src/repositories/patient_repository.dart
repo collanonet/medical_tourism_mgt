@@ -52,6 +52,8 @@ abstract class PatientRepository {
     int? limit = 10,
   });
 
+  Future<Paginated<Patient>> newChatPatients();
+
   Future<Patient> patient(
     String id,
   );

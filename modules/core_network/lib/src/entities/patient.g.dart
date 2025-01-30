@@ -57,6 +57,7 @@ Patient _$PatientFromJson(Map<String, dynamic> json) => Patient(
       groupSize: json['groupSize'] as String?,
       profile: json['profile'] as String?,
       isClosed: json['isClosed'] as bool? ?? false,
+      user: json['user'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -97,6 +98,7 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
       'groupSize': instance.groupSize,
       'profile': instance.profile,
       'isClosed': instance.isClosed,
+      'user': instance.user,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

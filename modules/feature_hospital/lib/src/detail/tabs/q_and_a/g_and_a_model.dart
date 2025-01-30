@@ -54,29 +54,64 @@ class QAndAModel {
     }
   }
 
+  ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> editData =
+      ValueNotifier(const AsyncData());
+
+  Future<void> edite(
+      FormGroup formGroup, NewRegistrationHospitalResponse response) async {
+    editData.value = AsyncData(data: response, loading: true);
+    formGroup.control('_id').value = response.id;
+    formGroup.control('hospital').value = response.hospital;
+    formGroup.control('updatedDate').value = response.updatedDate;
+    formGroup.control('updatedBy').value = response.updatedBy;
+    formGroup.control('classification').value = response.classification;
+    formGroup.control('shareThisQADataWithHospitals').value =
+        response.shareThisQADataWithHospitals;
+    formGroup.control('question').value = response.question;
+    formGroup.control('answer').value = response.answer;
+    await Future.delayed(const Duration(milliseconds: 500), () {
+      editData.value = AsyncData(data: response);
+    });
+  }
+
+   void resetEditData() {
+    editData.value = const AsyncData();
+  }
+
   ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> submit =
       ValueNotifier(const AsyncData());
 
   Future<void> submitNewRegistrationHospital(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
-      final response = await hospitalRepository.postNewRegistrationHospital(
-        NewRegistrationHospitalRequest(
-          hospital: hospitalId.value,
-          updatedDate: formGroup.control('updatedDate').value,
-          updatedBy: formGroup.control('updatedBy').value,
-          classification: formGroup.control('classification').value,
-          shareThisQADataWithHospitals:
-              formGroup.control('shareThisQADataWithHospitals').value,
-          question: formGroup.control('question').value,
-          answer: formGroup.control('answer').value,
-        ),
+      NewRegistrationHospitalRequest request = NewRegistrationHospitalRequest(
+        hospital: hospitalId.value,
+        updatedDate: formGroup.control('updatedDate').value,
+        updatedBy: formGroup.control('updatedBy').value,
+        classification: formGroup.control('classification').value,
+        shareThisQADataWithHospitals:
+            formGroup.control('shareThisQADataWithHospitals').value,
+        question: formGroup.control('question').value,
+        answer: formGroup.control('answer').value,
       );
-      submit.value = AsyncData(data: response);
-      newRegistrationHospitalData.value = AsyncData(data: [
-        ...newRegistrationHospitalData.value.data ?? [],
-        response,
-      ]);
+      if (formGroup.control('_id').value != null) {
+        final response = await hospitalRepository.putNewRegistrationHospital(
+            formGroup.control('_id').value, request);
+        submit.value = AsyncData(data: response);
+        newRegistrationHospitalData.value = AsyncData(data: [
+          ...newRegistrationHospitalData.value.data ?? [],
+          response,
+        ]);
+      } else {
+        final response =
+            await hospitalRepository.postNewRegistrationHospital(request);
+        submit.value = AsyncData(data: response);
+        newRegistrationHospitalData.value = AsyncData(data: [
+          ...newRegistrationHospitalData.value.data ?? [],
+          response,
+        ]);
+      }
+      editData.value = const AsyncData();
     } catch (e) {
       logger.d(e);
       submit.value = AsyncData(error: e);

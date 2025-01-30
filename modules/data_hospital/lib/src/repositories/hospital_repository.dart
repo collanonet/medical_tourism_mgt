@@ -32,6 +32,10 @@ abstract class HospitalRepository {
     DoctorProfileHospitalRequest doctorInformationHospitalRequest,
   );
 
+  Future<void> deleteDoctorInformationHospital(
+    String id,
+  );
+
   Future<AdditionalInformationSectionResponse> getAdditionalInformationHospital(
       String hospitalId);
 
@@ -71,6 +75,11 @@ abstract class HospitalRepository {
     NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
 
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
+    String id,
+    NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  );
+
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
       String hospitalId);
 
@@ -87,6 +96,11 @@ abstract class HospitalRepository {
     MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(
+    String id,
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
+
   Future<PatientSectionHospitalResponse> getWebReservationPatient(
     String hospitalId,
   );
@@ -99,14 +113,20 @@ abstract class HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
-    String? hospitalName,
-    String? type,
+    String? hospitalNameChinese,
+    String? hospitalNameKatakana,
+    bool? healthCheckup,
+    bool? treatment,
+    bool? heavyIonBeam,
+    bool? protonBeam,
+    bool? regenerativeMedicine,
+    bool? beauty,
     String? location,
     String? rHave,
-    bool? hospitalType1,
-    bool? hospitalType2,
-    bool? hospitalType3,
-    bool? hospitalType4,
+    bool? universityHospitalType,
+    bool? nationalAndPublicHospitalsType,
+    bool? privateHospitalType,
+    bool? clinicType,
   });
 
   Future<List<FacilityResponse>> getFacilityPhoto({required String id});
@@ -162,7 +182,6 @@ abstract class HospitalRepository {
 
   Future<void> deleteFacilityPhoto(String id);
 
-
   // web booking v2
 
   Future<BasicInformationHospitalResponse> webBookingGetHospitalById(String id);
@@ -201,13 +220,12 @@ abstract class HospitalRepository {
 
   Future<void> webBookingDeleteReservation(String reservationId);
 
-  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest);
+  Future<TreamentResponce> updateBooking(
+      String treatmentId, TreamentRequest treatmentRequest);
 
   Future<void> deleteTreatmentTeleMenu(String id);
 
   Future<void> deleteBasicInformationHospital(String id);
 
   Future<void> deleteMedicalRecordBasicInfoHospital(String id);
-
 }
-

@@ -52,6 +52,33 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<User> getUser() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = User.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<AuthData> refreshToken(String refreshToken) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -297,6 +324,36 @@ class _ApiService implements ApiService {
       r'returnDateto': returnDateto,
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<Paginated<Patient>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/patients',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = Paginated<Patient>.fromJson(
+      _result.data!,
+      (json) => Patient.fromJson(json as Map<String, dynamic>),
+    );
+    return _value;
+  }
+
+  @override
+  Future<Paginated<Patient>> newChatPatients() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -5005,6 +5062,30 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<void> deleteDoctorInformationHospital(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/doctor-information-hospital/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
+  @override
   Future<AdditionalInformationSectionResponse> getAdditionalInformationHospital(
       String hospitalId) async {
     final _extra = <String, dynamic>{};
@@ -5329,6 +5410,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
+    String id,
+    NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(newRegistrationHospitalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<NewRegistrationHospitalResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/qa/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = NewRegistrationHospitalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
       String hospitalId) async {
     final _extra = <String, dynamic>{};
@@ -5527,6 +5639,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(
+    String id,
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(memoMaterialHospitalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MemoMaterialHospitalResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-memo-materials/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MemoMaterialHospitalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<PatientSectionHospitalResponse> getPatientSectionHospital(
       String hospitalId) async {
     final _extra = <String, dynamic>{};
@@ -5587,27 +5730,39 @@ class _ApiService implements ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
-    String? hospitalName,
-    String? type,
+    String? hospitalNameChinese,
+    String? hospitalNameKatakana,
+    bool? healthCheckup,
+    bool? treatment,
+    bool? heavyIonBeam,
+    bool? protonBeam,
+    bool? regenerativeMedicine,
+    bool? beauty,
     String? location,
     String? rHave,
-    bool? hospitalType1,
-    bool? hospitalType2,
-    bool? hospitalType3,
-    bool? hospitalType4,
+    bool? universityHospitalType,
+    bool? nationalAndPublicHospitalsType,
+    bool? privateHospitalType,
+    bool? clinicType,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
-      r'hospitalName': hospitalName,
-      r'type': type,
+      r'hospitalNameChinese': hospitalNameChinese,
+      r'hospitalNameKatakana': hospitalNameKatakana,
+      r'healthCheckup': healthCheckup,
+      r'treatment': treatment,
+      r'heavyIonBeam': heavyIonBeam,
+      r'protonBeam': protonBeam,
+      r'regenerativeMedicine': regenerativeMedicine,
+      r'beauty': beauty,
       r'location': location,
       r'rHave': rHave,
-      r'hospitalType1': hospitalType1,
-      r'hospitalType2': hospitalType2,
-      r'hospitalType3': hospitalType3,
-      r'hospitalType4': hospitalType4,
+      r'universityHospitalType': universityHospitalType,
+      r'nationalAndPublicHospitalsType': nationalAndPublicHospitalsType,
+      r'privateHospitalType': privateHospitalType,
+      r'clinicType': clinicType,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -8501,6 +8656,143 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final _value = BillingResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<Chat>> getChats() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Chat>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/chats',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) => Chat.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<Chat> postChatGroup(ChatGroupRequest chatGroupRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(chatGroupRequest.toJson());
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Chat>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/chats/group',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = Chat.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<Chat> postChatPrivate(String user1Id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'user1Id': user1Id};
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Chat>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/chats/private',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = Chat.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<void> deleteChat(String chatId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/chats/${chatId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
+  @override
+  Future<List<Message>> getMessagesByChatId(String chatId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Message>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/messages/${chatId}/messages',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) => Message.fromJson(i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 

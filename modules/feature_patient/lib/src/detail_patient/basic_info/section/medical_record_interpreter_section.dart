@@ -46,8 +46,8 @@ class MedicalRecordInterpreterSection extends StatelessWidget {
                           width: context.appTheme.spacing.marginMedium,
                         );
                       },
-                      children: const [
-                        Expanded(
+                      children: [
+                        const Expanded(
                           child: ReactiveDropdownFormField(
                             formControlName: 'requiredOrUnnnecessary',
                             decoration: InputDecoration(
@@ -68,22 +68,32 @@ class MedicalRecordInterpreterSection extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: ReactiveDropdownFormField(
+                          child: ReactiveTextField(
                             formControlName: 'interpreter',
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               label: Text(
                                 '医療通訳者',
                               ),
                             ),
-                            items: [
-                              DropdownMenuItem(
-                                value: '赵雪',
-                                child: Text('赵雪'),
-                              ),
-                            ],
                           ),
                         ),
-                        Expanded(
+                        // Expanded(
+                        //   child: ReactiveDropdownFormField(
+                        //     formControlName: 'interpreter',
+                        //     decoration: InputDecoration(
+                        //       label: Text(
+                        //         '医療通訳者',
+                        //       ),
+                        //     ),
+                        //     items: [
+                        //       DropdownMenuItem(
+                        //         value: '赵雪',
+                        //         child: Text('赵雪'),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                       const Expanded(
                           child: SizedBox(),
                         ),
                       ],

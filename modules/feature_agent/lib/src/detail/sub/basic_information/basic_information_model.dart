@@ -104,7 +104,7 @@ class AgentBasicInformationModel {
           .value
           .forEach((element) {
         referralCommissions.add(AgentReferralCommissionRequest(
-          id: element['_id'],
+         // id: element['_id'],
           referralCommissionName: element['referralCommissionName'],
           referralCommission: element['referralCommission'] != null
               ? int.tryParse(element['referralCommission'].toString()) ?? 0
@@ -273,11 +273,13 @@ class AgentBasicInformationModel {
       await formGroup.control('manager').value.forEach((element) async {
         List<AgentManagerContactRequest> contactMethods = [];
         element['contactMethods'].forEach((e) {
-          contactMethods.add(AgentManagerContactRequest(
-            id: e['_id'],
-            howToContact: e['howToContact'],
-            howToContactQrCode: e['howToContactQrCode'],
-          ));
+          contactMethods.add(
+            AgentManagerContactRequest(
+              // id: e['_id'],
+              howToContact: e['howToContact'],
+              howToContactQrCode: e['howToContactQrCode'],
+            ),
+          );
         });
 
         String? file;
@@ -313,6 +315,7 @@ class AgentBasicInformationModel {
           contactMethods: contactMethods,
           agentRecord: id,
         );
+        logger.d('Manager= ${manager.toJson()}');
 
         if (element['_id'] != null) {
           var result =

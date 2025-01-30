@@ -9,7 +9,6 @@ part of 'agent_referral_commission_request.dart';
 AgentReferralCommissionRequest _$AgentReferralCommissionRequestFromJson(
         Map<String, dynamic> json) =>
     AgentReferralCommissionRequest(
-      id: json['_id'] as String?,
       referralCommissionName: json['referralCommissionName'] as String?,
       referralCommission: (json['referralCommission'] as num?)?.toInt(),
     );
@@ -17,7 +16,6 @@ AgentReferralCommissionRequest _$AgentReferralCommissionRequestFromJson(
 Map<String, dynamic> _$AgentReferralCommissionRequestToJson(
         AgentReferralCommissionRequest instance) =>
     <String, dynamic>{
-      '_id': instance.id,
       'referralCommissionName': instance.referralCommissionName,
       'referralCommission': instance.referralCommission,
     };

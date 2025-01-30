@@ -17,5 +17,7 @@ abstract class AuthRepository {
 
   Future<AuthData> login(String email, String password);
 
+  Future<User> getUser();
+
   Future<void> logOut();
 }

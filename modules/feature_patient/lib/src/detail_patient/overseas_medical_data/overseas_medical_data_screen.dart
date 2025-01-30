@@ -355,10 +355,19 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                                 context.appTheme.primaryColor,
                                           )),
                                           Expanded(
-                                              child: Icon(
-                                            CupertinoIcons.chat_bubble_2_fill,
-                                            color:
-                                                context.appTheme.primaryColor,
+                                              child: Row(
+                                            children: [
+                                              if (data.commentDicomFile !=
+                                                      null &&
+                                                  data.commentDicomFile!
+                                                      .isNotEmpty)
+                                                Icon(
+                                                  CupertinoIcons
+                                                      .chat_bubble_2_fill,
+                                                  color: context
+                                                      .appTheme.primaryColor,
+                                                ),
+                                            ],
                                           )),
                                         ],
                                       ),

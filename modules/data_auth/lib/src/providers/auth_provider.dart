@@ -22,4 +22,6 @@ abstract class AuthProvider {
   Future<AuthData> login(String email, String password);
 
   Future<void> clearStore();
+
+  Future<User> getUser();
 }

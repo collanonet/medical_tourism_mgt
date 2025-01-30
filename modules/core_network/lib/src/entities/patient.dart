@@ -40,6 +40,7 @@ class Patient {
   String? groupSize;
   String? profile;
   bool isClosed;
+  String user;
 
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -78,6 +79,7 @@ class Patient {
     this.groupSize,
     this.profile,
     this.isClosed = false,
+    required this.user,
     required this.createdAt,
     required this.updatedAt,
   });

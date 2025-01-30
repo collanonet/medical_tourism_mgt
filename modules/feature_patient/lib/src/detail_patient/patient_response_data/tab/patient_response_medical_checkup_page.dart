@@ -21,7 +21,7 @@ class PatientResponseMedicalCheckupPage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-          form: () => medicalCheckupForm(),
+          form: () => medicalCheckupForm()..markAllAsTouched(),
           builder: (context, formGroup, child) {
             return Provider(
                 create: (context) =>
