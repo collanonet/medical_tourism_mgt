@@ -19,6 +19,7 @@ import 'view_popup.dart';
 
 class MedicalPaymentDetailScreen extends StatefulWidget {
   const MedicalPaymentDetailScreen({super.key, this.id});
+
   final String? id;
 
   @override
@@ -29,6 +30,7 @@ class MedicalPaymentDetailScreen extends StatefulWidget {
 class _MedicalPaymentDetailScreenState
     extends State<MedicalPaymentDetailScreen> {
   ValueNotifier<List<String>> selected = ValueNotifier([]);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -213,8 +215,10 @@ class _MedicalPaymentDetailScreenState
                                 color: context.appTheme.primaryColor),
                           )),
                           Expanded(
-                            child: Text(dateFormat.format(
-                                value.data![index].dateOfIssue as DateTime)),
+                            child: Text(value.data?[index].dateOfIssue == null
+                                ? '-'
+                                : dateFormat.format(value
+                                    .data![index].dateOfIssue as DateTime)),
                           ),
                         ],
                       ),
