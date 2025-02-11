@@ -81,8 +81,7 @@ class BasicInformationModel {
       try {
         loading.value = const AsyncData(loading: true);
 
-        await createUpdatePatientNames(
-            form.control('PATIENT_NAMES') as FormGroup);
+        await createUpdatePatientNames(form.control('PATIENT_NAMES') as FormGroup);
         await createUpdatePatientNationalities(
             form.control('PATIENT_NATIONALITIES') as FormGroup);
         await createUpdatePatientPassports(
@@ -97,7 +96,7 @@ class BasicInformationModel {
 
           await createUpdateMedicalRecordBudgets(
               form.control('MEDICAL_RECORD_BUDGETS') as FormGroup);
-          //
+
           await createUpdateMedicalRecordTravelGroups(
               form.control('travelGroup') as FormGroup);
 
