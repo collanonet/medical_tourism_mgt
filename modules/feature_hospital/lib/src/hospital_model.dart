@@ -26,24 +26,23 @@ class HospitalModel with ChangeNotifier {
       await hospitalRepository
           .getHospitals(
         hospitalNameChinese: form?.control('hospitalName').value,
-        hospitalNameKatakana: form?.control('hospitalName').value,
         healthCheckup: form?.control('type').value != null
-            ? form?.control('type').value == '健診'
+            ? form?.control('type').value == '健診' ? true : null
             : null,
         treatment: form?.control('type').value != null
-            ? form?.control('type').value == '治療'
+            ? form?.control('type').value == '治療' ? true : null
             : null,
         heavyIonBeam: form?.control('type').value != null
-            ? form?.control('type').value == '重粒子線'
+            ? form?.control('type').value == '重粒子線' ? true : null
             : null,
         protonBeam: form?.control('type').value != null
-            ? form?.control('type').value == '陽子線'
+            ? form?.control('type').value == '陽子線' ? true : null
             : null,
         regenerativeMedicine: form?.control('type').value != null
-            ? form?.control('type').value == '再生医療'
+            ? form?.control('type').value == '再生医療' ? true : null
             : null,
         beauty: form?.control('type').value != null
-            ? form?.control('type').value == '美容'
+            ? form?.control('type').value == '美容' ? true : null
             : null,
         rHave: form?.control('rHave').value,
         universityHospitalType:
