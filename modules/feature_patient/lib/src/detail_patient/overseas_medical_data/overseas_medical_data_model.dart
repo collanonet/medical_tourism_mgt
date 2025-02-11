@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:data_auth/data_auth.dart';
 import 'package:data_patient/data_patient.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 

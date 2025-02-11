@@ -210,7 +210,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                           },
                           child: const Text('クリア'),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         ElevatedButton(
                           onPressed: () {
                             model.fetchHospitals(form: formGroup);

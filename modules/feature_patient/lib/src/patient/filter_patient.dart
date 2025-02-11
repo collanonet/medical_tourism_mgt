@@ -18,7 +18,6 @@ class PatientFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     return Consumer<PatientModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(

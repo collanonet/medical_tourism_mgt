@@ -9,7 +9,6 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:socket_chat/socket_chat.dart';
 
 import '../../app/app_model.dart';
 import '../injection.dart';

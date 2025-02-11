@@ -123,7 +123,9 @@ class ProcessChartScreen extends StatelessWidget {
                                         ),
                                         Expanded(
                                             flex: 2,
-                                            child: Text(value.data?[index].day?.isEmpty == true
+                                            child: Text(value.data?[index].day
+                                                        ?.isEmpty ==
+                                                    true
                                                 ? '--'
                                                 : value.data?[index].day
                                                             ?.length ==

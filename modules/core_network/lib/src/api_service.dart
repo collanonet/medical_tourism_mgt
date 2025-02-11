@@ -8,7 +8,6 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
-import 'entities/chat_group_request.dart';
 
 part 'api_service.g.dart';
 

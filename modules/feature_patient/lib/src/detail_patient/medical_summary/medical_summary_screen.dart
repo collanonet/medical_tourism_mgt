@@ -6,7 +6,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 
 // Project imports:
-import 'tabs/auto_translate_page.dart';
 import 'tabs/normal_summary_page.dart';
 import 'tabs/short_summary_page.dart';
 import 'tabs/summary_list_page.dart';

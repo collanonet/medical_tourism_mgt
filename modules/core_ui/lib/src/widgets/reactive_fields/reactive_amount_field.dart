@@ -57,7 +57,7 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
   final TextEditingController _amountController = TextEditingController();
 
   /// Formatter for Japanese currency display (without currency symbol)
-  final NumberFormat _japaneseCurrencyFormat = NumberFormat("#,##0", "ja_JP");
+  final NumberFormat _japaneseCurrencyFormat = NumberFormat('#,##0', 'ja_JP');
 
   @override
   void initState() {
@@ -163,7 +163,7 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
 /// - View: formatted strings for display
 class DoubleValueAccessor extends ControlValueAccessor<double, String> {
   /// Formatter instance for Japanese currency format
-  final NumberFormat _formatter = NumberFormat("#,##0", "ja_JP");
+  final NumberFormat _formatter = NumberFormat('#,##0', 'ja_JP');
 
   /// Converts the model value (double) to view value (formatted string)
   @override

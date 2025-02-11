@@ -15,7 +15,6 @@ import 'section/medical_record_interpreter_section.dart';
 import 'section/medical_record_name_section.dart';
 import 'section/medical_record_nationality_section.dart';
 import 'section/medical_record_passport_section.dart';
-import 'section/medical_record_referrer_section.dart';
 import 'section/medical_record_section.dart';
 import 'section/medical_record_traval_group_section.dart';
 import 'section/medical_record_user_account_section.dart';

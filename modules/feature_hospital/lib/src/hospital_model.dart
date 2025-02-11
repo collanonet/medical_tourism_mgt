@@ -27,38 +27,41 @@ class HospitalModel with ChangeNotifier {
           .getHospitals(
         hospitalNameChinese: form?.control('hospitalName').value,
         healthCheckup: form?.control('type').value != null
-            ? form?.control('type').value == '健診' ? true : null
+            ? form?.control('type').value == '健診'
+                ? true
+                : null
             : null,
         treatment: form?.control('type').value != null
-            ? form?.control('type').value == '治療' ? true : null
+            ? form?.control('type').value == '治療'
+                ? true
+                : null
             : null,
         heavyIonBeam: form?.control('type').value != null
-            ? form?.control('type').value == '重粒子線' ? true : null
+            ? form?.control('type').value == '重粒子線'
+                ? true
+                : null
             : null,
         protonBeam: form?.control('type').value != null
-            ? form?.control('type').value == '陽子線' ? true : null
+            ? form?.control('type').value == '陽子線'
+                ? true
+                : null
             : null,
         regenerativeMedicine: form?.control('type').value != null
-            ? form?.control('type').value == '再生医療' ? true : null
+            ? form?.control('type').value == '再生医療'
+                ? true
+                : null
             : null,
         beauty: form?.control('type').value != null
-            ? form?.control('type').value == '美容' ? true : null
+            ? form?.control('type').value == '美容'
+                ? true
+                : null
             : null,
         rHave: form?.control('rHave').value,
-        universityHospitalType:
-            form?.control('universityHospitalType').value != null
-                ? form?.control('universityHospitalType').value
-                : null,
+        universityHospitalType: form?.control('universityHospitalType').value,
         nationalAndPublicHospitalsType:
-            form?.control('nationalAndPublicHospitalsType').value != null
-                ? form?.control('nationalAndPublicHospitalsType').value
-                : null,
-        privateHospitalType: form?.control('privateHospitalType').value != null
-            ? form?.control('privateHospitalType').value
-            : null,
-        clinicType: form?.control('clinicType').value != null
-            ? form?.control('clinicType').value
-            : null,
+            form?.control('nationalAndPublicHospitalsType').value,
+        privateHospitalType: form?.control('privateHospitalType').value,
+        clinicType: form?.control('clinicType').value,
       )
           .then((response) {
         logger.d(response.length);

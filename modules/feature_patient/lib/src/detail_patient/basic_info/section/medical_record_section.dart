@@ -208,7 +208,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               IntrinsicWidth(
                                 child: ReactiveTextField<double>(
                                   formControlName: 'weight',
-                                  keyboardType: TextInputType.numberWithOptions(
+                                  keyboardType: const TextInputType.numberWithOptions(
                                       decimal: true),
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,

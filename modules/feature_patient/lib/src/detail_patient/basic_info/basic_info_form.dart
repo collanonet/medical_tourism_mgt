@@ -176,18 +176,6 @@ FormGroup basicInfoForm({
             value: '',
           ),
         }),
-        'MEDICAL_RECORD_Referrers': FormGroup({
-          '_id': FormControl<String?>(),
-          'company': FormControl<String?>(
-            value: '',
-          ),
-          'nameInKanji': FormControl<String?>(
-            value: '',
-          ),
-          'nameInKana': FormControl<String?>(
-            value: '',
-          ),
-        }),
         'MEDICAL_RECORD_Interpreter': FormGroup({
           '_id': FormControl<String?>(),
           'requiredOrUnnnecessary': FormControl<String>(),

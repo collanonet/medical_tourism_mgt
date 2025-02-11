@@ -101,7 +101,7 @@ class _FilePreviewState extends State<FilePreview> {
 class PdfPreviewFromBytes extends StatelessWidget {
   final Uint8List file;
 
-  const PdfPreviewFromBytes({Key? key, required this.file}) : super(key: key);
+  const PdfPreviewFromBytes({super.key, required this.file});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class PdfPreviewFromBytes extends StatelessWidget {
 class PdfPreviewFromUrl extends StatefulWidget {
   final String url;
 
-  const PdfPreviewFromUrl({Key? key, required this.url}) : super(key: key);
+  const PdfPreviewFromUrl({super.key, required this.url});
 
   @override
   _PdfPreviewFromUrlState createState() => _PdfPreviewFromUrlState();

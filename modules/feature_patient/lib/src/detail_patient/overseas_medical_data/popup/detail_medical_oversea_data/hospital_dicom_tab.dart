@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,7 +14,7 @@ import '../../overseas_medical_data_model.dart';
 import 'detail_medical_oversea_form.dart';
 
 class HospitalDICOMTab extends StatefulWidget {
-  HospitalDICOMTab({
+  const HospitalDICOMTab({
     super.key,
     required this.medicalRecordOverseaData,
   });
@@ -37,7 +36,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.6,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -110,7 +109,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                                 context
                                     .read<OverseasMedicalDataModel>()
                                     .commentDicomFile(
-                                      widget.medicalRecordOverseaData?.id ?? '',
+                                      widget.medicalRecordOverseaData.id ?? '',
                                       control.value?.toString() ?? '',
                                     );
                               },

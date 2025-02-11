@@ -1,7 +1,6 @@
 // Flutter imports:
 import 'package:core_utils/async.dart';
 import 'package:feature_chats/feature_chats.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -21,7 +20,7 @@ class MessageScreen extends StatefulWidget {
 class _MessageScreenState extends State<MessageScreen> {
   final TextEditingController _messageController = TextEditingController();
 
-  ValueNotifier<User?> _receiver = ValueNotifier(null);
+  final ValueNotifier<User?> _receiver = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {
