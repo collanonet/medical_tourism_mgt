@@ -40,7 +40,6 @@ class DetailPatientScreen extends StatefulWidget {
 }
 
 class _DetailPatientScreenState extends State<DetailPatientScreen> {
-
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
@@ -106,7 +105,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                         BasicInformationPage(
                           patient: widget.patient ?? patientData.data,
                         ),
-                        if (medicalRecord.hasData) ...[
+                        if (medicalRecord.hasData && patientData.hasData) ...[
                           DetailPatientWebReservationPage(
                             patient: patientData.requireData,
                           ),

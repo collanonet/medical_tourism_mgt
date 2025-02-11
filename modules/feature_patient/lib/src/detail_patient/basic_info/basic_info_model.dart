@@ -38,11 +38,14 @@ class BasicInformationModel {
     if (patient != null) {
       try {
         patientData.value = AsyncData(data: patient);
-        getPatientUser(userId: patient.id, formGroup: formGroup);
-        getPatientNames(patientId: patient.id, formGroup: formGroup);
-        getMedicalRecords(patientId: patient.id, formGroup: formGroup);
-        getPatientNationalities(patientId: patient.id, formGroup: formGroup);
-        getPatientPassports(patientId: patient.id, formGroup: formGroup);
+        await getPatientUser(userId: patient.id, formGroup: formGroup);
+        await getPatientNames(patientId: patient.id, formGroup: formGroup);
+
+        await getPatientNationalities(
+            patientId: patient.id, formGroup: formGroup);
+        await getPatientPassports(patientId: patient.id, formGroup: formGroup);
+
+        await getMedicalRecords(patientId: patient.id, formGroup: formGroup);
 
         loading.value = const AsyncData();
       } catch (error) {
@@ -81,7 +84,8 @@ class BasicInformationModel {
       try {
         loading.value = const AsyncData(loading: true);
 
-        await createUpdatePatientNames(form.control('PATIENT_NAMES') as FormGroup);
+        await createUpdatePatientNames(
+            form.control('PATIENT_NAMES') as FormGroup);
         await createUpdatePatientNationalities(
             form.control('PATIENT_NATIONALITIES') as FormGroup);
         await createUpdatePatientPassports(
@@ -114,7 +118,7 @@ class BasicInformationModel {
         logger.d(error);
         loading.value = AsyncData(error: error);
       } finally {
-        initialData(
+        await initialData(
           patient: patientData.value.requireData,
           formGroup: form,
         );
@@ -528,44 +532,42 @@ class BasicInformationModel {
   }) async {
     medicalRecord.value = const AsyncData(loading: true);
 
-    await patientRepository.medicalRecordsByPatient(patientId).then((value) {
-      if (value.isNotEmpty) {
-        medicalRecordId.value = AsyncData(data: value.first.id);
-        medicalRecord.value = AsyncData(data: value.first);
-        insertMedicalRecord(data: value.first, formGroup: formGroup);
-      } else {
-        medicalRecord.value = const AsyncData();
-      }
-    }).catchError((error) {
-      logger.d(error);
-      medicalRecord.value = AsyncData(error: error);
-    });
+    var records = await patientRepository.medicalRecordsByPatient(patientId);
+
+    if (records.isNotEmpty) {
+      medicalRecordId.value = AsyncData(data: records.first.id);
+      medicalRecord.value = AsyncData(data: records.first);
+      insertMedicalRecord(data: records.first, formGroup: formGroup);
+    } else {
+      medicalRecord.value = const AsyncData();
+    }
+
     if (medicalRecordId.value.hasData) {
-      getMedicalRecordHospitals(
-        medicalRecordId: medicalRecordId.value.requireData,
+      await getMedicalRecordHospitals(
+        medicalRecordId: records.first.id,
         formGroup: formGroup,
       );
-      getMedicalRecordBudgets(
-        medicalRecordId: medicalRecordId.value.requireData,
+      await getMedicalRecordBudgets(
+        medicalRecordId: records.first.id,
         formGroup: formGroup,
       );
-      getMedicalRecordAgents(
-        medicalRecordId: medicalRecordId.value.requireData,
-        formGroup: formGroup,
-      );
-
-      getMedicalRecordInterpreters(
-        medicalRecordId: medicalRecordId.value.requireData,
+      await getMedicalRecordAgents(
+        medicalRecordId: records.first.id,
         formGroup: formGroup,
       );
 
-      getMedicalRecordTravelGroups(
-        medicalRecordId: medicalRecordId.value.requireData,
+      await getMedicalRecordInterpreters(
+        medicalRecordId: records.first.id,
         formGroup: formGroup,
       );
 
-      getMedicalRecordCompanions(
-        medicalRecordId: medicalRecordId.value.requireData,
+      await getMedicalRecordTravelGroups(
+        medicalRecordId: records.first.id,
+        formGroup: formGroup,
+      );
+
+      await getMedicalRecordCompanions(
+        medicalRecordId: records.first.id,
         formGroup: formGroup,
       );
     }

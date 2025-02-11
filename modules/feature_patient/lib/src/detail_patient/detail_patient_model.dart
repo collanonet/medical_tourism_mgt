@@ -19,7 +19,7 @@ class DetailPatientModel {
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
 
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
-  ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
+      ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
   void updateMedicalRecord(MedicalRecord medicalRecord) {
     this.medicalRecord.value = AsyncData(data: medicalRecord);
@@ -38,7 +38,8 @@ class DetailPatientModel {
         } else {
           patientData.value = AsyncData<Patient>(data: patient);
         }
-        getPatientNames(patientId: patientData.value.data?.id ?? id ?? '');
+        await getPatientNames(
+            patientId: patientData.value.data?.id ?? id ?? '');
       } catch (error) {
         patientData.value = AsyncData<Patient>(error: error);
       }
@@ -60,18 +61,14 @@ class DetailPatientModel {
     if (patientName != null) {
       patientNames.value = AsyncData(data: patientName);
     } else {
-      await patientRepository
-          .patientNamesByPatient(patientId ?? patientData.value.data?.id ?? '')
-          .then((value) {
-        if (value.isNotEmpty) {
-          patientNames.value = AsyncData(data: value.firstOrNull);
-        } else {
-          patientNames.value = const AsyncData();
-        }
-      }).catchError((error) {
-        logger.d(error);
-        patientNames.value = AsyncData(error: error);
-      });
+      var names = await patientRepository
+          .patientNamesByPatient(patientId ?? patientData.value.data?.id ?? '');
+
+      if (names.isNotEmpty) {
+        patientNames.value = AsyncData(data: names.firstOrNull);
+      } else {
+        patientNames.value = const AsyncData();
+      }
     }
   }
 }
