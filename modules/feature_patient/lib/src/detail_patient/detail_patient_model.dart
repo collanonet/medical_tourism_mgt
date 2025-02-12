@@ -40,12 +40,32 @@ class DetailPatientModel {
         }
         await getPatientNames(
             patientId: patientData.value.data?.id ?? id ?? '');
+            getPatientPassports(patientId: patientData.value.data?.id ?? id ?? '');
       } catch (error) {
         patientData.value = AsyncData<Patient>(error: error);
       }
     } else {
       patientData.value = const AsyncData();
     }
+  }
+
+    ValueNotifier<AsyncData<PatientPassport>> patientPassport = ValueNotifier(
+    const AsyncData(),
+  );
+
+  Future<void> getPatientPassports({
+    required String patientId,
+   
+  }) async {
+    patientPassport.value = const AsyncData(loading: true);
+
+    await patientRepository.patientPassportsByPatient(patientId).then((value) {
+      patientPassport.value = AsyncData(data: value.first);
+     
+    }).catchError((error) {
+      logger.d(error);
+      patientPassport.value = AsyncData(error: error);
+    });
   }
 
   ValueNotifier<AsyncData<PatientName>> patientNames = ValueNotifier(
