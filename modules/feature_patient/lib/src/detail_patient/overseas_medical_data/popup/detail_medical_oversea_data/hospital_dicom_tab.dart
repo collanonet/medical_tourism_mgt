@@ -35,6 +35,20 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
   }
 
   @override
+  void didUpdateWidget(covariant HospitalDICOMTab oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.medicalRecordOverseaData != widget.medicalRecordOverseaData) {
+      medicalRecordOverseaData = widget.medicalRecordOverseaData;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    medicalRecordOverseaData = widget.medicalRecordOverseaData;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.6,
