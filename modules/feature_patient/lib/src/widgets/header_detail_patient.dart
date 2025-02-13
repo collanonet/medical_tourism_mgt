@@ -110,7 +110,8 @@ class HeaderDetailPatient extends StatelessWidget {
             valueListenable: context.read<DetailPatientModel>().patientPassport,
             builder: (context, value, _) {
               return ValueListenableBuilder(
-                valueListenable: context.read<DetailPatientModel>().patientData,
+                valueListenable:
+                    context.read<DetailPatientModel>().medicalRecord,
                 builder: (context, data, _) {
                   return Skeletonizer(
                     enabled: value.loading || data.loading,
@@ -128,7 +129,7 @@ class HeaderDetailPatient extends StatelessWidget {
                                 backgroundColor: const Color(0xff53A6FF),
                               ),
                               onPressed: () {},
-                              child: Text(data.data!.type?.first ?? '--'),
+                              child: Text(data.data?.type?.first ?? '--'),
                             ),
                             SizedBox(
                               width: context.appTheme.spacing.marginMedium,
@@ -185,7 +186,7 @@ class HeaderDetailPatient extends StatelessWidget {
                             SizedBox(
                               width: context.appTheme.spacing.marginSmall,
                             ),
-                             Text(data.data?.proposalNumber ?? '--'),
+                            Text(data.data?.proposalNumber ?? '--'),
                             SizedBox(
                               width: context.appTheme.spacing.marginExtraLarge,
                             ),
