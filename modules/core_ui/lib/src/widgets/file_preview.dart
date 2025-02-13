@@ -1,27 +1,17 @@
-// // Dart imports:
-//
-// // Flutter imports:
-// import 'package:core_network/core_network.dart';
-// import 'package:flutter/material.dart';
-//
-// // Package imports:
-// import 'package:core_utils/core_utils.dart';
-// import 'package:flutter_pdfview/flutter_pdfview.dart';
-//
-// // Project imports:
-// import '../../resources.dart';
-// import 'avatar.dart';
-//
-
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:http/http.dart' as http;
+import 'dart:html' as html;
+import 'package:get_it/get_it.dart';
+
+import 'package:pdf_render/pdf_render_widgets.dart';
+
+import 'row_separated.dart';
 
 class FilePreview extends StatefulWidget {
   const FilePreview({super.key, required this.fileSelect});
@@ -34,96 +24,62 @@ class FilePreview extends StatefulWidget {
 
 class _FilePreviewState extends State<FilePreview> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // Determine the file extension
     final fileExtension =
-        widget.fileSelect.filename?.split('.').last.toLowerCase() ?? '';
+        widget.fileSelect.filename?.split('.').last.toLowerCase() ??
+            widget.fileSelect.url?.split('.').last.toLowerCase();
 
-    // Handle PDF files
-    if (fileExtension == 'pdf') {
-      return Column(
-        children: [
-          TextButton(
-            onPressed: () {
-              openUrlInBrowser(fileName: widget.fileSelect.url ?? '');
-            },
-            child: const Text('Download PDF'),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        if (fileExtension == 'pdf')
+          Expanded(
+              child: Center(
+                  child: PdfPreviewFromUrl(url: widget.fileSelect.url ?? '')))
+        else if ([
+          'jpg',
+          'jpeg',
+          'png',
+          'gif',
+          'webp',
+          'bmp',
+          'tiff',
+          'tif',
+          'heic',
+          'heif',
+          'ico'
+        ].contains(fileExtension))
+          Expanded(
+              child: Center(child: ImagePreview(fileSelect: widget.fileSelect)))
+        else
+          Expanded(
+            child: Center(
+                child:
+                    Text('Unsupported file format ${widget.fileSelect.url}')),
           ),
-          widget.fileSelect.file != null
-              ? PdfPreviewFromBytes(file: widget.fileSelect.file!)
-              : PdfPreviewFromUrl(url: widget.fileSelect.url!),
-        ],
-      );
-    }
-
-    // Handle image files
-    if (['jpg', 'jpeg', 'png', 'gif'].contains(fileExtension)) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextButton(
-            onPressed: () {
-              openUrlInBrowser(fileName: widget.fileSelect.url ?? '');
-            },
-            child: const Text('Download Image'),
-          ),
-          widget.fileSelect.file != null
-              ? Image.memory(widget.fileSelect.file!)
-              : Image.network(widget.fileSelect.url!),
-        ],
-      );
-    }
-
-    // Handle unsupported file types
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text('Unsupported file format'),
-          TextButton(
-            onPressed: () {
-              openUrlInBrowser(fileName: widget.fileSelect.url ?? '');
-            },
-            child: const Text('Open in browser'),
-          ),
-        ],
-      ),
+        const SizedBox(height: 10),
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(width: 10);
+          },
+          children: [
+            TextButton.icon(
+              onPressed: () => downloadFileWeb(widget.fileSelect.url),
+              icon: const Icon(Icons.download),
+              label: const Text('ダウンロードファイル'),
+            ),
+            TextButton.icon(
+              onPressed: () =>
+                  openUrlInBrowser(fileName: widget.fileSelect.url ?? ''),
+              icon: const Icon(Icons.print),
+              label: const Text('印刷する'),
+            ),
+          ],
+        ),
+      ],
     );
-  }
-}
-
-class PdfPreviewFromBytes extends StatelessWidget {
-  final Uint8List file;
-
-  const PdfPreviewFromBytes({super.key, required this.file});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-      future: _writeToTempFile(file),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.hasData) {
-          return PDFView(filePath: snapshot.data!);
-        }
-        return const Center(child: Text('Failed to load PDF'));
-      },
-    );
-  }
-
-  Future<String> _writeToTempFile(Uint8List bytes) async {
-    final tempDir = await getTemporaryDirectory();
-    final tempFile = File('${tempDir.path}/temp.pdf');
-    await tempFile.writeAsBytes(bytes);
-    return tempFile.path;
   }
 }
 
@@ -137,46 +93,92 @@ class PdfPreviewFromUrl extends StatefulWidget {
 }
 
 class _PdfPreviewFromUrlState extends State<PdfPreviewFromUrl> {
-  String? localPath;
-
   @override
   void initState() {
     super.initState();
-    loadPdf();
   }
 
-  Future<void> loadPdf() async {
-    try {
-      final response = await http.get(Uri.parse(widget.url));
-      if (response.statusCode == 200) {
-        final bytes = response.bodyBytes;
-        final tempDir = await getTemporaryDirectory();
-        final tempFile = File('${tempDir.path}/temp.pdf');
-        await tempFile.writeAsBytes(bytes);
-        setState(() {
-          localPath = tempFile.path;
-        });
-      } else {
-        // Handle the error response
-        setState(() {
-          localPath = null; // or show an error message
-        });
-      }
-    } catch (e) {
-      // Handle any exceptions
-      setState(() {
-        localPath = null; // or show an error message
-      });
-    }
-  }
+  final controller = PdfViewerController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('PDF Preview')),
-      body: localPath == null
-          ? const Center(child: CircularProgressIndicator())
-          : PDFView(filePath: localPath!),
+    String baseUrl = GetIt.I<String>(instanceName: 'fileUrl');
+    return PdfViewer.openFutureData(
+      () async =>
+          (await DefaultCacheManager().getSingleFile('$baseUrl${widget.url}'))
+              .readAsBytes(),
+      viewerController: controller,
+      onError: (error) {
+        logger.e('PdfPreviewFromUrl: $error');
+      },
+      loadingBannerBuilder: (context) => Center(
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          color: Colors.black.withOpacity(0.5),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+            ],
+          ),
+        ),
+      ),
+      params: const PdfViewerParams(
+        padding: 10,
+        minScale: 1.0,
+      ),
     );
+  }
+}
+
+// ✅ Image Preview
+class ImagePreview extends StatelessWidget {
+  final FileSelect fileSelect;
+
+  const ImagePreview({super.key, required this.fileSelect});
+
+  @override
+  Widget build(BuildContext context) {
+    String baseUrl = GetIt.I<String>(instanceName: 'fileUrl');
+    String imageUrl = '$baseUrl${fileSelect.url}';
+
+    return fileSelect.file != null
+        ? Image.memory(fileSelect.file!)
+        : Image.network(imageUrl, height: 300, fit: BoxFit.cover);
+  }
+}
+
+Future<void> downloadFileWeb(String? fileName) async {
+  if (fileName == null || fileName.isEmpty) {
+    print('Download failed: No filename provided');
+    return;
+  }
+
+  try {
+    String baseUrl = GetIt.I<String>(instanceName: 'fileUrl');
+    String fullUrl = '$baseUrl$fileName';
+    print('Downloading from: $fullUrl');
+
+    final response = await http.get(Uri.parse(fullUrl));
+    if (response.statusCode == 200) {
+      // Convert response bytes to a Blob
+      final blob = html.Blob([response.bodyBytes]);
+
+      // Create object URL
+      final url = html.Url.createObjectUrlFromBlob(blob);
+
+      // Create anchor element and trigger download
+      final anchor = html.AnchorElement(href: url)
+        ..setAttribute("download", fileName)
+        ..click();
+
+      // Clean up the URL
+      html.Url.revokeObjectUrl(url);
+      print('Download started for: $fileName');
+    } else {
+      print('Download failed with status code: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Download error: $e');
   }
 }

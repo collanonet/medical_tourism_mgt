@@ -19,13 +19,7 @@ class MedicalPaymentDetailModel {
 
   final PatientRepository patientRepository;
 
-  // late Patient _patient;
 
-  // Patient get patient => _patient;
-
-  // Future<void> initialData({Patient? patient, String? id}) async {
-  //   notifyListeners();
-  // }
   ValueNotifier<AsyncData<List<MedicalPaymentResponse>>> medicalPaymentData =
       ValueNotifier(const AsyncData());
   Future<void> fetchMedicalPayment({required String id}) async {
@@ -48,12 +42,15 @@ class MedicalPaymentDetailModel {
       String? file;
       if (formGroup.control('file').value != null) {
         FileSelect docFile = formGroup.control('file').value;
+        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+            '.'+
+            docFile.filename!.split('.').last;
         if (docFile.file != null) {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
               base64Image,
-              docFile.filename!,
+              filename,
             );
             file = fileData.filename;
           } catch (e) {

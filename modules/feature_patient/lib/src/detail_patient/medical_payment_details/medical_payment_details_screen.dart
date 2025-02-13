@@ -177,7 +177,16 @@ class _MedicalPaymentDetailScreenState
                 children: List.generate(value.data?.length ?? 0, (index) {
                   final data = value.data?[index];
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      // this is popup full screen for preview file with url
+                      showPreviewFile(
+                        context,
+                        fileSelect: FileSelect(
+                          // file name from object model
+                          url: data?.file,
+                        ),
+                      );
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Row(

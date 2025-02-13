@@ -159,12 +159,15 @@ class StatementModel {
       String? logoFile;
       if (formGroup.control('logoFile').value != null) {
         FileSelect docFile = formGroup.control('logoFile').value;
+        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+            '.'+
+            docFile.filename!.split('.').last;
         if (docFile.file != null) {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
               base64Image,
-              docFile.filename!,
+              filename,
             );
             logoFile = fileData.filename;
           } catch (e) {
@@ -178,12 +181,15 @@ class StatementModel {
       String? stampFile;
       if (formGroup.control('stampFile').value != null) {
         FileSelect docFile = formGroup.control('stampFile').value;
+        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+            '.'+
+            docFile.filename!.split('.').last;
         if (docFile.file != null) {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
               base64Image,
-              docFile.filename!,
+              filename,
             );
             stampFile = fileData.filename;
           } catch (e) {
@@ -440,7 +446,8 @@ Future<Uint8List?> generatePdfFromInvoice(
     case 'ZHTW':
       fontData = (await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf'))
           .buffer
-          .asUint8List(); {}
+          .asUint8List();
+      {}
       break;
     case 'VN':
       fontData = (await rootBundle.load('assets/fonts/Roboto_VN.ttf'))
