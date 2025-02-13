@@ -204,13 +204,19 @@ class DocumentRequired extends StatelessWidget {
                                                                   control.value
                                                                           ?.filename !=
                                                                       null) {
-                                                                openUrlInBrowser(
-                                                                    fileName: control
-                                                                            .value
-                                                                            ?.url ??
-                                                                        control
-                                                                            .value!
-                                                                            .filename!);
+
+                                                                showPreviewFile(
+                                                                  context,
+                                                                  fileSelect: FileSelect(
+                                                                    // file name from object model
+                                                                      url: control
+                                                                          .value
+                                                                          ?.url ??
+                                                                          control
+                                                                              .value!
+                                                                              .filename!
+                                                                  ),
+                                                                );
                                                               }
                                                             },
                                                             child: Text(

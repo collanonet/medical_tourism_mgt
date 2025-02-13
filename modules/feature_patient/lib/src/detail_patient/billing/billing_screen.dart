@@ -502,7 +502,13 @@ class _BillingScreenState extends State<BillingScreen> {
                     return InkWell(
                       onTap: () {
                         if (control.value?.url != null) {
-                          openUrlInBrowser(fileName: control.value!.url!);
+                          showPreviewFile(
+                            context,
+                            fileSelect: FileSelect(
+                              // file name from object model
+                              url: control.value!.url,
+                            ),
+                          );
                         } else {
                           filePicker().then((value) {
                             if (value != null) {

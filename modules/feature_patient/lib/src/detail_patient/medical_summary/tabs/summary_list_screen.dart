@@ -1,6 +1,7 @@
 // Flutter imports:
 
 // Flutter imports:
+import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -99,7 +100,13 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                             var item = value.data![index];
                             return InkWell(
                               onTap: () {
-                                openUrlInBrowser(fileName: item.pathFile ?? '');
+                                showPreviewFile(
+                                  context,
+                                  fileSelect: FileSelect(
+                                    // file name from object model
+                                    url: item.pathFile,
+                                  ),
+                                );
                               },
                               child: Padding(
                                 padding:

@@ -224,7 +224,13 @@ class MaterialSectionState extends State<MaterialSection> {
                               return InkWell(
                                 onTap: () {
                                   if(data?.file != null) {
-                                    openUrlInBrowser(fileName: data?.file ?? '');
+                                    showPreviewFile(
+                                      context,
+                                      fileSelect: FileSelect(
+                                        // file name from object model
+                                          url: data?.file ?? ''
+                                      ),
+                                    );
                                   }
                                   // showDialog(
                                   //   context: context,
@@ -415,7 +421,13 @@ class MaterialSectionState extends State<MaterialSection> {
                           .value
                           .requireData
                           .firstWhere((element) => element.id == sels.first);
-                      openUrlInBrowser(fileName: data.file ?? '');
+                      showPreviewFile(
+                        context,
+                        fileSelect: FileSelect(
+                          // file name from object model
+                            url: data.file ?? ''
+                        ),
+                      );
                     } : null,
                     child: const Text('印刷する'),
                   ),

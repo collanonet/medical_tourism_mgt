@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -117,50 +118,71 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                           ListTile(
                                             title: const Text('日本語'),
                                             onTap: () {
-                                              openUrlInBrowser(
-                                                  fileName:
-                                                      data?.fileNamePdfJP ??
-                                                          '');
+                                              showPreviewFile(
+                                                context,
+                                                fileSelect: FileSelect(
+                                                  // file name from object model
+                                                  url: data?.fileNamePdfJP ??
+                                                      '',
+                                                ),
+                                              );
                                             },
                                           ),
                                         if (data?.fileNamePdfEN != null)
                                           ListTile(
                                             title: const Text('英語'),
                                             onTap: () {
-                                              openUrlInBrowser(
-                                                  fileName:
-                                                      data?.fileNamePdfEN ??
-                                                          '');
+                                              showPreviewFile(
+                                                context,
+                                                fileSelect: FileSelect(
+                                                  // file name from object model
+                                                  url: data?.fileNamePdfEN ??
+                                                      '',
+                                                ),
+                                              );
                                             },
                                           ),
                                         if (data?.fileNamePdfVN != null)
                                           ListTile(
                                             title: const Text('ベトナム語'),
                                             onTap: () {
-                                              openUrlInBrowser(
-                                                  fileName:
-                                                      data?.fileNamePdfVN ??
-                                                          '');
+
+                                              showPreviewFile(
+                                                context,
+                                                fileSelect: FileSelect(
+                                                  // file name from object model
+                                                  url: data?.fileNamePdfVN ??
+                                                      '',
+                                                ),
+                                              );
                                             },
                                           ),
                                         if (data?.fileNamePdfZH != null)
                                           ListTile(
                                             title: const Text('中国語'),
                                             onTap: () {
-                                              openUrlInBrowser(
-                                                  fileName:
-                                                      data?.fileNamePdfZH ??
-                                                          '');
+                                              showPreviewFile(
+                                                context,
+                                                fileSelect: FileSelect(
+                                                  // file name from object model
+                                                  url: data?.fileNamePdfZH ??
+                                                      '',
+                                                ),
+                                              );
                                             },
                                           ),
                                         if (data?.fileNamePdfZHTW != null)
                                           ListTile(
                                             title: const Text('繁体字'),
                                             onTap: () {
-                                              openUrlInBrowser(
-                                                  fileName:
-                                                      data?.fileNamePdfZHTW ??
-                                                          '');
+                                              showPreviewFile(
+                                                context,
+                                                fileSelect: FileSelect(
+                                                  // file name from object model
+                                                  url: data?.fileNamePdfZHTW ??
+                                                      '',
+                                                ),
+                                              );
                                             },
                                           ),
                                       ],

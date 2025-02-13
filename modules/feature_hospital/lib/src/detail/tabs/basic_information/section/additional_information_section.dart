@@ -121,8 +121,13 @@ class _AdditionalInformationSectionState
                                             InkWell(
                                               onTap: () {
                                                 if (e.url != null) {
-                                                  openUrlInBrowser(
-                                                      fileName: e.url!);
+                                                  showPreviewFile(
+                                                    context,
+                                                    fileSelect: FileSelect(
+                                                      // file name from object model
+                                                      url: e.url!
+                                                    ),
+                                                  );
                                                 }
                                               },
                                               child: Row(

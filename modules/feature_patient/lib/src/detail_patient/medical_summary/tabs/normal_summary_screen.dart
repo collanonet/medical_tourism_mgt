@@ -922,8 +922,13 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                   children: [
                                     ...value.data?.map((e) => InkWell(
                                               onTap: () {
-                                                openUrlInBrowser(
-                                                    fileName: e.pathFile ?? '');
+                                                showPreviewFile(
+                                                  context,
+                                                  fileSelect: FileSelect(
+                                                    // file name from object model
+                                                      url: e.pathFile ?? ''
+                                                  ),
+                                                );
                                               },
                                               child: Avatar.network(
                                                 e.pathFile,

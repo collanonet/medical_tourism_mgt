@@ -586,8 +586,13 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                       return InkWell(
                                         onTap: () {
                                           if (control.value?.url != null) {
-                                            openUrlInBrowser(
-                                                fileName: control.value!.url!);
+                                            showPreviewFile(
+                                              context,
+                                              fileSelect: FileSelect(
+                                                // file name from object model
+                                                  url: control.value!.url!
+                                              ),
+                                            );
                                           }
                                         },
                                         child: Text(

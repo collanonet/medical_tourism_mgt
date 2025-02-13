@@ -200,11 +200,17 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                       null ||
                                   value.requireData[index].uploadedPhoto !=
                                       null) {
-                                openUrlInBrowser(
-                                    fileName:
-                                        value.requireData[index].facilityFile ??
-                                            value.requireData[index]
-                                                .uploadedPhoto!);
+
+                                showPreviewFile(
+                                  context,
+                                  fileSelect: FileSelect(
+                                    // file name from object model
+                                      url:
+                                      value.requireData[index].facilityFile ??
+                                          value.requireData[index]
+                                              .uploadedPhoto!
+                                  ),
+                                );
                               }
                             },
                             child: Avatar.network(

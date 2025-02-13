@@ -136,7 +136,13 @@ class ContractSectionState extends State<ContractSection> {
                       return InkWell(
                         onTap: () {
                           if (data?.uploadFile != null) {
-                            openUrlInBrowser(fileName: data?.uploadFile ?? '');
+                            showPreviewFile(
+                              context,
+                              fileSelect: FileSelect(
+                                // file name from object model
+                                  url:  data?.uploadFile ?? ''
+                              ),
+                            );
                           } else {
                             snackBarWidget(
                               message: 'ファイルが見つかりません',
