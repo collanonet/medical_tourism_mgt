@@ -129,7 +129,7 @@ class SideBarMenu extends StatelessWidget {
                                 ),
                               ),
                               selected: selectedIndex == index,
-                              onTap: () => context.router.replace(
+                              onTap: () => context.router.push(
                                 PageRouteInfo(menus[index].route),
                               ),
                               hoverColor: Colors.transparent,
