@@ -38,14 +38,13 @@ class BasicInformationModel {
     if (patient != null) {
       try {
         patientData.value = AsyncData(data: patient);
-        await getPatientUser(userId: patient.id, formGroup: formGroup);
-        await getPatientNames(patientId: patient.id, formGroup: formGroup);
+        getPatientUser(userId: patient.id, formGroup: formGroup);
+        getPatientNames(patientId: patient.id, formGroup: formGroup);
 
-        await getPatientNationalities(
-            patientId: patient.id, formGroup: formGroup);
-        await getPatientPassports(patientId: patient.id, formGroup: formGroup);
+        getPatientNationalities(patientId: patient.id, formGroup: formGroup);
+        getPatientPassports(patientId: patient.id, formGroup: formGroup);
 
-        await getMedicalRecords(patientId: patient.id, formGroup: formGroup);
+        getMedicalRecords(patientId: patient.id, formGroup: formGroup);
 
         loading.value = const AsyncData();
       } catch (error) {
@@ -381,12 +380,15 @@ class BasicInformationModel {
     String? file;
     if (form.control('chatQrImage').value != null) {
       FileSelect docFile = form.control('chatQrImage').value;
+      String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+          '.'+
+            docFile.filename!.split('.').last;
       if (docFile.file != null) {
         try {
           String base64Image = base64Encode(docFile.file!);
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
-            docFile.filename!,
+            filename,
           );
           file = fileData.filename;
         } catch (e) {
@@ -1457,12 +1459,15 @@ class BasicInformationModel {
         String? file;
         if (element['chatQrImage'] != null) {
           FileSelect docFile = element['chatQrImage'];
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.'+
+            docFile.filename!.split('.').last;
           if (docFile.file != null) {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
                 base64Image,
-                docFile.filename!,
+                filename,
               );
               file = fileData.filename;
             } catch (e) {

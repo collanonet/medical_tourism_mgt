@@ -40,6 +40,7 @@ class DomesticMedicalDataModel {
 
   ValueNotifier<AsyncData<DomesticMedicalDataResponse>> submit =
       ValueNotifier(const AsyncData());
+
   void submitDomesticMedicalData(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
@@ -49,10 +50,15 @@ class DomesticMedicalDataModel {
           try {
             // convert Uint8List to base64
             FileSelect docFile = formGroup.control('uploadFile').value;
+
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.'+
+            docFile.filename!.split('.').last;
+
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
               base64Image,
-              docFile.filename!,
+              filename,
             );
             file = fileData.filename;
           } catch (e) {
@@ -118,5 +124,4 @@ class DomesticMedicalDataModel {
       delete.value = AsyncData(error: e.toString());
     }
   }
-
 }

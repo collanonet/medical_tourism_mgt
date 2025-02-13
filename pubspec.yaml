@@ -119,6 +119,8 @@ dependencies:
   flutter_pdfview: ^1.4.0
   socket_io_client: ^3.0.2
   libphonenumber: ^2.0.2
+  pdf_render: ^1.4.12
+  flutter_cache_manager: ^3.4.1
 
 
 dev_dependencies:

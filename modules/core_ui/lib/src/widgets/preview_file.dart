@@ -5,8 +5,29 @@ import 'package:flutter/material.dart';
 import 'package:core_network/core_network.dart';
 import '../../core_ui.dart';
 
+void showPreviewFile(
+  BuildContext context, {
+  required FileSelect fileSelect,
+}) {
+  showDialog(
+    context: context,
+    builder: (_) => Dialog(
+      insetPadding: EdgeInsets.zero,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: PreviewFile(
+          fileSelect: FileSelect(
+            url: fileSelect.url,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 class PreviewFile extends StatelessWidget {
-  const PreviewFile({super.key,required this.fileSelect});
+  const PreviewFile({super.key, required this.fileSelect});
 
   final FileSelect fileSelect;
 
@@ -24,7 +45,7 @@ class PreviewFile extends StatelessWidget {
             Icons.close,
           ),
         ),
-        FilePreview(fileSelect: fileSelect),
+        Expanded(child: FilePreview(fileSelect: fileSelect)),
       ],
     );
   }
