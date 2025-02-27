@@ -5,7 +5,7 @@ FormGroup typeForm() {
   return FormGroup({
     'type': FormArray([
       FormGroup({
-        '_id': FormControl<String>(),
+        '_id': FormControl<String>(value: ''),
         'typeName': FormControl<String>(
           validators: [Validators.required],
         ),

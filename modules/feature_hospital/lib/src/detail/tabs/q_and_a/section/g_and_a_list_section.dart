@@ -23,6 +23,14 @@ class QAndAListSection extends StatefulWidget {
 
 class _QAndAListSectionState extends State<QAndAListSection> {
   bool isExpanded = false;
+  @override
+  void setState(VoidCallback fn) {
+    context.watch<QAndAModel>().newRegistrationHospitalData;
+    context.watch<QAndAModel>().editData;
+    context.watch<QAndAModel>().submit;
+
+    super.setState(fn);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +195,8 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                   ),
                                                   RowSeparated(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.end,
+                                                          MainAxisAlignment
+                                                              .end,
                                                       separatorBuilder:
                                                           (context, index) =>
                                                               SizedBox(
@@ -208,22 +217,25 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                                     QAndAModel>()
                                                                 .delete
                                                                 .value;
-
+        
                                                             if (value
                                                                 .hasError) {
                                                               snackBarWidget(
                                                                 message:
                                                                     '削除に失敗しました',
                                                                 backgroundColor:
-                                                                    Colors.red,
+                                                                    Colors
+                                                                        .red,
                                                                 prefixIcon: const Icon(
-                                                                    Icons.error,
+                                                                    Icons
+                                                                        .error,
                                                                     color: Colors
                                                                         .white),
                                                               );
                                                             }
-
-                                                            if (value.hasData) {
+        
+                                                            if (value
+                                                                .hasData) {
                                                               snackBarWidget(
                                                                 message:
                                                                     '削除しました',
@@ -248,9 +260,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                                     return OutlinedButton(
                                                                         onPressed:
                                                                             () {
-                                                                          context
-                                                                              .read<QAndAModel>()
-                                                                              .deleteData(value.requireData[index]);
+                                                                          context.read<QAndAModel>().deleteData(value.requireData[index]);
                                                                         },
                                                                         child: WithLoadingButton(
                                                                             isLoading: value.loading,
@@ -304,8 +314,8 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                           child: const Text(
                                                             'コピーする',
                                                             style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                              color: Colors
+                                                                  .white,
                                                             ),
                                                           ),
                                                         ),

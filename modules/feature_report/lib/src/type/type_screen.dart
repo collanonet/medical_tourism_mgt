@@ -119,7 +119,7 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                                         .indexOf(currentForm) >
                                                     0 &&
                                                 currentForm
-                                                        .control('id')
+                                                        .control('_id')
                                                         .value ==
                                                     null)
                                               IconButton(
@@ -159,7 +159,8 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                           onPressed: () {
                                             formArray.add(
                                               FormGroup({
-                                                '_id': FormControl<String>(),
+                                                '_id': FormControl<String>(
+                                                    value: ''),
                                                 'typeName': FormControl<String>(
                                                   validators: [
                                                     Validators.required

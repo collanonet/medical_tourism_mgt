@@ -10,10 +10,10 @@ import 'package:data_process_chart/data_process_chart.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i1;
 
 import 'src/detail/detail_process_chart_model.dart' as _i3;
-import 'src/detail/tab/facility/facility_model.dart' as _i6;
-import 'src/detail/tab/hotel_registration/hotel_registration_model.dart' as _i5;
-import 'src/detail/tab/itinerary/itinerary_model.dart' as _i8;
-import 'src/detail/tab/related_parties/related_parties_model.dart' as _i7;
+import 'src/detail/tab/facility/facility_model.dart' as _i5;
+import 'src/detail/tab/hotel_registration/hotel_registration_model.dart' as _i6;
+import 'src/detail/tab/itinerary/itinerary_model.dart' as _i7;
+import 'src/detail/tab/related_parties/related_parties_model.dart' as _i8;
 import 'src/itinerary_simplified/itinerary_simplified_model.dart' as _i9;
 import 'src/process_chart_model.dart' as _i10;
 
@@ -23,13 +23,13 @@ class FeatureProcessChartPackageModule extends _i1.MicroPackageModule {
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.factory<_i3.DetailProcessChartModel>(() => _i3.DetailProcessChartModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
-    gh.factory<_i5.HotelRegistrationModel>(() => _i5.HotelRegistrationModel(
+    gh.factory<_i5.FacilityModel>(() => _i5.FacilityModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
-    gh.factory<_i6.FacilityModel>(() => _i6.FacilityModel(
+    gh.factory<_i6.HotelRegistrationModel>(() => _i6.HotelRegistrationModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
-    gh.factory<_i7.RelatedPartiesModel>(() => _i7.RelatedPartiesModel(
+    gh.factory<_i7.ItineraryModel>(() => _i7.ItineraryModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
-    gh.factory<_i8.ItineraryModel>(() => _i8.ItineraryModel(
+    gh.factory<_i8.RelatedPartiesModel>(() => _i8.RelatedPartiesModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
     gh.factory<_i9.ItinerarySimplifiedModel>(() => _i9.ItinerarySimplifiedModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
