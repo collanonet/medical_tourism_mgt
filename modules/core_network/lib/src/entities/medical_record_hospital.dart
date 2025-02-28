@@ -8,17 +8,17 @@ part 'medical_record_hospital.g.dart';
 class MedicalRecordHospital {
   @JsonKey(name: '_id')
   final String id;
-   String hospitalName;
-   String medicalCardNumber;
-   String medicalRecord;
+  String? hospitalName;
+  String? medicalCardNumber;
+  String? medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   MedicalRecordHospital({
     required this.id,
-    required this.hospitalName,
-    required this.medicalCardNumber,
-    required this.medicalRecord,
+    this.hospitalName,
+    this.medicalCardNumber,
+    this.medicalRecord,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -29,15 +29,16 @@ class MedicalRecordHospital {
 
   Map<String, dynamic> toJson() => _$MedicalRecordHospitalToJson(this);
 
-  static FormGroup buildFormGroup(MedicalRecordHospital? medicalRecordHospital) {
+  static FormGroup buildFormGroup(
+      MedicalRecordHospital? medicalRecordHospital) {
     return FormGroup({
       '_id': FormControl<String>(value: medicalRecordHospital?.id),
       'hospitalName':
-      FormControl<String>(value: medicalRecordHospital?.hospitalName),
-      'medicalCardNumber': FormControl<String>(
-          value: medicalRecordHospital?.medicalCardNumber),
+          FormControl<String>(value: medicalRecordHospital?.hospitalName),
+      'medicalCardNumber':
+          FormControl<String>(value: medicalRecordHospital?.medicalCardNumber),
       'medicalRecord':
-      FormControl<String>(value: medicalRecordHospital?.medicalRecord),
+          FormControl<String>(value: medicalRecordHospital?.medicalRecord),
     });
   }
 }

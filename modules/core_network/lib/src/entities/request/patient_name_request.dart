@@ -6,32 +6,32 @@ part 'patient_name_request.g.dart';
 @JsonSerializable()
 class PatientNameRequest {
   String familyNameRomanized;
-  String middleNameRomanized;
+  String? middleNameRomanized;
   String firstNameRomanized;
-  String familyNameChineseOrVietnamese;
-  String middleNameChineseOrVietnamese;
-  String firstNameChineseOrVietnamese;
-  String familyNameJapaneseForChinese;
-  String middleNameJapaneseForChinese;
-  String firstNameJapaneseForChinese;
-  String familyNameJapaneseForNonChinese;
-  String middleNameJapaneseForNonChinese;
-  String firstNameJapaneseForNonChinese;
+  String? familyNameChineseOrVietnamese;
+  String? middleNameChineseOrVietnamese;
+  String? firstNameChineseOrVietnamese;
+  String? familyNameJapaneseForChinese;
+  String? middleNameJapaneseForChinese;
+  String? firstNameJapaneseForChinese;
+  String? familyNameJapaneseForNonChinese;
+  String? middleNameJapaneseForNonChinese;
+  String? firstNameJapaneseForNonChinese;
   String? patient;
 
   PatientNameRequest({
     required this.familyNameRomanized,
-    required this.middleNameRomanized,
+    this.middleNameRomanized,
     required this.firstNameRomanized,
-    required this.familyNameChineseOrVietnamese,
-    required this.middleNameChineseOrVietnamese,
-    required this.firstNameChineseOrVietnamese,
-    required this.familyNameJapaneseForChinese,
-    required this.middleNameJapaneseForChinese,
-    required this.firstNameJapaneseForChinese,
-    required this.familyNameJapaneseForNonChinese,
-    required this.middleNameJapaneseForNonChinese,
-    required this.firstNameJapaneseForNonChinese,
+    this.familyNameChineseOrVietnamese,
+    this.middleNameChineseOrVietnamese,
+    this.firstNameChineseOrVietnamese,
+    this.familyNameJapaneseForChinese,
+    this.middleNameJapaneseForChinese,
+    this.firstNameJapaneseForChinese,
+    this.familyNameJapaneseForNonChinese,
+    this.middleNameJapaneseForNonChinese,
+    this.firstNameJapaneseForNonChinese,
     this.patient,
   });
 

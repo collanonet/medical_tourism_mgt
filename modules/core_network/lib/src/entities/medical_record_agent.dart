@@ -9,8 +9,8 @@ class MedicalRecordAgent {
   @JsonKey(name: '_id')
   final String id;
   String company;
-  String nameInKanji;
-  String nameInKana;
+  String? nameInKanji;
+  String? nameInKana;
   String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -18,8 +18,8 @@ class MedicalRecordAgent {
   MedicalRecordAgent({
     required this.id,
     required this.company,
-    required this.nameInKanji,
-    required this.nameInKana,
+    this.nameInKanji,
+    this.nameInKana,
     required this.medicalRecord,
     required this.createdAt,
     required this.updatedAt,

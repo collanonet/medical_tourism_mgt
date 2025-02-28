@@ -11,27 +11,27 @@ PatientName _$PatientNameFromJson(Map<String, dynamic> json) => PatientName(
       patient: json['patient'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      familyNameRomanized: json['familyNameRomanized'] as String,
-      middleNameRomanized: json['middleNameRomanized'] as String,
-      firstNameRomanized: json['firstNameRomanized'] as String,
+      familyNameRomanized: json['familyNameRomanized'] as String?,
+      middleNameRomanized: json['middleNameRomanized'] as String?,
+      firstNameRomanized: json['firstNameRomanized'] as String?,
       familyNameChineseOrVietnamese:
-          json['familyNameChineseOrVietnamese'] as String,
+          json['familyNameChineseOrVietnamese'] as String?,
       middleNameChineseOrVietnamese:
-          json['middleNameChineseOrVietnamese'] as String,
+          json['middleNameChineseOrVietnamese'] as String?,
       firstNameChineseOrVietnamese:
-          json['firstNameChineseOrVietnamese'] as String,
+          json['firstNameChineseOrVietnamese'] as String?,
       familyNameJapaneseForChinese:
-          json['familyNameJapaneseForChinese'] as String,
+          json['familyNameJapaneseForChinese'] as String?,
       middleNameJapaneseForChinese:
-          json['middleNameJapaneseForChinese'] as String,
+          json['middleNameJapaneseForChinese'] as String?,
       firstNameJapaneseForChinese:
-          json['firstNameJapaneseForChinese'] as String,
+          json['firstNameJapaneseForChinese'] as String?,
       familyNameJapaneseForNonChinese:
-          json['familyNameJapaneseForNonChinese'] as String,
+          json['familyNameJapaneseForNonChinese'] as String?,
       middleNameJapaneseForNonChinese:
-          json['middleNameJapaneseForNonChinese'] as String,
+          json['middleNameJapaneseForNonChinese'] as String?,
       firstNameJapaneseForNonChinese:
-          json['firstNameJapaneseForNonChinese'] as String,
+          json['firstNameJapaneseForNonChinese'] as String?,
     );
 
 Map<String, dynamic> _$PatientNameToJson(PatientName instance) =>

@@ -16,7 +16,7 @@ PatientPassport _$PatientPassportFromJson(Map<String, dynamic> json) =>
       expirationDate: json['expirationDate'] == null
           ? null
           : DateTime.parse(json['expirationDate'] as String),
-      visaType: json['visaType'] as String,
+      visaType: json['visaType'] as String?,
       visaCategory: json['visaCategory'] as String?,
       underConfirmation: json['underConfirmation'] as bool?,
       patient: json['patient'] as String,

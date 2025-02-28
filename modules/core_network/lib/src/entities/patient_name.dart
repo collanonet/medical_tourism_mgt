@@ -13,18 +13,18 @@ class PatientName {
   final DateTime updatedAt;
 
   // New fields
-  String familyNameRomanized;
-  String middleNameRomanized;
-  String firstNameRomanized;
-  String familyNameChineseOrVietnamese;
-  String middleNameChineseOrVietnamese;
-  String firstNameChineseOrVietnamese;
-  String familyNameJapaneseForChinese;
-  String middleNameJapaneseForChinese;
-  String firstNameJapaneseForChinese;
-  String familyNameJapaneseForNonChinese;
-  String middleNameJapaneseForNonChinese;
-  String firstNameJapaneseForNonChinese;
+  String? familyNameRomanized;
+  String? middleNameRomanized;
+  String? firstNameRomanized;
+  String? familyNameChineseOrVietnamese;
+  String? middleNameChineseOrVietnamese;
+  String? firstNameChineseOrVietnamese;
+  String? familyNameJapaneseForChinese;
+  String? middleNameJapaneseForChinese;
+  String? firstNameJapaneseForChinese;
+  String? familyNameJapaneseForNonChinese;
+  String? middleNameJapaneseForNonChinese;
+  String? firstNameJapaneseForNonChinese;
 
   PatientName({
     required this.id,
@@ -32,18 +32,18 @@ class PatientName {
     required this.createdAt,
     required this.updatedAt,
     // New fields
-    required this.familyNameRomanized,
-    required this.middleNameRomanized,
-    required this.firstNameRomanized,
-    required this.familyNameChineseOrVietnamese,
-    required this.middleNameChineseOrVietnamese,
-    required this.firstNameChineseOrVietnamese,
-    required this.familyNameJapaneseForChinese,
-    required this.middleNameJapaneseForChinese,
-    required this.firstNameJapaneseForChinese,
-    required this.familyNameJapaneseForNonChinese,
-    required this.middleNameJapaneseForNonChinese,
-    required this.firstNameJapaneseForNonChinese,
+    this.familyNameRomanized,
+    this.middleNameRomanized,
+    this.firstNameRomanized,
+    this.familyNameChineseOrVietnamese,
+    this.middleNameChineseOrVietnamese,
+    this.firstNameChineseOrVietnamese,
+    this.familyNameJapaneseForChinese,
+    this.middleNameJapaneseForChinese,
+    this.firstNameJapaneseForChinese,
+    this.familyNameJapaneseForNonChinese,
+    this.middleNameJapaneseForNonChinese,
+    this.firstNameJapaneseForNonChinese,
   });
 
   factory PatientName.fromJson(Map<String, dynamic> json) {
@@ -59,18 +59,30 @@ class PatientName {
       'createdAt': FormControl<DateTime>(value: patientName?.createdAt),
       'updatedAt': FormControl<DateTime>(value: patientName?.updatedAt),
       // New fields
-      'familyNameRomanized': FormControl<String>(value: patientName?.familyNameRomanized),
-      'middleNameRomanized': FormControl<String>(value: patientName?.middleNameRomanized),
-      'firstNameRomanized': FormControl<String>(value: patientName?.firstNameRomanized),
-      'familyNameChineseOrVietnamese': FormControl<String>(value: patientName?.familyNameChineseOrVietnamese),
-      'middleNameChineseOrVietnamese': FormControl<String>(value: patientName?.middleNameChineseOrVietnamese),
-      'firstNameChineseOrVietnamese': FormControl<String>(value: patientName?.firstNameChineseOrVietnamese),
-      'familyNameJapaneseForChinese': FormControl<String>(value: patientName?.familyNameJapaneseForChinese),
-      'middleNameJapaneseForChinese': FormControl<String>(value: patientName?.middleNameJapaneseForChinese),
-      'firstNameJapaneseForChinese': FormControl<String>(value: patientName?.firstNameJapaneseForChinese),
-      'familyNameJapaneseForNonChinese': FormControl<String>(value: patientName?.familyNameJapaneseForNonChinese),
-      'middleNameJapaneseForNonChinese': FormControl<String>(value: patientName?.middleNameJapaneseForNonChinese),
-      'firstNameJapaneseForNonChinese': FormControl<String>(value: patientName?.firstNameJapaneseForNonChinese),
+      'familyNameRomanized':
+          FormControl<String>(value: patientName?.familyNameRomanized),
+      'middleNameRomanized':
+          FormControl<String>(value: patientName?.middleNameRomanized),
+      'firstNameRomanized':
+          FormControl<String>(value: patientName?.firstNameRomanized),
+      'familyNameChineseOrVietnamese': FormControl<String>(
+          value: patientName?.familyNameChineseOrVietnamese),
+      'middleNameChineseOrVietnamese': FormControl<String>(
+          value: patientName?.middleNameChineseOrVietnamese),
+      'firstNameChineseOrVietnamese':
+          FormControl<String>(value: patientName?.firstNameChineseOrVietnamese),
+      'familyNameJapaneseForChinese':
+          FormControl<String>(value: patientName?.familyNameJapaneseForChinese),
+      'middleNameJapaneseForChinese':
+          FormControl<String>(value: patientName?.middleNameJapaneseForChinese),
+      'firstNameJapaneseForChinese':
+          FormControl<String>(value: patientName?.firstNameJapaneseForChinese),
+      'familyNameJapaneseForNonChinese': FormControl<String>(
+          value: patientName?.familyNameJapaneseForNonChinese),
+      'middleNameJapaneseForNonChinese': FormControl<String>(
+          value: patientName?.middleNameJapaneseForNonChinese),
+      'firstNameJapaneseForNonChinese': FormControl<String>(
+          value: patientName?.firstNameJapaneseForNonChinese),
     });
   }
 }

@@ -80,7 +80,7 @@ FormGroup basicInfoForm({
           ],
         ),
         'receivingMethod': FormControl<String>(),
-        'memo': FormControl<String>(),
+        'memo': FormControl<String>(value: ''),
         'patient': FormControl<String>(value: patientId),
         'deletedMedicalRecordHospitals': FormControl<List<String>>(value: []),
         'MEDICAL_RECORD_HOSPITALS': FormArray([
@@ -151,7 +151,7 @@ FormGroup basicInfoForm({
           ),
           'chatToolLink': FormArray([
             FormGroup({
-              'chatToolLink': FormControl<String>(),
+              'chatToolLink': FormControl<String>(value: ''),
             })
           ]),
           'chatQrImage': FormControl<FileSelect>(),
@@ -177,9 +177,9 @@ FormGroup basicInfoForm({
           ),
         }),
         'MEDICAL_RECORD_Interpreter': FormGroup({
-          '_id': FormControl<String?>(),
-          'requiredOrUnnnecessary': FormControl<String>(),
-          'interpreter': FormControl<String>(),
+          '_id': FormControl<String?>(value: ''),
+          'requiredOrUnnnecessary': FormControl<String>(value: ''),
+          'interpreter': FormControl<String>(value: ''),
         }),
         'PATIENT_PASSPORTS': FormGroup({
           '_id': FormControl<String?>(),
@@ -202,7 +202,7 @@ FormGroup basicInfoForm({
             value: 'medicalGuarantee',
           ),
           'visaCategory': FormControl<String?>(),
-          'underConfirmation': FormControl<bool?>(),
+          'underConfirmation': FormControl<bool?>(value: false),
         }),
         'MEDICAL_RECORD_Companion': FormArray([
           FormGroup({
@@ -248,7 +248,7 @@ FormGroup basicInfoForm({
             ),
             'chatToolLink': FormArray([
               FormGroup({
-                'chatToolLink': FormControl<String>(),
+                'chatToolLink': FormControl<String>(value: ''),
               })
             ]),
             'chatQrImage': FormControl<FileSelect>(),
@@ -267,7 +267,7 @@ FormGroup basicInfoForm({
                 ),
               ],
             ),
-            'visaType': FormControl<String>(),
+            'visaType': FormControl<String>(value: ''),
           }),
         ]),
       },

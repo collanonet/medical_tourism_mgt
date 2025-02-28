@@ -10,9 +10,9 @@ MedicalRecordHospital _$MedicalRecordHospitalFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordHospital(
       id: json['_id'] as String,
-      hospitalName: json['hospitalName'] as String,
-      medicalCardNumber: json['medicalCardNumber'] as String,
-      medicalRecord: json['medicalRecord'] as String,
+      hospitalName: json['hospitalName'] as String?,
+      medicalCardNumber: json['medicalCardNumber'] as String?,
+      medicalRecord: json['medicalRecord'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );

@@ -10,7 +10,7 @@ class PatientPassport {
   String? passportNumber;
   DateTime? issueDate;
   DateTime? expirationDate;
-  String visaType;
+  String? visaType;
   String? visaCategory;
   bool? underConfirmation;
   String patient;
@@ -22,7 +22,7 @@ class PatientPassport {
     this.passportNumber,
     this.issueDate,
     this.expirationDate,
-    required this.visaType,
+     this.visaType,
     this.visaCategory,
     this.underConfirmation,
     required this.patient,

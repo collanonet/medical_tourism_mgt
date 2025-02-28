@@ -179,35 +179,35 @@ class BasicInformationModel {
   }
 
   void insertPatientName({
-    required PatientName data,
+    PatientName? data,
     required FormGroup formGroup,
   }) {
     formGroup.reset();
 
     // formGroup.updateValue(data.toJson());
 
-    formGroup.control('_id').value = data.id;
-    formGroup.control('familyNameRomanized').value = data.familyNameRomanized;
-    formGroup.control('middleNameRomanized').value = data.middleNameRomanized;
-    formGroup.control('firstNameRomanized').value = data.firstNameRomanized;
+    formGroup.control('_id').value = data?.id;
+    formGroup.control('familyNameRomanized').value = data?.familyNameRomanized;
+    formGroup.control('middleNameRomanized').value = data?.middleNameRomanized;
+    formGroup.control('firstNameRomanized').value = data?.firstNameRomanized;
     formGroup.control('familyNameChineseOrVietnamese').value =
-        data.familyNameChineseOrVietnamese;
+        data?.familyNameChineseOrVietnamese;
     formGroup.control('middleNameChineseOrVietnamese').value =
-        data.middleNameChineseOrVietnamese;
+        data?.middleNameChineseOrVietnamese;
     formGroup.control('firstNameChineseOrVietnamese').value =
-        data.firstNameChineseOrVietnamese;
+        data?.firstNameChineseOrVietnamese;
     formGroup.control('familyNameJapaneseForChinese').value =
-        data.familyNameJapaneseForChinese;
+        data?.familyNameJapaneseForChinese;
     formGroup.control('middleNameJapaneseForChinese').value =
-        data.middleNameJapaneseForChinese;
+        data?.middleNameJapaneseForChinese;
     formGroup.control('firstNameJapaneseForChinese').value =
-        data.firstNameJapaneseForChinese;
+        data?.firstNameJapaneseForChinese;
     formGroup.control('familyNameJapaneseForNonChinese').value =
-        data.familyNameJapaneseForNonChinese;
+        data?.familyNameJapaneseForNonChinese;
     formGroup.control('middleNameJapaneseForNonChinese').value =
-        data.middleNameJapaneseForNonChinese;
+        data?.middleNameJapaneseForNonChinese;
     formGroup.control('firstNameJapaneseForNonChinese').value =
-        data.firstNameJapaneseForNonChinese;
+        data?.firstNameJapaneseForNonChinese;
   }
 
   Future<void> createUpdatePatientNames(FormGroup form) async {
@@ -312,27 +312,27 @@ class BasicInformationModel {
   }
 
   void insertPATIENTNATIONALITIES({
-    required PatientNationality data,
+    PatientNationality? data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('_id').value = data.id;
-    formGroup.control('nationality').value = data.nationality;
-    formGroup.control('nativeLanguage').value = data.nativeLanguage;
-    formGroup.control('residentialArea').value = data.residentialArea;
-    formGroup.control('currentAddress').value = data.currentAddress;
-    formGroup.control('mobileNumber').value = data.mobileNumber;
-    formGroup.control('patient').value = data.patient;
-    formGroup.control('email').value = data.email;
+    formGroup.control('_id').value = data?.id;
+    formGroup.control('nationality').value = data?.nationality;
+    formGroup.control('nativeLanguage').value = data?.nativeLanguage;
+    formGroup.control('residentialArea').value = data?.residentialArea;
+    formGroup.control('currentAddress').value = data?.currentAddress;
+    formGroup.control('mobileNumber').value = data?.mobileNumber;
+    formGroup.control('patient').value = data?.patient;
+    formGroup.control('email').value = data?.email;
     final chatToolLink = formGroup.control('chatToolLink') as FormArray;
     chatToolLink.clear();
-    data.chatToolLink?.forEach((element) {
+    data?.chatToolLink?.forEach((element) {
       chatToolLink.add(
         FormGroup({
           'chatToolLink': FormControl<String>(value: element ?? ''),
         }),
       );
     });
-    if (data.chatToolLink == null || data.chatToolLink!.isEmpty) {
+    if (data?.chatToolLink == null || data?.chatToolLink?.isEmpty == true) {
       chatToolLink.clear();
       chatToolLink.add(
         FormGroup({
@@ -342,7 +342,7 @@ class BasicInformationModel {
     }
 
     formGroup.control('chatQrImage').value =
-        data.chatQrImage == null ? null : FileSelect(url: data.chatQrImage);
+        data?.chatQrImage == null ? null : FileSelect(url: data?.chatQrImage);
   }
 
   // post PATIENT_NATIONALITIES
@@ -381,8 +381,8 @@ class BasicInformationModel {
     if (form.control('chatQrImage').value != null) {
       FileSelect docFile = form.control('chatQrImage').value;
       String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-          '.'+
-            docFile.filename!.split('.').last;
+          '.' +
+          docFile.filename!.split('.').last;
       if (docFile.file != null) {
         try {
           String base64Image = base64Encode(docFile.file!);
@@ -810,12 +810,12 @@ class BasicInformationModel {
   }
 
   void insertMEDICALRECORDBUDGETS({
-    required MedicalRecordBudget data,
+    MedicalRecordBudget? data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('_id').value = data.id;
-    formGroup.control('budget').value = data.budget ?? 0;
-    formGroup.control('remarks').value = data.remarks;
+    formGroup.control('_id').value = data?.id;
+    formGroup.control('budget').value = data?.budget ?? 0;
+    formGroup.control('remarks').value = data?.remarks;
   }
 
   // post MEDICAL_RECORD_BUDGETS
@@ -903,12 +903,12 @@ class BasicInformationModel {
           FormArray chatToolLink = FormArray([]);
           chatToolLink.clear();
           if (element.chatToolLink != null &&
-              element.chatToolLink!.isNotEmpty) {
+              element.chatToolLink?.isNotEmpty == true) {
             for (var i = 0; i < element.chatToolLink!.length; i++) {
               chatToolLink.add(
                 FormGroup({
                   'chatToolLink': FormControl<String>(
-                    value: element.chatToolLink![i],
+                    value: element.chatToolLink?[i],
                   ),
                 }),
               );
@@ -1388,7 +1388,7 @@ class BasicInformationModel {
     if (data?.travelGroup == null || data?.travelGroup?.isEmpty == true) {
       type.add(
         FormGroup({
-          'name': FormControl<String>(),
+          'name': FormControl<String>(value: ''),
         }),
       );
     }
@@ -1460,8 +1460,8 @@ class BasicInformationModel {
         if (element['chatQrImage'] != null) {
           FileSelect docFile = element['chatQrImage'];
           String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+              '.' +
+              docFile.filename!.split('.').last;
           if (docFile.file != null) {
             try {
               String base64Image = base64Encode(docFile.file!);
