@@ -42,10 +42,11 @@ class MedicalPaymentDetailModel {
       String? file;
       if (formGroup.control('file').value != null) {
         FileSelect docFile = formGroup.control('file').value;
-        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-            '.'+
-            docFile.filename!.split('.').last;
+
         if (docFile.file != null) {
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.'+
+              docFile.filename!.split('.').last;
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(

@@ -107,10 +107,11 @@ class BillingModel {
         String? file;
         if (element['file'] != null) {
           FileSelect docFile = element['file'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.'+
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(

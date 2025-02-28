@@ -980,10 +980,12 @@ class MedicalVisaModel with ChangeNotifier {
           String? passportFileSelect;
           if (element['passportFileSelect'] != null) {
             FileSelect docFile = element['passportFileSelect'];
-            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-                '.'+
-            docFile.filename!.split('.').last;
+
             if (docFile.file != null) {
+              String filename =
+                  DateTime.now().millisecondsSinceEpoch.toString() +
+                      '.' +
+                      docFile.filename!.split('.').last;
               try {
                 String base64Image = base64Encode(docFile.file!);
                 FileResponse fileData =
@@ -1002,10 +1004,12 @@ class MedicalVisaModel with ChangeNotifier {
           String? letterOfGuaranteeFileSelect;
           if (element['letterOfGuaranteeFileSelect'] != null) {
             FileSelect docFile = element['letterOfGuaranteeFileSelect'];
-            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-                '.'+
-            docFile.filename!.split('.').last;
+
             if (docFile.file != null) {
+              String filename =
+                  DateTime.now().millisecondsSinceEpoch.toString() +
+                      '.' +
+                      docFile.filename!.split('.').last;
               try {
                 String base64Image = base64Encode(docFile.file!);
                 FileResponse fileData =
@@ -1046,10 +1050,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? treatmentScheduleFileSelect;
         if (e['treatmentScheduleFileSelect'] != null) {
           FileSelect docFile = e['treatmentScheduleFileSelect'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1077,10 +1082,11 @@ class MedicalVisaModel with ChangeNotifier {
           null) {
         FileSelect docFile =
             formRequiredInJapan.control('statementOfReasonsFileSelect').value;
-        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-            '.'+
-            docFile.filename!.split('.').last;
+
         if (docFile.file != null) {
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.' +
+              docFile.filename!.split('.').last;
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1101,10 +1107,11 @@ class MedicalVisaModel with ChangeNotifier {
           null) {
         FileSelect docFile =
             formRequiredInJapan.control('travelCompanionListFileSelect').value;
-        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-            '.'+
-            docFile.filename!.split('.').last;
+
         if (docFile.file != null) {
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.' +
+              docFile.filename!.split('.').last;
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1179,10 +1186,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? visaPageFileName;
         if (e['visaPageFileName'] != null) {
           FileSelect docFile = e['visaPageFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1201,10 +1209,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? landingPermitFileName;
         if (e['landingPermitFileName'] != null) {
           FileSelect docFile = e['landingPermitFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1235,10 +1244,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? planeTicketForYourVisitToJapanFileName;
         if (e['planeTicketForYourVisitToJapanFileName'] != null) {
           FileSelect docFile = e['planeTicketForYourVisitToJapanFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1268,10 +1278,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? returnFlightTicketFileName;
         if (e['returnFlightTicketFileName'] != null) {
           FileSelect docFile = e['returnFlightTicketFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1300,10 +1311,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? boardingPassForReturnFlightFileName;
         if (e['boardingPassForReturnFlightFileName'] != null) {
           FileSelect docFile = e['boardingPassForReturnFlightFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1335,10 +1347,11 @@ class MedicalVisaModel with ChangeNotifier {
         FileSelect docFile = afterGettingVisaForm
             .control('certificateOfEligibilityFileName')
             .value;
-        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-            '.'+
-            docFile.filename!.split('.').last;
+
         if (docFile.file != null) {
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.' +
+              docFile.filename!.split('.').last;
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1400,10 +1413,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? visaPageFileName;
         if (e['visaPageFileName'] != null) {
           FileSelect docFile = e['visaPageFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1422,10 +1436,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? landingPermitFileName;
         if (e['landingPermitFileName'] != null) {
           FileSelect docFile = e['landingPermitFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1482,10 +1497,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? letterOfGuaranteeFileSelect;
         if (e['letterOfGuaranteeFileSelect'] != null) {
           FileSelect docFile = e['letterOfGuaranteeFileSelect'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1503,10 +1519,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? passportFileSelect;
         if (e['passportFileSelect'] != null) {
           FileSelect docFile = e['passportFileSelect'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1540,10 +1557,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? treatmentScheduleFileSelect;
         if (e['treatmentScheduleFileSelect'] != null) {
           FileSelect docFile = e['treatmentScheduleFileSelect'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1571,10 +1589,11 @@ class MedicalVisaModel with ChangeNotifier {
           null) {
         FileSelect docFile =
             formNequiredInJapan.control('statementOfReasonsFileSelect').value;
-        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-            '.'+
-            docFile.filename!.split('.').last;
+
         if (docFile.file != null) {
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.' +
+              docFile.filename!.split('.').last;
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1595,10 +1614,11 @@ class MedicalVisaModel with ChangeNotifier {
           null) {
         FileSelect docFile =
             formNequiredInJapan.control('travelCompanionListFileSelect').value;
-        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-            '.'+
-            docFile.filename!.split('.').last;
+
         if (docFile.file != null) {
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.' +
+              docFile.filename!.split('.').last;
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1636,10 +1656,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? visaPageFileName;
         if (e['visaPageFileName'] != null) {
           FileSelect docFile = e['visaPageFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1658,10 +1679,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? landingPermitFileName;
         if (e['landingPermitFileName'] != null) {
           FileSelect docFile = e['landingPermitFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1692,10 +1714,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? planeTicketForYourVisitToJapanFileName;
         if (e['planeTicketForYourVisitToJapanFileName'] != null) {
           FileSelect docFile = e['planeTicketForYourVisitToJapanFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1755,10 +1778,11 @@ class MedicalVisaModel with ChangeNotifier {
         String? boardingPassForReturnFlightFileName;
         if (e['boardingPassForReturnFlightFileName'] != null) {
           FileSelect docFile = e['boardingPassForReturnFlightFileName'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.'+
-            docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -1790,10 +1814,11 @@ class MedicalVisaModel with ChangeNotifier {
         FileSelect docFile = afterGettingVisaForm
             .control('certificateOfEligibilityFileName')
             .value;
-        String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-            '.'+
-            docFile.filename!.split('.').last;
+
         if (docFile.file != null) {
+          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+              '.' +
+              docFile.filename!.split('.').last;
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(

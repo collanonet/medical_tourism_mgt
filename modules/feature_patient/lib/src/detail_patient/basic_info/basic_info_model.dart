@@ -361,61 +361,65 @@ class BasicInformationModel {
   }
 
   Future<void> createUpdatePatientNationalities(FormGroup form) async {
-    patientNationalities.value = const AsyncData(loading: true);
+    try {
+      patientNationalities.value = const AsyncData(loading: true);
 
-    List<String?> chatToolLink = [];
-    if (form.control('chatToolLink').value != null) {
-      for (var i = 0;
-          i < (form.control('chatToolLink').value as List<dynamic>).length;
-          i++) {
-        if ((form.control('chatToolLink').value as List<dynamic>)[i]
-                ['chatToolLink'] !=
-            null) {
-          chatToolLink.add((form.control('chatToolLink').value
-              as List<dynamic>)[i]['chatToolLink']);
+      List<String?> chatToolLink = [];
+      if (form.control('chatToolLink').value != null) {
+        for (var i = 0;
+            i < (form.control('chatToolLink').value as List<dynamic>).length;
+            i++) {
+          if ((form.control('chatToolLink').value as List<dynamic>)[i]
+                  ['chatToolLink'] !=
+              null) {
+            chatToolLink.add((form.control('chatToolLink').value
+                as List<dynamic>)[i]['chatToolLink']);
+          }
         }
       }
-    }
 
-    String? file;
-    if (form.control('chatQrImage').value != null) {
-      FileSelect docFile = form.control('chatQrImage').value;
-      String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-          '.' +
-          docFile.filename!.split('.').last;
-      if (docFile.file != null) {
-        try {
-          String base64Image = base64Encode(docFile.file!);
-          FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            filename,
-          );
-          file = fileData.filename;
-        } catch (e) {
-          logger.e(e);
+      String? file;
+      if (form.control('chatQrImage').value != null) {
+        FileSelect docFile = form.control('chatQrImage').value;
+
+        if (docFile.file != null) {
+          String filename =
+              '${DateTime.now().millisecondsSinceEpoch}.${docFile.filename!.split('.').last}';
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              filename,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          file = docFile.url;
         }
+      }
+
+      PatientNationalityRequest request = PatientNationalityRequest(
+        nationality: form.control('nationality').value ?? '',
+        nativeLanguage: form.control('nativeLanguage').value ?? '',
+        residentialArea: form.control('residentialArea').value ?? '',
+        currentAddress: form.control('currentAddress').value ?? '',
+        mobileNumber: form.control('mobileNumber').value ?? '',
+        email: form.control('email').value,
+        chatToolLink: chatToolLink.isEmpty ? null : chatToolLink,
+        chatQrImage: file,
+        patient: patientData.value.requireData.id,
+      );
+
+      if (form.control('_id').value != null) {
+        await updatePatientNationalities(
+            form, form.control('_id').value, request);
       } else {
-        file = docFile.url;
+        await postPatientNationalities(form, request);
       }
-    }
-
-    PatientNationalityRequest request = PatientNationalityRequest(
-      nationality: form.control('nationality').value ?? '',
-      nativeLanguage: form.control('nativeLanguage').value ?? '',
-      residentialArea: form.control('residentialArea').value ?? '',
-      currentAddress: form.control('currentAddress').value ?? '',
-      mobileNumber: form.control('mobileNumber').value,
-      email: form.control('email').value,
-      chatToolLink: chatToolLink.isEmpty ? null : chatToolLink,
-      chatQrImage: file,
-      patient: patientData.value.requireData.id,
-    );
-
-    if (form.control('_id').value != null) {
-      await updatePatientNationalities(
-          form, form.control('_id').value, request);
-    } else {
-      await postPatientNationalities(form, request);
+    } catch (error) {
+      logger.d(error);
     }
   }
 
@@ -1459,10 +1463,11 @@ class BasicInformationModel {
         String? file;
         if (element['chatQrImage'] != null) {
           FileSelect docFile = element['chatQrImage'];
-          String filename = DateTime.now().millisecondsSinceEpoch.toString() +
-              '.' +
-              docFile.filename!.split('.').last;
+
           if (docFile.file != null) {
+            String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+                '.' +
+                docFile.filename!.split('.').last;
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
