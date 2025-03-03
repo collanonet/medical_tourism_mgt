@@ -311,7 +311,25 @@ class _DocumentSectionState extends State<DocumentSection> {
                                 }),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('印刷する'))
+                           onPressed: sels.length == 1
+                              ? () {
+                                  var data = context
+                                      .read<DocumentModel>()
+                                      .documentData
+                                      .value
+                                      .requireData
+                                      .firstWhere((element) =>
+                                          element.id == sels.first);
+                                  showPreviewFile(
+                                    context,
+                                    fileSelect: FileSelect(
+                                        // file name from object model
+                                        url: data.uploadFile ?? ''),
+                                  );
+                                }
+                              : null,
+                            child: const Text('印刷する'),
+                          )
                         ],
                       );
                     }),

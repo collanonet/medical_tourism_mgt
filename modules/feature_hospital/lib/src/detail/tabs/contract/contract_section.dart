@@ -139,9 +139,8 @@ class ContractSectionState extends State<ContractSection> {
                             showPreviewFile(
                               context,
                               fileSelect: FileSelect(
-                                // file name from object model
-                                  url:  data?.uploadFile ?? ''
-                              ),
+                                  // file name from object model
+                                  url: data?.uploadFile ?? ''),
                             );
                           } else {
                             snackBarWidget(
@@ -300,7 +299,25 @@ class ContractSectionState extends State<ContractSection> {
                                 }),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('印刷する'))
+                            onPressed: sels.length == 1
+                                ? () {
+                                    var data = context
+                                        .read<ContrantModel>()
+                                        .contrantData
+                                        .value
+                                        .requireData
+                                        .firstWhere((element) =>
+                                            element.id == sels.first);
+                                    showPreviewFile(
+                                      context,
+                                      fileSelect: FileSelect(
+                                          // file name from object model
+                                          url: data.uploadFile ?? ''),
+                                    );
+                                  }
+                                : null,
+                            child: const Text('印刷する'),
+                          )
                         ],
                       );
                     }),

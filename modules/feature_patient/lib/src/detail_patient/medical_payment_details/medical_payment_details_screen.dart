@@ -335,7 +335,23 @@ class _MedicalPaymentDetailScreenState
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: sels.length == 1
+                            ? () {
+                                var data = context
+                                    .read<MedicalPaymentDetailModel>()
+                                    .medicalPaymentData
+                                    .value
+                                    .requireData
+                                    .firstWhere(
+                                        (element) => element.id == sels.first);
+                                showPreviewFile(
+                                  context,
+                                  fileSelect: FileSelect(
+                                      // file name from object model
+                                      url: data.file ?? ''),
+                                );
+                              }
+                            : null,
                         child: const Text(
                           '印刷する',
                           style: TextStyle(

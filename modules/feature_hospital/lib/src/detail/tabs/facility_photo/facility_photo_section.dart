@@ -200,16 +200,14 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                       null ||
                                   value.requireData[index].uploadedPhoto !=
                                       null) {
-
                                 showPreviewFile(
                                   context,
                                   fileSelect: FileSelect(
-                                    // file name from object model
-                                      url:
-                                      value.requireData[index].facilityFile ??
+                                      // file name from object model
+                                      url: value.requireData[index]
+                                              .facilityFile ??
                                           value.requireData[index]
-                                              .uploadedPhoto!
-                                  ),
+                                              .uploadedPhoto!),
                                 );
                               }
                             },
@@ -335,7 +333,25 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                               }),
                         ),
                         ElevatedButton(
-                            onPressed: () {}, child: const Text('印刷する'))
+                          onPressed: sels.length == 1
+                              ? () {
+                                  var data = context
+                                      .read<FacilityModel>()
+                                      .facilityData
+                                      .value
+                                      .requireData
+                                      .firstWhere((element) =>
+                                          element.id == sels.first);
+                                  showPreviewFile(
+                                    context,
+                                    fileSelect: FileSelect(
+                                        // file name from object model
+                                        url: data.facilityFile ?? ''),
+                                  );
+                                }
+                              : null,
+                          child: const Text('印刷する'),
+                        )
                       ],
                     );
                   }),
