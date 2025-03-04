@@ -284,7 +284,8 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('キャンセル'),
+                                                          child: const Text(
+                                                              'キャンセル'),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -297,7 +298,8 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('削除する'),
+                                                          child: const Text(
+                                                              '削除する'),
                                                         ),
                                                       ],
                                                     ),
@@ -322,7 +324,23 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: sels.length == 1
+                              ? () {
+                                  var data = context
+                                      .read<EstimateInvoiceModel>()
+                                      .estimateInvoiceData
+                                      .value
+                                      .requireData
+                                      .firstWhere((element) =>
+                                          element.id == sels.first);
+                                  showPreviewFile(
+                                    context,
+                                    fileSelect: FileSelect(
+                                        // file name from object model
+                                        url: data.uploadFile ?? ''),
+                                  );
+                                }
+                              : null,
                           child: const Text('印刷する'),
                         )
                       ],

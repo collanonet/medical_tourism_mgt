@@ -306,7 +306,23 @@ class _ContractScreenState extends State<ContractScreen> {
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: sels.length == 1
+                                ? () {
+                                    var data = context
+                                        .read<ContractModel>()
+                                        .contrantData
+                                        .value
+                                        .requireData
+                                        .firstWhere((element) =>
+                                            element.id == sels.first);
+                                    showPreviewFile(
+                                      context,
+                                      fileSelect: FileSelect(
+                                          // file name from object model
+                                          url: data.uploadFile ?? ''),
+                                    );
+                                  }
+                                : null,
                           child: const Text('印刷する'),
                         )
                       ],
