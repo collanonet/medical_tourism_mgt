@@ -29,10 +29,10 @@ dependency_overrides:
   feature_web_appointment:
     path: ../feature_web_appointment
   data_chats:
-    path: ..\\data_chats
+    path: ../data_chats
   data_hospital:
-    path: ..\\data_hospital
+    path: ../data_hospital
   feature_chats:
-    path: ..\\feature_chats
+    path: ../feature_chats
   socket_chat:
-    path: ..\\socket_chat
+    path: ../socket_chat

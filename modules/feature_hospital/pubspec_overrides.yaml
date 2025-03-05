@@ -16,20 +16,20 @@ dependency_overrides:
   data_auth:
     path: ../data_auth
   data_chats:
-    path: ..\\data_chats
+    path: ../data_chats
   data_hospital:
     path: ../data_hospital
   data_patient:
-    path: ..\\data_patient
+    path: ../data_patient
   data_web_appointment:
-    path: ..\\data_web_appointment
+    path: ../data_web_appointment
   feature_auth:
     path: ../feature_auth
   feature_chats:
-    path: ..\\feature_chats
+    path: ../feature_chats
   feature_patient:
-    path: ..\\feature_patient
+    path: ../feature_patient
   feature_web_appointment:
-    path: ..\\feature_web_appointment
+    path: ../feature_web_appointment
   socket_chat:
-    path: ..\\socket_chat
+    path: ../socket_chat

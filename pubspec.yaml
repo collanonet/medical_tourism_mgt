@@ -121,7 +121,7 @@ dependencies:
   libphonenumber: ^2.0.2
   pdf_render: ^1.4.12
   flutter_cache_manager: ^3.4.1
-
+  html: ^0.15.5
 
 dev_dependencies:
   flutter_test:

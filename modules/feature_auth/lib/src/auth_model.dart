@@ -31,14 +31,18 @@ class AuthModel extends ChangeNotifier {
     } catch (e) {
       _userRole = PermissionRole.guest;
       notifyListeners();
+    } finally {
+      notifyListeners();
     }
   }
 
   Future<void> syncAuthState() async {
     try {
       _userRole = await authRepository.getPermissionRole();
+      notifyListeners();
     } catch (e) {
       _userRole = PermissionRole.guest;
+      notifyListeners();
     } finally {
       notifyListeners();
     }
@@ -60,7 +64,7 @@ class AuthModel extends ChangeNotifier {
     try {
       var result = await authRepository.login(email, password);
       _loginData = AsyncData(data: result);
-      syncAuthState();
+      await syncAuthState();
     } catch (error) {
       logger.d(error);
       _loginData = AsyncData(error: error);
