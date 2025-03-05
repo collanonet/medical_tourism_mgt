@@ -43,9 +43,6 @@ dependencies:
   libphonenumber: ^2.0.2
   pdf_render: ^1.4.12
   flutter_cache_manager: ^3.4.1
-  get_it: ^7.6.8
-  html: ^0.15.5
-  pdfrx: ^1.1.11
 
 dev_dependencies:
   flutter_test:
