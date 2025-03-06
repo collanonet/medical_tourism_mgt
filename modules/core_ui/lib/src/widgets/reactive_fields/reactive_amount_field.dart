@@ -27,14 +27,34 @@ class ReactiveAmountField extends StatefulWidget {
 
 class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
   final TextEditingController _amountController = TextEditingController();
+
+  // For Japanese Yen with commas but no decimals:
   final NumberFormat _japaneseCurrencyFormat = NumberFormat('#,##0', 'ja_JP');
+
+  // Flag to avoid multiple subscriptions or unnecessary calls in lifecycle events
+  bool _initialized = false;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _initialize());
+  }
+
+  @override
+  void didUpdateWidget(covariant ReactiveAmountField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialAmount != widget.initialAmount) {
       _initialize();
-    });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Make sure we only initialize once to avoid multiple subscriptions
+    if (!_initialized) {
+      _initialize();
+    }
   }
 
   @override
@@ -49,31 +69,33 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
 
     final control = formGroup.control(widget.formControlName);
 
+    // Mark that we've attached the listener
+    _initialized = true;
+
     // Initialize with either the control value or provided initialAmount
-    final initialValue = control.value ?? widget.initialAmount ?? 0.0;
-    if (initialValue != null) {
-      _amountController.text = _formatAmount(initialValue as double);
-    }
+    final double initialValue =
+        (control.value ?? widget.initialAmount ?? 0.0) as double;
+    _amountController.text = _formatAmount(initialValue);
 
     // Listen for external changes to the control value
     control.valueChanges.listen((value) {
-      if (value != null &&
-          _amountController.text != _formatAmount(value as double)) {
-        final newText = _formatAmount(value as double);
-        _amountController.value = TextEditingValue(
-          text: newText,
-          selection: TextSelection.collapsed(offset: newText.length),
-        );
+      if (value != null) {
+        final formatted = _formatAmount(value as double);
+        // Update controller text only if it differs
+        if (_amountController.text != formatted) {
+          _amountController.value = TextEditingValue(
+            text: formatted,
+            selection: TextSelection.collapsed(offset: formatted.length),
+          );
+        }
       }
     });
-
-    setState(() {});
   }
 
   String _formatAmount(double value) {
     try {
       return _japaneseCurrencyFormat.format(value);
-    } catch (e) {
+    } catch (_) {
       return value.toString();
     }
   }
@@ -84,8 +106,7 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
       formControlName: widget.formControlName,
       valueAccessor: DoubleValueAccessor(),
       validationMessages: {
-        'required': (control) => 'Amount is required',
-        'invalidFormat': (control) => 'Invalid amount format',
+        'required': (control) => '金額は必須です',
       },
       builder: (field) {
         return TextFormField(
@@ -98,8 +119,11 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             labelText: widget.label,
-            helperText: widget.helperText ?? 'Enter amount in JPY',
-            suffixIcon: const Icon(Icons.currency_yen, color: Colors.grey),
+            helperText: widget.helperText ?? '金額を日本円で入力してください',
+            suffixIcon: const Icon(
+              Icons.currency_yen,
+              color: Colors.grey,
+            ),
             errorText: field.errorText,
           ),
           onChanged: (value) => _onFieldChange(value, field),
@@ -123,53 +147,53 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
     final formGroup = ReactiveForm.of(context) as FormGroup?;
     if (formGroup == null) return;
 
-    // Store current cursor position and text for later adjustment
-    final currentPosition = _amountController.selection.start;
     final oldText = _amountController.text;
+    final oldCursorPosition = _amountController.selection.start;
 
-    // Parse value, handle empty string case
+    // Remove commas so we can parse the numeric value
     final plainText = value.replaceAll(',', '');
     final parsedValue =
         plainText.isEmpty ? 0.0 : double.tryParse(plainText) ?? 0.0;
 
-    // Update the form control value
+    // Update the reactive form control with the parsed double
     formGroup.control(widget.formControlName).value = parsedValue;
 
-    // Format the displayed value
-    final formattedText = _formatAmount(parsedValue);
+    // Format the new text
+    final newFormattedText = _formatAmount(parsedValue);
 
-    // Calculate new cursor position accounting for added/removed commas
-    int newPosition = currentPosition;
-    if (oldText.length != formattedText.length) {
-      // Count commas before cursor in old and new text
+    // Adjust the cursor position to account for commas
+    int newCursorPosition = oldCursorPosition;
+    if (oldText.length != newFormattedText.length) {
       final oldCommaCount =
-          oldText.substring(0, currentPosition).split(',').length - 1;
-      final newCommaCount = formattedText
-              .substring(0, min(currentPosition, formattedText.length))
+          oldText.substring(0, oldCursorPosition).split(',').length - 1;
+      final newCommaCount = newFormattedText
+              .substring(0, _min(oldCursorPosition, newFormattedText.length))
               .split(',')
               .length -
           1;
-      newPosition += (newCommaCount - oldCommaCount);
+      newCursorPosition += (newCommaCount - oldCommaCount);
     }
 
-    // Ensure the position is valid
-    newPosition = newPosition.clamp(0, formattedText.length);
+    // Clamp the position in case we go out of range
+    newCursorPosition = newCursorPosition.clamp(0, newFormattedText.length);
 
-    // Update the text field with formatted value and adjusted cursor position
+    // Update the text controller
     _amountController.value = TextEditingValue(
-      text: formattedText,
-      selection: TextSelection.collapsed(offset: newPosition),
+      text: newFormattedText,
+      selection: TextSelection.collapsed(offset: newCursorPosition),
     );
 
-    // Notify field was changed
-    field.didChange(formattedText);
+    // Update the underlying ReactiveFormField
+    field.didChange(newFormattedText);
 
-    // Call onChanged callback if provided
+    // Call onChanged callback
     if (widget.onChanged != null) {
       widget.onChanged!(
           formGroup.control(widget.formControlName) as FormControl<double>);
     }
   }
+
+  int _min(int a, int b) => a < b ? a : b;
 }
 
 class DoubleValueAccessor extends ControlValueAccessor<double, String> {
@@ -187,6 +211,3 @@ class DoubleValueAccessor extends ControlValueAccessor<double, String> {
     return double.tryParse(viewValue.replaceAll(',', ''));
   }
 }
-
-// Helper function needed for the implementation
-int min(int a, int b) => a < b ? a : b;

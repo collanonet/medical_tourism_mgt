@@ -61,21 +61,13 @@ class MedicalRecordBudgetSection extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveTextField<int>(
+                              ReactiveAmountField(
                                 formControlName: 'budget',
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  prefixText: '¥ ',
-                                ),
-                                valueAccessor: IntValueAccessor(),
-                                inputFormatters: [
-                                  CustomCurrencyFormatter(),
-                                  // FilteringTextInputFormatter.allow(
-                                  //     RegExp(r'[0-9]')),
-                                ],
-                              ),
+                                onChanged: (control) {
+                                  formGroup.control('budget').value =
+                                      control.value;
+                                },
+                              )
                             ],
                           ),
                         ),

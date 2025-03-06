@@ -159,7 +159,7 @@ FormGroup basicInfoForm({
         }),
         'MEDICAL_RECORD_BUDGETS': FormGroup({
           '_id': FormControl<String?>(),
-          'budget': FormControl<int>(
+          'budget': FormControl<double>(
             value: 0,
           ),
           'remarks': FormControl<String?>(),
