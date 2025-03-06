@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
+/*
+* how to use
+* ReactiveAmountField(
+    formControlName: 'budget',
+    onChanged: (control) {
+      formGroup.control('budget').value =
+          control.value;
+    },
+  )
+* */
 class ReactiveAmountField extends StatefulWidget {
   const ReactiveAmountField({
     super.key,
