@@ -11,6 +11,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:path/path.dart' as p;
 
 // Project imports:
 import '../basic_info_model.dart';
@@ -286,74 +287,231 @@ class MedicalRecordNationalitySection extends StatelessWidget {
   Widget qRChatCompanion(FormGroup currentForm, BuildContext context) {
     final file = currentForm.control('chatQrImage').value as FileSelect?;
 
+    // Helper methods to check file type by extension
+    bool isImageFile(String pathOrUrl) {
+      final extension = p.extension(pathOrUrl).toLowerCase();
+      const imageExtensions = [
+        '.png',
+        '.jpg',
+        '.jpeg',
+        '.gif',
+        '.webp',
+        '.bmp'
+      ];
+      return imageExtensions.contains(extension);
+    }
+
+    bool isPdfFile(String pathOrUrl) {
+      return p.extension(pathOrUrl).toLowerCase() == '.pdf';
+    }
+
+    // Provide a PDF placeholder
+    Widget _buildPdfPlaceholder(BuildContext context, String filenameOrUrl) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.picture_as_pdf, size: 48, color: Colors.red),
+          Text(
+            p.basename(filenameOrUrl),
+            style: const TextStyle(fontSize: 14),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      );
+    }
+
+    // Provide an unknown file placeholder
+    Widget _buildUnknownFilePlaceholder(
+        BuildContext context, String filenameOrUrl) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.insert_drive_file, size: 48, color: Colors.grey),
+          Text(
+            p.basename(filenameOrUrl),
+            style: const TextStyle(fontSize: 14),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      );
+    }
+
+    // Provide the initial “no file” widget
+    Widget _buildNoFilePlaceholder(BuildContext context, FormGroup form) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.copy_all_rounded),
+          const SizedBox(height: 10),
+          const Text('QRコードをここにドラッグ＆ドロップ'),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () async {
+              // Using your filePicker() method
+              final value = await filePicker();
+              form.control('chatQrImage').value = value;
+            },
+            child: const Text('またはファイルを選択する'),
+          ),
+        ],
+      );
+    }
+
+    // Decide how to display content based on file info
+    Widget buildFilePreview(FileSelect fileSelect) {
+      if (fileSelect.file != null && fileSelect.filename != null) {
+        final filename = fileSelect.filename!;
+        if (isImageFile(filename)) {
+          return Image.memory(
+            fileSelect.file!,
+            fit: BoxFit.fill,
+          );
+        } else if (isPdfFile(filename)) {
+          return _buildPdfPlaceholder(context, filename);
+        } else {
+          return _buildUnknownFilePlaceholder(context, filename);
+        }
+      }
+      // If no local file (Uint8List) but you have a url
+      else if (fileSelect.url != null) {
+        final url = fileSelect.url!;
+        if (isImageFile(url)) {
+          // Show image from network
+          return Image.network(
+            url,
+            fit: BoxFit.fill,
+            errorBuilder: (context, error, stack) =>
+                _buildUnknownFilePlaceholder(context, url),
+          );
+        } else if (isPdfFile(url)) {
+          // Show PDF icon if URL is a PDF
+          return _buildPdfPlaceholder(context, url);
+        } else {
+          return _buildUnknownFilePlaceholder(context, url);
+        }
+      }
+      // No file or no url => fallback
+      return _buildNoFilePlaceholder(context, currentForm);
+    }
+
+    // The InkWell that holds the preview and allows preview on tap
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         InkWell(
-          onTap: () {
-            imagePicker().then((value) {
+          // If there's an actual file, allow preview. Otherwise pick a file.
+          onTap: () async {
+            if (file != null) {
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  content: PreviewFile(fileSelect: file),
+                ),
+              );
+            } else {
+              // No file => pick a file
+              final value = await imagePicker();
               currentForm.control('chatQrImage').value = value;
-            });
+            }
           },
           child: Container(
             width: 250,
             height: 250,
-            padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+            padding: EdgeInsets.all(8.0), // adjust as needed
             decoration: BoxDecoration(
-              border: Border.all(color: context.appTheme.primaryColor),
-              borderRadius: BorderRadius.circular(
-                  context.appTheme.spacing.borderRadiusMedium),
+              border: Border.all(color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.circular(8),
             ),
-            child: file != null && file.file != null
-                ? Image.memory(
-                    file.file!,
-                    fit: BoxFit.fill,
-                  )
-                : file != null && file.url != null
-                    ? Avatar.network(
-                        file.url,
-                        placeholder: const AssetImage(
-                          Images.logoMadical,
-                          package: 'core_ui',
-                        ),
-                        shape: BoxShape.rectangle,
-                        customSize: const Size(200, 200),
-                      )
-                    : ColumnSeparated(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          );
-                        },
-                        children: [
-                          const Icon(Icons.copy_all_rounded),
-                          const Text('QRコードをここにドラッグ＆ドロップ'),
-                          ElevatedButton(
-                              onPressed: () {
-                                imagePicker().then((value) {
-                                  currentForm.control('chatQrImage').value =
-                                      value;
-                                });
-                              },
-                              child: const Text('またはファイルを選択する'))
-                        ],
-                      ),
+            child: (file != null)
+                ? buildFilePreview(file)
+                : _buildNoFilePlaceholder(context, currentForm),
           ),
         ),
+
+        // Delete icon if file is present
         if (file != null)
           IconButton(
             onPressed: () {
               currentForm.control('chatQrImage').value = null;
             },
-            icon: const Icon(
-              Icons.delete,
-              color: Colors.red,
-            ),
-          )
+            icon: const Icon(Icons.delete, color: Colors.red),
+          ),
       ],
     );
   }
+
+  // Widget qRChatCompanion(FormGroup currentForm, BuildContext context) {
+  //   final file = currentForm.control('chatQrImage').value as FileSelect?;
+
+  //   return Row(
+  //     crossAxisAlignment: CrossAxisAlignment.end,
+  //     mainAxisAlignment: MainAxisAlignment.end,
+  //     children: [
+  //       InkWell(
+  //         onTap: () {
+  //           filePicker().then((value) {
+  //             currentForm.control('chatQrImage').value = value;
+  //           });
+  //         },
+  //         child: Container(
+  //           width: 250,
+  //           height: 250,
+  //           padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+  //           decoration: BoxDecoration(
+  //             border: Border.all(color: context.appTheme.primaryColor),
+  //             borderRadius: BorderRadius.circular(
+  //                 context.appTheme.spacing.borderRadiusMedium),
+  //           ),
+  //           child: file != null && file.file != null
+  //               ? Image.memory(
+  //                   file.file!,
+  //                   fit: BoxFit.fill,
+  //                 )
+  //               : file != null && file.url != null
+  //                   ? Avatar.network(
+  //                       file.url,
+  //                       placeholder: const AssetImage(
+  //                         Images.logoMadical,
+  //                         package: 'core_ui',
+  //                       ),
+  //                       shape: BoxShape.rectangle,
+  //                       customSize: const Size(200, 200),
+  //                     )
+  //                   : ColumnSeparated(
+  //                       crossAxisAlignment: CrossAxisAlignment.center,
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       separatorBuilder: (BuildContext context, int index) {
+  //                         return SizedBox(
+  //                           height: context.appTheme.spacing.marginMedium,
+  //                         );
+  //                       },
+  //                       children: [
+  //                         const Icon(Icons.copy_all_rounded),
+  //                         const Text('QRコードをここにドラッグ＆ドロップ'),
+  //                         ElevatedButton(
+  //                             onPressed: () {
+  //                               filePicker().then((value) {
+  //                                 currentForm.control('chatQrImage').value =
+  //                                     value;
+  //                               });
+  //                             },
+  //                             child: const Text('またはファイルを選択する'))
+  //                       ],
+  //                     ),
+  //         ),
+  //       ),
+  //       if (file != null)
+  //         IconButton(
+  //           onPressed: () {
+  //             currentForm.control('chatQrImage').value = null;
+  //           },
+  //           icon: const Icon(
+  //             Icons.delete,
+  //             color: Colors.red,
+  //           ),
+  //         )
+  //     ],
+  //   );
+  // }
 }
