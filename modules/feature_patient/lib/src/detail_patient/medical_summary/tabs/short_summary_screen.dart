@@ -12,6 +12,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:path/path.dart' as p;
 
 // Project imports:
 import 'fileForm/file_form.dart';
@@ -360,98 +361,213 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                   .read<NormalSummaryModel>()
                                   .fileSummaryListData,
                               builder: (context, value, _) {
+                                 final files = value.data ?? [];
                                 return Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.start,
-                                  alignment: WrapAlignment.start,
-                                  spacing:
-                                      context.appTheme.spacing.marginMedium,
-                                  runSpacing:
-                                      context.appTheme.spacing.marginMedium,
-                                  children: [
-                                    ...value.data?.map((e) => InkWell(
-                                              onTap: () {
-                                                showPreviewFile(
-                                                  context,
-                                                  fileSelect: FileSelect(
-                                                    // file name from object model
-                                                      url: e.pathFile ?? ''
-                                                  ),
-                                                );
-                                              },
-                                              child: Avatar.network(
-                                                e.pathFile,
-                                                placeholder: const AssetImage(
-                                                  Images.logoMadical,
-                                                  package: 'core_ui',
-                                                ),
-                                                shape: BoxShape.rectangle,
-                                                customSize:
-                                                    const Size(300, 250),
+                                crossAxisAlignment: WrapCrossAlignment.start,
+                                alignment: WrapAlignment.start,
+                                spacing: context.appTheme.spacing.marginMedium,
+                                runSpacing:
+                                    context.appTheme.spacing.marginMedium,
+                                children: [
+                                  // Map files to UI
+                                  ...files.map((e) {
+                                    final path = e.pathFile ?? '';
+
+                                    // Decide how to display the file
+                                    bool isPdfFile(String url) {
+                                      final ext =
+                                          p.extension(url).toLowerCase();
+                                      return ext == '.pdf';
+                                    }
+
+                                    bool isImageFile(String url) {
+                                      final ext =
+                                          p.extension(url).toLowerCase();
+                                      const imageExtensions = [
+                                        '.png',
+                                        '.jpg',
+                                        '.jpeg',
+                                        '.gif',
+                                        '.webp',
+                                        '.bmp'
+                                      ];
+                                      return imageExtensions.contains(ext);
+                                    }
+
+                                    // Build the preview widget (PDF icon vs. image)
+                                    Widget filePreview() {
+                                      if (isPdfFile(path)) {
+                                        // PDF => show an icon preview
+                                        return Container(
+                                          width: 200,
+                                          height: 200,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.shade200,
+                                            borderRadius: BorderRadius.circular(
+                                                context.appTheme.spacing
+                                                    .borderRadiusMedium),
+                                            border: Border.all(
+                                                color: context
+                                                    .appTheme.primaryColor),
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Icon(Icons.picture_as_pdf,
+                                                  size: 60, color: Colors.red),
+                                              Text(
+                                                p.basename(path),
+                                                overflow: TextOverflow.ellipsis,
                                               ),
-                                            )) ??
-                                        [],
-                                    InkWell(
-                                      onTap: () {
-                                        filePicker().then((value) {
-                                          if (value != null) {
-                                            showCreateWithFileDialog(
-                                                context, value);
-                                          }
-                                        });
-                                      },
-                                      child: Container(
-                                        width: 300,
-                                        height: 250,
-                                        padding: EdgeInsets.all(
-                                          context.appTheme.spacing
-                                              .marginExtraLarge,
+                                            ],
+                                          ),
+                                        );
+                                      } else if (isImageFile(path)) {
+                                        // Image => show image using Avatar.network or Image.network
+                                        return Avatar.network(
+                                          path,
+                                          placeholder: const AssetImage(
+                                            Images.logoMadical,
+                                            package: 'core_ui',
+                                          ),
+                                          shape: BoxShape.rectangle,
+                                          customSize: const Size(200, 200),
+                                        );
+                                      } else {
+                                        // Unknown file type => show a generic file icon
+                                        return Container(
+                                          width: 200,
+                                          height: 200,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.shade200,
+                                            borderRadius: BorderRadius.circular(
+                                                context.appTheme.spacing
+                                                    .borderRadiusMedium),
+                                            border: Border.all(
+                                                color: context
+                                                    .appTheme.primaryColor),
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Icon(
+                                                  Icons.insert_drive_file,
+                                                  size: 60,
+                                                  color: Colors.grey),
+                                              Text(
+                                                p.basename(path),
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                    }
+
+                                    // Return a Row so we can have the preview + delete icon
+                                    return Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        // Tappable preview
+                                        InkWell(
+                                          onTap: () {
+                                            showPreviewFile(
+                                              context,
+                                              fileSelect: FileSelect(url: path),
+                                            );
+                                          },
+                                          child: filePreview(),
                                         ),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.all(Radius.circular(
-                                            context.appTheme.spacing
-                                                .borderRadiusMedium,
-                                          )),
-                                          border: Border.all(
+
+                                        // Delete icon
+                                        IconButton(
+                                          icon: const Icon(Icons.delete,
+                                              color: Colors.red),
+                                          onPressed: () {
+                                            // Remove this file from the list
+                                            final updatedList = List.of(files)
+                                              ..remove(e);
+                                            // Update the ValueListenable so UI rebuilds
+                                            context
+                                                    .read<NormalSummaryModel>()
+                                                    .fileSummaryListData
+                                                    .value =
+                                                value.copyWith(
+                                                    data: updatedList);
+
+                                            // If you were using a form control instead:
+                                            // currentForm.control('chatQrImage').value = null;
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  }),
+
+                                  // "Add File" container
+                                  InkWell(
+                                    onTap: () {
+                                      filePicker().then((picked) {
+                                        if (picked != null) {
+                                          showCreateWithFileDialog(
+                                              context, picked);
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 300,
+                                      height: 250,
+                                      padding: EdgeInsets.all(
+                                        context
+                                            .appTheme.spacing.marginExtraLarge,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(context.appTheme
+                                              .spacing.borderRadiusMedium),
+                                        ),
+                                        border: Border.all(
+                                          color: context.appTheme.primaryColor,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.copy_all_rounded,
+                                            size: 50,
                                             color:
                                                 context.appTheme.primaryColor,
                                           ),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.copy_all_rounded,
-                                              size: 50,
-                                              color:
-                                                  context.appTheme.primaryColor,
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                filePicker().then((value) {
-                                                  if (value != null) {
-                                                    showCreateWithFileDialog(
-                                                        context, value);
-                                                  }
-                                                });
-                                              },
-                                              child: const Text(
-                                                '書類を選択する',
-                                                style: TextStyle(
-                                                  fontFamily: 'NotoSansJP',
-                                                  package: 'core_ui',
-                                                  color: Colors.white,
-                                                ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              filePicker().then((picked) {
+                                                if (picked != null) {
+                                                  showCreateWithFileDialog(
+                                                      context, picked);
+                                                }
+                                              });
+                                            },
+                                            child: const Text(
+                                              '書類を選択する',
+                                              style: TextStyle(
+                                                fontFamily: 'NotoSansJP',
+                                                package: 'core_ui',
+                                                color: Colors.white,
                                               ),
-                                            )
-                                          ],
-                                        ),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    )
-                                  ],
-                                );
+                                    ),
+                                  ),
+                                ],
+                              );
                               }),
                         ],
                       ),

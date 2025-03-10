@@ -309,22 +309,31 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      var ids = context
-                          .read<SummaryListModel>()
-                          .fileSummaryListData
-                          .value;
-                      var list =
-                          ids.data!.where((e) => sels.contains(e.id)).toList();
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return AlertDialog(
-                              content: ViewAndPrintFileWidget(list
-                                  .map((e) =>
-                                      '${GetIt.I<String>(instanceName: 'fileUrl')}${e.pathFile}')
-                                  .toList()),
-                            );
-                          });
+                      var data = context
+                                    .read<SummaryListModel>()
+                                    .fileSummaryListData
+                                    .value
+                                    .requireData
+                                    .firstWhere(
+                                        (element) => element.id == sels.first);
+                     
+                          showPreviewFile(
+                                  context,
+                                  fileSelect: FileSelect(
+                                    // file name from object model
+                                    url: data.pathFile,
+                                  ),
+                                );
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (_) {
+                      //       return AlertDialog(
+                      //         content: ViewAndPrintFileWidget(list
+                      //             .map((e) =>
+                      //                 '${GetIt.I<String>(instanceName: 'fileUrl')}${e.pathFile}')
+                      //             .toList()),
+                      //       );
+                      //     });
                     },
                     child: const Text(
                       '印刷する',
