@@ -1,12 +1,13 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_ui/src/widgets/pdf_view_from_url_v2.dart';
+import 'image_view_from_url.dart';
+import 'pdf_view_from_url.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:http/http.dart' as http;
 import 'dart:html' as html;
 import 'package:get_it/get_it.dart';
 
-import 'package:pdf_render/pdf_render_widgets.dart';
 
 import 'row_separated.dart';
 
@@ -32,7 +33,7 @@ class _FilePreviewState extends State<FilePreview> {
         if (fileExtension == 'pdf')
           Expanded(
               child: Center(
-                  child: PdfPreviewFromUrl(url: widget.fileSelect.url ?? '')))
+                  child: PdfPreviewFromUrlV2(url: widget.fileSelect.url ?? '')))
         else if ([
           'jpg',
           'jpeg',
@@ -52,7 +53,7 @@ class _FilePreviewState extends State<FilePreview> {
           Expanded(
             child: Center(
                 child:
-                    Text('Unsupported file format ${widget.fileSelect.url}')),
+                    Text('ファイル形式 ${widget.fileSelect.url} はサポートされていませんが、ダウンロードまたは印刷することはできます。')),
           ),
         const SizedBox(height: 10),
         RowSeparated(
@@ -77,71 +78,6 @@ class _FilePreviewState extends State<FilePreview> {
         ),
       ],
     );
-  }
-}
-
-class PdfPreviewFromUrl extends StatefulWidget {
-  final String url;
-
-  const PdfPreviewFromUrl({super.key, required this.url});
-
-  @override
-  _PdfPreviewFromUrlState createState() => _PdfPreviewFromUrlState();
-}
-
-class _PdfPreviewFromUrlState extends State<PdfPreviewFromUrl> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  final controller = PdfViewerController();
-
-  @override
-  Widget build(BuildContext context) {
-    String baseUrl = GetIt.I<String>(instanceName: 'fileUrl');
-    return PdfViewer.openFutureData(
-      () async =>
-          (await DefaultCacheManager().getSingleFile('$baseUrl${widget.url}'))
-              .readAsBytes(),
-      viewerController: controller,
-      onError: (error) {
-        logger.e('PdfPreviewFromUrl: $error');
-      },
-      loadingBannerBuilder: (context) => Center(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          color: Colors.black.withOpacity(0.5),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(),
-            ],
-          ),
-        ),
-      ),
-      params: const PdfViewerParams(
-        padding: 10,
-        minScale: 1.0,
-      ),
-    );
-  }
-}
-
-// ✅ Image Preview
-class ImagePreview extends StatelessWidget {
-  final FileSelect fileSelect;
-
-  const ImagePreview({super.key, required this.fileSelect});
-
-  @override
-  Widget build(BuildContext context) {
-    String baseUrl = GetIt.I<String>(instanceName: 'fileUrl');
-    String imageUrl = '$baseUrl${fileSelect.url}';
-
-    return fileSelect.file != null
-        ? Image.memory(fileSelect.file!)
-        : Image.network(imageUrl, height: 300, fit: BoxFit.cover);
   }
 }
 

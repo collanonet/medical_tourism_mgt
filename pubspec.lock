@@ -1213,10 +1213,10 @@ packages:
     dependency: "direct dev"
     description:
       name: melos
-      sha256: a0cb264096a315e4acdb66ae75ee594a76c97fe15ce9ae469f6c58c6c4b2be87
+      sha256: f9a6fc4f4842b7edfca2e00ab3b5b06928584f24bdc3d776ab0b30be7d599450
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.0"
+    version: "6.0.0"
   meta:
     dependency: transitive
     description:
@@ -1353,6 +1353,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  pdfrx:
+    dependency: "direct main"
+    description:
+      name: pdfrx
+      sha256: "586ba63bf1c638de3986a220edf43941375ee2fe19de93a6c2706578605de060"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.84"
   petitparser:
     dependency: transitive
     description:
@@ -1833,10 +1841,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher
-      sha256: "6ce1e04375be4eed30548f10a315826fd933c1e493206eab82eed01f438c8d2e"
+      sha256: "9d06212b1362abc2f0f0d78e6f09f726608c74e3b9462e8368bb03314aa8d603"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.6"
+    version: "6.3.1"
   url_launcher_android:
     dependency: transitive
     description:
