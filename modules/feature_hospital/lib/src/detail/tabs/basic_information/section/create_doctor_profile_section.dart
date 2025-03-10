@@ -92,6 +92,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
     FormArray<Object?> formArray,
     ValueChanged onRemove,
   ) {
+    final FileSelect? img = currentForm.control('profile').value as FileSelect?;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,50 +115,73 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                 children: [
                   InkWell(
                     onTap: () {
-                      imagePicker().then((value) => {
-                            if (value != null)
-                              {
-                                currentForm.control('profile').value = value,
-                              },
-                          });
+                      // If 'img' is not null, and 'file' or 'url' is set, show the dialog
+                      if (img != null &&
+                          (img.file != null || img.url != null)) {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            content: PreviewFile(fileSelect: img),
+                          ),
+                        );
+                      } else {
+                        // Otherwise, pick an image
+                        imagePicker().then((value) {
+                          if (value != null) {
+                            currentForm.control('profile').value = value;
+                          }
+                        });
+                      }
                     },
                     child: Container(
                       width: 80,
                       height: 80,
                       decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          border: Border.fromBorderSide(
-                              BorderSide(color: Colors.black, width: 1))),
-                      child: currentForm.control('profile').value != null &&
-                              (currentForm.control('profile').value
-                                          as FileSelect)
-                                      .file !=
-                                  null
-                          ? Image.memory(
-                              (currentForm.control('profile').value
-                                      as FileSelect)
-                                  .file!,
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                        border: Border.fromBorderSide(
+                          BorderSide(color: Colors.black, width: 1),
+                        ),
+                      ),
+                      child: () {
+                        // Null check for 'img'
+                        if (img != null) {
+                          // If there's a file, display memory image
+                          if (img.file != null) {
+                            return Image.memory(
+                              img.file!,
                               fit: BoxFit.fill,
-                            )
-                          : currentForm.control('profile').value != null &&
-                                  (currentForm.control('profile').value
-                                              as FileSelect)
-                                          .url !=
-                                      null
-                              ? Avatar.network(
-                                  (currentForm.control('profile').value
-                                          as FileSelect)
-                                      .url,
-                                  placeholder: const AssetImage(
-                                    Images.logoMadical,
-                                    package: 'core_ui',
-                                  ),
-                                  shape: BoxShape.rectangle,
-                                  customSize: const Size(200, 200),
-                                )
-                              : const Icon(CupertinoIcons.camera),
+                            );
+                          }
+                          // Else if there's a URL, display Avatar
+                          else if (img.url != null) {
+                            return Avatar.network(
+                              img.url!,
+                              placeholder: const AssetImage(
+                                Images.logoMadical,
+                                package: 'core_ui',
+                              ),
+                              shape: BoxShape.rectangle,
+                              customSize: const Size(200, 200),
+                            );
+                          }
+                        }
+                        // Default fallback (no file and no URL)
+                        return const Icon(CupertinoIcons.camera);
+                      }(),
                     ),
                   ),
+// Conditionally show delete button only if 'img' is not null and has file/url
+                  if (img != null && (img.file != null || img.url != null))
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: IconButton(
+                        onPressed: () {
+                          currentForm.control('profile').value = FileSelect();
+                        },
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                      ),
+                    ),
+
                   ColumnSeparated(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     separatorBuilder: (context, index) => SizedBox(
@@ -585,19 +610,27 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                     builder: (context, control, _) {
                                       return InkWell(
                                         onTap: () {
-                                          if (control.value?.url != null) {
-                                            showPreviewFile(
-                                              context,
-                                              fileSelect: FileSelect(
-                                                // file name from object model
-                                                  url: control.value!.url!
-                                              ),
-                                            );
-                                          }
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => AlertDialog(
+                                              content: PreviewFile(
+                                                  fileSelect: control.value!),
+                                            ),
+                                          );
+                                          // showPreviewFile(
+                                          //   context,
+                                          //   fileSelect: FileSelect(
+                                          //       // file name from object model
+                                          //       url: control.value!.url!),
+                                          // );
+
+                                          logger.d(
+                                              'File URL: ${control.value?.url}');
                                         },
                                         child: Text(
-                                          control.value?.filename ??
-                                              'File Input .....',
+                                          control.value?.url ??
+                                              control.value?.filename ??
+                                              'File Input',
                                           style: context.textTheme.bodySmall,
                                         ),
                                       );

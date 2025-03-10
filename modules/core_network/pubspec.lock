@@ -1033,6 +1033,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  pdfrx:
+    dependency: transitive
+    description:
+      name: pdfrx
+      sha256: "586ba63bf1c638de3986a220edf43941375ee2fe19de93a6c2706578605de060"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.84"
   petitparser:
     dependency: transitive
     description:

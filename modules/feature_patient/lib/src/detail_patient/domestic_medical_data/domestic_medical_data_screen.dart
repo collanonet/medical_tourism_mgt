@@ -185,9 +185,18 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       var item = value.data![index];
+                      final data = value.data?[index];
                       var dateFormat = DateFormat('yyyy-MM-dd');
                       return InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          showPreviewFile(
+                            context,
+                            fileSelect: FileSelect(
+                              // file name from object model
+                              url: data?.file,
+                            ),
+                          );
+                        },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Row(
@@ -392,23 +401,38 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          var ids = context
-                              .read<DomesticMedicalDataModel>()
-                              .domesticMedicalData
-                              .value;
-                          var list = ids.data!
-                              .where((e) => sels.contains(e.id))
-                              .toList();
-                          showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                    content: ViewAndPrintFileWidget(list
-                                        .map((e) =>
-                                            'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/${e.file}')
-                                        .toList()),
-                                  ));
-                        },
+                        onPressed: sels.length == 1
+                            ? () {
+                                var data = context
+                                    .read<DomesticMedicalDataModel>()
+                                    .domesticMedicalData
+                                    .value
+                                    .requireData
+                                    .firstWhere(
+                                        (element) => element.id == sels.first);
+                                // var ids = context
+                                //     .read<DomesticMedicalDataModel>()
+                                //     .domesticMedicalData
+                                //     .value;
+                                // var list = ids.data!
+                                //     .where((e) => sels.contains(e.id))
+                                //     .toList();
+                                showPreviewFile(
+                                  context,
+                                  fileSelect: FileSelect(
+                                      // file name from object model
+                                      url: data.file ?? ''),
+                                );
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (_) => AlertDialog(
+                                //           content: ViewAndPrintFileWidget(list
+                                //               .map((e) =>
+                                //                   'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/${e.file}')
+                                //               .toList()),
+                                //         ));
+                              }
+                            : null,
                         child: const Text(
                           '印刷する',
                         ),
