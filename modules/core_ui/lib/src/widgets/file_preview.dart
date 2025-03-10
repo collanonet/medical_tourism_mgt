@@ -33,7 +33,7 @@ class _FilePreviewState extends State<FilePreview> {
         if (fileExtension == 'pdf')
           Expanded(
               child: Center(
-                  child: PdfPreviewFromUrlV2(url: widget.fileSelect.url ?? '')))
+                  child: PdfPreviewFromUrlV2(fileSelect: widget.fileSelect)))
         else if ([
           'jpg',
           'jpeg',
