@@ -11,6 +11,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:path/path.dart' as p;
 
 // Project imports:
 import 'basic_information_model.dart';
@@ -1076,13 +1077,95 @@ class _AgentBasicInformationScreenState
 
   Row managerCard(FormGroup currentForm, BuildContext context) {
     final file = currentForm.control('nameCardDragDrop').value as FileSelect?;
+
+    // Helpers
+    bool isImageFile(String pathOrUrl) {
+      final ext = p.extension(pathOrUrl).toLowerCase();
+      const imageExtensions = [
+        '.png',
+        '.jpg',
+        '.jpeg',
+        '.gif',
+        '.webp',
+        '.bmp'
+      ];
+      return imageExtensions.contains(ext);
+    }
+
+    bool isPdfFile(String pathOrUrl) {
+      return p.extension(pathOrUrl).toLowerCase() == '.pdf';
+    }
+
+    // Check if file is truly empty (null or has no data)
+    bool isEmptyFileSelect(FileSelect? fs) {
+      if (fs == null) return true;
+      final hasBytes = fs.file != null;
+      final hasUrl = (fs.url != null && fs.url!.isNotEmpty);
+      final hasName = (fs.filename != null && fs.filename!.isNotEmpty);
+      return !(hasBytes || hasUrl || hasName);
+    }
+
+    Widget buildFileDisplay(FileSelect fs) {
+      // 1) Prefer the filename if it exists, else use the URL to check extension
+      final path = fs.filename ?? fs.url ?? '';
+
+      if (isPdfFile(path)) {
+        return const Icon(
+          Icons.picture_as_pdf,
+          size: 60,
+          color: Colors.red,
+        );
+      } else if (isImageFile(path)) {
+        // Show local file bytes if we have them
+        if (fs.file != null) {
+          return Image.memory(
+            fs.file!,
+            fit: BoxFit.fill,
+          );
+        }
+        // Otherwise show from network
+        else if (fs.url != null) {
+          return Avatar.network(
+            fs.url!,
+            placeholder: const AssetImage(
+              Images.logoMadical,
+              package: 'core_ui',
+            ),
+            shape: BoxShape.rectangle,
+            customSize: const Size(200, 380),
+          );
+        }
+      }
+      // Fallback / unknown file
+      return const Icon(
+        Icons.insert_drive_file,
+        size: 60,
+        color: Colors.grey,
+      );
+    }
+
+    // Decide if we have no file
+    final noFile = isEmptyFileSelect(file);
+
     return Row(
       children: [
         InkWell(
           onTap: () {
-            filePicker().then((value) {
-              currentForm.control('nameCardDragDrop').value = value;
-            });
+            // If we don't have a file (null or empty), pick a file
+            if (noFile) {
+              filePicker().then((value) {
+                currentForm.control('nameCardDragDrop').value = value;
+              });
+            }
+            // Else, preview the existing file
+            else {
+              showPreviewFile(
+                context,
+                fileSelect: FileSelect(
+                  url: file?.url ?? file!.filename,
+                ),
+              );
+            }
           },
           child: Container(
             width: 400,
@@ -1091,70 +1174,160 @@ class _AgentBasicInformationScreenState
             ),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(
-                context.appTheme.spacing.borderRadiusMedium,
-              )),
+              borderRadius: BorderRadius.all(
+                Radius.circular(context.appTheme.spacing.borderRadiusMedium),
+              ),
               border: Border.all(
                 color: context.appTheme.primaryColor,
               ),
             ),
-            child: file != null && file.file != null
-                ? Image.memory(
-                    file.file!,
-                    fit: BoxFit.fill,
-                  )
-                : file != null && file.url != null
-                    ? Avatar.network(
-                        file.url,
-                        placeholder: const AssetImage(
-                          Images.logoMadical,
-                          package: 'core_ui',
-                        ),
-                        shape: BoxShape.rectangle,
-                        customSize: const Size(200, 380),
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.copy_all_rounded,
-                            size: 50,
-                            color: context.appTheme.primaryColor,
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            '名刺データをここにドラッグ＆ドロップ',
-                            style: context.textTheme.bodySmall?.copyWith(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              filePicker().then(
-                                (value) {
-                                  currentForm
-                                      .control('nameCardDragDrop')
-                                      .value = value;
-                                },
-                              );
-                            },
-                            child: const Text(
-                              'またはファイルを選択する',
-                            ),
-                          )
-                        ],
+
+            // ---------- Show placeholder if no file, otherwise show display widget ----------
+            child: noFile
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.copy_all_rounded,
+                        size: 50,
+                        color: context.appTheme.primaryColor,
                       ),
+                      SizedBox(height: context.appTheme.spacing.marginMedium),
+                      Text(
+                        '名刺データをここにドラッグ＆ドロップ',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: context.appTheme.spacing.marginMedium),
+                      ElevatedButton(
+                        onPressed: () {
+                          filePicker().then((value) {
+                            currentForm.control('nameCardDragDrop').value =
+                                value;
+                          });
+                        },
+                        child: const Text('またはファイルを選択する'),
+                      )
+                    ],
+                  )
+                : buildFileDisplay(file!),
           ),
         ),
+
+        // Delete button appears only if there's a file
+        if (!noFile)
+          IconButton(
+            onPressed: () {
+              // Set the value to null => triggers placeholder again
+              currentForm.control('nameCardDragDrop').value = null;
+            },
+            icon: const Icon(Icons.delete, color: Colors.red),
+          ),
       ],
     );
+
+    // Row managerCard(FormGroup currentForm, BuildContext context) {
+    //   final file = currentForm.control('nameCardDragDrop').value as FileSelect?;
+    //   return Row(
+    //     children: [
+    //       InkWell(
+    //         onTap: () {
+    //           if (file != null) {
+    //             showPreviewFile(
+    //               context,
+    //               fileSelect: FileSelect(
+    //                 // file name from object model
+    //                 url: file.url,
+    //               ),
+    //             );
+    //           } else {
+    //             filePicker().then((value) {
+    //               currentForm.control('nameCardDragDrop').value = value;
+    //             });
+    //           }
+    //         },
+    //         child: Container(
+    //           width: 400,
+    //           padding: EdgeInsets.all(
+    //             context.appTheme.spacing.marginExtraLarge,
+    //           ),
+    //           decoration: BoxDecoration(
+    //             color: Colors.white,
+    //             borderRadius: BorderRadius.all(Radius.circular(
+    //               context.appTheme.spacing.borderRadiusMedium,
+    //             )),
+    //             border: Border.all(
+    //               color: context.appTheme.primaryColor,
+    //             ),
+    //           ),
+    //           child: file != null && file.file != null
+    //               ? Image.memory(
+    //                   file.file!,
+    //                   fit: BoxFit.fill,
+    //                 )
+    //               : file != null && file.url != null
+    //                   ? Avatar.network(
+    //                       file.url,
+    //                       placeholder: const AssetImage(
+    //                         Images.logoMadical,
+    //                         package: 'core_ui',
+    //                       ),
+    //                       shape: BoxShape.rectangle,
+    //                       customSize: const Size(200, 380),
+    //                     )
+    //                   : Column(
+    //                       crossAxisAlignment: CrossAxisAlignment.center,
+    //                       mainAxisAlignment: MainAxisAlignment.center,
+    //                       mainAxisSize: MainAxisSize.min,
+    //                       children: [
+    //                         Icon(
+    //                           Icons.copy_all_rounded,
+    //                           size: 50,
+    //                           color: context.appTheme.primaryColor,
+    //                         ),
+    //                         SizedBox(
+    //                           height: context.appTheme.spacing.marginMedium,
+    //                         ),
+    //                         Text(
+    //                           '名刺データをここにドラッグ＆ドロップ',
+    //                           style: context.textTheme.bodySmall?.copyWith(
+    //                             fontSize: 22,
+    //                             fontWeight: FontWeight.bold,
+    //                           ),
+    //                         ),
+    //                         SizedBox(
+    //                           height: context.appTheme.spacing.marginMedium,
+    //                         ),
+    //                         ElevatedButton(
+    //                           onPressed: () {
+    //                             filePicker().then(
+    //                               (value) {
+    //                                 currentForm
+    //                                     .control('nameCardDragDrop')
+    //                                     .value = value;
+    //                               },
+    //                             );
+    //                           },
+    //                           child: const Text(
+    //                             'またはファイルを選択する',
+    //                           ),
+    //                         )
+    //                       ],
+    //                     ),
+    //         ),
+    //       ),
+    //       if (file != null)
+    //         IconButton(
+    //           onPressed: () {
+    //             currentForm.control('nameCardDragDrop').value = FileSelect();
+    //           },
+    //           icon: const Icon(Icons.delete, color: Colors.red),
+    //         ),
+    //     ],
+    //   );
   }
 }

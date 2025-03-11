@@ -149,48 +149,59 @@ class _ContractScreenState extends State<ContractScreen> {
                               return Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  children: [
-                                    ValueListenableBuilder(
-                                      valueListenable: selected,
-                                      builder: (context, sels, _) {
-                                        return Checkbox(
-                                          value: sels.contains(item.id),
-                                          onChanged: (sel) {
-                                            if (sel != null) {
-                                              if (sel) {
-                                                selected.value = [
-                                                  ...sels,
-                                                  item.id
-                                                ];
-                                              } else {
-                                                selected.value = [
-                                                  ...sels.where(
-                                                      (e) => e != item.id)
-                                                ];
+                                child: InkWell(
+                                  onTap: () {
+                                    showPreviewFile(
+                                      context,
+                                      fileSelect: FileSelect(
+                                        url: item.uploadFile ?? '',
+                                      ),
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      ValueListenableBuilder(
+                                        valueListenable: selected,
+                                        builder: (context, sels, _) {
+                                          return Checkbox(
+                                            value: sels.contains(item.id),
+                                            onChanged: (sel) {
+                                              if (sel != null) {
+                                                if (sel) {
+                                                  selected.value = [
+                                                    ...sels,
+                                                    item.id
+                                                  ];
+                                                } else {
+                                                  selected.value = [
+                                                    ...sels.where(
+                                                        (e) => e != item.id)
+                                                  ];
+                                                }
                                               }
-                                            }
-                                          },
-                                        );
-                                      },
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                          value.requireData[index].fileName ??
-                                              ''),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                          value.requireData[index].uploadOn ==
-                                                  null
-                                              ? Dates.formShortDate(value
-                                                  .requireData[index].updatedAt)
-                                              : Dates.formShortDate(value
-                                                  .requireData[index]
-                                                  .uploadOn)),
-                                    ),
-                                  ],
+                                            },
+                                          );
+                                        },
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                            value.requireData[index].fileName ??
+                                                ''),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                            value.requireData[index].uploadOn ==
+                                                    null
+                                                ? Dates.formShortDate(value
+                                                    .requireData[index]
+                                                    .updatedAt)
+                                                : Dates.formShortDate(value
+                                                    .requireData[index]
+                                                    .uploadOn)),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -307,22 +318,22 @@ class _ContractScreenState extends State<ContractScreen> {
                         ),
                         ElevatedButton(
                           onPressed: sels.length == 1
-                                ? () {
-                                    var data = context
-                                        .read<ContractModel>()
-                                        .contrantData
-                                        .value
-                                        .requireData
-                                        .firstWhere((element) =>
-                                            element.id == sels.first);
-                                    showPreviewFile(
-                                      context,
-                                      fileSelect: FileSelect(
-                                          // file name from object model
-                                          url: data.uploadFile ?? ''),
-                                    );
-                                  }
-                                : null,
+                              ? () {
+                                  var data = context
+                                      .read<ContractModel>()
+                                      .contrantData
+                                      .value
+                                      .requireData
+                                      .firstWhere((element) =>
+                                          element.id == sels.first);
+                                  showPreviewFile(
+                                    context,
+                                    fileSelect: FileSelect(
+                                        // file name from object model
+                                        url: data.uploadFile ?? ''),
+                                  );
+                                }
+                              : null,
                           child: const Text('印刷する'),
                         )
                       ],

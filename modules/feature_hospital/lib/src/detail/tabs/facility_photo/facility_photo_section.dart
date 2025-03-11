@@ -10,6 +10,7 @@ import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:path/path.dart' as p;
 
 // Project imports:
 import 'facility_file.dart';
@@ -142,88 +143,111 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                   itemBuilder: (context, index) {
                     final data = value.data?[index];
 
-                    return Row(
-                      children: [
-                        ValueListenableBuilder(
-                            valueListenable: selected,
-                            builder: (context, sels, _) {
-                              return Checkbox(
-                                value: sels.contains(data?.id),
-                                onChanged: (sel) {
-                                  if (sel != null) {
-                                    if (sel) {
-                                      selected.value = [
-                                        ...sels,
-                                        data?.id ?? ''
-                                      ];
-                                    } else {
-                                      selected.value = [
-                                        ...sels.where((e) => e != data?.id)
-                                      ];
+                    return InkWell(
+                      onTap: () {
+                        showPreviewFile(
+                          context,
+                          fileSelect: FileSelect(url: data?.facilityFile ?? ''),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          ValueListenableBuilder(
+                              valueListenable: selected,
+                              builder: (context, sels, _) {
+                                return Checkbox(
+                                  value: sels.contains(data?.id),
+                                  onChanged: (sel) {
+                                    if (sel != null) {
+                                      if (sel) {
+                                        selected.value = [
+                                          ...sels,
+                                          data?.id ?? ''
+                                        ];
+                                      } else {
+                                        selected.value = [
+                                          ...sels.where((e) => e != data?.id)
+                                        ];
+                                      }
                                     }
-                                  }
-                                },
-                              );
-                            }),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                              value.requireData[index].nameOfHospital ?? ''),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child:
-                                Text(value.requireData[index].photograph ?? ''),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 30),
-                            child: Text(
-                                value.requireData[index].shootingDate == null
-                                    ? ''
-                                    : Dates.formShortDate(
-                                        value.requireData[index].shootingDate)),
-                          ),
-                        ),
-                        Expanded(
-                          child: value.requireData[index].share == null
-                              ? const SizedBox()
-                              : const Icon(Icons.person),
-                        ),
-                        const SizedBox(width: 80),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              if (value.requireData[index].facilityFile !=
-                                      null ||
-                                  value.requireData[index].uploadedPhoto !=
-                                      null) {
-                                showPreviewFile(
-                                  context,
-                                  fileSelect: FileSelect(
-                                      // file name from object model
-                                      url: value.requireData[index]
-                                              .facilityFile ??
-                                          value.requireData[index]
-                                              .uploadedPhoto!),
+                                  },
                                 );
-                              }
-                            },
-                            child: Avatar.network(
-                              value.requireData[index].facilityFile ??
-                                  value.requireData[index].uploadedPhoto,
-                              placeholder: const AssetImage(
-                                Images.logoMadical,
-                                package: 'core_ui',
-                              ),
-                              shape: BoxShape.rectangle,
-                              customSize: const Size(60, 60),
+                              }),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                                value.requireData[index].nameOfHospital ?? ''),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                  value.requireData[index].photograph ?? ''),
                             ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 30),
+                              child: Text(value
+                                          .requireData[index].shootingDate ==
+                                      null
+                                  ? ''
+                                  : Dates.formShortDate(
+                                      value.requireData[index].shootingDate)),
+                            ),
+                          ),
+                          Expanded(
+                            child: value.requireData[index].share == null
+                                ? const SizedBox()
+                                : const Icon(Icons.person),
+                          ),
+                          const SizedBox(width: 80),
+                          Expanded(
+                            child: filePreviewCell(
+                              // Pass the correct file info
+                              (data?.facilityFile == null &&
+                                      data?.uploadedPhoto == null)
+                                  ? null
+                                  : FileSelect(
+                                      url: data?.facilityFile ??
+                                          data?.uploadedPhoto ??
+                                          '',
+                                    ),
+                              context,
+                            ),
+                          ),
+                          // Expanded(
+                          //   child: InkWell(
+                          //     onTap: () {
+                          //       if (value.requireData[index].facilityFile !=
+                          //               null ||
+                          //           value.requireData[index].uploadedPhoto !=
+                          //               null) {
+                          //         showPreviewFile(
+                          //           context,
+                          //           fileSelect: FileSelect(
+                          //               // file name from object model
+                          //               url: value.requireData[index]
+                          //                       .facilityFile ??
+                          //                   value.requireData[index]
+                          //                       .uploadedPhoto!),
+                          //         );
+                          //       }
+                          //     },
+                          //     child: Avatar.network(
+                          //       value.requireData[index].facilityFile ??
+                          //           value.requireData[index].uploadedPhoto,
+                          //       placeholder: const AssetImage(
+                          //         Images.logoMadical,
+                          //         package: 'core_ui',
+                          //       ),
+                          //       shape: BoxShape.rectangle,
+                          //       customSize: const Size(60, 60),
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
+                      ),
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {
@@ -378,6 +402,77 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget filePreviewCell(FileSelect? fileSelect, BuildContext context) {
+    bool isImageFile(String pathOrUrl) {
+      final ext = p.extension(pathOrUrl).toLowerCase();
+      const imageExtensions = [
+        '.png',
+        '.jpg',
+        '.jpeg',
+        '.gif',
+        '.webp',
+        '.bmp',
+      ];
+      return imageExtensions.contains(ext);
+    }
+
+    bool isPdfFile(String pathOrUrl) {
+      return p.extension(pathOrUrl).toLowerCase() == '.pdf';
+    }
+
+    Widget buildPreview(FileSelect fs) {
+      // 1. If we have in-memory bytes + filename
+      if (fs.file != null && fs.filename != null) {
+        final filename = fs.filename!;
+        if (isImageFile(filename)) {
+          return Image.memory(fs.file!, fit: BoxFit.cover);
+        } else if (isPdfFile(filename)) {
+          return const Icon(Icons.picture_as_pdf, size: 48, color: Colors.red);
+        } else {
+          return const Icon(Icons.insert_drive_file,
+              size: 48, color: Colors.grey);
+        }
+      }
+      // 2. If we have a URL
+      if (fs.url != null) {
+        final url = fs.url!;
+        if (isImageFile(url)) {
+          return Image.network(
+            url,
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => const Icon(Icons.insert_drive_file,
+                size: 48, color: Colors.grey),
+          );
+        } else if (isPdfFile(url)) {
+          return const Icon(Icons.picture_as_pdf, size: 48, color: Colors.red);
+        } else {
+          return const Icon(Icons.insert_drive_file,
+              size: 48, color: Colors.grey);
+        }
+      }
+
+      // 3. No file data
+      return const SizedBox();
+    }
+
+    // If there's no file at all, show nothing.
+    if (fileSelect == null) {
+      return const SizedBox();
+    }
+
+    // Otherwise, show a thumbnail (and allow tapping for a larger preview)
+    return InkWell(
+      onTap: () {
+        showPreviewFile(context, fileSelect: fileSelect);
+      },
+      child: SizedBox(
+        width: 80,
+        height: 80,
+        child: buildPreview(fileSelect),
       ),
     );
   }

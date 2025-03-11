@@ -144,70 +144,81 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                         itemBuilder: (context, index) {
                           final data = value.data?[index];
 
-                          return Row(
-                            children: [
-                              ValueListenableBuilder(
-                                  valueListenable: selected,
-                                  builder: (context, sels, _) {
-                                    return Checkbox(
-                                      value: sels.contains(data?.id),
-                                      onChanged: (sel) {
-                                        if (sel != null) {
-                                          if (sel) {
-                                            selected.value = [
-                                              ...sels,
-                                              data?.id ?? ''
-                                            ];
-                                          } else {
-                                            selected.value = [
-                                              ...sels
-                                                  .where((e) => e != data?.id)
-                                            ];
+                          return InkWell(
+                            onTap: () {
+                              showPreviewFile(
+                                context,
+                                fileSelect: FileSelect(
+                                  url: data?.uploadFile ?? '',
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                ValueListenableBuilder(
+                                    valueListenable: selected,
+                                    builder: (context, sels, _) {
+                                      return Checkbox(
+                                        value: sels.contains(data?.id),
+                                        onChanged: (sel) {
+                                          if (sel != null) {
+                                            if (sel) {
+                                              selected.value = [
+                                                ...sels,
+                                                data?.id ?? ''
+                                              ];
+                                            } else {
+                                              selected.value = [
+                                                ...sels
+                                                    .where((e) => e != data?.id)
+                                              ];
+                                            }
                                           }
-                                        }
-                                      },
-                                    );
-                                  }),
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                    value.requireData[index].documentName ??
-                                        ''),
-                              ),
-                              Expanded(
-                                child: Text(
-                                    value.requireData[index].publisher ?? ''),
-                              ),
-                              Expanded(
-                                child: Text(value
-                                            .requireData[index].dateOfIssue ==
-                                        null
-                                    ? ''
-                                    : Dates.formShortDate(
-                                        value.requireData[index].dateOfIssue)),
-                              ),
-                              Expanded(
-                                child: Text(
-                                    value.requireData[index].dateOfPayment ==
-                                            null
-                                        ? ''
-                                        : Dates.formShortDate(value
-                                            .requireData[index].dateOfPayment)),
-                              ),
-                              Expanded(
-                                child: Text(value
-                                            .requireData[index].paymentDay ==
-                                        null
-                                    ? ''
-                                    : Dates.formShortDate(
-                                        value.requireData[index].paymentDay)),
-                              ),
-                              Expanded(
-                                child: Text(
-                                    value.requireData[index].methodOfPayment ??
-                                        ''),
-                              ),
-                            ],
+                                        },
+                                      );
+                                    }),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                      value.requireData[index].documentName ??
+                                          ''),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      value.requireData[index].publisher ?? ''),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      value.requireData[index].dateOfIssue ==
+                                              null
+                                          ? ''
+                                          : Dates.formShortDate(value
+                                              .requireData[index].dateOfIssue)),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      value.requireData[index].dateOfPayment ==
+                                              null
+                                          ? ''
+                                          : Dates.formShortDate(value
+                                              .requireData[index]
+                                              .dateOfPayment)),
+                                ),
+                                Expanded(
+                                  child: Text(value
+                                              .requireData[index].paymentDay ==
+                                          null
+                                      ? ''
+                                      : Dates.formShortDate(
+                                          value.requireData[index].paymentDay)),
+                                ),
+                                Expanded(
+                                  child: Text(value
+                                          .requireData[index].methodOfPayment ??
+                                      ''),
+                                ),
+                              ],
+                            ),
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {

@@ -118,11 +118,11 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       // If 'img' is not null, and 'file' or 'url' is set, show the dialog
                       if (img != null &&
                           (img.file != null || img.url != null)) {
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            content: PreviewFile(fileSelect: img),
-                          ),
+                        showPreviewFile(
+                          context,
+                          fileSelect: FileSelect(
+                              // file name from object model
+                              url: img.url),
                         );
                       } else {
                         // Otherwise, pick an image
@@ -610,13 +610,13 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                     builder: (context, control, _) {
                                       return InkWell(
                                         onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (_) => AlertDialog(
-                                              content: PreviewFile(
-                                                  fileSelect: control.value!),
-                                            ),
+                                          showPreviewFile(
+                                            context,
+                                            fileSelect: FileSelect(
+                                                url: control.value?.url ??
+                                                    control.value!.filename!),
                                           );
+
                                           // showPreviewFile(
                                           //   context,
                                           //   fileSelect: FileSelect(

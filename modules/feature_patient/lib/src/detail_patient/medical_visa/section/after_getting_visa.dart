@@ -52,7 +52,6 @@ class AfterGettingVisa extends StatelessWidget {
                                           stepWidth: 200,
                                           child: ReactiveDatePickerField(
                                             formControlName: 'visaPage',
-
                                           ),
                                         ),
                                       ],
@@ -272,7 +271,6 @@ class AfterGettingVisa extends StatelessWidget {
                                       stepWidth: 200,
                                       child: ReactiveDatePickerField(
                                         formControlName: 'returnFlightTicket',
-
                                       ),
                                     ),
                                   ],
@@ -365,7 +363,6 @@ class AfterGettingVisa extends StatelessWidget {
                                       child: ReactiveDatePickerField(
                                         formControlName:
                                             'boardingPassForReturnFlight',
-
                                       ),
                                     ),
                                   ],
@@ -451,7 +448,6 @@ class AfterGettingVisa extends StatelessWidget {
                         stepWidth: 200,
                         child: ReactiveDatePickerField(
                           formControlName: 'certificateOfEligibility',
-
                         ),
                       ),
                     ],
@@ -496,18 +492,32 @@ class AfterGettingVisa extends StatelessWidget {
                   builder: (context, control, _) {
                     return InkWell(
                       onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            content: PreviewFile(fileSelect: control.value!),
-                          ),
+                        showPreviewFile(
+                          context,
+                          fileSelect: FileSelect(
+                              // file name from object model
+                              url: control.value?.url ??
+                                  control.value!.filename!),
                         );
                       },
-                      child: Text(
-                        control.value?.url ??
-                            control.value?.filename ??
-                            'File Name',
-                        style: context.textTheme.bodySmall,
+                      child: Row(
+                        children: [
+                          if (control.value?.url != null ||
+                              control.value?.filename != null)
+                            IconButton(
+                              onPressed: () {
+                                currentForm.control(fileName).value =
+                                    FileSelect();
+                              },
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                            ),
+                          Text(
+                            control.value?.url ??
+                                control.value?.filename ??
+                                'File Name',
+                            style: context.textTheme.bodySmall,
+                          ),
+                        ],
                       ),
                     );
                   },

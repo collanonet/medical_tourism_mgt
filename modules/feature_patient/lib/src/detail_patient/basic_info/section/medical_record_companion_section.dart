@@ -1092,11 +1092,9 @@ class _MedicalRecordCompanionSectionState
           // If there's an actual file, allow preview. Otherwise pick a file.
           onTap: () async {
             if (file != null) {
-              showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  content: PreviewFile(fileSelect: file),
-                ),
+              showPreviewFile(
+                context,
+                fileSelect: FileSelect(url: file.url ?? file.filename!),
               );
             } else {
               // No file => pick a file
