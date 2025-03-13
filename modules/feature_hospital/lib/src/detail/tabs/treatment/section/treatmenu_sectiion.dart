@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -141,38 +140,55 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                           children: [
                             Expanded(
                               flex: 2,
-                              child: ReactiveTextField(
-                                formControlName: 'project',
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 20),
+                                child: ReactiveTextField(
+                                  formControlName: 'project',
+                                ),
                               ),
                             ),
-                            Expanded(
-                                flex: 1,
-                                child: ReactiveTextField<double>(
-                                  keyboardType: TextInputType.number,
-                                  decoration: const InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                  ),
-                                  valueAccessor: DoubleValueAccessor(),
-                                  inputFormatters: [
-                                    CustomCurrencyFormatter(),
-                                    // FilteringTextInputFormatter.allow(
-                                    //     RegExp(r'[0-9]')),
-                                  ],
-                                  formControlName: 'treatmentCostExcludingTax',
-                                )),
-                            Expanded(
-                                flex: 1,
-                                child: ReactiveTextField<double>(
-                                  keyboardType: TextInputType.number,
-                                  valueAccessor: DoubleValueAccessor(),
-                                  inputFormatters: [
-                                    CustomCurrencyFormatter(),
-                                    // FilteringTextInputFormatter.allow(
-                                    //     RegExp(r'[0-9]')),
-                                  ],
-                                  formControlName: 'treatmentCostTaxIncluded',
-                                )),
+                            const Expanded(
+                              flex: 1,
+                              child: ReactiveAmountField(
+                                formControlName: 'treatmentCostExcludingTax',
+                                helperText: '',
+                              ),
+                            ),
+                            // Expanded(
+                            //     flex: 1,
+                            //     child: ReactiveTextField<double>(
+                            //       keyboardType: TextInputType.number,
+                            //       decoration: const InputDecoration(
+                            //         fillColor: Colors.white,
+                            //         filled: true,
+                            //       ),
+                            //       valueAccessor: DoubleValueAccessor(),
+                            //       inputFormatters: [
+                            //         CustomCurrencyFormatter(),
+                            //         // FilteringTextInputFormatter.allow(
+                            //         //     RegExp(r'[0-9]')),
+                            //       ],
+                            //       formControlName: 'treatmentCostExcludingTax',
+                            //     )),
+                            const Expanded(
+                              flex: 1,
+                              child: ReactiveAmountField(
+                                formControlName: 'treatmentCostTaxIncluded',
+                                helperText: '',
+                              ),
+                            ),
+                            // Expanded(
+                            //     flex: 1,
+                            //     child: ReactiveTextField<double>(
+                            //       keyboardType: TextInputType.number,
+                            //       valueAccessor: DoubleValueAccessor(),
+                            //       inputFormatters: [
+                            //         CustomCurrencyFormatter(),
+                            //         // FilteringTextInputFormatter.allow(
+                            //         //     RegExp(r'[0-9]')),
+                            //       ],
+                            //       formControlName: 'treatmentCostTaxIncluded',
+                            //     )),
                             ReactiveFormArray(
                               formArrayName: 'treatmentCostTax',
                               builder: (context, formArray, child) {
@@ -183,16 +199,9 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                         width: 100,
                                         child: ReactiveForm(
                                           formGroup: currentForm,
-                                          child: ReactiveTextField(
-                                            keyboardType: TextInputType.number,
-                                            valueAccessor:
-                                                DoubleValueAccessor(),
-                                            inputFormatters: [
-                                              CustomCurrencyFormatter(),
-                                              // FilteringTextInputFormatter.allow(
-                                              //     RegExp(r'[0-9]')),
-                                            ],
+                                          child: const ReactiveAmountField(
                                             formControlName: 'cost',
+                                            helperText: '',
                                           ),
                                         ),
                                       ),
@@ -295,8 +304,11 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                       ),
                       children: [
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'remark',
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: ReactiveTextField(
+                              formControlName: 'remark',
+                            ),
                           ),
                         ),
                         if (formArray.controls.indexOf(control) == 0)

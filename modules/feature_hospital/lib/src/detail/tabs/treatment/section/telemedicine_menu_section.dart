@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -103,40 +102,56 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                   children: [
                                     Expanded(
                                         flex: 3,
-                                        child: ReactiveTextField(
-                                            formControlName: 'project')),
-                                    Expanded(
-                                      flex: 2,
-                                      child: ReactiveTextField(
-                                        formControlName:
-                                            'treatmentCostExcludingTax',
-                                        keyboardType: TextInputType.number,
-                                        valueAccessor: DoubleValueAccessor(),
-                                        inputFormatters: [
-                                          CustomCurrencyFormatter(),
-                                          // FilteringTextInputFormatter.allow(
-                                          //     RegExp(r'[0-9]')),
-                                        ],
-                                      ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(bottom: 20),
+                                          child: ReactiveTextField(
+                                              formControlName: 'project'),
+                                        )),
+                                    const Expanded(
+                                      child: ReactiveAmountField(
+                                          formControlName:
+                                              'treatmentCostExcludingTax',helperText: '',),
                                     ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: ReactiveTextField(
-                                        formControlName:
-                                            'treatmentCostTaxIncluded',
-                                        keyboardType: TextInputType.number,
-                                        valueAccessor: DoubleValueAccessor(),
-                                        inputFormatters: [
-                                          CustomCurrencyFormatter(),
-                                          // FilteringTextInputFormatter.allow(
-                                          //     RegExp(r'[0-9]')),
-                                        ],
-                                      ),
+                                    const Expanded(
+                                      child: ReactiveAmountField(
+                                          formControlName:
+                                              'treatmentCostTaxIncluded',helperText: '',),
                                     ),
+                                    // Expanded(
+                                    //   flex: 2,
+                                    //   child: ReactiveTextField(
+                                    //     formControlName:
+                                    //         'treatmentCostExcludingTax',
+                                    //     keyboardType: TextInputType.number,
+                                    //     valueAccessor: DoubleValueAccessor(),
+                                    //     inputFormatters: [
+                                    //       CustomCurrencyFormatter(),
+                                    //       // FilteringTextInputFormatter.allow(
+                                    //       //     RegExp(r'[0-9]')),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    // Expanded(
+                                    //   flex: 2,
+                                    //   child: ReactiveTextField(
+                                    //     formControlName:
+                                    //         'treatmentCostTaxIncluded',
+                                    //     keyboardType: TextInputType.number,
+                                    //     valueAccessor: DoubleValueAccessor(),
+                                    //     inputFormatters: [
+                                    //       CustomCurrencyFormatter(),
+                                    //       // FilteringTextInputFormatter.allow(
+                                    //       //     RegExp(r'[0-9]')),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                     Expanded(
                                       flex: 3,
-                                      child: ReactiveTextField(
-                                        formControlName: 'remark',
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(bottom: 20),
+                                        child: ReactiveTextField(
+                                          formControlName: 'remark',
+                                        ),
                                       ),
                                     ),
                                     if (formArray.controls.indexOf(control) ==

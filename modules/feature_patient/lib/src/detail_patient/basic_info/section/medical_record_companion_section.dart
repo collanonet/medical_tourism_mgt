@@ -974,7 +974,14 @@ class _MedicalRecordCompanionSectionState
   }
 
   Widget qRChatCompanion(FormGroup currentForm, BuildContext context) {
+    // Attempt to read a FileSelect from the form control
     final file = currentForm.control('chatQrImage').value as FileSelect?;
+
+    // Safely derive the path from whichever field is non-null.
+    // (Might be local filename, remote url, etc.)
+    final path = file?.url?.isNotEmpty == true
+        ? file!.url!
+        : (file?.filename?.isNotEmpty == true ? file!.filename! : null);
 
     // Helper methods to check file type by extension
     bool isImageFile(String pathOrUrl) {
@@ -994,38 +1001,68 @@ class _MedicalRecordCompanionSectionState
       return p.extension(pathOrUrl).toLowerCase() == '.pdf';
     }
 
-    // Provide a PDF placeholder
-    Widget _buildPdfPlaceholder(BuildContext context, String filenameOrUrl) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.picture_as_pdf, size: 48, color: Colors.red),
-          Text(
-            p.basename(filenameOrUrl),
-            style: const TextStyle(fontSize: 14),
-            overflow: TextOverflow.ellipsis,
+    // Builds a file preview widget based on the file type (PDF, image, or unknown).
+    Widget filePreview(String path) {
+      if (isPdfFile(path)) {
+        // PDF => show an icon preview
+        return Container(
+          width: 250,
+          height: 250,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(
+                context.appTheme.spacing.borderRadiusMedium),
+            border: Border.all(color: context.appTheme.primaryColor),
           ),
-        ],
-      );
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.picture_as_pdf, size: 60, color: Colors.red),
+              Text(
+                p.basename(path),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        );
+      } else if (isImageFile(path)) {
+        // Image => show image
+        return Avatar.network(
+          path,
+          placeholder: const AssetImage(
+            Images.logoMadical, // Adjust to your asset reference
+            package: 'core_ui',
+          ),
+          shape: BoxShape.rectangle,
+          customSize: const Size(250, 250),
+        );
+      } else {
+        // Unknown file type => show a generic file icon
+        return Container(
+          width: 250,
+          height: 250,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(
+                context.appTheme.spacing.borderRadiusMedium),
+            border: Border.all(color: context.appTheme.primaryColor),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.insert_drive_file, size: 60, color: Colors.grey),
+              Text(
+                p.basename(path),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        );
+      }
     }
 
-    // Provide an unknown file placeholder
-    Widget _buildUnknownFilePlaceholder(
-        BuildContext context, String filenameOrUrl) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.insert_drive_file, size: 48, color: Colors.grey),
-          Text(
-            p.basename(filenameOrUrl),
-            style: const TextStyle(fontSize: 14),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      );
-    }
-
-    // Provide the initial “no file” widget
     Widget _buildNoFilePlaceholder(BuildContext context, FormGroup form) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -1046,78 +1083,39 @@ class _MedicalRecordCompanionSectionState
       );
     }
 
-    // Decide how to display content based on file info
-    Widget buildFilePreview(FileSelect fileSelect) {
-      if (fileSelect.file != null && fileSelect.filename != null) {
-        final filename = fileSelect.filename!;
-        if (isImageFile(filename)) {
-          return Image.memory(
-            fileSelect.file!,
-            fit: BoxFit.fill,
-          );
-        } else if (isPdfFile(filename)) {
-          return _buildPdfPlaceholder(context, filename);
-        } else {
-          return _buildUnknownFilePlaceholder(context, filename);
-        }
-      }
-      // If no local file (Uint8List) but you have a url
-      else if (fileSelect.url != null) {
-        final url = fileSelect.url!;
-        if (isImageFile(url)) {
-          // Show image from network
-          return Image.network(
-            url,
-            fit: BoxFit.fill,
-            errorBuilder: (context, error, stack) =>
-                _buildUnknownFilePlaceholder(context, url),
-          );
-        } else if (isPdfFile(url)) {
-          // Show PDF icon if URL is a PDF
-          return _buildPdfPlaceholder(context, url);
-        } else {
-          return _buildUnknownFilePlaceholder(context, url);
-        }
-      }
-      // No file or no url => fallback
-      return _buildNoFilePlaceholder(context, currentForm);
-    }
-
     // The InkWell that holds the preview and allows preview on tap
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         InkWell(
-          // If there's an actual file, allow preview. Otherwise pick a file.
           onTap: () async {
-            if (file != null) {
-              showPreviewFile(
-                context,
-                fileSelect: FileSelect(url: file.url ?? file.filename!),
-              );
+            if (path != null && path.isNotEmpty) {
+              // If we have a file/path, show the preview.
+              showPreviewFile(context, fileSelect: FileSelect(url: path));
             } else {
               // No file => pick a file
               final value = await imagePicker();
+              // Assuming your FileSelect is the correct type:
               currentForm.control('chatQrImage').value = value;
             }
           },
           child: Container(
             width: 250,
             height: 250,
-            padding: EdgeInsets.all(8.0), // adjust as needed
+            padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: (file != null)
-                ? buildFilePreview(file)
+            child: (path != null && path.isNotEmpty)
+                ? filePreview(path)
                 : _buildNoFilePlaceholder(context, currentForm),
           ),
         ),
 
         // Delete icon if file is present
-        if (file != null)
+        if (path != null && path.isNotEmpty)
           IconButton(
             onPressed: () {
               currentForm.control('chatQrImage').value = null;
