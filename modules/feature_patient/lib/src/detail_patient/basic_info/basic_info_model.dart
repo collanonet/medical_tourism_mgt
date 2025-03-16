@@ -909,13 +909,15 @@ class BasicInformationModel {
           if (element.chatToolLink != null &&
               element.chatToolLink?.isNotEmpty == true) {
             for (var i = 0; i < element.chatToolLink!.length; i++) {
-              chatToolLink.add(
-                FormGroup({
-                  'chatToolLink': FormControl<String>(
-                    value: element.chatToolLink?[i],
-                  ),
-                }),
-              );
+              if(element.chatToolLink?[i] != null){
+                chatToolLink.add(
+                  FormGroup({
+                    'chatToolLink': FormControl<String>(
+                      value: element.chatToolLink?[i],
+                    ),
+                  }),
+                );
+              }
             }
           } else {
             chatToolLink.add(
@@ -942,7 +944,9 @@ class BasicInformationModel {
               'middleNameRomanized': FormControl<String?>(
                 value: element.middleNameRomanized,
               ),
-              'firstNameRomanized': FormControl<String?>(),
+              'firstNameRomanized': FormControl<String?>(
+                value: element.firstNameRomanized,
+              ),
               'familyNameChineseOrVietnamese': FormControl<String?>(
                 value: element.familyNameChineseOrVietnamese,
               ),
