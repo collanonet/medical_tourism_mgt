@@ -909,7 +909,6 @@ class BasicInformationModel {
           if (element.chatToolLink != null &&
               element.chatToolLink?.isNotEmpty == true) {
             for (var i = 0; i < element.chatToolLink!.length; i++) {
-              if(element.chatToolLink?[i] != null){
                 chatToolLink.add(
                   FormGroup({
                     'chatToolLink': FormControl<String>(
@@ -917,7 +916,6 @@ class BasicInformationModel {
                     ),
                   }),
                 );
-              }
             }
           } else {
             chatToolLink.add(
