@@ -6,8 +6,8 @@ import 'package:webview_flutter_platform_interface/webview_flutter_platform_inte
 
 // import 'package:webview_flutter_web/webview_flutter_web.dart';
 
-class WebView extends StatefulWidget {
-  const WebView({
+class WebViewWidget extends StatefulWidget {
+  const WebViewWidget({
     super.key,
     required this.uri,
     this.allowedHosts = const [],
@@ -17,10 +17,10 @@ class WebView extends StatefulWidget {
   final List<String> allowedHosts;
 
   @override
-  State<WebView> createState() => _WebViewState();
+  State<WebViewWidget> createState() => _WebViewWidgetState();
 }
 
-class _WebViewState extends State<WebView> {
+class _WebViewWidgetState extends State<WebViewWidget> {
   late PlatformWebViewController _controller;
   bool loading = true;
 

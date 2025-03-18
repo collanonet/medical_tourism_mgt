@@ -1,5 +1,6 @@
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/src/widgets/pdf_view_from_url_v2.dart';
+import 'package:core_ui/src/widgets/web_view/web_view_modal.dart';
 import 'image_view_from_url.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,17 @@ class _FilePreviewState extends State<FilePreview> {
 
     final isPdf = fileExtension == 'pdf';
     final isImage = [
-      'jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'tiff', 'tif',
-      'heic', 'heif', 'ico'
+      'jpg',
+      'jpeg',
+      'png',
+      'gif',
+      'webp',
+      'bmp',
+      'tiff',
+      'tif',
+      'heic',
+      'heif',
+      'ico'
     ].contains(fileExtension);
 
     final isHttp = (widget.fileSelect.url != null &&
@@ -50,13 +60,13 @@ class _FilePreviewState extends State<FilePreview> {
               );
             } else if (isHttp) {
               // Use your new WebView widget
-              return WebViewPreview(fileSelect: widget.fileSelect);
+              return WebViewModal(link: widget.fileSelect.url!);
             } else {
               // Fallback if not PDF, not Image, and no valid http URL
               return Center(
                 child: Text(
                   'ファイル形式 ${widget.fileSelect.url} はサポートされていませんが、'
-                      'ダウンロードまたは印刷することはできます。',
+                  'ダウンロードまたは印刷することはできます。',
                 ),
               );
             }
@@ -70,17 +80,26 @@ class _FilePreviewState extends State<FilePreview> {
             return const SizedBox(width: 10);
           },
           children: [
-            TextButton.icon(
-              onPressed: () => downloadFileWeb(widget.fileSelect.url),
-              icon: const Icon(Icons.download),
-              label: const Text('ダウンロードファイル'),
-            ),
-            TextButton.icon(
-              onPressed: () =>
-                  openUrlInBrowser(fileName: widget.fileSelect.url ?? ''),
-              icon: const Icon(Icons.print),
-              label: const Text('印刷する'),
-            ),
+            if (isHttp)
+              TextButton.icon(
+                onPressed: () =>
+                    openUrlInBrowser(fileName: widget.fileSelect.url ?? ''),
+                icon: const Icon(Icons.open_in_new),
+                label: const Text('新しいタブで開く'),
+              ),
+            if (!isHttp)
+              TextButton.icon(
+                onPressed: () => downloadFileWeb(widget.fileSelect.url),
+                icon: const Icon(Icons.download),
+                label: const Text('ダウンロードファイル'),
+              ),
+            if (!isHttp)
+              TextButton.icon(
+                onPressed: () =>
+                    openUrlInBrowser(fileName: widget.fileSelect.url ?? ''),
+                icon: const Icon(Icons.print),
+                label: const Text('印刷する'),
+              ),
           ],
         ),
       ],

@@ -143,7 +143,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
             if (widget.medicalRecordOverseaData.sharedUrl != null &&
                 widget.medicalRecordOverseaData.sharedUrl?.isNotEmpty == true)
               Expanded(
-                child: WebView(
+                child: WebViewWidget(
                   uri: Uri.parse(
                       widget.medicalRecordOverseaData.sharedUrl ?? ''),
                 ),

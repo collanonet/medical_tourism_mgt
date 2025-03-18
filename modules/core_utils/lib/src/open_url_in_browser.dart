@@ -4,7 +4,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 Future<void> openUrlInBrowser({required String fileName}) async {
   String baseUrl = GetIt.I<String>(instanceName: 'fileUrl');
-  Uri uri = Uri.parse('$baseUrl$fileName'); // Parse the URL
+  Uri uri = Uri.parse(fileName.contains("http")
+      ? fileName
+      : '$baseUrl$fileName'); // Parse the URL
   // Check if the URL can be launched
   if (await canLaunchUrl(uri)) {
     // Launch the URL in the external browser

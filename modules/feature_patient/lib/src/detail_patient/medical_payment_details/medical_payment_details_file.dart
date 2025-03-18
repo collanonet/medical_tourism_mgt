@@ -62,8 +62,8 @@ class Popup extends StatelessWidget {
                       '外部URL',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
-                    IntrinsicWidth(
-                      stepWidth: 300,
+                    SizedBox(
+                      width: 300,
                       child: ReactiveTextField<String>(
                         formControlName: 'url',
                         decoration: const InputDecoration(
@@ -102,8 +102,8 @@ class Popup extends StatelessWidget {
                     '書類名',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'theNameOfTheHospital',
                       decoration: const InputDecoration(
@@ -125,8 +125,8 @@ class Popup extends StatelessWidget {
                     '発行元',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'documentName',
                       decoration: const InputDecoration(
@@ -160,8 +160,8 @@ class Popup extends StatelessWidget {
                     '発行日',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  const IntrinsicWidth(
-                    stepWidth: 300,
+                  const SizedBox(
+                    width: 300,
                     child: ReactiveDatePickerField(
                       formControlName: 'dateOfIssue',
                       label: '発行日',
