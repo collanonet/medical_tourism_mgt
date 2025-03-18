@@ -47,7 +47,6 @@ dependencies:
   pdfrx: ^1.0.84
   webview_flutter_web: ^0.2.3+2
   webview_flutter_platform_interface: ^2.10.0
-  flutter_inappwebview: ^6.0.0
 
 
 dev_dependencies:
