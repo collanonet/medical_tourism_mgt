@@ -13,9 +13,14 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'medical_payment_details_model.dart';
 
 class Popup extends StatelessWidget {
-  const Popup({super.key, this.title});
+  const Popup({
+    super.key,
+    this.title,
+    this.isUrl = false,
+  });
 
   final String? title;
+  final bool isUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +51,47 @@ class Popup extends StatelessWidget {
                 icon: const Icon(Icons.close)),
           ],
         ),
+        if (isUrl) ...{
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '外部URL',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    IntrinsicWidth(
+                      stepWidth: 300,
+                      child: ReactiveTextField<String>(
+                        formControlName: 'url',
+                        decoration: const InputDecoration(
+                          hintText: '外部URL',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: context.appTheme.spacing.marginMedium,
+              ),
+              const Expanded(
+                child: SizedBox.shrink(),
+              ),
+              SizedBox(
+                width: context.appTheme.spacing.marginMedium,
+              ),
+              const Expanded(
+                child: SizedBox.shrink(),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+        },
         Row(
           children: [
             Expanded(
@@ -97,12 +143,7 @@ class Popup extends StatelessWidget {
             const Expanded(
               child: SizedBox.shrink(),
             ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            const Expanded(
-              child: SizedBox.shrink(),
-            )
+
           ],
         ),
         SizedBox(
@@ -138,12 +179,7 @@ class Popup extends StatelessWidget {
             const Expanded(
               child: SizedBox.shrink(),
             ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            const Expanded(
-              child: SizedBox.shrink(),
-            )
+
           ],
         ),
         SizedBox(

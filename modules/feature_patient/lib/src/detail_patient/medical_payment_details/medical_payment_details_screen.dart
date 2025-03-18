@@ -45,7 +45,7 @@ class _MedicalPaymentDetailScreenState
                 onTap: () {
                   filePicker().then((value) {
                     if (value != null) {
-                      showCreateWithFileDialog(context, value);
+                      showCreateWithFileDialog(context, file: value);
                     } else {
                       logger.d('null');
                     }
@@ -92,7 +92,8 @@ class _MedicalPaymentDetailScreenState
                             onPressed: () {
                               filePicker().then((value) {
                                 if (value != null) {
-                                  showCreateWithFileDialog(context, value);
+                                  showCreateWithFileDialog(context,
+                                      file: value);
                                 }
                               });
                             },
@@ -113,7 +114,9 @@ class _MedicalPaymentDetailScreenState
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showCreateWithFileDialog(context);
+                    },
                     child: const Text(
                       '外部URLを追加',
                       style: TextStyle(
@@ -391,7 +394,7 @@ class _MedicalPaymentDetailScreenState
     );
   }
 
-  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+  void showCreateWithFileDialog(BuildContext context, {FileSelect? file}) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -404,7 +407,9 @@ class _MedicalPaymentDetailScreenState
                   medicalPaymentForm(medicalRecordId: widget.id!, file: file)
                     ..markAllAsTouched(),
               builder: (context, formGroup, child) {
-                return const Popup();
+                return Popup(
+                  isUrl: file == null,
+                );
               },
             ),
           ),

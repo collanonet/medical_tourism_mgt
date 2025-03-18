@@ -19,7 +19,6 @@ class MedicalPaymentDetailModel {
 
   final PatientRepository patientRepository;
 
-
   ValueNotifier<AsyncData<List<MedicalPaymentResponse>>> medicalPaymentData =
       ValueNotifier(const AsyncData());
   Future<void> fetchMedicalPayment({required String id}) async {
@@ -60,6 +59,8 @@ class MedicalPaymentDetailModel {
         } else {
           file = docFile.url;
         }
+      }else{
+        file = formGroup.control('url').value;
       }
 
       final response = await patientRepository.postMedicalPayment(
