@@ -555,14 +555,14 @@ class _MedicalRecordCompanionSectionState
                                           formControlName: 'mobileNumber',
                                           keyboardType: TextInputType.number,
                                           decoration: const InputDecoration(
-                                            prefixText: '+',
                                             label: Text(
                                               '携帯番号',
                                             ),
                                           ),
                                           inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9]')),
+                                            CustomPhoneFormatter(),
+                                            // FilteringTextInputFormatter.allow(
+                                            //     RegExp(r'[0-9]')),
                                           ],
                                         ),
                                       ),
