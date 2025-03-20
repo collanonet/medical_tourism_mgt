@@ -124,8 +124,8 @@ class WebAppointmentDetailModel {
 
   void insertHospitalSchedule({String? search}) {
     var data = hospital.value.requireData;
-    formGroup.control('medicalInstitutionName').value =search ??
-        data.hospitalNameChinese;
+    formGroup.control('medicalInstitutionName').value =
+        search ?? data.hospitalNameChinese;
     formGroup.control('department1').value = data.department1;
     formGroup.control('department2').value = data.department2;
     formGroup.control('shift1').value = data.shift1;
@@ -221,7 +221,9 @@ class WebAppointmentDetailModel {
               ),
             ],
           ),
-          'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
+          'choice': FormControl<String>(
+            value: e.selectMorningAfternoonAllDay,
+          ),
           'timePeriodFrom':
               FormControl<String>(value: e.timeZoneFrom, validators: [
             Validators.pattern(
@@ -233,6 +235,7 @@ class WebAppointmentDetailModel {
               ValidatorRegExp.time,
             ),
           ]),
+          'isConfirmed': FormControl<bool>(value: e.isConfirmed),
         }));
       }).toList();
     }

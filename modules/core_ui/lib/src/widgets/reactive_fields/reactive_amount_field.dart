@@ -129,7 +129,7 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
           decoration: InputDecoration(
             labelText: widget.label,
             helperText: widget.helperText ?? '金額を日本円で入力してください',
-            suffixIcon: const Icon(
+            prefixIcon: const Icon(
               Icons.currency_yen,
               color: Colors.grey,
             ),

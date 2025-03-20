@@ -188,8 +188,7 @@ class _WebAppointmentDetailScreenState
                                         Row(
                                           children: [
                                             const Expanded(
-                                              child:
-                                                  ReactiveDatePickerField(
+                                              child: ReactiveDatePickerField(
                                                 formControlName:
                                                     'preferredDate1',
                                                 label: '第１希望',
@@ -200,8 +199,7 @@ class _WebAppointmentDetailScreenState
                                                   .marginMedium,
                                             ),
                                             const Expanded(
-                                              child:
-                                                  ReactiveDatePickerField(
+                                              child: ReactiveDatePickerField(
                                                 formControlName:
                                                     'preferredDate2',
                                                 label: '第２希望',
@@ -212,8 +210,7 @@ class _WebAppointmentDetailScreenState
                                                   .marginMedium,
                                             ),
                                             const Expanded(
-                                              child:
-                                                  ReactiveDatePickerField(
+                                              child: ReactiveDatePickerField(
                                                 formControlName:
                                                     'preferredDate3',
                                                 label: '第３希望',
@@ -443,8 +440,8 @@ class _WebAppointmentDetailScreenState
                               children: [
                                 Row(
                                   children: [
-                                    const IntrinsicWidth(
-                                      stepWidth: 150,
+                                    const SizedBox(
+                                      width: 150,
                                       child: Text(
                                         '部門',
                                         style: TextStyle(
@@ -458,8 +455,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 150,
+                                    const SizedBox(
+                                      width: 150,
                                       child: Text(
                                         '診療時間',
                                         style: TextStyle(
@@ -473,8 +470,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 80,
+                                    SizedBox(
+                                      width: 75,
                                       child: boxText(
                                         context,
                                         '月',
@@ -486,8 +483,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 80,
+                                    SizedBox(
+                                      width: 75,
                                       child: boxText(
                                         context,
                                         '火',
@@ -499,8 +496,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 80,
+                                    SizedBox(
+                                      width: 75,
                                       child: boxText(
                                         context,
                                         '水',
@@ -512,8 +509,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 80,
+                                    SizedBox(
+                                      width: 75,
                                       child: boxText(
                                         context,
                                         '木',
@@ -525,8 +522,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 80,
+                                    SizedBox(
+                                      width: 75,
                                       child: boxText(
                                         context,
                                         '金',
@@ -538,8 +535,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 80,
+                                    SizedBox(
+                                      width: 75,
                                       child: boxText(
                                         context,
                                         '土',
@@ -551,8 +548,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 80,
+                                    SizedBox(
+                                      width: 75,
                                       child: boxText(
                                         context,
                                         '日',
@@ -567,8 +564,8 @@ class _WebAppointmentDetailScreenState
                                 ),
                                 Row(
                                   children: [
-                                    IntrinsicWidth(
-                                      stepWidth: 150,
+                                    SizedBox(
+                                      width: 150,
                                       child: ReactiveTextField(
                                         formControlName: 'department1',
                                       ),
@@ -577,8 +574,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 150,
+                                    SizedBox(
+                                      width: 150,
                                       child: ReactiveTextField(
                                         formControlName: 'shift1',
                                       ),
@@ -587,8 +584,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Mon',
                                         items: [
@@ -607,8 +604,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Tue',
                                         items: [
@@ -627,8 +624,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Wed',
                                         items: [
@@ -647,8 +644,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Thu',
                                         items: [
@@ -667,8 +664,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Fri',
                                         items: [
@@ -687,8 +684,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Sat',
                                         items: [
@@ -707,8 +704,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Sun',
                                         items: [
@@ -730,8 +727,8 @@ class _WebAppointmentDetailScreenState
                                 ),
                                 Row(
                                   children: [
-                                    IntrinsicWidth(
-                                      stepWidth: 150,
+                                    SizedBox(
+                                      width: 150,
                                       child: ReactiveTextField(
                                         formControlName: 'department2',
                                       ),
@@ -740,8 +737,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 150,
+                                    SizedBox(
+                                      width: 150,
                                       child: ReactiveTextField(
                                         formControlName: 'shift2',
                                       ),
@@ -750,8 +747,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Mon',
                                         items: [
@@ -770,8 +767,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Tue',
                                         items: [
@@ -790,8 +787,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Wed',
                                         items: [
@@ -810,8 +807,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Thu',
                                         items: [
@@ -830,8 +827,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Fri',
                                         items: [
@@ -850,8 +847,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Sat',
                                         items: [
@@ -870,8 +867,8 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 80,
+                                    const SizedBox(
+                                      width: 75,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Sun',
                                         items: [
@@ -912,6 +909,9 @@ class _WebAppointmentDetailScreenState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text('候補日'),
+                                SizedBox(
+                                  height: 16,
+                                ),
                                 ReactiveFormArray(
                                   formArrayName: 'candidateDate',
                                   builder: (context, formArray, child) {
@@ -956,9 +956,11 @@ class _WebAppointmentDetailScreenState
                                                       ValidatorRegExp.date,
                                                     ),
                                                   ],
-                                                ), // 第一希望
+                                                ),
+                                                // 第一希望
                                                 'choice': FormControl<String>(
-                                                    value: '午前'), // 午前, 午後, 終日
+                                                    value: '午前'),
+                                                // 午前, 午後, 終日
                                                 'timePeriodFrom':
                                                     FormControl<String>(
                                                   validators: [
@@ -967,7 +969,8 @@ class _WebAppointmentDetailScreenState
                                                       ValidatorRegExp.time,
                                                     )
                                                   ],
-                                                ), // 時間帯（自）
+                                                ),
+                                                // 時間帯（自）
                                                 'timePeriodTo':
                                                     FormControl<String>(
                                                   validators: [
@@ -976,7 +979,9 @@ class _WebAppointmentDetailScreenState
                                                       ValidatorRegExp.time,
                                                     )
                                                   ],
-                                                ), // 時間帯（至）
+                                                ),
+                                                'isConfirmed':
+                                                    FormControl<bool>()
                                               })
                                                 ..markAllAsTouched(),
                                             );
@@ -1220,146 +1225,220 @@ class _WebAppointmentDetailScreenState
         });
   }
 
-  Row candidateBooking(FormArray<Object?> formArray, FormGroup currentForm,
-      BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: ReactiveDatePickerField(
-            formControlName: 'preferredDate',
-            label: '第 ${formArray.controls.indexOf(currentForm) + 1} 希望',
+  AbsorbPointer candidateBooking(FormArray<Object?> formArray,
+      FormGroup currentForm, BuildContext context) {
+    bool? isConfirmed = currentForm.control('isConfirmed').value;
+    return AbsorbPointer(
+      absorbing: isConfirmed != null,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: ReactiveDatePickerField(
+              formControlName: 'preferredDate',
+              label: '第 ${formArray.controls.indexOf(currentForm) + 1} 希望',
+            ),
           ),
-        ),
-        SizedBox(
-          width: context.appTheme.spacing.marginMedium,
-        ),
-        ReactiveValueListenableBuilder(
-            formControlName: 'choice',
-            builder: (context, control, _) {
-              return Row(
-                children: [
-                  boxText(
-                    context,
-                    '午前',
-                    textColor:
-                        control.value == '午前' ? Colors.white : Colors.black,
-                    bg: control.value == '午前'
-                        ? const Color(0xffF08C67)
-                        : Colors.white,
-                    borderC: const Color(0xffF08C67),
-                    onTap: () {
-                      control.value = '午前';
-                    },
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  boxText(
-                    context,
-                    '午後',
-                    textColor:
-                        control.value == '午後' ? Colors.white : Colors.black,
-                    bg: control.value == '午後'
-                        ? const Color(0xffF08C67)
-                        : Colors.white,
-                    borderC: const Color(0xffF08C67),
-                    onTap: () {
-                      control.value = '午後';
-                    },
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  boxText(
-                    context,
-                    '終日',
-                    textColor:
-                        control.value == '終日' ? Colors.white : Colors.black,
-                    bg: control.value == '終日'
-                        ? const Color(0xffF08C67)
-                        : Colors.white,
-                    borderC: const Color(0xffF08C67),
-                    onTap: () {
-                      control.value = '終日';
-                    },
-                  ),
-                ],
-              );
-            }),
-        SizedBox(
-          width: context.appTheme.spacing.marginMedium,
-        ),
-        Expanded(
-          child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodFrom',
+          SizedBox(
+            width: context.appTheme.spacing.marginMedium,
+          ),
+          ReactiveValueListenableBuilder(
+              formControlName: 'choice',
               builder: (context, control, _) {
-                return ReactiveTextField<String>(
-                  formControlName: 'timePeriodFrom',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
-                  onChanged: (value) {
-                    if (value.value != null) {
-                      var time = processTimeInput(value.value!);
-                      control.value = time;
-                    }
-                  },
-                  decoration: const InputDecoration(
-                    label: Text(
-                      '時間帯（自）',
+                return Row(
+                  children: [
+                    boxText(
+                      context,
+                      '午前',
+                      textColor:
+                          control.value == '午前' ? Colors.white : Colors.black,
+                      bg: control.value == '午前'
+                          ? const Color(0xffF08C67)
+                          : Colors.white,
+                      borderC: const Color(0xffF08C67),
+                      onTap: () {
+                        control.value = '午前';
+                      },
                     ),
-                  ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    boxText(
+                      context,
+                      '午後',
+                      textColor:
+                          control.value == '午後' ? Colors.white : Colors.black,
+                      bg: control.value == '午後'
+                          ? const Color(0xffF08C67)
+                          : Colors.white,
+                      borderC: const Color(0xffF08C67),
+                      onTap: () {
+                        control.value = '午後';
+                      },
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    boxText(
+                      context,
+                      '終日',
+                      textColor:
+                          control.value == '終日' ? Colors.white : Colors.black,
+                      bg: control.value == '終日'
+                          ? const Color(0xffF08C67)
+                          : Colors.white,
+                      borderC: const Color(0xffF08C67),
+                      onTap: () {
+                        control.value = '終日';
+                      },
+                    ),
+                  ],
                 );
               }),
-        ),
-        SizedBox(
-          width: context.appTheme.spacing.marginMedium,
-        ),
-        const Text('〜'),
-        SizedBox(
-          width: context.appTheme.spacing.marginMedium,
-        ),
-        Expanded(
-          child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodTo',
-              builder: (context, control, _) {
-                return ReactiveTextField<String>(
-                  formControlName: 'timePeriodTo',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
-                  onChanged: (value) {
-                    if (value.value != null) {
-                      var time = processTimeInput(value.value!);
-                      control.value = time;
-                    }
-                  },
-                  decoration: const InputDecoration(
-                    label: Text(
-                      '時間帯（至）',
-                    ),
-                  ),
-                );
-              }),
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              if (formArray.controls.indexOf(currentForm) != 0) ...{
-                IconButton(
-                  icon: const Icon(Icons.delete_forever, color: Colors.red),
-                  onPressed: () => formArray.removeAt(
-                    formArray.controls.indexOf(currentForm),
-                  ),
-                ),
-              }
-            ],
+          SizedBox(
+            width: context.appTheme.spacing.marginMedium,
           ),
-        ),
-      ],
+          Expanded(
+            child: ReactiveValueListenableBuilder<String>(
+                formControlName: 'timePeriodFrom',
+                builder: (context, control, _) {
+                  return ReactiveTextField<String>(
+                    formControlName: 'timePeriodFrom',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      formatter.timeFormatter,
+                    ],
+                    onChanged: (value) {
+                      if (value.value != null) {
+                        var time = processTimeInput(value.value!);
+                        control.value = time;
+                      }
+                    },
+                    decoration: const InputDecoration(
+                      label: Text(
+                        '時間帯（自）',
+                      ),
+                    ),
+                  );
+                }),
+          ),
+          SizedBox(
+            width: context.appTheme.spacing.marginMedium,
+          ),
+          const Text('〜'),
+          SizedBox(
+            width: context.appTheme.spacing.marginMedium,
+          ),
+          Expanded(
+            child: ReactiveValueListenableBuilder<String>(
+                formControlName: 'timePeriodTo',
+                builder: (context, control, _) {
+                  return ReactiveTextField<String>(
+                    formControlName: 'timePeriodTo',
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      formatter.timeFormatter,
+                    ],
+                    onChanged: (value) {
+                      if (value.value != null) {
+                        var time = processTimeInput(value.value!);
+                        control.value = time;
+                      }
+                    },
+                    decoration: const InputDecoration(
+                      label: Text(
+                        '時間帯（至）',
+                      ),
+                    ),
+                  );
+                }),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                if (isConfirmed != null)
+                  ReactiveValueListenableBuilder<bool>(
+                    formControlName: 'isConfirmed',
+                    builder: (context, control, _) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child: RowSeparated(
+                          mainAxisSize: MainAxisSize.min,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(width: 16);
+                          },
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: control.value == true
+                                    ? const Color(0xffF08C67)
+                                    : Colors.white,
+                                border: Border.all(
+                                  color: const Color(0xffF08C67),
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  context.appTheme.spacing.borderRadiusMedium,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '○',
+                                  style: TextStyle(
+                                    color: control.value == true
+                                        ? Colors.white
+                                        : const Color(0xffF08C67),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: control.value == false
+                                    ? const Color(0xffF08C67)
+                                    : Colors.white,
+                                border: Border.all(
+                                  color: const Color(0xffF08C67),
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  context.appTheme.spacing.borderRadiusMedium,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '×',
+                                  style: TextStyle(
+                                    color: control.value == false
+                                        ? Colors.white
+                                        : const Color(0xffF08C67),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                if (isConfirmed == null)
+                  if (formArray.controls.indexOf(currentForm) != 0) ...{
+                    IconButton(
+                      icon: const Icon(Icons.delete_forever, color: Colors.red),
+                      onPressed: () => formArray.removeAt(
+                        formArray.controls.indexOf(currentForm),
+                      ),
+                    ),
+                  }
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -62,13 +62,13 @@ class NecessaryInJapan extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    const Expanded(child: Text('身元保証書')),
+                                    const Expanded(child: Text('書類送付日')),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 200,
+                                    const SizedBox(
+                                      width: 200,
                                       child: ReactiveDatePickerField(
                                         formControlName:
                                             'letterOfGuaranteeDate',
@@ -78,73 +78,67 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    SizedBox(
-                                      width: 600,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Expanded(
-                                            child: ReactiveRadioListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
-                                              value: 'true',
-                                              formControlName: 'sendBy',
-                                              title: const Text('原本送付'),
-                                            ),
+                                    Wrap(
+                                      children: [
+                                        IntrinsicWidth(
+                                          child: ReactiveRadioListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity
+                                                    .leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            value: 'true',
+                                            formControlName: 'sendBy',
+                                            title: const Text('原本送付'),
                                           ),
-                                          const Text('（'),
-                                          Expanded(
-                                            child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
-                                              formControlName: 'byEMS',
-                                              title: const Text('EMS'),
-                                            ),
+                                        ),
+                                        const Text('（'),
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity
+                                                    .leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'byEMS',
+                                            title: const Text('EMS'),
                                           ),
-                                          Expanded(
-                                            child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
-                                              formControlName: 'byFedex',
-                                              title: const Text('Fedex'),
-                                            ),
+                                        ),
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity
+                                                    .leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'byFedex',
+                                            title: const Text('Fedex'),
                                           ),
-                                          Expanded(
-                                            child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
-                                              formControlName: 'byOthers',
-                                              title: const Text('その他'),
-                                            ),
+                                        ),
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity
+                                                    .leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'byOthers',
+                                            title: const Text('その他'),
                                           ),
-                                          const Text('）'),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
+                                        ),
+                                        const Text('）'),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        IntrinsicWidth(
+                                          child: ReactiveRadioListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity
+                                                    .leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            value: 'false',
+                                            formControlName: 'sendBy',
+                                            title: const Text('PDF送付'),
                                           ),
-                                          Expanded(
-                                            child: ReactiveRadioListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
-                                              value: 'false',
-                                              formControlName: 'sendBy',
-                                              title: const Text('PDF送付'),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(
                                       width:

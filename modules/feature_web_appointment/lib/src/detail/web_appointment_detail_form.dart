@@ -120,6 +120,7 @@ FormGroup formWebAppointment() => FormGroup({
               )
             ],
           ), // 時間帯（至）
+          'isConfirmed': FormControl<bool>()
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）
