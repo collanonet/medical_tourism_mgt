@@ -283,7 +283,7 @@ class MedicalVisaModel with ChangeNotifier {
               'flightNumberIn':
                   FormControl<String>(value: element.flightNumberIn),
               'departureTimeIn':
-                  FormControl<String>(value: element.departureIn),
+                  FormControl<String>(value: element.departureTimeIn),
               'arrivalTimeIn':
                   FormControl<String>(value: element.arrivalTimeIn),
 
@@ -473,7 +473,6 @@ class MedicalVisaModel with ChangeNotifier {
         response.travelCompanion?.addressArea;
     travelCompanionForm.control('numberPassport').value =
         response.travelCompanion?.numberPassport;
-    logger.d('Name = ${response.travelCompanion?.nameRomaji}');
 
     FormArray travelCompanionTravelInfo =
         travelCompanionForm.control('travelInfo') as FormArray;
@@ -523,11 +522,10 @@ class MedicalVisaModel with ChangeNotifier {
               'flightNumberIn':
                   FormControl<String>(value: element.flightNumberIn),
               'departureTimeIn':
-                  FormControl<String>(value: element.departureIn),
+                  FormControl<String>(value: element.departureTimeIn),
               'arrivalTimeIn':
                   FormControl<String>(value: element.arrivalTimeIn),
 
-              // 出国 hand out
               'departureOut': FormControl<String>(value: element.departureOut),
               'arrivalOut': FormControl<String>(value: element.arrivalOut),
               'flightNumberOut':
@@ -949,11 +947,8 @@ class MedicalVisaModel with ChangeNotifier {
               paymentStatus: e['paymentStatus'],
             ),
           );
-          logger.d('Data ${e['medicalVisa']}');
         },
       );
-
-      logger.d('Data2 ${personal.toList()}');
 
       //stayPeriod
       List<MedicalVisaStayPeriodRequest>? stayPeriod = [];
@@ -975,7 +970,6 @@ class MedicalVisaModel with ChangeNotifier {
       List<VisaInfoRequest>? visaInfo = [];
 
       for (dynamic element in formRequiredInJapan.control('visaInfo').value) {
-        logger.d('Data visaInfo ${element['passportFileSelect']}');
         try {
           String? passportFileSelect;
           if (element['passportFileSelect'] != null) {
@@ -1038,8 +1032,6 @@ class MedicalVisaModel with ChangeNotifier {
               byOthers: element['byOthers'],
             ),
           );
-          logger.d('Data ${passportFileSelect.toString()}');
-          logger.d('All ${visaInfo.toList()}');
         } catch (e) {
           logger.e('Error while processing visaInfo: ${e.toString()}');
         }
