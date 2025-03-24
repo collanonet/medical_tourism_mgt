@@ -650,47 +650,44 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
-                          child: ReactiveValueListenableBuilder<String>(
-                            formControlName: 'timeFrom',
-                            builder: (context, control, _) {
-                              return ReactiveTextField<String>(
-                                formControlName: 'timeFrom',
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  formatter.timeFormatter,
-                                ],
-                                decoration: const InputDecoration(
-                                  label: Text(
-                                    '時刻（自）',
-                                  ),
-                                ),
-                              );
-                            },
+                        const Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 23),
+                            child: ReactiveTimePickerField(
+                                formControlName: 'timeFrom'),
                           ),
                         ),
+                        // Expanded(
+                        //   child: ReactiveValueListenableBuilder<String>(
+                        //     formControlName: 'timeFrom',
+                        //     builder: (context, control, _) {
+                        //       return ReactiveTextField<String>(
+                        //         formControlName: 'timeFrom',
+                        //         keyboardType: TextInputType.number,
+                        //         inputFormatters: [
+                        //           formatter.timeFormatter,
+                        //         ],
+                        //         decoration: const InputDecoration(
+                        //           label: Text(
+                        //             '時刻（自）',
+                        //           ),
+                        //         ),
+                        //       );
+                        //     },
+                        //   ),
+                        // ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
-                          child: ReactiveValueListenableBuilder<String>(
-                            formControlName: 'timeTo',
-                            builder: (context, control, _) {
-                              return ReactiveTextField<String>(
-                                formControlName: 'timeTo',
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  formatter.timeFormatter,
-                                ],
-                                decoration: const InputDecoration(
-                                  label: Text(
-                                    '時刻（至）',
-                                  ),
-                                ),
-                              );
-                            },
+                        const Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 23),
+                            child: ReactiveTimePickerField(
+                              formControlName: 'timeTo',
+                            ),
                           ),
                         ),
+
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),

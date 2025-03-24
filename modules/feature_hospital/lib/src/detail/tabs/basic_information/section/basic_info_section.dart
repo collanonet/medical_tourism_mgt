@@ -1206,12 +1206,21 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              SizedBox(
-                                width: 150,
-                                child: ReactiveTextField(
-                                  formControlName: 'shift1',
+                              const Padding(
+                                padding: EdgeInsets.only(top: 23),
+                                child: SizedBox(
+                                  width: 150,
+                                  child: ReactiveTimePickerField(
+                                    formControlName: 'shift1',
+                                  ),
                                 ),
                               ),
+                              // SizedBox(
+                              //   width: 150,
+                              //   child: ReactiveTextField(
+                              //     formControlName: 'shift1',
+                              //   ),
+                              // ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
@@ -1361,12 +1370,21 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              SizedBox(
-                                width: 150,
-                                child: ReactiveTextField(
-                                  formControlName: 'shift2',
+                              const Padding(
+                                padding: EdgeInsets.only(top: 23),
+                                child: SizedBox(
+                                  width: 150,
+                                  child: ReactiveTimePickerField(
+                                    formControlName: 'shift2',
+                                  ),
                                 ),
                               ),
+                              // SizedBox(
+                              //   width: 150,
+                              //   child: ReactiveTextField(
+                              //     formControlName: 'shift2',
+                              //   ),
+                              // ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),

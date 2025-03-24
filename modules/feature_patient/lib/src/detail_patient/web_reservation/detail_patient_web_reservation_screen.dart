@@ -538,12 +538,21 @@ class _DetailPatientWebReservationScreenState
                                     width:
                                         context.appTheme.spacing.marginMedium,
                                   ),
-                                  IntrinsicWidth(
+                                  const IntrinsicWidth(
                                     stepWidth: 150,
-                                    child: ReactiveTextField(
-                                      formControlName: 'shift1',
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 23),
+                                      child: ReactiveTimePickerField(
+                                        formControlName: 'shift1',
+                                      ),
                                     ),
                                   ),
+                                  // IntrinsicWidth(
+                                  //   stepWidth: 150,
+                                  //   child: ReactiveTextField(
+                                  //     formControlName: 'shift1',
+                                  //   ),
+                                  // ),
                                   SizedBox(
                                     width:
                                         context.appTheme.spacing.marginMedium,
@@ -701,12 +710,21 @@ class _DetailPatientWebReservationScreenState
                                     width:
                                         context.appTheme.spacing.marginMedium,
                                   ),
-                                  IntrinsicWidth(
+                                  const IntrinsicWidth(
                                     stepWidth: 150,
-                                    child: ReactiveTextField(
-                                      formControlName: 'shift2',
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 23),
+                                      child: ReactiveTimePickerField(
+                                        formControlName: 'shift2',
+                                      ),
                                     ),
                                   ),
+                                  // IntrinsicWidth(
+                                  //   stepWidth: 150,
+                                  //   child: ReactiveTextField(
+                                  //     formControlName: 'shift2',
+                                  //   ),
+                                  // ),
                                   SizedBox(
                                     width:
                                         context.appTheme.spacing.marginMedium,
@@ -1096,30 +1114,14 @@ class _DetailPatientWebReservationScreenState
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 100,
-                                child: ReactiveValueListenableBuilder<String>(
-                                    formControlName: 'testCallTime',
-                                    builder: (context, control, _) {
-                                      return ReactiveTextField<String>(
-                                        formControlName: 'testCallTime',
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: [
-                                          formatter.timeFormatter,
-                                        ],
-                                        onChanged: (value) {
-                                          if (value.value != null) {
-                                            var time =
-                                                processTimeInput(value.value!);
-                                            control.value = time;
-                                          }
-                                        },
-                                        decoration: const InputDecoration(
-                                          label: Text('時間'),
-                                        ),
-                                      );
-                                    }),
+                                child: ReactiveTimePickerField(
+                                  formControlName: 'testCallTime',
+                                  label: '時間',
+                                ),
                               ),
+                              
                             ],
                           ),
                         ),
@@ -1231,14 +1233,14 @@ class _DetailPatientWebReservationScreenState
                                       cell: [
                                         Text(
                                           '${index + 1}',
-                                          style: context
-                                              .textTheme.titleSmall
+                                          style: context.textTheme.titleSmall
                                               ?.copyWith(
-                                                  color: context.appTheme
-                                                      .primaryColor),
+                                                  color: context
+                                                      .appTheme.primaryColor),
                                         ),
                                         Text(
-                                          data.hospital?.hospitalNameChinese ?? ' - ',
+                                          data.hospital?.hospitalNameChinese ??
+                                              ' - ',
                                           style: context.textTheme.titleSmall
                                               ?.copyWith(
                                                   color: context
@@ -1342,25 +1344,31 @@ class _DetailPatientWebReservationScreenState
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        Expanded(
-          child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodFrom',
-              builder: (context, control, _) {
-                return ReactiveTextField<String>(
-                  formControlName: 'timePeriodFrom',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
-                  decoration: const InputDecoration(
-                    hintText: '00:00',
-                    label: Text(
-                      '時間帯（自）',
-                    ),
-                  ),
-                );
-              }),
+        const Expanded(
+          child: ReactiveTimePickerField(
+            formControlName: 'timePeriodFrom',
+            label: '時間帯（自）',
+          ),
         ),
+        // Expanded(
+        //   child: ReactiveValueListenableBuilder<String>(
+        //       formControlName: 'timePeriodFrom',
+        //       builder: (context, control, _) {
+        //         return ReactiveTextField<String>(
+        //           formControlName: 'timePeriodFrom',
+        //           keyboardType: TextInputType.number,
+        //           inputFormatters: [
+        //             formatter.timeFormatter,
+        //           ],
+        //           decoration: const InputDecoration(
+        //             hintText: '00:00',
+        //             label: Text(
+        //               '時間帯（自）',
+        //             ),
+        //           ),
+        //         );
+        //       }),
+        // ),
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
@@ -1368,25 +1376,31 @@ class _DetailPatientWebReservationScreenState
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        Expanded(
-          child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodTo',
-              builder: (context, control, _) {
-                return ReactiveTextField<String>(
-                  formControlName: 'timePeriodTo',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
-                  decoration: const InputDecoration(
-                    label: Text(
-                      '時間帯（至）',
-                    ),
-                    hintText: '00:00',
-                  ),
-                );
-              }),
+        const Expanded(
+          child: ReactiveTimePickerField(
+            formControlName: 'timePeriodTo',
+            label: '時間帯（至）',
+          ),
         ),
+        // Expanded(
+        //   child: ReactiveValueListenableBuilder<String>(
+        //       formControlName: 'timePeriodTo',
+        //       builder: (context, control, _) {
+        //         return ReactiveTextField<String>(
+        //           formControlName: 'timePeriodTo',
+        //           keyboardType: TextInputType.number,
+        //           inputFormatters: [
+        //             formatter.timeFormatter,
+        //           ],
+        //           decoration: const InputDecoration(
+        //             label: Text(
+        //               '時間帯（至）',
+        //             ),
+        //             hintText: '00:00',
+        //           ),
+        //         );
+        //       }),
+        // ),
         Expanded(
           child: Row(
             children: [

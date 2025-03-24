@@ -1089,29 +1089,12 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
-                                  stepWidth: 100,
-                                  child: ReactiveValueListenableBuilder<String>(
-                                      formControlName: 'testCallTime',
-                                      builder: (context, control, _) {
-                                        return ReactiveTextField<String>(
-                                          formControlName: 'testCallTime',
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            formatter.timeFormatter,
-                                          ],
-                                          onChanged: (value) {
-                                            if (value.value != null) {
-                                              var time = processTimeInput(
-                                                  value.value!);
-                                              control.value = time;
-                                            }
-                                          },
-                                          decoration: const InputDecoration(
-                                            label: Text('時間'),
-                                          ),
-                                        );
-                                      }),
+                                const IntrinsicWidth(
+                                  stepWidth: 150,
+                                  child: ReactiveTimePickerField(
+                                    formControlName: 'testCallTime',
+                                    label: '時間',
+                                  ),
                                 ),
                               ],
                             ),
@@ -1259,29 +1242,11 @@ class _WebReservationSectionState extends State<WebReservationSection> {
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        Expanded(
-          child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodFrom',
-              builder: (context, control, _) {
-                return ReactiveTextField<String>(
-                  formControlName: 'timePeriodFrom',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
-                  onChanged: (value) {
-                    if (value.value != null) {
-                      var time = processTimeInput(value.value!);
-                      control.value = time;
-                    }
-                  },
-                  decoration: const InputDecoration(
-                    label: Text(
-                      '時間帯（自）',
-                    ),
-                  ),
-                );
-              }),
+        const Expanded(
+          child: ReactiveTimePickerField(
+            formControlName: 'timePeriodFrom',
+            label: '時間帯（自）',
+          ),
         ),
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
@@ -1290,29 +1255,11 @@ class _WebReservationSectionState extends State<WebReservationSection> {
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        Expanded(
-          child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodTo',
-              builder: (context, control, _) {
-                return ReactiveTextField<String>(
-                  formControlName: 'timePeriodTo',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
-                  onChanged: (value) {
-                    if (value.value != null) {
-                      var time = processTimeInput(value.value!);
-                      control.value = time;
-                    }
-                  },
-                  decoration: const InputDecoration(
-                    label: Text(
-                      '時間帯（至）',
-                    ),
-                  ),
-                );
-              }),
+        const Expanded(
+          child: ReactiveTimePickerField(
+            formControlName: 'timePeriodTo',
+            label: '時間帯（至）',
+          ),
         ),
         Expanded(
           child: Row(
