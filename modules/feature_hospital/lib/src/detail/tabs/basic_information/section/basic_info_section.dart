@@ -209,6 +209,37 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               ),
                             ],
                           ),
+
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('エリア'),
+                                  SizedBox(
+                                    width: 300,
+                                    child: ValueListenableBuilder(
+                                        valueListenable:
+                                        context.read<BasicInformationModel>().areaData,
+                                        builder: (context, value, _) {
+                                          return ReactiveDropdownFormField(
+                                            formControlName: 'area',
+                                            items: value
+                                                .map((e) => DropdownMenuItem(
+                                              value: e.item,
+                                              child: Text(
+                                                e.item,
+                                              ),
+                                            ))
+                                                .toList(),
+                                          );
+                                        }),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -414,28 +445,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('エリア'),
-                                  ValueListenableBuilder(
-                                      valueListenable:
-                                      context.read<HospitalModel>().areaData,
-                                      builder: (context, value, _) {
-                                        return ReactiveDropdownFormField(
-                                          formControlName: 'area',
-                                          items: value
-                                              .map((e) => DropdownMenuItem(
-                                            value: e.item,
-                                            child: Text(
-                                              e.item,
-                                            ),
-                                          ))
-                                              .toList(),
-                                        );
-                                      }),
-                                ],
-                              ),
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -186,7 +186,7 @@ class HospitalScreen extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: Text(
-                                          value.requireData[index].location ??
+                                          value.requireData[index].area ??
                                               '--'),
                                     ),
                                     const Expanded(
