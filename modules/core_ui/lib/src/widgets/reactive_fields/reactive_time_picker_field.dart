@@ -97,7 +97,7 @@ class _ReactiveTimePickerFieldState extends State<ReactiveTimePickerField> {
           ],
           decoration: InputDecoration(
             labelText: widget.label,
-            helperText: widget.helperText ?? 'HH:mm',
+            helperText: widget.helperText,
             errorText: field.errorText, // Reactive error message
             suffixIcon: IconButton(
               icon: const Icon(Icons.access_time, color: Colors.grey),
