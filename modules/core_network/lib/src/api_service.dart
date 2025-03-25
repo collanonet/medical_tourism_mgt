@@ -1128,6 +1128,7 @@ abstract class ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
+    @Query('area') String? area,
     @Query('hospitalNameChinese') String? hospitalNameChinese,
     @Query('hospitalNameKatakana') String? hospitalNameKatakana,
     // type search

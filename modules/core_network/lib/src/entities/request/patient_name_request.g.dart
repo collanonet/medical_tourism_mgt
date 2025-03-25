@@ -9,7 +9,7 @@ part of 'patient_name_request.dart';
 PatientNameRequest _$PatientNameRequestFromJson(Map<String, dynamic> json) =>
     PatientNameRequest(
       familyNameRomanized: json['familyNameRomanized'] as String,
-      middleNameRomanized: json['middleNameRomanized'] as String,
+      middleNameRomanized: json['middleNameRomanized'] as String?,
       firstNameRomanized: json['firstNameRomanized'] as String,
       familyNameChineseOrVietnamese:
           json['familyNameChineseOrVietnamese'] as String?,

@@ -161,6 +161,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? area,
     String? hospitalNameChinese,
     String? hospitalNameKatakana,
     bool? healthCheckup,
@@ -179,6 +180,7 @@ class HospitalRepositoryIml extends HospitalRepository {
     return remote.getHospitals(
       page: page,
       pageSize: pageSize,
+      area: area,
       hospitalNameChinese: hospitalNameChinese,
       hospitalNameKatakana: hospitalNameKatakana,
       healthCheckup: healthCheckup,

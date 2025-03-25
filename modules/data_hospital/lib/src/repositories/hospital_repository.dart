@@ -113,6 +113,7 @@ abstract class HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? area,
     String? hospitalNameChinese,
     String? hospitalNameKatakana,
     bool? healthCheckup,

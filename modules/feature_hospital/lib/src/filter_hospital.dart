@@ -93,7 +93,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                                       context.read<HospitalModel>().areaData,
                                   builder: (context, value, _) {
                                     return ReactiveDropdownFormField(
-                                      formControlName: 'location',
+                                      formControlName: 'area',
                                       items: value
                                           .map((e) => DropdownMenuItem(
                                                 value: e.item,

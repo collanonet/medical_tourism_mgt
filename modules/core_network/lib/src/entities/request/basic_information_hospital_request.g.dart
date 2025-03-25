@@ -10,6 +10,7 @@ BasicInformationHospitalRequest _$BasicInformationHospitalRequestFromJson(
         Map<String, dynamic> json) =>
     BasicInformationHospitalRequest(
       id: json['_id'] as String?,
+      area: json['area'] as String?,
       hospitalNameChinese: json['hospitalNameChinese'] as String,
       hospitalNameKatakana: json['hospitalNameKatakana'] as String,
       zipCode: json['zipCode'] as String?,
@@ -77,6 +78,7 @@ Map<String, dynamic> _$BasicInformationHospitalRequestToJson(
         BasicInformationHospitalRequest instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'area': instance.area,
       'hospitalNameChinese': instance.hospitalNameChinese,
       'hospitalNameKatakana': instance.hospitalNameKatakana,
       'zipCode': instance.zipCode,

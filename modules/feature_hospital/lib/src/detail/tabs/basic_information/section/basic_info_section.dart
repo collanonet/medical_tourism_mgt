@@ -11,6 +11,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
+import '../../../../hospital_model.dart';
 import '../../../hospital_detail_model.dart';
 import '../basic_information_model.dart';
 
@@ -413,6 +414,28 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('エリア'),
+                                  ValueListenableBuilder(
+                                      valueListenable:
+                                      context.read<HospitalModel>().areaData,
+                                      builder: (context, value, _) {
+                                        return ReactiveDropdownFormField(
+                                          formControlName: 'area',
+                                          items: value
+                                              .map((e) => DropdownMenuItem(
+                                            value: e.item,
+                                            child: Text(
+                                              e.item,
+                                            ),
+                                          ))
+                                              .toList(),
+                                        );
+                                      }),
+                                ],
+                              ),
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,

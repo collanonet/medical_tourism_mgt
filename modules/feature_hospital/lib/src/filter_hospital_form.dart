@@ -9,7 +9,7 @@ FormGroup formFilterHospital() => FormGroup(
       {
         'hospitalName': FormControl<String>(),
         'type': FormControl<String>(),
-        'location': FormControl<String>(),
+        'area': FormControl<String>(),
         'rHave': FormControl<String>(),
         'universityHospitalType': FormControl<bool>(),
         'nationalAndPublicHospitalsType': FormControl<bool>(),

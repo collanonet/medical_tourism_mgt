@@ -7,6 +7,7 @@ part 'basic_information_hospital_response.g.dart';
 class BasicInformationHospitalResponse {
   @JsonKey(name: '_id')
   String id;
+  String? area;
   String? hospitalNameChinese;
   String? hospitalNameKatakana;
   String? zipCode;
@@ -72,6 +73,7 @@ class BasicInformationHospitalResponse {
 
   BasicInformationHospitalResponse({
     required this.id,
+    this.area,
     this.hospitalNameChinese,
     this.hospitalNameKatakana,
     this.zipCode,

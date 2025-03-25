@@ -5730,6 +5730,7 @@ class _ApiService implements ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? area,
     String? hospitalNameChinese,
     String? hospitalNameKatakana,
     bool? healthCheckup,
@@ -5749,6 +5750,7 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
+      r'area': area,
       r'hospitalNameChinese': hospitalNameChinese,
       r'hospitalNameKatakana': hospitalNameKatakana,
       r'healthCheckup': healthCheckup,

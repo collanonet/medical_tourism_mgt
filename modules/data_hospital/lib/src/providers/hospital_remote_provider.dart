@@ -176,6 +176,7 @@ class HospitalRemoteProvider {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? area,
     String? hospitalNameChinese,
     String? hospitalNameKatakana,
     bool? healthCheckup,
@@ -194,6 +195,7 @@ class HospitalRemoteProvider {
     return apiService.getHospitals(
       page: page,
       pageSize: pageSize,
+      area: area,
       hospitalNameChinese: hospitalNameChinese,
       hospitalNameKatakana: hospitalNameKatakana,
       healthCheckup: healthCheckup,

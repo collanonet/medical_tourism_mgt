@@ -34,6 +34,9 @@ FormGroup basicInformationForm() {
         value: '',
         validators: [Validators.pattern(RegExp(r'^https?://'))],
       ),
+      'area': FormControl<String>(
+        value: '',
+      ),
       'phoneNumber': FormControl<String>(
         value: '',
       ),
