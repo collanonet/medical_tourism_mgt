@@ -75,7 +75,7 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                       Column(
                         children: [
                           Text(
-                            '診療データをここにドラッグ＆ドロップ',
+                            '診療データをここにドラッグ＆ドロップ DICOMのみデータをアップ',
                             style: context.textTheme.bodySmall?.copyWith(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,

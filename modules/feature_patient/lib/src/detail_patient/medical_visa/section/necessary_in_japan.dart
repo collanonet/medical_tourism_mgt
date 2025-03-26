@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -61,8 +62,9 @@ class NecessaryInJapan extends StatelessWidget {
                                   height: context.appTheme.spacing.marginMedium,
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Expanded(child: Text('書類送付日')),
+                                    Text('書類送付日'),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
@@ -78,186 +80,79 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Wrap(
-                                      children: [
-                                        IntrinsicWidth(
-                                          child: ReactiveRadioListTile(
-                                            controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
-                                            contentPadding: EdgeInsets.zero,
-                                            value: 'true',
-                                            formControlName: 'sendBy',
-                                            title: const Text('原本送付'),
+                                    Expanded(
+                                      child: Wrap(
+                                        spacing:
+                                            context.appTheme.spacing.marginMedium,
+                                        runSpacing:
+                                            context.appTheme.spacing.marginMedium,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        runAlignment: WrapAlignment.end,
+                                        alignment: WrapAlignment.end,
+                                        children: [
+                                          IntrinsicWidth(
+                                            child: ReactiveRadioListTile(
+                                              controlAffinity:
+                                                  ListTileControlAffinity.leading,
+                                              contentPadding: EdgeInsets.zero,
+                                              value: 'true',
+                                              formControlName: 'sendBy',
+                                              title: const Text('原本送付'),
+                                            ),
                                           ),
-                                        ),
-                                        const Text('（'),
-                                        IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
-                                            controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
-                                            contentPadding: EdgeInsets.zero,
-                                            formControlName: 'byEMS',
-                                            title: const Text('EMS'),
+                                          const Text('（'),
+                                          IntrinsicWidth(
+                                            child: ReactiveCheckboxListTile(
+                                              controlAffinity:
+                                                  ListTileControlAffinity.leading,
+                                              contentPadding: EdgeInsets.zero,
+                                              formControlName: 'byEMS',
+                                              title: const Text('EMS'),
+                                            ),
                                           ),
-                                        ),
-                                        IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
-                                            controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
-                                            contentPadding: EdgeInsets.zero,
-                                            formControlName: 'byFedex',
-                                            title: const Text('Fedex'),
+                                          IntrinsicWidth(
+                                            child: ReactiveCheckboxListTile(
+                                              controlAffinity:
+                                                  ListTileControlAffinity.leading,
+                                              contentPadding: EdgeInsets.zero,
+                                              formControlName: 'byFedex',
+                                              title: const Text('Fedex'),
+                                            ),
                                           ),
-                                        ),
-                                        IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
-                                            controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
-                                            contentPadding: EdgeInsets.zero,
-                                            formControlName: 'byOthers',
-                                            title: const Text('その他'),
+                                          IntrinsicWidth(
+                                            child: ReactiveCheckboxListTile(
+                                              controlAffinity:
+                                                  ListTileControlAffinity.leading,
+                                              contentPadding: EdgeInsets.zero,
+                                              formControlName: 'byOthers',
+                                              title: const Text('その他'),
+                                            ),
                                           ),
-                                        ),
-                                        const Text('）'),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        ),
-                                        IntrinsicWidth(
-                                          child: ReactiveRadioListTile(
-                                            controlAffinity:
-                                                ListTileControlAffinity
-                                                    .leading,
-                                            contentPadding: EdgeInsets.zero,
-                                            value: 'false',
-                                            formControlName: 'sendBy',
-                                            title: const Text('PDF送付'),
+                                          const Text('）'),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
                                           ),
-                                        ),
-                                      ],
+                                          IntrinsicWidth(
+                                            child: ReactiveRadioListTile(
+                                              controlAffinity:
+                                                  ListTileControlAffinity.leading,
+                                              contentPadding: EdgeInsets.zero,
+                                              value: 'false',
+                                              formControlName: 'sendBy',
+                                              title: const Text('PDF送付'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    SizedBox(
-                                      width: 200,
-                                      child: ColumnSeparated(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(
-                                          height: context
-                                              .appTheme.spacing.formSpacing,
-                                        ),
-                                        children: [
-                                          RowSeparated(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            separatorBuilder:
-                                                (context, index) => SizedBox(
-                                              width: context
-                                                  .appTheme.spacing.formSpacing,
-                                            ),
-                                            children: [
-                                              SizedBox(
-                                                width: 75,
-                                                child: RowSeparated(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  separatorBuilder:
-                                                      (context, index) =>
-                                                          SizedBox(
-                                                    width: context
-                                                        .appTheme
-                                                        .spacing
-                                                        .marginExtraSmall,
-                                                  ),
-                                                  children: [
-                                                    Flexible(
-                                                      child:
-                                                          ReactiveValueListenableBuilder<
-                                                              FileSelect>(
-                                                        formControlName:
-                                                            'letterOfGuaranteeFileSelect',
-                                                        builder: (context,
-                                                            control, _) {
-                                                          return InkWell(
-                                                            onTap: () {
-                                                              if (control.value
-                                                                          ?.url !=
-                                                                      null ||
-                                                                  control.value
-                                                                          ?.filename !=
-                                                                      null) {
-                                                                showPreviewFile(
-                                                                  context,
-                                                                  fileSelect:
-                                                                      FileSelect(
-                                                                          // file name from object model
-                                                                          url: control.value?.url ??
-                                                                              control.value!.filename!),
-                                                                );
-                                                              }
-                                                            },
-                                                            child: Text(
-                                                              control.value
-                                                                      ?.url ??
-                                                                  control.value
-                                                                      ?.filename ??
-                                                                  'File Name',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodySmall,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  filePicker().then((value) {
-                                                    if (value != null) {
-                                                      currentForm
-                                                          .control(
-                                                              'letterOfGuaranteeFileSelect')
-                                                          .value = value;
-                                                      logger
-                                                          .d('Value Not Null');
-                                                    }
-                                                  });
-                                                },
-                                                child: Chip(
-                                                  label: const Text('ファイル選択'),
-                                                  labelStyle: TextStyle(
-                                                    color: context.appTheme
-                                                        .secondaryBackgroundColor,
-                                                  ),
-                                                  backgroundColor: context
-                                                      .appTheme.primaryColor,
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    // fileUpload(context, currentForm,
-                                    //     'letterOfGuaranteeFileSelect'),
+                                    fileUpload(context, currentForm,
+                                        'letterOfGuaranteeFileSelect'),
                                   ],
                                 ),
                               ],
@@ -508,35 +403,34 @@ class NecessaryInJapan extends StatelessWidget {
                 ReactiveValueListenableBuilder<FileSelect>(
                   formControlName: fileName,
                   builder: (context, control, _) {
-                    return InkWell(
-                      onTap: () {
-                        showPreviewFile(
-                          context,
-                          fileSelect: FileSelect(
-                              // file name from object model
-                              url: control.value?.url ??
-                                  control.value!.filename!),
-                        );
-                      },
-                      child: Row(
-                        children: [
+                    return Row(
+                      children: [
+                        if (control.value?.url != null ||
+                            control.value?.filename != null)
+                          IconButton(
+                            onPressed: () {
+                              currentForm.control(fileName).value =
+                                  FileSelect();
+                            },
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                          ),
+                        TextButton(
+                          onPressed: () {
                             if (control.value?.url != null ||
-                              control.value?.filename != null)
-                            IconButton(
-                              onPressed: () {
-                                currentForm.control(fileName).value =
-                                    FileSelect();
-                              },
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                            ),
-                          Text(
+                                control.value?.filename != null)
+                              showPreviewFile(
+                                context,
+                                fileSelect: control.value!,
+                              );
+                          },
+                          child: Text(
                             control.value?.url ??
                                 control.value?.filename ??
                                 'File Name',
                             style: context.textTheme.bodySmall,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   },
                 ),

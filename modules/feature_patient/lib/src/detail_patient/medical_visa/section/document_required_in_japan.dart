@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -61,35 +62,34 @@ class DocumentRequired extends StatelessWidget {
                                   height: context.appTheme.spacing.marginMedium,
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Expanded(child: Text('身元保証書')),
-                                    // SizedBox(
-                                    //   width:
-                                    //       context.appTheme.spacing.marginMedium,
-                                    // ),
-                                    const IntrinsicWidth(
-                                      stepWidth: 200,
+                                    Text('身元保証書'),
+                                    SizedBox(
+                                      width:
+                                      context.appTheme.spacing.marginMedium,
+                                    ),
+                                    const SizedBox(
+                                      width: 200,
                                       child: ReactiveDatePickerField(
-                                        formControlName:
-                                            'letterOfGuaranteeDate',
+                                        formControlName: 'letterOfGuaranteeDate',
                                       ),
                                     ),
-                                    // SizedBox(
-                                    //   width:
-                                    //       context.appTheme.spacing.marginMedium,
-                                    // ),
                                     SizedBox(
-                                      width: 600,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
+                                      width:
+                                      context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Expanded(
+                                      child: Wrap(
+                                        spacing: context.appTheme.spacing.marginMedium,
+                                        runSpacing: context.appTheme.spacing.marginMedium,
+                                        crossAxisAlignment: WrapCrossAlignment.center,
+                                        runAlignment: WrapAlignment.end,
+                                        alignment: WrapAlignment.end,
                                         children: [
-                                          Expanded(
+                                          IntrinsicWidth(
                                             child: ReactiveRadioListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
+                                              controlAffinity: ListTileControlAffinity.leading,
                                               contentPadding: EdgeInsets.zero,
                                               value: 'true',
                                               formControlName: 'sendBy',
@@ -97,46 +97,34 @@ class DocumentRequired extends StatelessWidget {
                                             ),
                                           ),
                                           const Text('（'),
-                                          Expanded(
+                                          IntrinsicWidth(
                                             child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
+                                              controlAffinity: ListTileControlAffinity.leading,
                                               contentPadding: EdgeInsets.zero,
                                               formControlName: 'byEMS',
                                               title: const Text('EMS'),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
                                             child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
+                                              controlAffinity: ListTileControlAffinity.leading,
                                               contentPadding: EdgeInsets.zero,
                                               formControlName: 'byFedex',
                                               title: const Text('Fedex'),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
                                             child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
+                                              controlAffinity: ListTileControlAffinity.leading,
                                               contentPadding: EdgeInsets.zero,
                                               formControlName: 'byOthers',
                                               title: const Text('その他'),
                                             ),
                                           ),
                                           const Text('）'),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
+                                          IntrinsicWidth(
                                             child: ReactiveRadioListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
+                                              controlAffinity: ListTileControlAffinity.leading,
                                               contentPadding: EdgeInsets.zero,
                                               value: 'false',
                                               formControlName: 'sendBy',
@@ -146,126 +134,13 @@ class DocumentRequired extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    // SizedBox(
-                                    //   width:
-                                    //       context.appTheme.spacing.marginMedium,
-                                    // ),
                                     SizedBox(
-                                      width: 200,
-                                      child: ColumnSeparated(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(
-                                          height: context
-                                              .appTheme.spacing.formSpacing,
-                                        ),
-                                        children: [
-                                          RowSeparated(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            separatorBuilder:
-                                                (context, index) => SizedBox(
-                                              width: context
-                                                  .appTheme.spacing.formSpacing,
-                                            ),
-                                            children: [
-                                              SizedBox(
-                                                width: 75,
-                                                child: RowSeparated(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  separatorBuilder:
-                                                      (context, index) =>
-                                                          SizedBox(
-                                                    width: context
-                                                        .appTheme
-                                                        .spacing
-                                                        .marginExtraSmall,
-                                                  ),
-                                                  children: [
-                                                    Flexible(
-                                                      child:
-                                                          ReactiveValueListenableBuilder<
-                                                              FileSelect>(
-                                                        formControlName:
-                                                            'letterOfGuaranteeFileSelect',
-                                                        builder: (context,
-                                                            control, _) {
-                                                          return InkWell(
-                                                            onTap: () {
-                                                              if (control.value
-                                                                          ?.url !=
-                                                                      null ||
-                                                                  control.value
-                                                                          ?.filename !=
-                                                                      null) {
-                                                                showPreviewFile(
-                                                                  context,
-                                                                  fileSelect:
-                                                                      FileSelect(
-                                                                          // file name from object model
-                                                                          url: control.value?.url ??
-                                                                              control.value!.filename!),
-                                                                );
-                                                              }
-                                                            },
-                                                            child: Text(
-                                                              control.value
-                                                                      ?.url ??
-                                                                  control.value
-                                                                      ?.filename ??
-                                                                  'File Name',
-                                                              style: context
-                                                                  .textTheme
-                                                                  .bodySmall,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  filePicker().then((value) {
-                                                    if (value != null) {
-                                                      currentForm
-                                                          .control(
-                                                              'letterOfGuaranteeFileSelect')
-                                                          .value = value;
-                                                      logger
-                                                          .d('Value Not Null');
-                                                    }
-                                                  });
-                                                },
-                                                child: Chip(
-                                                  label: const Text('ファイル選択'),
-                                                  labelStyle: TextStyle(
-                                                    color: context.appTheme
-                                                        .secondaryBackgroundColor,
-                                                  ),
-                                                  backgroundColor: context
-                                                      .appTheme.primaryColor,
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
+                                      width:
+                                      context.appTheme.spacing.marginMedium,
                                     ),
-                                    // fileUpload(context, currentForm,
-                                    //       'letterOfGuaranteeFileSelect'),
+                                    fileUpload(context, currentForm, 'letterOfGuaranteeFileSelect'),
                                   ],
-                                ),
+                                )
                               ],
                             ),
                           ))
@@ -1016,35 +891,34 @@ class DocumentRequired extends StatelessWidget {
                 ReactiveValueListenableBuilder<FileSelect>(
                   formControlName: fileName,
                   builder: (context, control, _) {
-                    return InkWell(
-                      onTap: () {
-                        showPreviewFile(
-                          context,
-                          fileSelect: FileSelect(
-                              // file name from object model
-                              url: control.value?.url ??
-                                  control.value!.filename!),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          if (control.value?.url != null ||
-                              control.value?.filename != null)
-                            IconButton(
-                              onPressed: () {
-                                currentForm.control(fileName).value =
-                                    FileSelect();
-                              },
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                            ),
-                          Text(
+                    return Row(
+                      children: [
+                        if (control.value?.url != null ||
+                            control.value?.filename != null)
+                          IconButton(
+                            onPressed: () {
+                              currentForm.control(fileName).value =
+                                  FileSelect();
+                            },
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                          ),
+                        TextButton(
+                          onPressed: () {
+                            if (control.value?.url != null ||
+                                control.value?.filename != null)
+                              showPreviewFile(
+                                context,
+                                fileSelect: control.value!,
+                              );
+                          },
+                          child: Text(
                             control.value?.url ??
                                 control.value?.filename ??
                                 'File Name',
                             style: context.textTheme.bodySmall,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   },
                 ),

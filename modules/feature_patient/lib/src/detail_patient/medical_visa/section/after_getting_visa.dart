@@ -490,35 +490,34 @@ class AfterGettingVisa extends StatelessWidget {
                 ReactiveValueListenableBuilder<FileSelect>(
                   formControlName: fileName,
                   builder: (context, control, _) {
-                    return InkWell(
-                      onTap: () {
-                        showPreviewFile(
-                          context,
-                          fileSelect: FileSelect(
-                              // file name from object model
-                              url: control.value?.url ??
-                                  control.value!.filename!),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          if (control.value?.url != null ||
-                              control.value?.filename != null)
-                            IconButton(
-                              onPressed: () {
-                                currentForm.control(fileName).value =
-                                    FileSelect();
-                              },
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                            ),
-                          Text(
+                    return Row(
+                      children: [
+                        if (control.value?.url != null ||
+                            control.value?.filename != null)
+                          IconButton(
+                            onPressed: () {
+                              currentForm.control(fileName).value =
+                                  FileSelect();
+                            },
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                          ),
+                        TextButton(
+                          onPressed: () {
+                            if (control.value?.url != null ||
+                                control.value?.filename != null)
+                              showPreviewFile(
+                                context,
+                                fileSelect: control.value!,
+                              );
+                          },
+                          child: Text(
                             control.value?.url ??
                                 control.value?.filename ??
                                 'File Name',
                             style: context.textTheme.bodySmall,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   },
                 ),
