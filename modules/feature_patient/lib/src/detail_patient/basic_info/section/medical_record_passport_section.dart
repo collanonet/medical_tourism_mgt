@@ -179,10 +179,7 @@ class _MedicalRecordPassportSectionState
                               ),
                               Row(
                                 children: <Widget>[
-                                  // addRadioButton(
-                                  //     0, 'medicalGuarantee', formGroup),
-                                  // addRadioButton(1, 'other', formGroup),
-                                  IntrinsicWidth(
+                                   IntrinsicWidth(
                                     stepWidth: 50,
                                     child: ReactiveRadioListTile<String?>(
                                       value: 'medicalGuarantee',
@@ -209,37 +206,102 @@ class _MedicalRecordPassportSectionState
                             ],
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('ビザ種類'),
-                              ReactiveTextField(
+                              Text('ビザ種類'),
+                              ReactiveDropdownFormField(
                                 formControlName: 'visaCategory',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: 'ビザ種類',
                                 ),
-                              ),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: 'medicalVisa',
+                                    child: Text('医療ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'short_term_stay_visa',
+                                    child: Text('短期滞在ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'touristVisa',
+                                    child: Text('観光ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'familyVisitingVisa',
+                                    child: Text('親族訪問ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'businessVisa',
+                                    child: Text('商用ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'studentVisa',
+                                    child: Text('留学ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'workingVisa',
+                                    child: Text('就業ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value:
+                                    'engineer_specialist_humanities_international_business_visa',
+                                    child: Text('技術者・人文知識・国際業務ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'spouseVisa',
+                                    child: Text('配偶者ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'long_term_resident_visa',
+                                    child: Text('定住者ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'specifiedSkills',
+                                    child: Text('特定技能ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'culturalActivities',
+                                    child: Text('文化活動ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'religiousVisa',
+                                    child: Text('宗教ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value:
+                                    'status_of_residence_for_humanitarian_reasons',
+                                    child: Text('人道上の理由による在留資格'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'specialVisa',
+                                    child: Text('特例ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value:
+                                    'intra_company_transferee_visa',
+                                    child: Text('企業内転勤者ビザ'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value:
+                                    'technical_intern_training_program',
+                                    child: Text('技能実習制度'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value:
+                                    'special_permanent_resident_visa',
+                                    child: Text('特別永住者ビザ'),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
 
-                        // Expanded(
-                        //   child: InkWell(
-                        //     onTap: () {
-                        //       setState(() {
-                        //         formGroup.control('underConfirmation').value =
-                        //             !selectUnderConfirmation;
-                        //         selectUnderConfirmation =
-                        //             !selectUnderConfirmation;
-                        //       });
-                        //     },
-                        //     child: addRadioUnderConfirmationButton(
-                        //         selectUnderConfirmation ? 0 : 1),
-                        //   ),
-                        // )
                         Column(
                           children: [
                             const SizedBox(height: 20),
