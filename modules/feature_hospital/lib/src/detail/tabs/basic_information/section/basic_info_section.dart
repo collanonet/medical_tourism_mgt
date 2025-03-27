@@ -209,7 +209,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               ),
                             ],
                           ),
-
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -220,18 +219,19 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   SizedBox(
                                     width: 300,
                                     child: ValueListenableBuilder(
-                                        valueListenable:
-                                        context.read<BasicInformationModel>().areaData,
+                                        valueListenable: context
+                                            .read<BasicInformationModel>()
+                                            .areaData,
                                         builder: (context, value, _) {
                                           return ReactiveDropdownFormField(
                                             formControlName: 'area',
                                             items: value
                                                 .map((e) => DropdownMenuItem(
-                                              value: e.item,
-                                              child: Text(
-                                                e.item,
-                                              ),
-                                            ))
+                                                      value: e.item,
+                                                      child: Text(
+                                                        e.item,
+                                                      ),
+                                                    ))
                                                 .toList(),
                                           );
                                         }),
@@ -1238,13 +1238,10 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(top: 23),
-                                child: SizedBox(
-                                  width: 150,
-                                  child: ReactiveTimePickerField(
-                                    formControlName: 'shift1',
-                                  ),
+                              const SizedBox(
+                                width: 150,
+                                child: ReactiveTimePickerField(
+                                  formControlName: 'shift1',
                                 ),
                               ),
                               // SizedBox(
@@ -1402,13 +1399,10 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(top: 23),
-                                child: SizedBox(
-                                  width: 150,
-                                  child: ReactiveTimePickerField(
-                                    formControlName: 'shift2',
-                                  ),
+                              const SizedBox(
+                                width: 150,
+                                child: ReactiveTimePickerField(
+                                  formControlName: 'shift2',
                                 ),
                               ),
                               // SizedBox(

@@ -630,121 +630,115 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
     return ReactiveFormArray(
       formArrayName: 'tasks',
       builder: (context, formArray, child) {
-        final rows =
-            formArray.controls.map((control) => control as FormGroup).map(
-                  (currentForm) => ReactiveForm(
-                    formGroup: currentForm,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: ReactiveTextField(
-                            formControlName: 'placeName',
-                            decoration: const InputDecoration(
-                              label: Text(
-                                '地名',
-                              ),
-                            ),
+        final rows = formArray.controls
+            .map((control) => control as FormGroup)
+            .map(
+              (currentForm) => ReactiveForm(
+                formGroup: currentForm,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: ReactiveTextField(
+                        formControlName: 'placeName',
+                        decoration: const InputDecoration(
+                          label: Text(
+                            '地名',
                           ),
                         ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        const Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 23),
-                            child: ReactiveTimePickerField(
-                                formControlName: 'timeFrom'),
-                          ),
-                        ),
-                        // Expanded(
-                        //   child: ReactiveValueListenableBuilder<String>(
-                        //     formControlName: 'timeFrom',
-                        //     builder: (context, control, _) {
-                        //       return ReactiveTextField<String>(
-                        //         formControlName: 'timeFrom',
-                        //         keyboardType: TextInputType.number,
-                        //         inputFormatters: [
-                        //           formatter.timeFormatter,
-                        //         ],
-                        //         decoration: const InputDecoration(
-                        //           label: Text(
-                        //             '時刻（自）',
-                        //           ),
-                        //         ),
-                        //       );
-                        //     },
-                        //   ),
-                        // ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        const Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 23),
-                            child: ReactiveTimePickerField(
-                              formControlName: 'timeTo',
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ValueListenableBuilder(
-                                  valueListenable: context
-                                      .read<ItineraryModel>()
-                                      .transportation,
-                                  builder: (context, value, _) {
-                                    return ReactiveDropdownFormField(
-                                      decoration:
-                                          const InputDecoration(hintText: '交通'),
-                                      formControlName: 'transportation',
-                                      items: value
-                                          .map((e) => DropdownMenuItem(
-                                                value: e.type,
-                                                child: Text(
-                                                  e.type,
-                                                ),
-                                              ))
-                                          .toList(),
-                                    );
-                                  }),
-                            ],
-                          ),
-                        ),
-                        // Expanded(
-                        //   child: ReactiveTextField(
-                        //     formControlName: 'transportation',
-                        //     decoration: const InputDecoration(
-                        //       label: Text(
-                        //         '交通',
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: ReactiveTextField(
-                            formControlName: 'itinerary',
-                            decoration: const InputDecoration(
-                              label: Text(
-                                '行程',
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    const Expanded(
+                      child:
+                          ReactiveTimePickerField(formControlName: 'timeFrom'),
+                    ),
+                    // Expanded(
+                    //   child: ReactiveValueListenableBuilder<String>(
+                    //     formControlName: 'timeFrom',
+                    //     builder: (context, control, _) {
+                    //       return ReactiveTextField<String>(
+                    //         formControlName: 'timeFrom',
+                    //         keyboardType: TextInputType.number,
+                    //         inputFormatters: [
+                    //           formatter.timeFormatter,
+                    //         ],
+                    //         decoration: const InputDecoration(
+                    //           label: Text(
+                    //             '時刻（自）',
+                    //           ),
+                    //         ),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    const Expanded(
+                      child: ReactiveTimePickerField(
+                        formControlName: 'timeTo',
+                      ),
+                    ),
+
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ValueListenableBuilder(
+                              valueListenable:
+                                  context.read<ItineraryModel>().transportation,
+                              builder: (context, value, _) {
+                                return ReactiveDropdownFormField(
+                                  decoration:
+                                      const InputDecoration(hintText: '交通'),
+                                  formControlName: 'transportation',
+                                  items: value
+                                      .map((e) => DropdownMenuItem(
+                                            value: e.type,
+                                            child: Text(
+                                              e.type,
+                                            ),
+                                          ))
+                                      .toList(),
+                                );
+                              }),
+                        ],
+                      ),
+                    ),
+                    // Expanded(
+                    //   child: ReactiveTextField(
+                    //     formControlName: 'transportation',
+                    //     decoration: const InputDecoration(
+                    //       label: Text(
+                    //         '交通',
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: ReactiveTextField(
+                        formControlName: 'itinerary',
+                        decoration: const InputDecoration(
+                          label: Text(
+                            '行程',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
