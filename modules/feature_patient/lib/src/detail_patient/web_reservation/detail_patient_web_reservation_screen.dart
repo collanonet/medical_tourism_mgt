@@ -540,11 +540,8 @@ class _DetailPatientWebReservationScreenState
                                   ),
                                   const IntrinsicWidth(
                                     stepWidth: 150,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 23),
-                                      child: ReactiveTimePickerField(
-                                        formControlName: 'shift1',
-                                      ),
+                                    child: ReactiveTimePickerField(
+                                      formControlName: 'shift1',
                                     ),
                                   ),
                                   // IntrinsicWidth(
@@ -712,11 +709,8 @@ class _DetailPatientWebReservationScreenState
                                   ),
                                   const IntrinsicWidth(
                                     stepWidth: 150,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 23),
-                                      child: ReactiveTimePickerField(
-                                        formControlName: 'shift2',
-                                      ),
+                                    child: ReactiveTimePickerField(
+                                      formControlName: 'shift2',
                                     ),
                                   ),
                                   // IntrinsicWidth(
@@ -1121,7 +1115,6 @@ class _DetailPatientWebReservationScreenState
                                   label: '時間',
                                 ),
                               ),
-                              
                             ],
                           ),
                         ),
