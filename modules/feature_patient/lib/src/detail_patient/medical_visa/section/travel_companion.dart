@@ -317,15 +317,10 @@ class TravelCompanion extends StatelessWidget {
                                                   .marginMedium,
                                             ),
                                             Expanded(
-                                              child: ReactiveTextField(
+                                              child: ReactiveTimePickerField(
                                                 formControlName:
                                                     'departureTimeIn',
-                                                decoration:
-                                                    const InputDecoration(
-                                                  label: Text(
-                                                    '発時刻',
-                                                  ),
-                                                ),
+                                                label: '発時刻',
                                               ),
                                             ),
                                             SizedBox(
@@ -333,15 +328,10 @@ class TravelCompanion extends StatelessWidget {
                                                   .marginMedium,
                                             ),
                                             Expanded(
-                                              child: ReactiveTextField(
+                                              child: ReactiveTimePickerField(
                                                 formControlName:
                                                     'arrivalTimeIn',
-                                                decoration:
-                                                    const InputDecoration(
-                                                  label: Text(
-                                                    '着時刻',
-                                                  ),
-                                                ),
+                                                label: '着時刻',
                                               ),
                                             ),
                                             SizedBox(
@@ -416,15 +406,10 @@ class TravelCompanion extends StatelessWidget {
                                                   .marginMedium,
                                             ),
                                             Expanded(
-                                              child: ReactiveTextField(
+                                              child: ReactiveTimePickerField(
                                                 formControlName:
                                                     'departureTimeOut',
-                                                decoration:
-                                                    const InputDecoration(
-                                                  label: Text(
-                                                    '発時刻',
-                                                  ),
-                                                ),
+                                                label: '発時刻',
                                               ),
                                             ),
                                             SizedBox(
@@ -432,15 +417,10 @@ class TravelCompanion extends StatelessWidget {
                                                   .marginMedium,
                                             ),
                                             Expanded(
-                                              child: ReactiveTextField(
+                                              child: ReactiveTimePickerField(
                                                 formControlName:
                                                     'arrivalTimeOut',
-                                                decoration:
-                                                    const InputDecoration(
-                                                  label: Text(
-                                                    '着時刻',
-                                                  ),
-                                                ),
+                                                label: '着時刻',
                                               ),
                                             ),
                                             SizedBox(

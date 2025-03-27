@@ -67,29 +67,35 @@ class DocumentRequired extends StatelessWidget {
                                     Text('身元保証書'),
                                     SizedBox(
                                       width:
-                                      context.appTheme.spacing.marginMedium,
+                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     const SizedBox(
                                       width: 200,
                                       child: ReactiveDatePickerField(
-                                        formControlName: 'letterOfGuaranteeDate',
+                                        formControlName:
+                                            'letterOfGuaranteeDate',
                                       ),
                                     ),
                                     SizedBox(
                                       width:
-                                      context.appTheme.spacing.marginMedium,
+                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
                                       child: Wrap(
-                                        spacing: context.appTheme.spacing.marginMedium,
-                                        runSpacing: context.appTheme.spacing.marginMedium,
-                                        crossAxisAlignment: WrapCrossAlignment.center,
+                                        spacing: context
+                                            .appTheme.spacing.marginMedium,
+                                        runSpacing: context
+                                            .appTheme.spacing.marginMedium,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
                                         runAlignment: WrapAlignment.end,
                                         alignment: WrapAlignment.end,
                                         children: [
                                           IntrinsicWidth(
                                             child: ReactiveRadioListTile(
-                                              controlAffinity: ListTileControlAffinity.leading,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               contentPadding: EdgeInsets.zero,
                                               value: 'true',
                                               formControlName: 'sendBy',
@@ -99,7 +105,9 @@ class DocumentRequired extends StatelessWidget {
                                           const Text('（'),
                                           IntrinsicWidth(
                                             child: ReactiveCheckboxListTile(
-                                              controlAffinity: ListTileControlAffinity.leading,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               contentPadding: EdgeInsets.zero,
                                               formControlName: 'byEMS',
                                               title: const Text('EMS'),
@@ -107,7 +115,9 @@ class DocumentRequired extends StatelessWidget {
                                           ),
                                           IntrinsicWidth(
                                             child: ReactiveCheckboxListTile(
-                                              controlAffinity: ListTileControlAffinity.leading,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               contentPadding: EdgeInsets.zero,
                                               formControlName: 'byFedex',
                                               title: const Text('Fedex'),
@@ -115,7 +125,9 @@ class DocumentRequired extends StatelessWidget {
                                           ),
                                           IntrinsicWidth(
                                             child: ReactiveCheckboxListTile(
-                                              controlAffinity: ListTileControlAffinity.leading,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               contentPadding: EdgeInsets.zero,
                                               formControlName: 'byOthers',
                                               title: const Text('その他'),
@@ -124,7 +136,9 @@ class DocumentRequired extends StatelessWidget {
                                           const Text('）'),
                                           IntrinsicWidth(
                                             child: ReactiveRadioListTile(
-                                              controlAffinity: ListTileControlAffinity.leading,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               contentPadding: EdgeInsets.zero,
                                               value: 'false',
                                               formControlName: 'sendBy',
@@ -136,9 +150,10 @@ class DocumentRequired extends StatelessWidget {
                                     ),
                                     SizedBox(
                                       width:
-                                      context.appTheme.spacing.marginMedium,
+                                          context.appTheme.spacing.marginMedium,
                                     ),
-                                    fileUpload(context, currentForm, 'letterOfGuaranteeFileSelect'),
+                                    fileUpload(context, currentForm,
+                                        'letterOfGuaranteeFileSelect'),
                                   ],
                                 )
                               ],
@@ -537,15 +552,11 @@ class DocumentRequired extends StatelessWidget {
                                                           .spacing.marginMedium,
                                                     ),
                                                     Expanded(
-                                                      child: ReactiveTextField(
+                                                      child:
+                                                          ReactiveTimePickerField(
                                                         formControlName:
                                                             'departureTimeIn',
-                                                        decoration:
-                                                            const InputDecoration(
-                                                          label: Text(
-                                                            '発時刻',
-                                                          ),
-                                                        ),
+                                                        label: '発時刻',
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -553,15 +564,11 @@ class DocumentRequired extends StatelessWidget {
                                                           .spacing.marginMedium,
                                                     ),
                                                     Expanded(
-                                                      child: ReactiveTextField(
+                                                      child:
+                                                          ReactiveTimePickerField(
                                                         formControlName:
                                                             'arrivalTimeIn',
-                                                        decoration:
-                                                            const InputDecoration(
-                                                          label: Text(
-                                                            '着時刻',
-                                                          ),
-                                                        ),
+                                                        label: '着時刻',
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -642,15 +649,11 @@ class DocumentRequired extends StatelessWidget {
                                                           .spacing.marginMedium,
                                                     ),
                                                     Expanded(
-                                                      child: ReactiveTextField(
+                                                      child:
+                                                          ReactiveTimePickerField(
                                                         formControlName:
                                                             'departureTimeOut',
-                                                        decoration:
-                                                            const InputDecoration(
-                                                          label: Text(
-                                                            '発時刻',
-                                                          ),
-                                                        ),
+                                                        label: '発時刻',
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -658,15 +661,11 @@ class DocumentRequired extends StatelessWidget {
                                                           .spacing.marginMedium,
                                                     ),
                                                     Expanded(
-                                                      child: ReactiveTextField(
+                                                      child:
+                                                          ReactiveTimePickerField(
                                                         formControlName:
                                                             'arrivalTimeOut',
-                                                        decoration:
-                                                            const InputDecoration(
-                                                          label: Text(
-                                                            '着時刻',
-                                                          ),
-                                                        ),
+                                                        label: '着時刻',
                                                       ),
                                                     ),
                                                     SizedBox(
