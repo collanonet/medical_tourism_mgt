@@ -206,7 +206,7 @@ class _MedicalRecordPassportSectionState
                             ],
                           ),
                         ),
-                        const Expanded(
+                         Expanded(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,12 +296,15 @@ class _MedicalRecordPassportSectionState
                                     'special_permanent_resident_visa',
                                     child: Text('特別永住者ビザ'),
                                   ),
+                                  DropdownMenuItem(
+                                    value: 'other',
+                                    child: Text('その他'),
+                                  ),
                                 ],
                               )
                             ],
                           ),
                         ),
-
                         Column(
                           children: [
                             const SizedBox(height: 20),
