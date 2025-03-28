@@ -201,7 +201,7 @@ FormGroup basicInfoForm({
           'visaType': FormControl<String?>(
             value: 'medicalGuarantee',
           ),
-          'visaCategory': FormControl<String?>(),
+          'visaCategory': FormControl<String>(),
           'underConfirmation': FormControl<bool?>(value: false),
         }),
         'MEDICAL_RECORD_Companion': FormArray([
