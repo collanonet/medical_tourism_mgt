@@ -6,17 +6,19 @@ part 'message.g.dart';
 @JsonSerializable()
 class Message {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   final String chatId;
   final String sender;
   final String content;
+  final String? tempId;
   final DateTime timestamp;
 
   Message({
-    required this.id,
+    this.id,
     required this.chatId,
     required this.sender,
     required this.content,
+    this.tempId,
     required this.timestamp,
   });
 

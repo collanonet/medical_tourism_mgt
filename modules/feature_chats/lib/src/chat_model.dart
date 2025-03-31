@@ -113,13 +113,16 @@ class ChatModel {
     }
   }
 
-  // Add a new message to the list and notify listeners
+// Add a new message to the list and notify listeners, avoiding duplicates
   void _addMessage(Message message) {
     final currentMessages = messages.value.data ?? [];
-    messages.value = AsyncData(data: [message, ...currentMessages]);
+    if (!currentMessages
+        .any((msg) => msg.id == message.tempId || msg.id == message.id)) {
+      messages.value = AsyncData(data: [message, ...currentMessages]);
+    }
   }
 
-  // Send a new message
+// Send a new message
   void sendMessage(String content) {
     logger.d('Sending message: $content');
     try {
@@ -134,20 +137,24 @@ class ChatModel {
         return;
       }
 
-      socketService.emit('sendMessage', {
-        'chatId': currentChatId,
-        'senderId': userId.value!,
-        'content': content,
-      });
-
-      // Optimistically add the message to the list
-      _addMessage(Message(
-        id: UniqueKey().toString(),
+      var tempId = UniqueKey().toString();
+      final newMessage = Message(
+        id: tempId,
         chatId: currentChatId,
         sender: userId.value!,
         content: content,
         timestamp: DateTime.now(),
-      ));
+      );
+
+      socketService.emit('sendMessage', {
+        'chatId': currentChatId,
+        'senderId': userId.value!,
+        'content': content,
+        'tempId': tempId,
+      });
+
+      // Optimistically add the message to the list, avoiding duplicates
+      _addMessage(newMessage);
     } catch (e) {
       logger.e('Error sending message: $e');
     }
