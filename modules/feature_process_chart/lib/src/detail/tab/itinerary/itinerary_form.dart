@@ -24,9 +24,9 @@ FormGroup itineraryForm() => FormGroup(
             'date': FormControl<DateTime>(), // 日付
             'meals': FormControl<List<bool>>(value: []),
             //meals
-            'morning': FormControl<bool>(value: false),
-            'noon': FormControl<bool>(value: false),
-            'evening': FormControl<bool>(value: false),
+            'morning': FormControl<String>(value: ''),
+            // 'noon': FormControl<String>(value: ''),
+            // 'evening': FormControl<String>(value: ''),
 
             'placeName': FormControl<String>(value: ''), // 地名
             'placeStay': FormControl<String>(value: ''), // 宿泊場所

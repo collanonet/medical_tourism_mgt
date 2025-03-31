@@ -179,7 +179,7 @@ class _MedicalRecordPassportSectionState
                               ),
                               Row(
                                 children: <Widget>[
-                                   IntrinsicWidth(
+                                  IntrinsicWidth(
                                     stepWidth: 50,
                                     child: ReactiveRadioListTile<String?>(
                                       value: 'medicalGuarantee',
@@ -206,7 +206,7 @@ class _MedicalRecordPassportSectionState
                             ],
                           ),
                         ),
-                         Expanded(
+                        const Expanded(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,7 +249,7 @@ class _MedicalRecordPassportSectionState
                                   ),
                                   DropdownMenuItem(
                                     value:
-                                    'engineer_specialist_humanities_international_business_visa',
+                                        'engineer_specialist_humanities_international_business_visa',
                                     child: Text('技術者・人文知識・国際業務ビザ'),
                                   ),
                                   DropdownMenuItem(
@@ -274,7 +274,7 @@ class _MedicalRecordPassportSectionState
                                   ),
                                   DropdownMenuItem(
                                     value:
-                                    'status_of_residence_for_humanitarian_reasons',
+                                        'status_of_residence_for_humanitarian_reasons',
                                     child: Text('人道上の理由による在留資格'),
                                   ),
                                   DropdownMenuItem(
@@ -282,18 +282,15 @@ class _MedicalRecordPassportSectionState
                                     child: Text('特例ビザ'),
                                   ),
                                   DropdownMenuItem(
-                                    value:
-                                    'intra_company_transferee_visa',
+                                    value: 'intra_company_transferee_visa',
                                     child: Text('企業内転勤者ビザ'),
                                   ),
                                   DropdownMenuItem(
-                                    value:
-                                    'technical_intern_training_program',
+                                    value: 'technical_intern_training_program',
                                     child: Text('技能実習制度'),
                                   ),
                                   DropdownMenuItem(
-                                    value:
-                                    'special_permanent_resident_visa',
+                                    value: 'special_permanent_resident_visa',
                                     child: Text('特別永住者ビザ'),
                                   ),
                                   DropdownMenuItem(
@@ -305,22 +302,22 @@ class _MedicalRecordPassportSectionState
                             ],
                           ),
                         ),
-                        Column(
-                          children: [
-                            const SizedBox(height: 20),
-                            IntrinsicWidth(
-                              stepWidth: 50,
-                              child: ReactiveRadioListTile<bool?>(
-                                value: false,
-                                contentPadding: EdgeInsets.zero,
-                                formControlName: 'underConfirmation',
-                                controlAffinity:
-                                    ListTileControlAffinity.leading,
-                                title: const Text('確認中'),
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Column(
+                        //   children: [
+                        //     const SizedBox(height: 20),
+                        //     IntrinsicWidth(
+                        //       stepWidth: 50,
+                        //       child: ReactiveRadioListTile<bool?>(
+                        //         value: false,
+                        //         contentPadding: EdgeInsets.zero,
+                        //         formControlName: 'underConfirmation',
+                        //         controlAffinity:
+                        //             ListTileControlAffinity.leading,
+                        //         title: const Text('確認中'),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ],

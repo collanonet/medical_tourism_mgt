@@ -318,13 +318,15 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                         Row(
                                           children: [
                                             IntrinsicWidth(
-                                              child: ReactiveCheckboxListTile(
+                                              child: ReactiveRadioListTile(
+                                                value: 'morning',
                                                 controlAffinity:
                                                     ListTileControlAffinity
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
                                                 formControlName: 'morning',
                                                 title: const Text('朝'),
+                                                onChanged: (control) {},
                                               ),
                                             ),
                                             SizedBox(
@@ -332,12 +334,14 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                   .appTheme.spacing.marginSmall,
                                             ),
                                             IntrinsicWidth(
-                                              child: ReactiveCheckboxListTile(
+                                              child: ReactiveRadioListTile(
+                                                value: 'noon',
+                                                enableFeedback: false,
                                                 controlAffinity:
                                                     ListTileControlAffinity
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
-                                                formControlName: 'noon',
+                                                formControlName: 'morning',
                                                 title: const Text('昼'),
                                               ),
                                             ),
@@ -346,12 +350,13 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                   .appTheme.spacing.marginSmall,
                                             ),
                                             IntrinsicWidth(
-                                              child: ReactiveCheckboxListTile(
+                                              child: ReactiveRadioListTile(
+                                                value: 'evening',
                                                 controlAffinity:
                                                     ListTileControlAffinity
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
-                                                formControlName: 'evening',
+                                                formControlName: 'morning',
                                                 title: const Text('夕'),
                                               ),
                                             ),

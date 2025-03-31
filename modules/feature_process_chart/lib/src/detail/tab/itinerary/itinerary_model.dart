@@ -97,9 +97,18 @@ class ItineraryModel {
             '_id': FormControl<String>(value: e.id),
             'date': FormControl<DateTime>(value: e.date),
             'meals': FormControl<List<bool>>(value: e.meals ?? []),
-            'morning': FormControl<bool>(value: e.meals?[0] ?? false),
-            'noon': FormControl<bool>(value: e.meals?[1] ?? false),
-            'evening': FormControl<bool>(value: e.meals?[2] ?? false),
+            'morning': FormControl<String>(
+                value: e.meals?[0] == true
+                    ? 'morning'
+                    : e.meals?[1] == true
+                        ? 'noon'
+                        : e.meals?[2] == true
+                            ? 'evening'
+                            : ''),
+            // 'noon':
+            //     FormControl<String>(value: e.meals?[1] == true ? 'noon' : ''),
+            // 'evening': FormControl<String>(
+            //     value: e.meals?[2] == true ? 'evening' : ''),
             'placeName': FormControl<String>(value: e.placeName),
             'placeStay': FormControl<String>(value: e.placeStay),
             'groups': FormArray(groups),
@@ -113,9 +122,9 @@ class ItineraryModel {
             '_id': FormControl<String>(value: ''),
             'date': FormControl<DateTime>(),
             'meals': FormControl<List<bool>>(value: []),
-            'morning': FormControl<bool>(value: false),
-            'noon': FormControl<bool>(value: false),
-            'evening': FormControl<bool>(value: false),
+            'morning': FormControl<String>(value: ''),
+            // 'noon': FormControl<String>(value: ''),
+            // 'evening': FormControl<String>(value: ''),
             'placeName': FormControl<String>(value: ''),
             'placeStay': FormControl<String>(value: ''),
             'groups': FormArray([
@@ -161,9 +170,19 @@ class ItineraryModel {
       formGroup.control('day').value.forEach(
         (element) {
           List<bool> meals = [];
-          meals.add(element['morning']);
-          meals.add(element['noon']);
-          meals.add(element['evening']);
+          if (element['morning'] == 'morning') {
+            meals.add(true);
+            meals.add(false);
+            meals.add(false);
+          } else if (element['morning'] == 'noon') {
+            meals.add(false);
+            meals.add(true);
+            meals.add(false);
+          } else if (element['morning'] == 'evening') {
+            meals.add(false);
+            meals.add(false);
+            meals.add(true);
+          }
 
           List<Group>? groups = [];
           element['groups'].forEach(

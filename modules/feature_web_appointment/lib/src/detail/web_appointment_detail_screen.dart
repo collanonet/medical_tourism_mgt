@@ -1438,30 +1438,30 @@ class _WebAppointmentDetailScreenState
                       );
                     },
                   ),
-                if (isConfirmed == null)
-                  if (formArray.controls.indexOf(currentForm) != -1 &&
-                      formArray.controls.indexOf(currentForm) != 0) ...{
-                    IconButton(
-                      icon: const Icon(Icons.delete_forever, color: Colors.red),
-                      onPressed: () {
-                        // Remove the form at the correct index
-                        formArray
-                            .removeAt(formArray.controls.indexOf(currentForm));
-                        print(
-                            "Index to remove: $formArray.controls.indexOf(currentForm)"); // Debugging line
-                      },
-                    )
-                  }
-
                 // if (isConfirmed == null)
-                //   if (formArray.controls.indexOf(currentForm) != 0) ...{
+                //   if (formArray.controls.indexOf(currentForm) != -1 &&
+                //       formArray.controls.indexOf(currentForm) != 0) ...{
                 //     IconButton(
                 //       icon: const Icon(Icons.delete_forever, color: Colors.red),
-                //       onPressed: () => formArray.removeAt(
-                //         formArray.controls.indexOf(currentForm),
-                //       ),
-                //     ),
+                //       onPressed: () {
+                //         // Remove the form at the correct index
+                //         formArray
+                //             .removeAt(formArray.controls.indexOf(currentForm));
+                //         print(
+                //             "Index to remove: $formArray.controls.indexOf(currentForm)"); // Debugging line
+                //       },
+                //     )
                 //   }
+
+                if (isConfirmed == null)
+                  if (formArray.controls.indexOf(currentForm) != 0) ...{
+                    IconButton(
+                      icon: const Icon(Icons.delete_forever, color: Colors.red),
+                      onPressed: () => formArray.removeAt(
+                        formArray.controls.indexOf(currentForm),
+                      ),
+                    ),
+                  }
               ],
             ),
           ),
