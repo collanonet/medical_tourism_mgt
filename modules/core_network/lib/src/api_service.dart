@@ -91,7 +91,10 @@ abstract class ApiService {
   });
 
   @GET(EndPoints.GET_PATIENTS)
-  Future<Paginated<Patient>> newChatPatients();
+  Future<Paginated<Patient>> newChatPatients({
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+  });
 
   @GET('${EndPoints.GET_PATIENT}/{id}')
   Future<Patient> patient(
@@ -1138,7 +1141,6 @@ abstract class ApiService {
     @Query('protonBeam') bool? protonBeam,
     @Query('regenerativeMedicine') bool? regenerativeMedicine,
     @Query('beauty') bool? beauty,
-
     @Query('location') String? location,
     @Query('rHave') String? rHave,
     // 病院種別 hospitalType

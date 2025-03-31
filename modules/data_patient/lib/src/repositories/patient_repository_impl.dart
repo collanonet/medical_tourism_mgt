@@ -1074,8 +1074,17 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
-  Future<Paginated<Patient>> newChatPatients() {
-    return remote.newChatPatients();
+  Future<Paginated<Patient>> newChatPatients(
+  {
+
+    int? page = 1,
+    int? limit = 10,
+}
+      ) {
+    return remote.newChatPatients(
+      page: page,
+      limit: limit,
+    );
   }
 
 

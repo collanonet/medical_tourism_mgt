@@ -1,5 +1,7 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -23,10 +25,10 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder3(
-        first: context.read<ChatModel>().patientData,
-        second: context.read<ChatModel>().chats,
-        third: context.read<ChatModel>().userId,
-        builder: (context, patientData, chats, userId, _) {
+        first: context.read<ChatModel>().chats,
+        second: context.read<ChatModel>().userId,
+        third: context.read<ChatModel>().tempChats,
+        builder: (context, chats, userId, tempChats, _) {
           return Row(
             children: [
               Expanded(
@@ -44,129 +46,13 @@ class _ChatScreenState extends State<ChatScreen> {
                       Expanded(
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height * 0.8,
-                          child: ValueListenableBuilder2(
-                              first: context.read<ChatModel>().patient,
-                              second: context.read<ChatModel>().chat,
-                              builder:
-                                  (context, selectedPatient, selectedChats, _) {
-                                return SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount: chats.data?.length ?? 0,
-                                          itemBuilder: (context, index) {
-                                            var item = chats.data?[index];
-                                            User? fromUser = item?.users
-                                                .firstWhere((element) =>
-                                                    element.id != userId);
-                                            return Container(
-                                              decoration: BoxDecoration(
-                                                color: index % 2 != 0
-                                                    ? Colors.white
-                                                    : const Color(0xffEDF8F8),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                                border: Border.all(
-                                                    color: selectedChats.data ==
-                                                            item
-                                                        ? Colors.blue
-                                                        : Colors.transparent,
-                                                    width: 1),
-                                              ),
-                                              child: ListTile(
-                                                onTap: () {
-                                                  context
-                                                      .read<ChatModel>()
-                                                      .selectChat(chat: item);
-                                                },
-                                                selected:
-                                                    selectedChats.data == item,
-                                                selectedColor: Colors.blue,
-                                                selectedTileColor: Colors.blue,
-                                                tileColor: index % 2 == 0
-                                                    ? context
-                                                        .appTheme.primaryColor
-                                                    : Colors.white,
-                                                title: Text(
-                                                  fromUser?.fullName ?? '-',
-                                                  style: TextStyle(
-                                                    color: context
-                                                        .appTheme.primaryColor,
-                                                    fontFamily: 'NotoSansJP',
-                                                    package: 'core_ui',
-                                                  ),
-                                                ),
-                                                subtitle: Text(
-                                                  item?.latestMessage
-                                                          ?.content ??
-                                                      '-',
-                                                ),
-                                              ),
-                                            );
-                                          }),
-                                      ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount:
-                                              patientData.data?.items.length ??
-                                                  0,
-                                          itemBuilder: (context, index) {
-                                            var item =
-                                                patientData.data?.items[index];
-                                            return Container(
-                                              decoration: BoxDecoration(
-                                                color: index % 2 != 0
-                                                    ? Colors.white
-                                                    : const Color(0xffEDF8F8),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                                border: Border.all(
-                                                    color: selectedPatient
-                                                                .data ==
-                                                            item
-                                                        ? Colors.blue
-                                                        : Colors.transparent,
-                                                    width: 1),
-                                              ),
-                                              child: ListTile(
-                                                onTap: () {
-                                                  context
-                                                      .read<ChatModel>()
-                                                      .selectChat();
-                                                  context
-                                                      .read<ChatModel>()
-                                                      .selectPatient(
-                                                          patient: item);
-                                                },
-                                                selected:
-                                                    selectedPatient.data ==
-                                                        item,
-                                                selectedColor: Colors.blue,
-                                                selectedTileColor: Colors.blue,
-                                                tileColor: index % 2 == 0
-                                                    ? context
-                                                        .appTheme.primaryColor
-                                                    : Colors.white,
-                                                title: Text(
-                                                  '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
-                                                  style: TextStyle(
-                                                    color: context
-                                                        .appTheme.primaryColor,
-                                                    fontFamily: 'NotoSansJP',
-                                                    package: 'core_ui',
-                                                  ),
-                                                ),
-                                                subtitle: Text(
-                                                    '${item?.firstNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.familyNameChineseOrVietnamese ?? '-'} / ${item?.firstNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.familyNameJapaneseForChinese ?? '-'} / ${item?.firstNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.familyNameJapaneseForNonChinese ?? '-'} '),
-                                              ),
-                                            );
-                                          }),
-                                    ],
-                                  ),
+                          child: ValueListenableBuilder(
+                              valueListenable: context.read<ChatModel>().chat,
+                              builder: (context, selectedChats, _) {
+                                return listChat(
+                                  tempChats.data ?? chats.data ?? [],
+                                  userId,
+                                  selectedChats.data,
                                 );
                               }),
                         ),
@@ -181,6 +67,53 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: MessageScreen(),
               ),
             ],
+          );
+        });
+  }
+
+  Widget listChat(List<Chat> chats, String? userId, Chat? selectedChats) {
+    return ListView.builder(
+        itemCount: chats.length,
+        itemBuilder: (context, index) {
+          var item = chats[index];
+          User? fromUser =
+              item.users.firstWhere((element) => element.id != userId);
+          return Container(
+            decoration: BoxDecoration(
+              color: index % 2 != 0 ? Colors.white : const Color(0xffEDF8F8),
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                  color:
+                      selectedChats == item ? Colors.blue : Colors.transparent,
+                  width: 1),
+            ),
+            child: ListTile(
+              onTap: () {
+                context.read<ChatModel>().selectChat(chat: item);
+              },
+              selected: selectedChats == item,
+              selectedColor: Colors.blue,
+              selectedTileColor: Colors.blue,
+              tileColor:
+                  index % 2 == 0 ? context.appTheme.primaryColor : Colors.white,
+              title: Text(
+                '${fromUser?.patient?.firstNameRomanized ?? '-'} ${fromUser?.patient?.middleNameRomanized ?? '-'} ${fromUser?.patient?.familyNameRomanized ?? '-'}',
+                style: TextStyle(
+                  color: context.appTheme.primaryColor,
+                  fontFamily: 'NotoSansJP',
+                  package: 'core_ui',
+                ),
+              ),
+              subtitle: Text(
+                item.latestMessage?.content ?? '-',
+              ),
+              trailing: Text(
+                item.latestMessage?.timestamp != null
+                    ? Strings.shortDateTimeName(item.latestMessage!.timestamp)
+                    : '-',
+                style: context.textTheme.bodySmall,
+              ),
+            ),
           );
         });
   }

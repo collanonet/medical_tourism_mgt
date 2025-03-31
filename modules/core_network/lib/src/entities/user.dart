@@ -19,6 +19,7 @@ class User {
   final DateTime updatedAt;
   final PermissionRole role;
   final bool isClosed;
+  final Patient? patient;
 
   User({
     required this.id,
@@ -31,6 +32,7 @@ class User {
     required this.updatedAt,
     required this.role,
     this.isClosed = false,
+    this.patient,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {

@@ -86,10 +86,10 @@ class Strings {
     }
   }
 
-  static shortDateTimeName(DateTime dateTime) {
+  static String shortDateTimeName(DateTime dateTime) {
     return Jiffy.parseFromDateTime(dateTime)
         .toLocal()
-        .format(pattern: 'dMMyy h mm a');
+        .format(pattern: 'dd/MMM hh:mm a');
   }
 
   // convert 10000.05 to 10,000.05

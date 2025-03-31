@@ -8,6 +8,7 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reactive_forms/src/models/models.dart';
 import 'package:socket_chat/socket_chat.dart';
 
 @injectable
@@ -26,12 +27,12 @@ class ChatModel {
   ValueNotifier<AsyncData<List<Message>>> messages =
       ValueNotifier(const AsyncData());
 
-  // ValueNotifier for patient data (existing functionality)
-  ValueNotifier<AsyncData<Paginated<Patient>>> patientData =
-      ValueNotifier(const AsyncData());
-
   // ValueNotifier for the list of chats
   ValueNotifier<AsyncData<List<Chat>>> chats = ValueNotifier(const AsyncData());
+
+  // ValueNotifier for the list of chats
+  ValueNotifier<AsyncData<List<Chat>>> tempChats =
+      ValueNotifier(const AsyncData());
 
   // ValueNotifier for the currently selected chat
   ValueNotifier<AsyncData<Chat>> chat = ValueNotifier(const AsyncData());
@@ -95,6 +96,7 @@ class ChatModel {
     try {
       final fetchedChats = await chatRepository.fetchChats();
       chats.value = AsyncData(data: fetchedChats);
+      patients();
     } catch (error) {
       logger.e('Error fetching chats: $error');
       chats.value = AsyncData(error: error);
@@ -199,37 +201,34 @@ class ChatModel {
   }
 
   // Fetch patients (existing functionality)
-  Future<void> patients() {
-    patientData.value = const AsyncData(loading: true);
 
-    return patientRepository.newChatPatients().then((value) {
-      patientData.value = AsyncData(data: value);
-    }).catchError((error) {
+  Future<void> patients() async {
+    try {
+      final value = await patientRepository.newChatPatients(
+        limit: 100,
+      );
+      final existingUserIds = <String>{};
+
+      for (var item in chats.value.requireData) {
+        for (var user in item.users) {
+          existingUserIds.add(user.id);
+        }
+      }
+
+      for (var patient in value.items) {
+        if (!existingUserIds.contains(patient.user)) {
+          await createChat(patient.user);
+        }
+      }
+    } catch (error) {
       logger.d(error);
-      patientData.value = AsyncData(error: error);
-    });
-  }
-
-  // Select a patient
-  ValueNotifier<AsyncData<Patient>> patient = ValueNotifier(const AsyncData());
-
-  void selectPatient({Patient? patient}) {
-    this.patient.value = AsyncData(data: patient);
+    }
   }
 
   // Select a chat
   void selectChat({Chat? chat}) {
     try {
       this.chat.value = AsyncData(data: chat);
-
-      var recipient =
-          chat?.users.firstWhere((element) => element.id != userId.value);
-
-      if (recipient != null) {
-        var data = patientData.value.requireData.items
-            .firstWhere((element) => element.user == recipient.id);
-        patient.value = AsyncData(data: data);
-      }
 
       if (chat?.id != null) {
         joinChat(chat!.id); // Join the selected chat
@@ -240,20 +239,22 @@ class ChatModel {
   }
 
   // Create a new chat
-  Future<void> createChat() async {
+  Future<void> createChat(String user1Id) async {
     try {
-      var result = await chatRepository
-          .createPrivateChat(patient.value.requireData.user);
+      var result = await chatRepository.createPrivateChat(user1Id);
       chat.value = AsyncData(data: result);
+      chats.value = AsyncData(
+        data: [
+          result,
+          ...?chats.value.data,
+        ],
+      );
       //
       // // Emit event to notify the server about the new chat
       // socketService.emit('newChat', {
       //   'userIds': result.users.map((user) => user.id).toList(),
       //   'creatorId': userId.value!,
       // });
-
-      // Refresh the chat list
-      fetchChats();
     } catch (e) {
       logger.e(e);
     }
@@ -265,6 +266,23 @@ class ChatModel {
       fetchChats();
     } catch (e) {
       logger.e(e);
+    }
+  }
+
+  void filterChat(String? value) {
+    if (value == null || value.isEmpty) {
+      chats.value = AsyncData(
+        data: chats.value.data,
+      );
+      tempChats.value = AsyncData();
+    } else {
+      tempChats.value = AsyncData(
+        data: chats.value.requireData
+            .where((element) =>
+                '${element.users.firstWhere((element) => element.patient != null).patient?.firstNameRomanized} ${element.users.firstWhere((element) => element.patient != null).patient?.middleNameRomanized} ${element.users.firstWhere((element) => element.patient != null).patient?.familyNameRomanized}'
+                    .contains(value))
+            .toList(),
+      );
     }
   }
 }

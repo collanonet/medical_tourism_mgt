@@ -17,6 +17,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       role: $enumDecode(_$PermissionRoleEnumMap, json['role']),
       isClosed: json['isClosed'] as bool? ?? false,
+      patient: json['patient'] == null
+          ? null
+          : Patient.fromJson(json['patient'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -30,6 +33,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'updatedAt': instance.updatedAt.toIso8601String(),
       'role': _$PermissionRoleEnumMap[instance.role]!,
       'isClosed': instance.isClosed,
+      'patient': instance.patient,
     };
 
 const _$PermissionRoleEnumMap = {

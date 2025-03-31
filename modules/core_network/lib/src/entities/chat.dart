@@ -12,13 +12,17 @@ class Chat {
   final bool isGroupChat;
   final List<User> users;
   final Message? latestMessage;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Chat({
     required this.id,
-     this.name,
+    this.name,
     required this.isGroupChat,
     required this.users,
     this.latestMessage,
+     this.createdAt,
+     this.updatedAt,
   });
 
   /// Factory method to parse JSON into a `Chat` object

@@ -40,14 +40,23 @@ class ChatFilter extends StatelessWidget {
                   SizedBox(
                     height: context.appTheme.spacing.marginExtraSmall,
                   ),
-                  ReactiveTextField(
+                  ReactiveTextField<String>(
                     formControlName: 'patientNameMessage',
-                    decoration: const InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.search,
-                        color: Colors.grey,
-                      ),
-                    ),
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.grey,
+                        ),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              context.read<ChatModel>().filterChat('');
+                              formGroup.control('patientNameMessage')
+                                  .updateValue('');
+                            },
+                            icon: Icon(Icons.clear))),
+                    onChanged: (value) {
+                      model.filterChat(value.value ?? '');
+                    },
                   ),
                 ],
               );

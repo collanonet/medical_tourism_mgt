@@ -24,8 +24,9 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    context.read<ChatModel>().fetchChats();
-    context.read<ChatModel>().patients();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ChatModel>().fetchChats();
+    });
   }
 
   @override
