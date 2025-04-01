@@ -8,6 +8,7 @@ class BasicInformationHospitalResponse {
   @JsonKey(name: '_id')
   String id;
   String? area;
+  String? hospitalID;
   String? hospitalNameChinese;
   String? hospitalNameKatakana;
   String? zipCode;
@@ -74,6 +75,7 @@ class BasicInformationHospitalResponse {
   BasicInformationHospitalResponse({
     required this.id,
     this.area,
+    this.hospitalID,
     this.hospitalNameChinese,
     this.hospitalNameKatakana,
     this.zipCode,

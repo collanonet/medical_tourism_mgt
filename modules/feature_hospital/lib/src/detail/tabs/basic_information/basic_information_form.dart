@@ -21,6 +21,7 @@ FormGroup basicInformationForm() {
       'hospitalNameChinese': FormControl<String>(
         validators: [Validators.required],
       ),
+      'hospitalID': FormControl<String>(),
       'hospitalNameKatakana': FormControl<String>(
         validators: [Validators.required],
       ),

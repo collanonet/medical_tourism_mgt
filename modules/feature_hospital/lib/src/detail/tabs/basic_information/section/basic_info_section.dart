@@ -238,6 +238,26 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('病院ID'),
+                                  SizedBox(
+                                    width: 300,
+                                    child: ReactiveTextField(
+                                      formControlName: 'hospitalID',
+                                      decoration: const InputDecoration(
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        hintText: '病院IDを入力',
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           Row(

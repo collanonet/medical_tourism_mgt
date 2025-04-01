@@ -874,8 +874,6 @@ class BasicInformationModel {
 }
 
 List<String> convertToList(Map<String, dynamic> element, String key) {
-  logger.d(' ggggg');
-  logger.d(element[key]);
   try {
     if ((element[key] as List).isNotEmpty) {
       List<String> data = [];
