@@ -579,6 +579,8 @@ class BasicInformationModel {
         ...deleteIdMedicalRecordHospitals.value,
         value,
       ];
+      logger.d(
+          'deleteIdMedicalRecordHospitals: ${deleteIdMedicalRecordHospitals.value}');
     } else {
       deleteIdMedicalRecordHospitals.value = [];
     }
@@ -592,6 +594,7 @@ class BasicInformationModel {
       medicalRecordBasicInfoData.value = const AsyncData(loading: true);
 
       for (var element in deleteIdMedicalRecordHospitals.value) {
+        logger.d('deleteIdMedicalRecordHospitals: $element');
         if (element.isNotEmpty) {
           try {
             await hospitalRepository
