@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -26,22 +27,24 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16), color: Colors.white),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                '医療ビザ管理',
-                style: context.textTheme.titleMedium,
-              ),
-            ],
-          ),
-        ),
+        ValueListenableBuilder(
+            valueListenable: context.read<MedicalVisaDetailModel>().patientData,
+            builder: (context, value, _) {
+              return Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.white),
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Text(
+                      '${value.data?.firstNameRomanized ?? '-'} ${value.data?.middleNameRomanized ?? '-'} ${value.data?.familyNameRomanized ?? '-'}',
+                      style: context.textTheme.titleSmall,
+                    )
+                  ],
+                ),
+              );
+            }),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,
         ),
@@ -63,10 +66,13 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                         valueListenable:
                             context.watch<MedicalVisaDetailModel>().patientData,
                         builder: (context, patient, _) {
-                          return value.hasData ? MedicalVisaPage(
-                            patient: patient.data,
-                            id: value.requireData.id,
-                          ) : const Center(child: CircularProgressIndicator());
+                          return value.hasData
+                              ? MedicalVisaPage(
+                                  patient: patient.data,
+                                  id: value.requireData.id,
+                                )
+                              : const Center(
+                                  child: CircularProgressIndicator());
                         }),
                   );
                 }),
