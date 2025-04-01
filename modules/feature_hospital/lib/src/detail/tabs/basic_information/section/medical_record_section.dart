@@ -218,9 +218,19 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                                 icon: const Icon(
                                                     Icons.delete_forever,
                                                     color: Colors.red),
-                                                onPressed: () => formArray
+                                                onPressed: () {
+                                                  if(currentForm.control('_id').value != null) {
+                                                    context
+                                                        .read<BasicInformationModel>()
+                                                        .deleteMedicalRecord(
+                                                            currentForm
+                                                                .control('_id')
+                                                                .value);
+                                                  }
+                                                  formArray
                                                     .removeAt(formArray.controls
-                                                        .indexOf(currentForm))),
+                                                        .indexOf(currentForm));
+                                                }),
                                         ],
                                       )
                                     ],

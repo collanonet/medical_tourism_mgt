@@ -18,6 +18,7 @@ class BasicInformationModel {
   BasicInformationModel({
     required this.hospitalRepository,
   });
+
   ValueNotifier<List<Area>> areaData = ValueNotifier([
     ...[
       "北海道",
@@ -69,7 +70,6 @@ class BasicInformationModel {
       "沖縄"
     ].map((e) => Area(item: e)),
   ]);
-
 
   final HospitalRepository hospitalRepository;
 
@@ -570,12 +570,37 @@ class BasicInformationModel {
     }
   }
 
+  ValueNotifier<List<String>> deleteIdMedicalRecordHospitals =
+      ValueNotifier([]);
+
+  void deleteMedicalRecord(String? value) {
+    if (value != null) {
+      deleteIdMedicalRecordHospitals.value = [
+        ...deleteIdMedicalRecordHospitals.value,
+        value,
+      ];
+    } else {
+      deleteIdMedicalRecordHospitals.value = [];
+    }
+  }
+
   Future<void> submitMedicalRecordBasicInfo(
       FormGroup formGroup, String hospitalId) async {
     try {
       List<MedicalRecordBasicInfoHospitalResponse> data =
           medicalRecordBasicInfoData.value.data ?? [];
       medicalRecordBasicInfoData.value = const AsyncData(loading: true);
+
+      for (var element in deleteIdMedicalRecordHospitals.value) {
+        if (element.isNotEmpty) {
+          try {
+            await hospitalRepository
+                .deleteMedicalRecordBasicInfoHospital(element);
+          } catch (e) {
+            logger.e('Error deleting medical record: $e');
+          }
+        }
+      }
 
       await formGroup
           .control('medicalRecordHospitals')
@@ -629,16 +654,16 @@ class BasicInformationModel {
 
       doctorInformationData.value = const AsyncData(loading: true);
 
-      for (var element in formGroup.control('deleteDoctors').value){
+      for (var element in formGroup.control('deleteDoctors').value) {
         if (element['_id'] != null) {
           try {
-            await hospitalRepository.deleteDoctorInformationHospital(element['_id']);
+            await hospitalRepository
+                .deleteDoctorInformationHospital(element['_id']);
           } catch (e) {
             logger.e('Error deleting doctor information: $e');
           }
         }
       }
-
 
       for (dynamic element in formGroup.control('addDoctorProfile').value) {
         String? file;
