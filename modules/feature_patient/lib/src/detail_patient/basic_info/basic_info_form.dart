@@ -87,6 +87,7 @@ FormGroup basicInfoForm({
           FormGroup({
             '_id': FormControl<String?>(),
             'hospitalName': FormControl<String?>(),
+            'hospitalData': FormControl<BasicInformationHospitalResponse>(),
             'medicalCardNumber': FormControl<String?>(),
           }),
         ]),

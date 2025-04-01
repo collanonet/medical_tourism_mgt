@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 // Flutter imports:
+import 'package:data_hospital/data_hospital.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,9 +16,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 class BasicInformationModel {
   BasicInformationModel({
     required this.patientRepository,
+    required this.hospitalRepository,
   });
 
   final PatientRepository patientRepository;
+  final HospitalRepository hospitalRepository;
 
   ValueNotifier<AsyncData<Patient>> patientData =
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
@@ -1105,6 +1108,10 @@ class BasicInformationModel {
 // //GET_MEDICAL_RECORD_HOSPITALS
   ValueNotifier<AsyncData<List<MedicalRecordHospital>>> medicalRecordHospitals =
       ValueNotifier<AsyncData<List<MedicalRecordHospital>>>(const AsyncData());
+
+  Future<List<BasicInformationHospitalResponse>> searchHospital(String name) async {
+    return await hospitalRepository.getHospitals(hospitalNameChinese: name);
+  }
 
   Future<void> getMedicalRecordHospitals({
     required String medicalRecordId,

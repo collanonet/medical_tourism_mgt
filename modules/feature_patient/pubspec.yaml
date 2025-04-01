@@ -16,6 +16,7 @@ dependencies:
   core_network: 0.0.1-alpha.1
   data_auth: 0.0.1-alpha.1
   data_patient: 0.0.1-alpha.1
+  data_hospital: 0.0.1-alpha.1
   data_web_appointment: 0.0.1-alpha.1
   feature_web_appointment: 0.0.1-alpha.1
 
