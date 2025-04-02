@@ -322,6 +322,7 @@ class WebAppointmentDetailModel {
           selectMorningAfternoonAllDay: element['choice'],
           timeZoneFrom: element['timePeriodFrom'],
           timeZoneTo: element['timePeriodTo'],
+          isConfirmed: element['isConfirmed'],
         ));
       });
       List<MessageFrom> messageFrom = [];
