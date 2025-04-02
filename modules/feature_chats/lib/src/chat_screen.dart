@@ -106,6 +106,8 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
               subtitle: Text(
                 item.latestMessage?.content ?? '-',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               trailing: Text(
                 item.latestMessage?.timestamp != null
