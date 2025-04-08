@@ -9,6 +9,7 @@ class MedicalRecordHospital {
   @JsonKey(name: '_id')
   final String id;
   String? hospitalName;
+  String? hospitalId;
   String? medicalCardNumber;
   String? medicalRecord;
   final DateTime createdAt;
@@ -17,6 +18,7 @@ class MedicalRecordHospital {
   MedicalRecordHospital({
     required this.id,
     this.hospitalName,
+    this.hospitalId,
     this.medicalCardNumber,
     this.medicalRecord,
     required this.createdAt,
@@ -28,17 +30,4 @@ class MedicalRecordHospital {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordHospitalToJson(this);
-
-  static FormGroup buildFormGroup(
-      MedicalRecordHospital? medicalRecordHospital) {
-    return FormGroup({
-      '_id': FormControl<String>(value: medicalRecordHospital?.id),
-      'hospitalName':
-          FormControl<String>(value: medicalRecordHospital?.hospitalName),
-      'medicalCardNumber':
-          FormControl<String>(value: medicalRecordHospital?.medicalCardNumber),
-      'medicalRecord':
-          FormControl<String>(value: medicalRecordHospital?.medicalRecord),
-    });
-  }
 }

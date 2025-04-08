@@ -64,7 +64,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: ReactiveTextField(
+                                    child: ReactiveTextField<String>(
                                       formControlName: 'hospitalName',
                                       decoration: const InputDecoration(
                                         label: Text(
@@ -75,6 +75,30 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                           color: Colors.grey,
                                         ),
                                       ),
+                                      onSubmitted: (value) async {
+                                        if (value.value != null &&
+                                            value.value!.isNotEmpty) {
+                                          final result = await context
+                                              .read<BasicInformationModel>()
+                                              .searchHospital(value.value!);
+
+                                          if (result != null) {
+                                            currentForm
+                                                    .control('hospitalName')
+                                                    .value =
+                                                result.hospitalNameChinese;
+                                            currentForm
+                                                .control('medicalCardNumber')
+                                                .value = result.hospitalID;
+                                            currentForm
+                                                .control('hospitalData')
+                                                .value = result;
+                                            currentForm
+                                                .control('hospitalId')
+                                                .value = result.id;
+                                          }
+                                        }
+                                      },
                                     ),
                                   ),
                                   SizedBox(

@@ -26,7 +26,7 @@ class BasicInformationModel {
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
 
   ValueNotifier<AsyncData<Patient>> loading =
-      ValueNotifier<AsyncData<Patient>>( const AsyncData());
+      ValueNotifier<AsyncData<Patient>>(const AsyncData());
 
   ValueNotifier<AsyncData<User>> userAccount =
       ValueNotifier<AsyncData<User>>(const AsyncData());
@@ -912,13 +912,13 @@ class BasicInformationModel {
           if (element.chatToolLink != null &&
               element.chatToolLink?.isNotEmpty == true) {
             for (var i = 0; i < element.chatToolLink!.length; i++) {
-                chatToolLink.add(
-                  FormGroup({
-                    'chatToolLink': FormControl<String>(
-                      value: element.chatToolLink?[i],
-                    ),
-                  }),
-                );
+              chatToolLink.add(
+                FormGroup({
+                  'chatToolLink': FormControl<String>(
+                    value: element.chatToolLink?[i],
+                  ),
+                }),
+              );
             }
           } else {
             chatToolLink.add(
@@ -1109,8 +1109,10 @@ class BasicInformationModel {
   ValueNotifier<AsyncData<List<MedicalRecordHospital>>> medicalRecordHospitals =
       ValueNotifier<AsyncData<List<MedicalRecordHospital>>>(const AsyncData());
 
-  Future<List<BasicInformationHospitalResponse>> searchHospital(String name) async {
-    return await hospitalRepository.getHospitals(hospitalNameChinese: name);
+  Future<BasicInformationHospitalResponse?> searchHospital(String name) async {
+    final result =
+        await hospitalRepository.getHospitals(hospitalNameChinese: name);
+    return result.firstOrNull;
   }
 
   Future<void> getMedicalRecordHospitals({
@@ -1133,21 +1135,30 @@ class BasicInformationModel {
     });
   }
 
-  void insertMedicalRecordHospitals({
+  Future<void> insertMedicalRecordHospitals({
     required List<MedicalRecordHospital> data,
     required FormArray formArray,
-  }) {
+  }) async {
     if (data.isNotEmpty) {
       formArray.clear();
       for (var element in data) {
-        formArray.add(
-          FormGroup({
-            '_id': FormControl<String?>(value: element.id),
-            'hospitalName': FormControl<String>(value: element.hospitalName),
-            'medicalCardNumber':
-                FormControl<String>(value: element.medicalCardNumber),
-          }),
-        );
+        if (element.hospitalId != null) {
+          final hospital = await hospitalRepository
+              .getBasicInformationHospital(element.hospitalId!);
+          formArray.add(
+            FormGroup({
+              '_id': FormControl<String?>(value: element.id),
+              'hospitalName':
+                  FormControl<String>(value: hospital.hospitalNameChinese),
+              'hospitalData': FormControl<BasicInformationHospitalResponse>(
+                value: hospital,
+              ),
+              'hospitalId': FormControl<String>(value: hospital.id),
+              'medicalCardNumber':
+                  FormControl<String>(value: hospital.hospitalID),
+            }),
+          );
+        }
       }
     }
   }
