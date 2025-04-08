@@ -22,7 +22,17 @@ class OverseasMedicalDataPage extends StatelessWidget {
     return Provider(
       create: (context) =>
           GetIt.I<OverseasMedicalDataModel>()..initialData(patient: patient),
-      child: const OverseasMedicalDataScreen(),
+      child: Builder(
+        builder: (context) {
+          return OverseasMedicalDataScreen(
+            onRefresh: () {
+              context.read<OverseasMedicalDataModel>().initialData(
+                    patient: patient,
+                  );
+            },
+          );
+        }
+      ),
     );
   }
 }

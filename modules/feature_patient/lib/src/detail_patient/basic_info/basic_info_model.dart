@@ -25,8 +25,8 @@ class BasicInformationModel {
   ValueNotifier<AsyncData<Patient>> patientData =
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
 
-  ValueNotifier<AsyncData> loading =
-      ValueNotifier<AsyncData>(const AsyncData());
+  ValueNotifier<AsyncData<Patient>> loading =
+      ValueNotifier<AsyncData<Patient>>( const AsyncData());
 
   ValueNotifier<AsyncData<User>> userAccount =
       ValueNotifier<AsyncData<User>>(const AsyncData());
@@ -111,7 +111,7 @@ class BasicInformationModel {
               form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
 
           logger.d('createUpdateAll');
-          loading.value = const AsyncData(data: true);
+          loading.value = AsyncData(data: patientData.value.requireData);
         } else {
           medicalRecord.value =
               const AsyncData(error: '黄色のボックスに患者様の個人情報をご入力ください');

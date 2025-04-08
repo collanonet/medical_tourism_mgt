@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:core_utils/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -17,8 +18,10 @@ class HospitalDICOMTab extends StatefulWidget {
   const HospitalDICOMTab({
     super.key,
     required this.medicalRecordOverseaData,
+    this.onRefresh,
   });
 
+  final Function? onRefresh;
   final MedicalRecordOverseaData medicalRecordOverseaData;
 
   @override
@@ -39,6 +42,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.medicalRecordOverseaData != widget.medicalRecordOverseaData) {
       medicalRecordOverseaData = widget.medicalRecordOverseaData;
+      setState(() {});
     }
   }
 
@@ -46,6 +50,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     medicalRecordOverseaData = widget.medicalRecordOverseaData;
+    setState(() {});
   }
 
   @override
@@ -61,28 +66,6 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
             return const SizedBox(height: 8);
           },
           children: [
-            if (medicalRecordOverseaData.commentDicomFile != null &&
-                medicalRecordOverseaData.commentDicomFile?.isNotEmpty == true)
-              ...medicalRecordOverseaData.commentDicomFile!
-                  .map((e) => TextFormField(
-                        controller: TextEditingController(
-                          text: e.comment ?? '',
-                        ),
-                        decoration: InputDecoration(
-                          isDense: true,
-                          label: Text(
-                            e.role == 'Admin'
-                                ? '管理者'
-                                : e.role == 'Hospital'
-                                    ? '病院'
-                                    : e.role == 'Agent'
-                                        ? 'エージェント'
-                                        : '',
-                          ),
-                        ),
-                        enabled: false,
-                        readOnly: true,
-                      )),
             ValueListenableBuilder(
                 valueListenable:
                     context.watch<OverseasMedicalDataModel>().submitComment,
@@ -90,7 +73,10 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                   return Skeletonizer(
                     enabled: value.data == true,
                     child: ReactiveFormBuilder(
-                        form: () => detailMedicalOverseaForm()..markAllAsTouched(),
+                        form: () => detailMedicalOverseaForm(
+                            data:
+                                medicalRecordOverseaData.commentDicomFile ?? [])
+                          ..markAllAsTouched(),
                         builder: (context, form, __) {
                           return ValueListenableListener(
                             valueListenable: context
@@ -103,7 +89,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                                   .value;
 
                               if (data.hasData) {
-                                form.reset();
+                                widget.onRefresh?.call();
                                 medicalRecordOverseaData = data.requireData;
                                 setState(() {});
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -113,19 +99,98 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                                 );
                               }
                             },
-                            child: ReactiveTextField(
-                              formControlName: 'comment',
-                              decoration: const InputDecoration(
-                                isDense: true,
-                                hintText: '病院名',
-                              ),
-                              onSubmitted: (control) {
-                                context
-                                    .read<OverseasMedicalDataModel>()
-                                    .commentDicomFile(
-                                      widget.medicalRecordOverseaData.id ?? '',
-                                      control.value?.toString() ?? '',
-                                    );
+                            child: ReactiveFormArray(
+                              formArrayName: 'comments',
+                              builder: (context, formArray, child) {
+                                final rows = formArray.controls
+                                    .map((control) => control as FormGroup)
+                                    .map((currentForm) => ReactiveForm(
+                                        formGroup: currentForm,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child:
+                                                  ReactiveValueListenableBuilder(
+                                                      formControlName: 'role',
+                                                      builder: (context,
+                                                          control, _) {
+                                                        return ReactiveTextField<
+                                                            String>(
+                                                          formControlName:
+                                                              'comment',
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText: control
+                                                                        .value ==
+                                                                    'Admin'
+                                                                ? '管理者'
+                                                                : control.value ==
+                                                                        'Hospital'
+                                                                    ? '病院'
+                                                                    : control.value ==
+                                                                            'Agent'
+                                                                        ? 'エージェント'
+                                                                        : 'コメント',
+                                                            isDense: true,
+                                                          ),
+                                                        );
+                                                      }),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                formArray.removeAt(formArray
+                                                    .controls
+                                                    .indexOf(currentForm));
+                                              },
+                                              icon: Icon(
+                                                Icons.remove_circle,
+                                              ),
+                                            ),
+                                          ],
+                                        )));
+                                return ColumnSeparated(
+                                  separatorBuilder:
+                                      (BuildContext context, int index) =>
+                                          const SizedBox(height: 8),
+                                  children: [
+                                    ColumnSeparated(
+                                      separatorBuilder:
+                                          (BuildContext context, int index) =>
+                                              const Divider(),
+                                      children: rows.toList(),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+                                              formArray.add(FormGroup({
+                                                'comment':
+                                                    FormControl<String>(),
+                                                'role': FormControl<String>(
+                                                    value: 'Admin'),
+                                              }));
+                                            },
+                                            child: Text('さらに追加します')),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            context
+                                                .read<
+                                                    OverseasMedicalDataModel>()
+                                                .commentDicomFile(
+                                                  widget
+                                                      .medicalRecordOverseaData
+                                                      .id,
+                                                  form,
+                                                );
+                                          },
+                                          child: const Text('送信'),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                );
                               },
                             ),
                           );

@@ -20,7 +20,12 @@ import 'popup/detail_medical_oversea_data/detail_medical_oversea_data_screen.dar
 import 'popup/summary_medical_oversea_data_screen.dart';
 
 class OverseasMedicalDataScreen extends StatefulWidget {
-  const OverseasMedicalDataScreen({super.key});
+  const OverseasMedicalDataScreen({
+    super.key,
+    this.onRefresh,
+  });
+
+  final Function? onRefresh;
 
   @override
   State<OverseasMedicalDataScreen> createState() =>
@@ -546,6 +551,9 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
             content: DetailMedicalOverseaDataScreen(
               medicalRecordOverseaDatas: data,
               index: index,
+              onRefresh: () {
+                widget.onRefresh?.call();
+              },
             ),
             actions: [
               OutlinedButton(

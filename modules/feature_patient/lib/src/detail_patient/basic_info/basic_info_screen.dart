@@ -18,6 +18,7 @@ class BasicInformationScreen extends StatelessWidget {
   const BasicInformationScreen({
     super.key,
   });
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -131,7 +132,11 @@ class BasicInformationScreen extends StatelessWidget {
                 final value =
                     context.read<BasicInformationModel>().loading.value;
                 if (value.hasData) {
-                  logger.d('loading');
+                  context.router.replaceAll([
+                    DetailPatientRoute(
+                      patient: value.requireData,
+                    )
+                  ]);
                   snackBarWidget(
                     message: '正常に保存されました',
                     prefixIcon:

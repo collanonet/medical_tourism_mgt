@@ -179,7 +179,7 @@ class OverseasMedicalDataModel {
 
   void commentDicomFile(
     String id,
-    String comment,
+    FormGroup comments,
   ) async {
     try {
       submitComment.value = const AsyncData(loading: true);
@@ -187,20 +187,18 @@ class OverseasMedicalDataModel {
           .value.requireData
           .firstWhere((element) => element.id == id);
 
-      CommentDicomFile commentDicomFile = CommentDicomFile(
-        comment: comment,
-        role: 'Admin',
-      );
+      List<CommentDicomFile> commentDicomFile = [];
 
-      if (data.commentDicomFile != null) {
-        data.commentDicomFile!.add(commentDicomFile);
-      } else {
-        data.commentDicomFile = [commentDicomFile];
+      for (var i = 0; i < comments.control('comments').value.length; i++) {
+        commentDicomFile.add(CommentDicomFile(
+          comment: comments.control('comments').value[i]['comment'],
+          role: comments.control('comments').value[i]['role'],
+        ));
       }
 
       var request = MedicalRecordOverseaDataRequest(
         file: data.file,
-        commentDicomFile: data.commentDicomFile,
+        commentDicomFile: commentDicomFile,
         hospitalName: data.hospitalName,
         category: data.category,
         documentName: data.documentName,

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +15,10 @@ class DetailMedicalOverseaDataScreen extends StatefulWidget {
     super.key,
     required this.medicalRecordOverseaDatas,
     required this.index,
+    this.onRefresh,
   });
 
+  final Function? onRefresh;
   final int index;
   final List<MedicalRecordOverseaData> medicalRecordOverseaDatas;
 
@@ -26,18 +29,21 @@ class DetailMedicalOverseaDataScreen extends StatefulWidget {
 
 class _DetailMedicalOverseaDataScreenState
     extends State<DetailMedicalOverseaDataScreen> {
-  final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
-
-  late List<String> _tabs = const [
-    '北京協和病院_DICOM',
-    '中国人民解放軍総病院_診断書',
-    '四川大学華西病院_DICOM',
-  ];
+  late List<String> _tabs;
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex.value = widget.index;
+    _tabs = widget.medicalRecordOverseaDatas
+        .map((e) => e.hospitalName.toString())
+        .toList();
+  }
+
+  @override
+  void didUpdateWidget(
+      covariant DetailMedicalOverseaDataScreen oldWidget,
+      ) {
+    super.didUpdateWidget(oldWidget);
     _tabs = widget.medicalRecordOverseaDatas
         .map((e) => e.hospitalName.toString())
         .toList();
@@ -45,35 +51,45 @@ class _DetailMedicalOverseaDataScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ValueListenableBuilder<int>(
-          valueListenable: _selectedIndex,
-          builder: (BuildContext context, int value, Widget? child) {
-            return TabBarWidget(
-              selectedIndex: value,
-              menu: _tabs,
-              onPressed: (index) {
-                _selectedIndex.value = index;
-              },
-            );
-          },
+    return DefaultTabController(
+      length: _tabs.length,
+      initialIndex: widget.index,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TabBar(
+              isScrollable: true,
+              labelColor: context.appTheme.primaryColor,
+              unselectedLabelColor: context.appTheme.primaryColor,
+              indicatorColor: context.appTheme.primaryColor,
+              indicatorWeight: 2,
+              labelStyle: context.textTheme.titleSmall,
+              unselectedLabelStyle: context.textTheme.titleSmall,
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  context.appTheme.spacing.borderRadiusMedium,
+                ),
+                color: context.appTheme.primaryColor.withOpacity(0.1),
+              ),
+              tabs: _tabs.map((tab) => Tab(text: tab)).toList(),
+            ),
+            Expanded(
+              child: TabBarView(
+                children: widget.medicalRecordOverseaDatas
+                    .map((e) => HospitalDICOMTab(
+                  medicalRecordOverseaData: e,
+                  onRefresh: widget.onRefresh,
+                ))
+                    .toList(),
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          child: ValueListenableBuilder<int>(
-            valueListenable: _selectedIndex,
-            builder: (context, index, child) {
-              return widget.medicalRecordOverseaDatas
-                  .map((e) => HospitalDICOMTab(
-                        medicalRecordOverseaData: e,
-                      ))
-                  .toList()[index];
-            },
-          ),
-        )
-      ],
+      ),
     );
   }
 }
