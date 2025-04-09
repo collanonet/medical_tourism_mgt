@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:core_network/core_network.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -76,6 +78,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                         ),
                                       ),
                                       onSubmitted: (value) async {
+                                        logger.d(value.value);
                                         if (value.value != null &&
                                             value.value!.isNotEmpty) {
                                           final result = await context
@@ -83,6 +86,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                               .searchHospital(value.value!);
 
                                           if (result != null) {
+                                            logger.d('start insert');
                                             currentForm
                                                     .control('hospitalName')
                                                     .value =
@@ -169,9 +173,12 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                   InkWell(
                     onTap: () => formArray.add(
                       FormGroup({
-                        '_id': FormControl<String?>(),
-                        'hospitalName': FormControl<String?>(),
-                        'medicalCardNumber': FormControl<String?>(),
+                        '_id': FormControl<String>(),
+                        'hospitalName': FormControl<String>(),
+                        'hospitalData':
+                            FormControl<BasicInformationHospitalResponse>(),
+                        'hospitalId': FormControl<String>(),
+                        'medicalCardNumber': FormControl<String>(),
                       }),
                     ),
                     child: Row(

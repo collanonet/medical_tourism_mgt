@@ -1147,7 +1147,7 @@ class BasicInformationModel {
               .getBasicInformationHospital(element.hospitalId!);
           formArray.add(
             FormGroup({
-              '_id': FormControl<String?>(value: element.id),
+              '_id': FormControl<String>(value: element.id),
               'hospitalName':
                   FormControl<String>(value: hospital.hospitalNameChinese),
               'hospitalData': FormControl<BasicInformationHospitalResponse>(

@@ -43,7 +43,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                       '病院・クリニック検索',
                       style: context.textTheme.titleMedium,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         Expanded(
@@ -134,6 +134,17 @@ class _HospitalFilterState extends State<HospitalFilter> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          model.fetchHospitals(form: formGroup);
+                        },
+                        child: const Text('検索'),
+                      ),
+                    ],)
                   ],
                 ),
               );

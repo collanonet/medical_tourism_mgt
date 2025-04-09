@@ -85,11 +85,11 @@ FormGroup basicInfoForm({
         'deletedMedicalRecordHospitals': FormControl<List<String>>(value: []),
         'MEDICAL_RECORD_HOSPITALS': FormArray([
           FormGroup({
-            '_id': FormControl<String?>(),
-            'hospitalName': FormControl<String?>(),
+            '_id': FormControl<String>(),
+            'hospitalName': FormControl<String>(),
             'hospitalData': FormControl<BasicInformationHospitalResponse>(),
-            'hospitalId': FormControl<String?>(),
-            'medicalCardNumber': FormControl<String?>(),
+            'hospitalId': FormControl<String>(),
+            'medicalCardNumber': FormControl<String>(),
           }),
         ]),
         'travelGroup': FormGroup({
