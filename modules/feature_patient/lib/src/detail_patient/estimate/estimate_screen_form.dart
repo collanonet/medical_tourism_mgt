@@ -47,7 +47,7 @@ class EstimateScreenForm extends StatelessWidget {
                             var logoFile = control.value;
                             return InkWell(
                               onTap: () {
-                                filePicker().then((value) {
+                                imagePicker().then((value) {
                                   form.control('logoFile').value = value;
                                 });
                               },
@@ -114,7 +114,7 @@ class EstimateScreenForm extends StatelessWidget {
                                               ),
                                               ElevatedButton(
                                                 onPressed: () {
-                                                  filePicker().then(
+                                                  imagePicker().then(
                                                     (value) {
                                                       form
                                                           .control('logoFile')
@@ -138,7 +138,7 @@ class EstimateScreenForm extends StatelessWidget {
                             var stampFile = control.value;
                             return InkWell(
                               onTap: () {
-                                filePicker().then((value) {
+                                imagePicker().then((value) {
                                   form.control('stampFile').value = value;
                                 });
                               },
@@ -206,7 +206,7 @@ class EstimateScreenForm extends StatelessWidget {
                                               ),
                                               ElevatedButton(
                                                 onPressed: () {
-                                                  filePicker().then(
+                                                  imagePicker().then(
                                                     (value) {
                                                       form
                                                           .control('stampFile')
