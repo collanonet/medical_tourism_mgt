@@ -259,7 +259,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                                     ? value.value?.filename ??
                                                         value.value?.url ??
                                                         ''
-                                                    : 'パスポートを選択してください',
+                                                    : '',
                                                 style: context
                                                     .textTheme.bodyMedium,
                                               ),
@@ -286,7 +286,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   formGroup.control('visaFile').value = value;
                                 },
                                 child: const Text(
-                                  'パスポートをアップロードする',
+                                  'パスポートをドロップ',
                                 ),
                               )
                             ],
