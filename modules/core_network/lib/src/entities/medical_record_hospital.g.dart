@@ -11,6 +11,7 @@ MedicalRecordHospital _$MedicalRecordHospitalFromJson(
     MedicalRecordHospital(
       id: json['_id'] as String,
       hospitalName: json['hospitalName'] as String?,
+      hospitalId: json['hospitalId'] as String?,
       medicalCardNumber: json['medicalCardNumber'] as String?,
       medicalRecord: json['medicalRecord'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
@@ -22,6 +23,7 @@ Map<String, dynamic> _$MedicalRecordHospitalToJson(
     <String, dynamic>{
       '_id': instance.id,
       'hospitalName': instance.hospitalName,
+      'hospitalId': instance.hospitalId,
       'medicalCardNumber': instance.medicalCardNumber,
       'medicalRecord': instance.medicalRecord,
       'createdAt': instance.createdAt.toIso8601String(),

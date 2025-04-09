@@ -36,6 +36,7 @@ MedicalRecordRequest _$MedicalRecordRequestFromJson(
           : DateTime.parse(json['advancePaymentDate'] as String),
       receivingMethod: json['receivingMethod'] as String?,
       memo: json['memo'] as String?,
+      visaFile: json['visaFile'] as String?,
       patient: json['patient'] as String,
     );
 
@@ -56,6 +57,7 @@ Map<String, dynamic> _$MedicalRecordRequestToJson(
       'progress': instance.progress,
       'advancePaymentDate': instance.advancePaymentDate?.toIso8601String(),
       'receivingMethod': instance.receivingMethod,
+      'visaFile': instance.visaFile,
       'memo': instance.memo,
       'patient': instance.patient,
     };

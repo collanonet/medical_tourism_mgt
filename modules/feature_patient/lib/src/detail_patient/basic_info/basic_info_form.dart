@@ -81,6 +81,7 @@ FormGroup basicInfoForm({
         ),
         'receivingMethod': FormControl<String>(),
         'memo': FormControl<String>(value: ''),
+        'visaFile': FormControl<FileSelect>(),
         'patient': FormControl<String>(value: patientId),
         'deletedMedicalRecordHospitals': FormControl<List<String>>(value: []),
         'MEDICAL_RECORD_HOSPITALS': FormArray([

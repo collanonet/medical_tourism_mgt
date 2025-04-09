@@ -20,6 +20,7 @@ class MedicalRecordRequest {
   DateTime? advancePaymentDate;
   String? receivingMethod;
 
+  String? visaFile;
   String? memo;
   String patient;
 
@@ -39,6 +40,7 @@ class MedicalRecordRequest {
     this.advancePaymentDate,
     this.receivingMethod,
     this.memo,
+    this.visaFile,
     required this.patient,
   });
 

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -208,8 +209,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               IntrinsicWidth(
                                 child: ReactiveTextField<double>(
                                   formControlName: 'weight',
-                                  keyboardType: const TextInputType.numberWithOptions(
-                                      decimal: true),
+                                  keyboardType:
+                                      const TextInputType.numberWithOptions(
+                                          decimal: true),
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -227,19 +229,58 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   ],
                                 ),
                               ),
-                              // SizedBox(
-                              //   width: context.appTheme.spacing.marginMedium,
-                              // ),
-                              // IntrinsicWidth(
-                              //   child: ElevatedButton(
-                              //     onPressed: () {
-                              //       snackBarWidget(message: 'まだ開発中');
-                              //     },
-                              //     child: const Text(
-                              //       'パスポートを表示する',
-                              //     ),
-                              //   ),
-                              // )
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              ReactiveValueListenableBuilder<FileSelect>(
+                                formControlName: 'visaFile',
+                                builder: (context, value, child) {
+                                  return value.value != null
+                                      ? Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                showPreviewFile(context,
+                                                    fileSelect: value.value!);
+                                              },
+                                              child: Text(
+                                                value.value != null
+                                                    ? value.value?.filename ??
+                                                        value.value?.url ??
+                                                        ''
+                                                    : 'パスポートを選択してください',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              ),
+                                            ),
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.remove_circle,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                formGroup
+                                                    .control('visaFile')
+                                                    .value = null;
+                                              },
+                                            ),
+                                          ],
+                                        )
+                                      : SizedBox();
+                                },
+                              ),
+                              IntrinsicWidth(
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    final value = await filePicker();
+                                    formGroup.control('visaFile').value = value;
+                                  },
+                                  child: const Text(
+                                    'パスポートをアップロードする',
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),

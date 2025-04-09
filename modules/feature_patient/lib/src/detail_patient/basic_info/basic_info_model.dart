@@ -621,6 +621,9 @@ class BasicInformationModel {
     formGroup.control('advancePaymentDate').value = data?.advancePaymentDate;
     formGroup.control('receivingMethod').value = data?.receivingMethod;
     formGroup.control('memo').value = data?.memo;
+    formGroup.control('visaFile').value = FileSelect(
+      url: data?.visaFile
+    );
     formGroup.control('patient').value = data?.patient;
   }
 
@@ -641,6 +644,28 @@ class BasicInformationModel {
         }
       }
 
+      String? file;
+      if(form.control('visaFile').value != null){
+        FileSelect docFile = form.control('visaFile').value;
+
+        if (docFile.file != null) {
+          String filename =
+              '${DateTime.now().millisecondsSinceEpoch}.${docFile.filename!.split('.').last}';
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              filename,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          file = docFile.url;
+        }
+      }
+
       MedicalRecordRequest request = MedicalRecordRequest(
         dateOfBirth: form.control('dateOfBirth').value,
         age: form.control('age').value ?? 0,
@@ -658,6 +683,7 @@ class BasicInformationModel {
             form.control('advancePaymentDate').value as DateTime?,
         receivingMethod: form.control('receivingMethod').value,
         memo: form.control('memo').value,
+        visaFile: file,
         patient: patientData.value.requireData.id,
       );
       if (form.control('_id').value != null) {

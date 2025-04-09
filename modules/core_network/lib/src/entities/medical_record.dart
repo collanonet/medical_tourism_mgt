@@ -21,6 +21,7 @@ class MedicalRecord {
   String? progress;
   DateTime? advancePaymentDate;
   String? receivingMethod;
+  String? visaFile;
 
   String? memo;
   String patient;
@@ -46,6 +47,7 @@ class MedicalRecord {
     this.advancePaymentDate,
     this.receivingMethod,
     this.memo,
+    this.visaFile,
     required this.patient,
     required this.createdAt,
     required this.updatedAt,
