@@ -7,7 +7,6 @@ abstract class AgentRepository {
     String? nameKana,
     String? country,
     String? area,
-    String? fullNameJapaneseKanjiChineseOnly,
     int? pastCasesNumber,
   });
 

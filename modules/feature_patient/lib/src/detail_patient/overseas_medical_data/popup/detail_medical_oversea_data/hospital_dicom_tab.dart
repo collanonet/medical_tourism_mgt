@@ -120,17 +120,18 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                                                               'comment',
                                                           decoration:
                                                               InputDecoration(
-                                                            labelText: control
-                                                                        .value ==
-                                                                    'Admin'
-                                                                ? '管理者'
-                                                                : control.value ==
-                                                                        'Hospital'
-                                                                    ? '病院'
-                                                                    : control.value ==
-                                                                            'Agent'
-                                                                        ? 'エージェント'
-                                                                        : 'コメント',
+                                                                labelText: 'コメント',
+                                                            // labelText: control
+                                                            //             .value ==
+                                                            //         'Admin'
+                                                            //     ? '管理者'
+                                                            //     : control.value ==
+                                                            //             'Hospital'
+                                                            //         ? '病院'
+                                                            //         : control.value ==
+                                                            //                 'Agent'
+                                                            //             ? 'エージェント'
+                                                            //             : 'コメント',
                                                             isDense: true,
                                                           ),
                                                         );
@@ -185,7 +186,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                                                   form,
                                                 );
                                           },
-                                          child: const Text('送信'),
+                                          child: const Text('保存する'),
                                         ),
                                       ],
                                     ),

@@ -48,7 +48,6 @@ class AgentRepositoryIml extends AgentRepository {
     String? nameKana,
     String? country,
     String? area,
-    String? fullNameJapaneseKanjiChineseOnly,
     int? pastCasesNumber,
   }) {
     return remote.getAgents(
@@ -56,7 +55,6 @@ class AgentRepositoryIml extends AgentRepository {
       nameKana: nameKana,
       country: country,
       area: area,
-      fullNameJapaneseKanjiChineseOnly: fullNameJapaneseKanjiChineseOnly,
       pastCasesNumber: pastCasesNumber,
     );
   }

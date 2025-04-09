@@ -16,7 +16,6 @@ class AgentRemoteProvider {
     String? nameKana,
     String? country,
     String? area,
-    String? fullNameJapaneseKanjiChineseOnly,
     int? pastCasesNumber,
   }) async {
     return await apiService.getAgents(
@@ -24,7 +23,6 @@ class AgentRemoteProvider {
       nameKana: nameKana,
       country: country,
       area: area,
-      fullNameJapaneseKanjiChineseOnly: fullNameJapaneseKanjiChineseOnly,
       pastCasesNumber: pastCasesNumber,
     );
   }

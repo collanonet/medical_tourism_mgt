@@ -12,7 +12,6 @@ FormGroup formFilterPatient() => FormGroup(
         'pastCasesNumber': FormControl<int>(),
         'country': FormControl<String?>(),
         'area': FormControl<String?>(),
-        'fullNameJapaneseKanjiChineseOnly': FormControl<String?>(),
       },
     );
 

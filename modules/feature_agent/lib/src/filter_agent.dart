@@ -176,14 +176,7 @@ class AgentFilter extends StatelessWidget {
                                 '患者名',
                                 style: context.textTheme.bodySmall,
                               ),
-                              SizedBox(
-                                height:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              ReactiveTextField(
-                                formControlName:
-                                    'fullNameJapaneseKanjiChineseOnly',
-                              ),
+
                             ],
                           ),
                         ),

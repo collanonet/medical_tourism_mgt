@@ -38,7 +38,6 @@ class AgentModel with ChangeNotifier {
       area: form?.control('area').value == null
           ? null
           : form!.control('area').value,
-      fullNameJapaneseKanjiChineseOnly: form?.control('fullNameJapaneseKanjiChineseOnly').value == null ? null : form!.control('fullNameJapaneseKanjiChineseOnly').value,
       pastCasesNumber: form?.control('pastCasesNumber').value == null
           ? null
           : form!.control('pastCasesNumber').value,
@@ -48,8 +47,6 @@ class AgentModel with ChangeNotifier {
       logger.d(value.length);
     }).catchError((error) {
       agents.value = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
     });
   }
 }
