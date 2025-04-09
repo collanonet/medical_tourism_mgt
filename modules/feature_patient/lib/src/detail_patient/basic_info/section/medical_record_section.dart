@@ -235,7 +235,17 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               ReactiveValueListenableBuilder<FileSelect>(
                                 formControlName: 'visaFile',
                                 builder: (context, value, child) {
-                                  return value.value != null
+                                  final path = value.value?.url?.isNotEmpty ==
+                                          true
+                                      ? value.value!.url!
+                                      : (value.value?.filename?.isNotEmpty ==
+                                              true
+                                          ? value.value!.filename!
+                                          : null);
+
+                                  return value.value != null &&
+                                          path != null &&
+                                          path.isNotEmpty
                                       ? Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
@@ -270,15 +280,13 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                       : SizedBox();
                                 },
                               ),
-                              IntrinsicWidth(
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    final value = await filePicker();
-                                    formGroup.control('visaFile').value = value;
-                                  },
-                                  child: const Text(
-                                    'パスポートをアップロードする',
-                                  ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  final value = await filePicker();
+                                  formGroup.control('visaFile').value = value;
+                                },
+                                child: const Text(
+                                  'パスポートをアップロードする',
                                 ),
                               )
                             ],
