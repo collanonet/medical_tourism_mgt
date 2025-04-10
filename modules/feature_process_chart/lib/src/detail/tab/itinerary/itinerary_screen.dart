@@ -2,6 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:feature_process_chart/src/detail/tab/itinerary/search/search_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -19,6 +20,7 @@ class ItineraryScreen extends StatefulWidget {
 
 class _ItineraryScreenState extends State<ItineraryScreen> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableListener(
@@ -50,26 +52,22 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                       children: [
                         const SizedBox(height: 10),
                         ReactiveFormArray(
-                          formArrayName: 'patient',
+                          formArrayName: 'patients',
                           builder: (context, formArray, child) {
-                            final rows = formArray.controls
-                                .map((control) => control as FormGroup)
-                                .map(
-                                  (currentForm) => ReactiveForm(
-                                    formGroup: currentForm,
-                                    child: SizedBox(
-                                      width: 250,
-                                      child: ReactiveTextField(
-                                        formControlName: 'patientName',
-                                        decoration: const InputDecoration(
-                                          label: Text(
-                                            '患者名',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                            final rows = formArray.controls.asMap().entries.map(
+                                  (entry) {
+                                final index = entry.key;
+                                logger.d(index);
+                                final currentForm = entry.value as FormGroup;
+
+                                return SearchPatient(
+                                  currentForm: currentForm,
+                                  // remove: () {
+                                  //   formArray.removeAt(index);
+                                  // },
                                 );
+                              },
+                            );
 
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -440,13 +438,14 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                         onTap: () => formArray.add(
                           FormGroup(
                             {
+                              '_id': FormControl<String>(value: ''),
                               'date': FormControl<DateTime>(),
                               // 日付
-
+                              'meals': FormControl<List<bool>>(value: []),
                               //meals
-                              'morning': FormControl<bool>(value: false),
-                              'noon': FormControl<bool>(value: false),
-                              'evening': FormControl<bool>(value: false),
+                              'morning': FormControl<String>(value: ''),
+                              // 'noon': FormControl<String>(value: ''),
+                              // 'evening': FormControl<String>(value: ''),
 
                               'placeName': FormControl<String>(value: ''),
                               // 地名
@@ -461,6 +460,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                         [
                                           FormGroup(
                                             {
+                                              '_id': FormControl<String>(),
                                               'placeName': FormControl<String>(
                                                   value: ''), // 地名
                                               'timeFrom': FormControl<String>(
@@ -580,23 +580,21 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                     onTap: () => formArray.add(
                       FormGroup(
                         {
-                          'groups': FormControl<String>(value: ''),
-                          // グループ番号
                           'tasks': FormArray(
                             [
                               FormGroup(
                                 {
-                                  'placeName': FormControl<String>(value: ''),
-                                  // 地名
-                                  'timeFrom': FormControl<String>(value: ''),
-                                  // 時刻（自）
-                                  'timeTo': FormControl<String>(value: ''),
-                                  // 時刻（至）
+                                  '_id': FormControl<String>(),
+                                  'placeName':
+                                      FormControl<String>(value: ''), // 地名
+                                  'timeFrom':
+                                      FormControl<String>(value: ''), // 時刻（自）
+                                  'timeTo':
+                                      FormControl<String>(value: ''), // 時刻（至）
                                   'transportation':
-                                      FormControl<String>(value: ''),
-                                  // 交通
-                                  'itinerary': FormControl<String>(value: ''),
-                                  // 行程
+                                      FormControl<String>(value: ''), // 交通
+                                  'itinerary':
+                                      FormControl<String>(value: ''), // 行程
                                 },
                               ),
                             ],

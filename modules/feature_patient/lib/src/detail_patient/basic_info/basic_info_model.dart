@@ -1168,23 +1168,21 @@ class BasicInformationModel {
     if (data.isNotEmpty) {
       formArray.clear();
       for (var element in data) {
-        if (element.hospitalId != null) {
-          final hospital = await hospitalRepository
-              .getBasicInformationHospital(element.hospitalId!);
+          final hospital = element.hospitalId != null ? await hospitalRepository
+              .getBasicInformationHospital(element.hospitalId!) : null;
           formArray.add(
             FormGroup({
               '_id': FormControl<String>(value: element.id),
               'hospitalName':
-                  FormControl<String>(value: hospital.hospitalNameChinese),
+                  FormControl<String>(value: hospital?.hospitalNameChinese ?? element.hospitalName),
               'hospitalData': FormControl<BasicInformationHospitalResponse>(
                 value: hospital,
               ),
-              'hospitalId': FormControl<String>(value: hospital.id),
+              'hospitalId': FormControl<String>(value: hospital?.id ?? element.hospitalId),
               'medicalCardNumber':
-                  FormControl<String>(value: hospital.hospitalID),
+                  FormControl<String>(value: hospital?.hospitalID ?? element.medicalCardNumber),
             }),
           );
-        }
       }
     }
   }

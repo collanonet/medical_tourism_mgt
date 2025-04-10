@@ -11,6 +11,9 @@ DetailIneraryRequest _$DetailIneraryRequestFromJson(
     DetailIneraryRequest(
       patient:
           (json['patient'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      patients: (json['patients'] as List<dynamic>?)
+          ?.map((e) => PatientTour.fromJson(e as Map<String, dynamic>))
+          .toList(),
       tourName: json['tourName'] as String?,
       peopleNumber: (json['peopleNumber'] as num?)?.toInt(),
       group: (json['group'] as num?)?.toInt(),
@@ -22,6 +25,7 @@ Map<String, dynamic> _$DetailIneraryRequestToJson(
         DetailIneraryRequest instance) =>
     <String, dynamic>{
       'patient': instance.patient,
+      'patients': instance.patients,
       'tourName': instance.tourName,
       'peopleNumber': instance.peopleNumber,
       'group': instance.group,

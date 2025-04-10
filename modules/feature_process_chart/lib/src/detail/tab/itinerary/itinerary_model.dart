@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:data_patient/data_patient.dart';
 import 'package:data_process_chart/data_process_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -7,12 +10,28 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class ItineraryModel {
-  ItineraryModel({required this.processChartRepository});
+  ItineraryModel({
+    required this.processChartRepository,
+    required this.patientRepository,
+  });
 
   final ProcessChartRepository processChartRepository;
+  final PatientRepository patientRepository;
 
   ValueNotifier<AsyncData<DetailItineraryResponse>> itinerraryData =
       ValueNotifier(const AsyncData());
+
+  Future<Patient?> searchPatient(String name) async {
+    try {
+      final response = await patientRepository.patients(
+        patientName: name,
+      );
+      return response.items.firstOrNull;
+    } catch (e) {
+      logger.d(e);
+      return null;
+    }
+  }
 
   Future<void> fetchItinerary(FormGroup formGroup, {String? id}) async {
     try {
@@ -37,6 +56,33 @@ class ItineraryModel {
       formGroup.control('group').value = data.group;
       formGroup.control('classification').value = data.classification;
       formGroup.control('_id').value = data.id;
+
+      FormArray patientsForms = formGroup.control('patients') as FormArray;
+
+      List<FormGroup> patients = [];
+
+      data.patients?.forEach((element) {
+        patients.add(
+          FormGroup({
+            'patientName': FormControl<String>(value: element.patientName),
+            'patient': FormControl<String>(value: element.patient),
+          }),
+        );
+      });
+
+      if (data.patients == null || data.patients!.isEmpty) {
+        patients = [
+          FormGroup({
+            'patientName': FormControl<String>(value: ''),
+            'patient': FormControl<String>(value: ''),
+          }),
+        ];
+      }
+
+      if (patients.isNotEmpty) {
+        patientsForms.clear();
+        patientsForms.addAll(patients);
+      }
 
       List<FormGroup> days = [];
 
@@ -161,9 +207,12 @@ class ItineraryModel {
 
   Future<void> submitItinerary(FormGroup formGroup) async {
     try {
-      List<String>? patients = [];
-      formGroup.control('patient').value.forEach((element) {
-        patients.add(element['patientName']);
+      List<PatientTour>? patients = [];
+      formGroup.control('patients').value.forEach((element) {
+        patients.add(PatientTour(
+          patientName: element['patientName'],
+          patient: element['patient'],
+        ));
       });
 
       List<dynamic>? days = [];
@@ -223,6 +272,7 @@ class ItineraryModel {
       submitData.value = const AsyncData(loading: true);
       DetailIneraryRequest request = DetailIneraryRequest(
         patient: [],
+        patients: patients,
         tourName: formGroup.control('tourName').value,
         peopleNumber: formGroup.control('peopleNumber').value,
         group: formGroup.control('group').value,
@@ -274,5 +324,6 @@ class Type {
 
 class TransportationType {
   final String type;
+
   TransportationType({required this.type});
 }
