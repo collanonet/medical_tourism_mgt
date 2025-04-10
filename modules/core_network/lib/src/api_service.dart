@@ -90,6 +90,19 @@ abstract class ApiService {
     @Query('returnDateto') String? returnDateto,
   });
 
+  @GET('${EndPoints.MEDICAL_RECORD_VISA}/patients')
+  Future<Paginated<Patient>> getPatientsByVisaFilter({
+    @Query('patientName') String? patientName,
+    @Query('visa') String? visa,
+    @Query('report') String? report,
+    @Query('subjects_withdrawal') bool? subjects_withdrawal,
+    @Query('refinement_date') String? refinement_date,
+    @Query('period_from') DateTime? period_from,
+    @Query('period_to') DateTime? period_to,
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+  });
+
   @GET(EndPoints.GET_PATIENTS)
   Future<Paginated<Patient>> newChatPatients({
     @Query('page') int? page,

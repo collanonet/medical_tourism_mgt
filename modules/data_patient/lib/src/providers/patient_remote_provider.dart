@@ -855,4 +855,28 @@ class PatientRemoteProvider {
       limit: limit,
     );
   }
+
+  Future<Paginated<Patient>> getPatientsByVisaFilter({
+    String? patientName,
+    String? visa,
+    String? report,
+    bool? subjects_withdrawal,
+    String? refinement_date,
+    DateTime? period_from,
+    DateTime? period_to,
+    int? page,
+    int? limit,
+  }) {
+    return apiService.getPatientsByVisaFilter(
+      patientName: patientName,
+      visa: visa,
+      report: report,
+      subjects_withdrawal: subjects_withdrawal,
+      refinement_date: refinement_date,
+      period_from: period_from,
+      period_to: period_to,
+      page: page,
+      limit: limit,
+    );
+  }
 }

@@ -19,13 +19,36 @@ class MedicalVisaModel with ChangeNotifier {
   final PatientRepository patientRepository;
 
   AsyncData<Paginated<Patient>> _patientData = const AsyncData();
+
   AsyncData<Paginated<Patient>> get patientData => _patientData;
 
-  Future<void> patients() {
+  Future<void> patients({
+    String? patientName,
+    String? visa,
+    String? report,
+    bool? subjects_withdrawal,
+    String? refinement_date,
+    DateTime? period_from,
+    DateTime? period_to,
+    int? page = 1,
+    int? limit = 10,
+  }) {
     _patientData = const AsyncData(loading: true);
     notifyListeners();
 
-    return patientRepository.patients().then((value) {
+    return patientRepository
+        .getPatientsByVisaFilter(
+      patientName: patientName,
+      visa: visa,
+      report: report,
+      subjects_withdrawal: subjects_withdrawal,
+      refinement_date: refinement_date,
+      period_from: period_from,
+      period_to: period_to,
+      page: page,
+      limit: limit,
+    )
+        .then((value) {
       _patientData = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -35,26 +58,41 @@ class MedicalVisaModel with ChangeNotifier {
     });
   }
 
-  Future<void> fetchMorePatients() async {
+  Future<void> fetchMorePatients({
+    String? patientName,
+    String? visa,
+    String? report,
+    bool? subjects_withdrawal,
+    String? refinement_date,
+    DateTime? period_from,
+    DateTime? period_to,
+  }) async {
     if (_patientData.data?.hasNextPage == true) {
       _patientData.copyWith(
         loading: true,
       );
       notifyListeners();
       await patientRepository
-          .patients(
+          .getPatientsByVisaFilter(
+        patientName: patientName,
+        visa: visa,
+        report: report,
+        subjects_withdrawal: subjects_withdrawal,
+        refinement_date: refinement_date,
+        period_from: period_from,
+        period_to: period_to,
         page: _patientData.data!.currentPage + 1,
       )
           .then((value) {
         _patientData = AsyncData(
             data: Paginated(
-              items: [
-                ..._patientData.data?.items ?? [],
-                ...value.items,
-              ],
-              totalPages: value.totalPages,
-              currentPage: value.currentPage,
-            ));
+          items: [
+            ..._patientData.data?.items ?? [],
+            ...value.items,
+          ],
+          totalPages: value.totalPages,
+          currentPage: value.currentPage,
+        ));
       }).catchError((error) {
         logger.d(error);
         _patientData = AsyncData(error: error);
@@ -63,5 +101,4 @@ class MedicalVisaModel with ChangeNotifier {
       });
     }
   }
-
 }

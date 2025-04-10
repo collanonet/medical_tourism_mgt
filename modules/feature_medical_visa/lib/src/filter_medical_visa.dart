@@ -8,6 +8,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
 import 'filter_medical_visa_form.dart';
@@ -22,289 +23,273 @@ class MedicalVisaFilter extends StatefulWidget {
 
 class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<MedicalVisaModel>(
       builder: (context, model, child) {
-        return ReactiveFormConfig(
-          validationMessages: validationMessages,
-          child: ReactiveFormBuilder(
-            form: () => formFilterMedicalVisa(),
-            builder: (context, formGroup, child) {
-              return Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white),
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.start,
+        return ReactiveFormConsumer(builder: (context, formGroup, child) {
+          return Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16), color: Colors.white),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  '医療ビザ管理検索',
+                  style: context.textTheme.titleMedium,
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      '医療ビザ管理検索',
-                      style: context.textTheme.titleMedium,
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.l10n.labelPatientName,
+                            style: context.textTheme.bodySmall,
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginExtraSmall,
+                          ),
+                          ReactiveTextField(
+                            formControlName: 'patientName',
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 16),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                context.l10n.labelPatientName,
-                                style: context.textTheme.bodySmall,
-                              ),
-                              SizedBox(
-                                height:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              ReactiveTextField(
-                                formControlName: 'patientName',
-                              ),
-                            ],
+                    const SizedBox(width: 16),
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '査証',
+                            style: context.textTheme.bodySmall,
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '査証',
-                                style: context.textTheme.bodySmall,
-                              ),
-                              SizedBox(
-                                height:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              ReactiveTextField(
-                                formControlName: 'visa',
-                              ),
-                            ],
+                          SizedBox(
+                            height: context.appTheme.spacing.marginExtraSmall,
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '報告書',
-                                style: context.textTheme.bodySmall,
-                              ),
-                              SizedBox(
-                                height:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              ReactiveTextField(
-                                formControlName: 'report',
-                              ),
-                            ],
+                          ReactiveTextField(
+                            formControlName: 'visa',
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        IntrinsicWidth(
-                          child: ReactiveCheckboxListTile(
-                            contentPadding: EdgeInsets.zero,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            formControlName: 'subjects_withdrawal',
-                            title: const Text('取下対象者'),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 16),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              '日付絞込み',
-                            ),
-                            RowSeparated(
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium);
-                              },
-                              children: [
-                                IntrinsicWidth(
-                                  child: ReactiveRadioListTile(
-                                    contentPadding: EdgeInsets.zero,
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    formControlName: 'refinement_date',
-                                    value: '来日日',
-                                    title: const Text('来日日'),
-                                  ),
-                                ),
-                                IntrinsicWidth(
-                                  child: ReactiveRadioListTile(
-                                    contentPadding: EdgeInsets.zero,
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    formControlName: 'refinement_date',
-                                    value: '帰国日',
-                                    title: const Text('帰国日'),
-                                  ),
-                                ),
-                                IntrinsicWidth(
-                                  child: ReactiveRadioListTile(
-                                    contentPadding: EdgeInsets.zero,
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
-                                    formControlName: 'refinement_date',
-                                    value: '身元保証書発行日',
-                                    title: const Text('身元保証書発行日'),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(width: context.appTheme.spacing.marginMedium),
-                        InkWell(
-                          onTap: () {
-                            final periodFrom = formGroup.control('period_from');
-                            final periodTo = formGroup.control('period_to');
-                            final valueDate =
-                                periodFrom.value ?? DateTime.now();
-                            periodFrom.value = DateTime(
-                                valueDate.year, valueDate.month - 1, 1);
-                            periodTo.value =
-                                DateTime(valueDate.year, valueDate.month, 0);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(
-                                context.appTheme.spacing.marginSmall),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(context
-                                    .appTheme.spacing.borderRadiusMedium),
-                                border: Border.all(color: Colors.grey)),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_back_ios_new_rounded,
-                                  color: context.appTheme.primaryColor,
-                                ),
-                                Text(
-                                  '前月',
-                                  style: context.textTheme.titleMedium
-                                      ?.copyWith(
-                                          color: context.appTheme.primaryColor),
-                                ),
-                              ],
-                            ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '報告書',
+                            style: context.textTheme.bodySmall,
                           ),
-                        ),
-                        SizedBox(width: context.appTheme.spacing.marginSmall),
-                        Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '期間（自）',
-                                      style: context.textTheme.bodySmall,
-                                    ),
-                                    SizedBox(
-                                      height: context
-                                          .appTheme.spacing.marginExtraSmall,
-                                    ),
-                                    const ReactiveDatePickerField(
-                                      formControlName: 'period_from',
-
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 4),
-                                child: Text('〜'),
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '期間（至）',
-                                      style: context.textTheme.bodySmall,
-                                    ),
-                                    SizedBox(
-                                      height: context
-                                          .appTheme.spacing.marginExtraSmall,
-                                    ),
-                                    const ReactiveDatePickerField(
-                                      formControlName: 'period_to',
-
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          SizedBox(
+                            height: context.appTheme.spacing.marginExtraSmall,
                           ),
-                        ),
-                        SizedBox(width: context.appTheme.spacing.marginSmall),
-                        InkWell(
-                          onTap: () {
-                            final periodFrom = formGroup.control('period_from');
-                            final periodTo = formGroup.control('period_to');
-                            final valueDate = periodTo.value ?? DateTime.now();
-                            periodFrom.value = DateTime(
-                                valueDate.year, valueDate.month + 1, 1);
-                            periodTo.value = DateTime(
-                                valueDate.year, valueDate.month + 2, 0);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(
-                                context.appTheme.spacing.marginSmall),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(context
-                                    .appTheme.spacing.borderRadiusMedium),
-                                border: Border.all(color: Colors.grey)),
-                            child: Row(
-                              children: [
-                                Text(
-                                  '次月',
-                                  style: context.textTheme.titleMedium
-                                      ?.copyWith(
-                                          color: context.appTheme.primaryColor),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: context.appTheme.primaryColor,
-                                ),
-                              ],
-                            ),
+                          ReactiveTextField(
+                            formControlName: 'report',
                           ),
-                        ),
-                        SizedBox(width: context.appTheme.spacing.marginMedium),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('検索'),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        contentPadding: EdgeInsets.zero,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        formControlName: 'subjects_withdrawal',
+                        title: const Text('取下対象者'),
+                      ),
                     ),
                   ],
                 ),
-              );
-            },
-          ),
-        );
+                const SizedBox(height: 16),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '日付絞込み',
+                        ),
+                        RowSeparated(
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(
+                                width: context.appTheme.spacing.marginMedium);
+                          },
+                          children: [
+                            IntrinsicWidth(
+                              child: ReactiveRadioListTile(
+                                contentPadding: EdgeInsets.zero,
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                formControlName: 'refinement_date',
+                                value: '来日日',
+                                title: const Text('来日日'),
+                              ),
+                            ),
+                            IntrinsicWidth(
+                              child: ReactiveRadioListTile(
+                                contentPadding: EdgeInsets.zero,
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                formControlName: 'refinement_date',
+                                value: '帰国日',
+                                title: const Text('帰国日'),
+                              ),
+                            ),
+                            IntrinsicWidth(
+                              child: ReactiveRadioListTile(
+                                contentPadding: EdgeInsets.zero,
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                formControlName: 'refinement_date',
+                                value: '身元保証書発行日',
+                                title: const Text('身元保証書発行日'),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(width: context.appTheme.spacing.marginMedium),
+                    InkWell(
+                      onTap: () {
+                        final periodFrom = formGroup.control('period_from');
+                        final periodTo = formGroup.control('period_to');
+                        final valueDate = periodFrom.value ?? DateTime.now();
+                        periodFrom.value =
+                            DateTime(valueDate.year, valueDate.month - 1, 1);
+                        periodTo.value =
+                            DateTime(valueDate.year, valueDate.month, 0);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(
+                            context.appTheme.spacing.marginSmall),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                context.appTheme.spacing.borderRadiusMedium),
+                            border: Border.all(color: Colors.grey)),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: context.appTheme.primaryColor,
+                            ),
+                            Text(
+                              '前月',
+                              style: context.textTheme.titleMedium?.copyWith(
+                                  color: context.appTheme.primaryColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: context.appTheme.spacing.marginSmall),
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: const ReactiveDatePickerField(
+                              formControlName: 'period_from',
+                              label: '期間（自）',
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 4),
+                            child: Text('〜'),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: const ReactiveDatePickerField(
+                              formControlName: 'period_to',
+                              label: '期間（至）',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: context.appTheme.spacing.marginSmall),
+                    InkWell(
+                      onTap: () {
+                        final periodFrom = formGroup.control('period_from');
+                        final periodTo = formGroup.control('period_to');
+                        final valueDate = periodTo.value ?? DateTime.now();
+                        periodFrom.value =
+                            DateTime(valueDate.year, valueDate.month + 1, 1);
+                        periodTo.value =
+                            DateTime(valueDate.year, valueDate.month + 2, 0);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(
+                            context.appTheme.spacing.marginSmall),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                context.appTheme.spacing.borderRadiusMedium),
+                            border: Border.all(color: Colors.grey)),
+                        child: Row(
+                          children: [
+                            Text(
+                              '次月',
+                              style: context.textTheme.titleMedium?.copyWith(
+                                  color: context.appTheme.primaryColor),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: context.appTheme.primaryColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: context.appTheme.spacing.marginMedium),
+                    TextButton(
+                      onPressed: () {
+                        formGroup.reset();
+                        context.read<MedicalVisaModel>().patients();
+                      },
+                      child: const Text('リセット'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (formGroup.valid) {
+                          final model = context.read<MedicalVisaModel>();
+                          model.patients(
+                            patientName: formGroup.control('patientName').value,
+                            visa: formGroup.control('visa').value,
+                            report: formGroup.control('report').value,
+                            subjects_withdrawal:
+                                formGroup.control('subjects_withdrawal').value,
+                            refinement_date:
+                                formGroup.control('refinement_date').value,
+                            period_from: formGroup.control('period_from').value,
+                            period_to: formGroup.control('period_to').value,
+                          );
+                        }
+                      },
+                      child: const Text('検索'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
       },
     );
   }

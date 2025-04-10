@@ -351,6 +351,57 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<Paginated<Patient>> getPatientsByVisaFilter({
+    String? patientName,
+    String? visa,
+    String? report,
+    bool? subjects_withdrawal,
+    String? refinement_date,
+    DateTime? period_from,
+    DateTime? period_to,
+    int? page,
+    int? limit,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'patientName': patientName,
+      r'visa': visa,
+      r'report': report,
+      r'subjects_withdrawal': subjects_withdrawal,
+      r'refinement_date': refinement_date,
+      r'period_from': period_from?.toIso8601String(),
+      r'period_to': period_to?.toIso8601String(),
+      r'page': page,
+      r'limit': limit,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<Paginated<Patient>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-visa-data/patients',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = Paginated<Patient>.fromJson(
+      _result.data!,
+      (json) => Patient.fromJson(json as Map<String, dynamic>),
+    );
+    return _value;
+  }
+
+  @override
   Future<Paginated<Patient>> newChatPatients({
     int? page,
     int? limit,

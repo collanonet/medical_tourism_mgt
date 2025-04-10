@@ -18,7 +18,7 @@ class AgentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) => GetIt.I<AgentModel>()..getAgent(),
       child: const LayoutView(
         selectedIndex: 6,

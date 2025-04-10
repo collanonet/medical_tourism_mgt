@@ -22,18 +22,18 @@ FormGroup formFilterMedicalVisa() => FormGroup(
           value: '来日日',
         ),
         'period_from': FormControl<DateTime>(
-          validators: [
-            Validators.pattern(
-              ValidatorRegExp.date,
-            ),
-          ],
+          // validators: [
+          //   Validators.pattern(
+          //     ValidatorRegExp.date,
+          //   ),
+          // ],
         ),
         'period_to': FormControl<DateTime>(
-          validators: [
-            Validators.pattern(
-              ValidatorRegExp.date,
-            ),
-          ],
+          // validators: [
+          //   Validators.pattern(
+          //     ValidatorRegExp.date,
+          //   ),
+          // ],
         ),
       },
     );

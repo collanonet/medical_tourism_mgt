@@ -52,6 +52,19 @@ abstract class PatientRepository {
     int? limit = 10,
   });
 
+
+  Future<Paginated<Patient>> getPatientsByVisaFilter({
+    String? patientName,
+    String? visa,
+    String? report,
+    bool? subjects_withdrawal,
+    String? refinement_date,
+    DateTime? period_from,
+    DateTime? period_to,
+    int? page = 1,
+    int? limit = 10,
+  });
+
   Future<Paginated<Patient>> newChatPatients(
       {
         int? page = 1,

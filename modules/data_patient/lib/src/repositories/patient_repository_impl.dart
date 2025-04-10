@@ -796,18 +796,20 @@ class PatientRepositoryIml extends PatientRepository {
       {required String medicalRecordId}) {
     return remote.getDomesticMedicalData(medicalRecordId: medicalRecordId);
   }
-  
+
   @override
-  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId}) {
+  Future<List<MedicalPaymentResponse>> getMedicalPayment(
+      {required String medicalRecordId}) {
     return remote.getMedicalPayment(medicalRecordId: medicalRecordId);
   }
-  
+
   @override
-  Future<MedicalPaymentResponse> postMedicalPayment(MedicalPaymentRequest medicalPaymentRequest) {
+  Future<MedicalPaymentResponse> postMedicalPayment(
+      MedicalPaymentRequest medicalPaymentRequest) {
     return remote.postMedicalPayment(medicalPaymentRequest);
   }
 
-   @override
+  @override
   Future<void> deleteMedicalPayment(String id) {
     return remote.deleteMedicalPayment(id);
   }
@@ -818,7 +820,6 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   // web booking v2
-
 
   @override
   Future<TreamentResponce> getBookingByPatientId(String patientId) {
@@ -900,33 +901,37 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
-  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
+  Future<TreamentResponce> updateBooking(
+      String treatmentId, TreamentRequest treatmentRequest) {
     return remote.updateBooking(treatmentId, treatmentRequest);
   }
-  
+
   @override
   Future<void> deleteDomesticMedical(String id) {
     return remote.deleteDomesticMedical(id);
   }
-  
+
   //A9
   @override
   Future<void> deleteSummaryList(String patientId) {
     return remote.deleteSummaryList(patientId);
   }
-  
+
   @override
-  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(String patientId) {
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(
+      String patientId) {
     return remote.getSummaryList(patientId);
   }
 
   @override
-  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(String summaryId) {
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(
+      String summaryId) {
     return remote.getFileSummaryBySummaryId(summaryId);
   }
 
   @override
-  Future<MedicalRecordFileSummaryResponse> postFileSummary(MedicalRecordFileSummaryRequest fileRequest) {
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(
+      MedicalRecordFileSummaryRequest fileRequest) {
     return remote.postFileSummary(fileRequest);
   }
 
@@ -941,154 +946,183 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
-  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(String medicalRecordId) {
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
+      String medicalRecordId) {
     return remote.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
-
   @override
-  Future<MedicalInvoiceResponse> postInvoice(MedicalInvoiceRequest invoiceRequest) {
+  Future<MedicalInvoiceResponse> postInvoice(
+      MedicalInvoiceRequest invoiceRequest) {
     return remote.postInvoice(invoiceRequest);
   }
+
   @override
-  Future<MedicalInvoiceResponse> putInvoice(String id, MedicalInvoiceRequest invoiceRequest) {
+  Future<MedicalInvoiceResponse> putInvoice(
+      String id, MedicalInvoiceRequest invoiceRequest) {
     return remote.putInvoice(id, invoiceRequest);
   }
 
   @override
-  Future<MedicalInvoiceResponse> putTypeInvoice(
-      String id, bool type){
+  Future<MedicalInvoiceResponse> putTypeInvoice(String id, bool type) {
     return remote.putTypeInvoice(id, type);
   }
 
   @override
-  Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
+  Future<List<MedicalInvoiceResponse>> getInvoices(
+      {String? medicalRecord, bool? type}) {
     return remote.getInvoices(medicalRecord: medicalRecord, type: type);
   }
-  
+
   @override
   Future<AfterGettingVisaResponse> getAfterGettingVisa() {
     return remote.getAfterGettingVisa();
   }
-  
+
   @override
   Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal() {
     return remote.getAfterGettingVisaFinal();
   }
-  
+
   @override
   Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan() {
     return remote.getMedicalRequiredInJapan();
   }
-  
+
   @override
   Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan() {
     return remote.getMedicalVisaNecessaryInJapan();
   }
-  
+
   // @override
   // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() {
   //   return remote.getMedicalVisaPersonal();
   // }
-  
+
   @override
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod() {
     return remote.getMedicalVisaStayPeriod();
   }
-  
+
   @override
   Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion() {
-   return remote.getMedicalVisaTravelCompanion();
+    return remote.getMedicalVisaTravelCompanion();
   }
-  
+
   @override
   Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal() {
-   return remote.getMedicalVisaWithdrawal();
+    return remote.getMedicalVisaWithdrawal();
   }
-  
+
   @override
-  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(RequiredInJapan requiredInJapan) {
+  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(
+      RequiredInJapan requiredInJapan) {
     return remote.popMedicalVisaRequiredInJapan(requiredInJapan);
   }
-  
+
   @override
-  Future<AfterGettingVisaResponse> postAfterGettingVisa(AfterGettingVisaRequest request) {
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(
+      AfterGettingVisaRequest request) {
     return remote.postAfterGettingVisa(request);
   }
-  
+
   @override
-  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request) {
-   return remote.postAfterGettingVisaFinal(request);
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(
+      MedicalAfterGettingVisaFinalRequest request) {
+    return remote.postAfterGettingVisaFinal(request);
   }
-  
+
   @override
-  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(MedicalVisaNecessaryInJapanRequest request) {
-   return remote.postMedicalVisaNecessaryInJapan(request);
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(
+      MedicalVisaNecessaryInJapanRequest request) {
+    return remote.postMedicalVisaNecessaryInJapan(request);
   }
-  
+
   // @override
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request) {
   //   return remote.postMedicalVisaPersonal(request);
   // }
-  
+
   @override
-  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(MedicalVisaStayPeriodRequest request) {
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(
+      MedicalVisaStayPeriodRequest request) {
     return remote.postMedicalVisaStayPeriod(request);
   }
-  
+
   @override
-  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(MedicalVisaTravelCompanionRequest request) {
-   return remote.postMedicalVisaTravelCompanion(request);
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
+      MedicalVisaTravelCompanionRequest request) {
+    return remote.postMedicalVisaTravelCompanion(request);
   }
-  
+
   @override
-  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(MedicalVisaWithdrawalRequest request) {
-   return remote.postMedicalVisaWithdrawal(request);
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(
+      MedicalVisaWithdrawalRequest request) {
+    return remote.postMedicalVisaWithdrawal(request);
   }
-  
+
   @override
   Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord) {
     return remote.getMedicalRecordVisa(medicalRecord);
   }
-  
+
   @override
-  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request) {
+  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(
+      MedicalRecordVisaRequest request) {
     return remote.postMedicalRecordVisa(request);
   }
-  
+
   @override
   Future<BillingResponse> getBilling({
     required String medicalRecord,
   }) {
     return remote.getBilling(medicalRecord: medicalRecord);
   }
-  
+
   @override
   Future<BillingResponse> postBilling(BillingRequest request) {
     return remote.postBilling(request);
   }
-  
+
   @override
-  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(String id, MedicalRecordVisaRequest request) {
-   return remote.putMedicalRecordVisa(id, request);
+  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(
+      String id, MedicalRecordVisaRequest request) {
+    return remote.putMedicalRecordVisa(id, request);
   }
 
   @override
-  Future<Paginated<Patient>> newChatPatients(
-  {
-
+  Future<Paginated<Patient>> newChatPatients({
     int? page = 1,
     int? limit = 10,
-}
-      ) {
+  }) {
     return remote.newChatPatients(
       page: page,
       limit: limit,
     );
   }
 
-
-  
- 
+  @override
+  Future<Paginated<Patient>> getPatientsByVisaFilter({
+    String? patientName,
+    String? visa,
+    String? report,
+    bool? subjects_withdrawal,
+    String? refinement_date,
+    DateTime? period_from,
+    DateTime? period_to,
+    int? page = 1,
+    int? limit = 10,
+  }) {
+    return remote.getPatientsByVisaFilter(
+      patientName: patientName,
+      visa: visa,
+      report: report,
+      subjects_withdrawal: subjects_withdrawal,
+      refinement_date: refinement_date,
+      period_from: period_from,
+      period_to: period_to,
+      page: page,
+      limit: limit,
+    );
+  }
 }
-
