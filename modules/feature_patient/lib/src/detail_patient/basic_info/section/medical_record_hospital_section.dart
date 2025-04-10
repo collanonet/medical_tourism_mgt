@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:feature_patient/src/detail_patient/basic_info/section/search/search_hospital.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -61,102 +62,10 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                       final rows = formArray.controls
                           .map((control) => control as FormGroup)
                           .map(
-                            (currentForm) => ReactiveForm(
-                              formGroup: currentForm,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: ReactiveTextField<String>(
-                                      formControlName: 'hospitalName',
-                                      decoration: const InputDecoration(
-                                        label: Text(
-                                          '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
-                                        ),
-                                        suffixIcon: Icon(
-                                          Icons.search,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      onSubmitted: (value) async {
-                                        logger.d(value.value);
-                                        if (value.value != null &&
-                                            value.value!.isNotEmpty) {
-                                          final result = await context
-                                              .read<BasicInformationModel>()
-                                              .searchHospital(value.value!);
-
-                                          if (result != null) {
-                                            logger.d('start insert');
-                                            currentForm
-                                                    .control('hospitalName')
-                                                    .value =
-                                                result.hospitalNameChinese;
-                                            currentForm
-                                                .control('medicalCardNumber')
-                                                .value = result.hospitalID;
-                                            currentForm
-                                                .control('hospitalData')
-                                                .value = result;
-                                            currentForm
-                                                .control('hospitalId')
-                                                .value = result.id;
-                                          }
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Expanded(
-                                    child: ReactiveTextField(
-                                      formControlName: 'medicalCardNumber',
-                                      decoration: const InputDecoration(
-                                        label: Text(
-                                          '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Expanded(
-                                      child: Row(
-                                    children: [
-                                      if (formArray.controls
-                                              .indexOf(currentForm) !=
-                                          0)
-                                        IconButton(
-                                          onPressed: () {
-                                            if (currentForm
-                                                    .control('_id')
-                                                    .value !=
-                                                null) {
-                                              // deletedMedicalRecordHospitals
-                                              formGroup
-                                                  .control(
-                                                      'deletedMedicalRecordHospitals')
-                                                  .value
-                                                  .add(currentForm
-                                                      .control('_id')
-                                                      .value);
-                                            }
-                                            formArray.removeAt(formArray
-                                                .controls
-                                                .indexOf(currentForm));
-                                          },
-                                          icon: const Icon(
-                                            Icons.delete_forever,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                    ],
-                                  ))
-                                ],
-                              ),
+                            (currentForm) => SearchHospital(
+                              formArray: formArray,
+                              currentForm: currentForm,
+                              formGroup: formGroup,
                             ),
                           );
 
