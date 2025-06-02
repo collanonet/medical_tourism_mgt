@@ -119,20 +119,20 @@ abstract class RestModule {
   @Order(0)
   @Named('apiKey')
   String get devApiKey =>
-      '8edfe85af9e52e929397f90c5dfd6c9029de4855c0cff48963c27582be869de7';
+      'edaa342ab5a995157ec02bcb53e65e86';
 
   @stage
   @Order(0)
   @Named('apiKey')
   String get stageApiKey =>
-      '8edfe85af9e52e929397f90c5dfd6c9029de4855c0cff48963c27582be869de7';
+      'edaa342ab5a995157ec02bcb53e65e86';
 
   @production
   @prod
   @Order(0)
   @Named('apiKey')
   String get prodApiKey =>
-      '5cd9f031b4845ba78d688d01d3336e9d3eea2d3bce9f5c813a06d8533c3f1a3f';
+      'edaa342ab5a995157ec02bcb53e65e86';
 
   @dev
   @Order(0)
