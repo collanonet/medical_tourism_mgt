@@ -22,7 +22,7 @@ abstract class RestModule {
     CacheOptions cacheOptions,
   ) {
     return RestClient(baseUrl.toString())
-      ..headers.addAll({'Api-Key': apiKey})
+      ..headers.addAll({'X-API-Key': apiKey})
       ..addIntercepter(TokenInterceptor())
       ..addIntercepter(ErrorInterceptor())
       ..setDebug(kDebugMode)
@@ -47,7 +47,7 @@ abstract class RestModule {
             ? {}
             : {
                 'Authorization': token.build(),
-                'Api-Key': apiKey,
+                'X-API-Key': apiKey,
               };
       },
     );
