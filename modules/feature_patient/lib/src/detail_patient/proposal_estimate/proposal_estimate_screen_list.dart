@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
@@ -15,13 +15,15 @@ class ProposalEstimateScreenList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = GetIt.I<ProposalEstimateModel>();
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('見積書一覧', style: context.textTheme.titleLarge),
         SizedBox(height: context.appTheme.spacing.marginMedium),
         ValueListenableBuilder(
-          valueListenable: context.watch<ProposalEstimateModel>().medicalQuotationData,
+          valueListenable: model.medicalQuotationData,
           builder: (context, value, _) {
             if (value.loading) {
               return const Center(child: CircularProgressIndicator());
@@ -52,20 +54,16 @@ class ProposalEstimateScreenList extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            context
-                                .read<ProposalEstimateModel>()
-                                .editQuotation(
-                                  invoice: quotation,
-                                  formGroup: ReactiveForm.of(context) as FormGroup,
-                                );
+                            model.editQuotation(
+                              invoice: quotation,
+                              formGroup: ReactiveForm.of(context) as FormGroup,
+                            );
                           },
                           icon: const Icon(Icons.edit),
                         ),
                         IconButton(
                           onPressed: () {
-                            context
-                                .read<ProposalEstimateModel>()
-                                .deleteInvoice([quotation.id]);
+                            model.deleteInvoice([quotation.id]);
                           },
                           icon: const Icon(Icons.delete, color: Colors.red),
                         ),
