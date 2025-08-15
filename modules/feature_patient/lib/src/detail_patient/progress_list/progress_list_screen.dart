@@ -127,7 +127,6 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                           ),
                           'task': FormControl<String>(
                             value: item.task,
-                            disabled: true,
                           ),
                           'completionDate': FormControl<DateTime>(
                             validators: [
@@ -228,12 +227,39 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                   ),
                   Expanded(
                       flex: 2,
+                      child: Text('作業者',
+                          style: Theme.of(context).textTheme.bodySmall)),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  Expanded(
+                      flex: 2,
                       child: Text('備考',
                           style: Theme.of(context).textTheme.bodySmall)),
                 ],
               ),
               const Divider(),
-              ...rows,
+              // 並び替え可能なリスト
+              ReorderableListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: rows.length,
+                onReorder: (oldIndex, newIndex) {
+                  if (oldIndex < newIndex) {
+                    newIndex -= 1;
+                  }
+                  // フォーム配列の順序を変更
+                  final item = formArray.controls.removeAt(oldIndex);
+                  formArray.controls.insert(newIndex, item);
+                },
+                buildDefaultDragHandles: false,
+                itemBuilder: (context, index) {
+                  return Container(
+                    key: ValueKey(formArray.controls[index].control('_id').value ?? index),
+                    child: rows[index],
+                  );
+                },
+              ),
               InkWell(
                 onTap: () {
                   formArray.add(
@@ -241,7 +267,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       '_id': FormControl<String>(),
                       'completed': FormControl<bool>(value: false),
                       'key': FormControl<String>(),
-                      'tag': FormControl<String>(),
+                      'tag': FormControl<String>(value: '当社'),
                       'task': FormControl<String>(),
                       'completionDate': FormControl<DateTime>(
                         validators: [
