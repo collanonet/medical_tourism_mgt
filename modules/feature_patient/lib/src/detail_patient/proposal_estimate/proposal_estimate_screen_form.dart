@@ -569,8 +569,137 @@ class ProposalEstimateScreenForm extends StatelessWidget {
                     },
                   ),
 
-                  // 新しい提案セクション
-                  Text('ご提案', style: context.textTheme.titleLarge),
+                                     // 既存の病院提案セクション
+                   Text('病院のご提案', style: context.textTheme.titleLarge),
+                   ReactiveFormArray(
+                     formArray: form.control('proposal') as FormArray,
+                     builder: (context, formArray, child) {
+                       List<Widget> proposals = formArray.controls
+                           .map((control) => control as FormGroup)
+                           .map((currentForm) => ReactiveForm(
+                                 formGroup: currentForm,
+                                 child: Card(
+                                   child: Padding(
+                                     padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                                     child: ColumnSeparated(
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       separatorBuilder: (BuildContext context, int index) {
+                                         return SizedBox(height: context.appTheme.spacing.formSpacing);
+                                       },
+                                       children: [
+                                         RowSeparated(
+                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                           separatorBuilder: (BuildContext context, int index) {
+                                             return SizedBox(width: context.appTheme.spacing.formSpacing);
+                                           },
+                                           children: [
+                                             Expanded(
+                                               child: ReactiveTextField<String>(
+                                                 formControlName: 'hospitalName',
+                                                 decoration: const InputDecoration(
+                                                   labelText: '病院名 *',
+                                                   errorStyle: TextStyle(color: Colors.red),
+                                                 ),
+                                               ),
+                                             ),
+                                             Expanded(
+                                               child: ReactiveTextField<String>(
+                                                 formControlName: 'postalCode',
+                                                 decoration: const InputDecoration(
+                                                   labelText: '郵便番号',
+                                                 ),
+                                               ),
+                                             ),
+                                             Expanded(
+                                               flex: 3,
+                                               child: ReactiveTextField<String>(
+                                                 formControlName: 'address',
+                                                 decoration: const InputDecoration(
+                                                   labelText: '所在地',
+                                                 ),
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                         ReactiveTextField<String>(
+                                           formControlName: 'summary',
+                                           minLines: 3,
+                                           maxLines: 5,
+                                           decoration: const InputDecoration(
+                                             labelText: '概要',
+                                           ),
+                                         ),
+                                         Row(
+                                           mainAxisAlignment: MainAxisAlignment.end,
+                                           children: [
+                                             if (formArray.controls.length > 1)
+                                               IconButton(
+                                                 icon: const Icon(Icons.delete, color: Colors.red),
+                                                 onPressed: () {
+                                                   formArray.removeAt(
+                                                     formArray.controls.indexOf(currentForm),
+                                                   );
+                                                 },
+                                               ),
+                                           ],
+                                         ),
+                                       ],
+                                     ),
+                                   ),
+                                 ),
+                               ))
+                           .toList();
+
+                       return ColumnSeparated(
+                         separatorBuilder: (BuildContext context, int index) {
+                           return SizedBox(height: context.appTheme.spacing.formSpacing);
+                         },
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           ...proposals,
+                           InkWell(
+                             onTap: () {
+                               formArray.add(FormGroup({
+                                 '_id': FormControl<String?>(),
+                                 'hospitalName': FormControl<String>(
+                                   validators: [Validators.required],
+                                 ),
+                                 'postalCode': FormControl<String>(),
+                                 'address': FormControl<String>(),
+                                 'summary': FormControl<String>(),
+                                 'medicalRecord': FormControl<String>(),
+                               }));
+                             },
+                             child: Row(
+                               mainAxisSize: MainAxisSize.min,
+                               crossAxisAlignment: CrossAxisAlignment.center,
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Icon(
+                                   Icons.add_circle,
+                                   color: context.appTheme.primaryColor,
+                                 ),
+                                 SizedBox(
+                                   width: context.appTheme.spacing.marginSmall,
+                                 ),
+                                 Text(
+                                   '病院を追加',
+                                   style: TextStyle(
+                                     fontFamily: 'NotoSansJP',
+                                     package: 'core_ui',
+                                     color: context.appTheme.primaryColor,
+                                   ),
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ],
+                       );
+                     },
+                   ),
+
+                   // 新しい提案セクション
+                   Text('ご提案', style: context.textTheme.titleLarge),
                   ReactiveFormArray(
                     formArray: form.control('proposals') as FormArray,
                     builder: (context, formArray, child) {

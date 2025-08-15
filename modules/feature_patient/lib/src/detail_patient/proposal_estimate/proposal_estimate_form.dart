@@ -58,7 +58,21 @@ FormGroup proposalEstimateForm() {
     ),
     'remarks': FormControl<String>(),
     
-    // 提案関連フィールド
+    // 提案関連フィールド（既存の病院提案）
+    'proposal': FormArray([
+      FormGroup({
+        '_id': FormControl<String?>(),
+        'hospitalName': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'postalCode': FormControl<String>(),
+        'address': FormControl<String>(),
+        'summary': FormControl<String>(),
+        'medicalRecord': FormControl<String>(),
+      })
+    ]),
+    
+    // 新しい提案関連フィールド
     'proposals': FormArray([
       FormGroup({
         '_id': FormControl<String>(),

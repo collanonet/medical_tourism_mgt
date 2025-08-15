@@ -32,8 +32,12 @@ class ProposalEstimateModel {
   ValueNotifier<AsyncData<List<MedicalInvoiceResponse>>> medicalQuotationData =
       ValueNotifier(const AsyncData());
 
-  // 提案関連
+  // 提案関連（既存の病院提案）
   ValueNotifier<AsyncData<List<MedicalRecordProposal>>> proposal =
+      ValueNotifier(const AsyncData<List<MedicalRecordProposal>>());
+      
+  // 提案関連（新しい提案）
+  ValueNotifier<AsyncData<List<MedicalRecordProposal>>> newProposals =
       ValueNotifier(const AsyncData<List<MedicalRecordProposal>>());
 
   Future<void> initialData({
@@ -49,8 +53,11 @@ class ProposalEstimateModel {
     // 見積書データを取得
     await fetchMedicalQuotation(medicalRecordId: medicalRecord.id);
     
-    // 提案データを取得
-    await getProposal(medicalRecord.id, formGroup);
+         // 既存の病院提案データを取得
+     await getProposal(medicalRecord.id, formGroup);
+     
+     // 新しい提案データを取得
+     await getNewProposals(medicalRecord.id, formGroup);
   }
 
   ValueNotifier<AsyncData<MedicalInvoiceResponse>> editData =
@@ -142,39 +149,73 @@ class ProposalEstimateModel {
     }
   }
 
-  // 提案関連メソッド
-  getProposal(String medicalRecord, FormGroup formGroup) async {
-    proposal.value = const AsyncData(loading: true);
-    try {
-      final data = await patientRepository
-          .getMedicalRecordProposalsByMedicalRecord(medicalRecord);
-      proposal.value = AsyncData(data: data);
-      insertProposal(data, formGroup);
-    } catch (e) {
-      logger.d(e);
-      proposal.value = AsyncData(error: e);
-    }
-  }
+     // 既存の病院提案関連メソッド
+   getProposal(String medicalRecord, FormGroup formGroup) async {
+     proposal.value = const AsyncData(loading: true);
+     try {
+       final data = await patientRepository
+           .getMedicalRecordProposalsByMedicalRecord(medicalRecord);
+       proposal.value = AsyncData(data: data);
+       insertProposal(data, formGroup);
+     } catch (e) {
+       logger.d(e);
+       proposal.value = AsyncData(error: e);
+     }
+   }
+   
+   // 新しい提案関連メソッド
+   getNewProposals(String medicalRecord, FormGroup formGroup) async {
+     newProposals.value = const AsyncData(loading: true);
+     try {
+       // 新しい提案データを取得（既存の病院提案とは別のデータソース）
+       final data = await patientRepository
+           .getMedicalRecordProposalsByMedicalRecord(medicalRecord);
+       newProposals.value = AsyncData(data: data);
+       insertNewProposals(data, formGroup);
+     } catch (e) {
+       logger.d(e);
+       newProposals.value = AsyncData(error: e);
+     }
+   }
 
-  void insertProposal(
-      List<MedicalRecordProposal> data, FormGroup formGroup) async {
-    if (data.isNotEmpty) {
-      FormArray proposals = formGroup.control('proposals') as FormArray;
+     void insertProposal(
+       List<MedicalRecordProposal> data, FormGroup formGroup) async {
+     if (data.isNotEmpty) {
+       FormArray proposalArray = formGroup.control('proposal') as FormArray;
 
-      proposals.clear();
-      for (var d in data) {
-        proposals.add(FormGroup({
-          '_id': FormControl<String?>(value: d.id),
-          'medicalInstitution': FormControl<String>(value: d.hospitalName),
-          'region': FormControl<String>(value: d.address),
-          'treatmentType': FormControl<String>(),
-          'recommendationReason': FormControl<String>(value: d.summary),
-          'expectedTreatmentMenu': FormControl<String>(),
-          'budget': FormControl<String>(),
-        }));
-      }
-    }
-  }
+       proposalArray.clear();
+       for (var d in data) {
+         proposalArray.add(FormGroup({
+           '_id': FormControl<String?>(value: d.id),
+           'hospitalName': FormControl<String>(value: d.hospitalName),
+           'postalCode': FormControl<String>(),
+           'address': FormControl<String>(value: d.address),
+           'summary': FormControl<String>(value: d.summary),
+           'medicalRecord': FormControl<String>(value: d.medicalRecord),
+         }));
+       }
+     }
+   }
+   
+   void insertNewProposals(
+       List<MedicalRecordProposal> data, FormGroup formGroup) async {
+     if (data.isNotEmpty) {
+       FormArray proposals = formGroup.control('proposals') as FormArray;
+
+       proposals.clear();
+       for (var d in data) {
+         proposals.add(FormGroup({
+           '_id': FormControl<String?>(value: d.id),
+           'medicalInstitution': FormControl<String>(value: d.hospitalName),
+           'region': FormControl<String>(value: d.address),
+           'treatmentType': FormControl<String>(),
+           'recommendationReason': FormControl<String>(value: d.summary),
+           'expectedTreatmentMenu': FormControl<String>(),
+           'budget': FormControl<String>(),
+         }));
+       }
+     }
+   }
 
   ValueNotifier<AsyncData<bool>> submitData = ValueNotifier(const AsyncData());
 
@@ -273,8 +314,11 @@ class ProposalEstimateModel {
         await createQuotation(request: request);
       }
 
-      // 提案データの処理
-      await saveProposals(formGroup);
+             // 既存の病院提案データの処理
+       await saveProposals(formGroup);
+       
+       // 新しい提案データの処理
+       await saveNewProposals(formGroup);
 
       editData.value = const AsyncData();
       submitData.value = const AsyncData(data: true);
@@ -285,28 +329,51 @@ class ProposalEstimateModel {
     }
   }
 
-  Future<void> saveProposals(FormGroup formGroup) async {
-    FormArray proposalsArray = formGroup.control('proposals') as FormArray;
-    
-    for (var form in proposalsArray.controls) {
-      if (form.value['medicalInstitution'] != null && 
-          form.value['medicalInstitution'].toString().isNotEmpty) {
-        final data = MedicalRecordProposalRequest(
-          hospitalName: form.value['medicalInstitution'],
-          postalCode: '',
-          address: form.value['region'] ?? '',
-          summary: form.value['recommendationReason'] ?? '',
-          medicalRecord: medicalRecordData.value.requireData.id,
-        );
-        
-        if (form.value['_id'] != null) {
-          await updateProposal(data, form.value['_id']);
-        } else {
-          await createProposal(data);
-        }
-      }
-    }
-  }
+     Future<void> saveProposals(FormGroup formGroup) async {
+     FormArray proposalArray = formGroup.control('proposal') as FormArray;
+     
+     for (var form in proposalArray.controls) {
+       if (form.value['hospitalName'] != null && 
+           form.value['hospitalName'].toString().isNotEmpty) {
+         final data = MedicalRecordProposalRequest(
+           hospitalName: form.value['hospitalName'],
+           postalCode: form.value['postalCode'] ?? '',
+           address: form.value['address'] ?? '',
+           summary: form.value['summary'] ?? '',
+           medicalRecord: medicalRecordData.value.requireData.id,
+         );
+         
+         if (form.value['_id'] != null) {
+           await updateProposal(data, form.value['_id']);
+         } else {
+           await createProposal(data);
+         }
+       }
+     }
+   }
+   
+   Future<void> saveNewProposals(FormGroup formGroup) async {
+     FormArray proposalsArray = formGroup.control('proposals') as FormArray;
+     
+     for (var form in proposalsArray.controls) {
+       if (form.value['medicalInstitution'] != null && 
+           form.value['medicalInstitution'].toString().isNotEmpty) {
+         final data = MedicalRecordProposalRequest(
+           hospitalName: form.value['medicalInstitution'],
+           postalCode: '',
+           address: form.value['region'] ?? '',
+           summary: form.value['recommendationReason'] ?? '',
+           medicalRecord: medicalRecordData.value.requireData.id,
+         );
+         
+         if (form.value['_id'] != null) {
+           await updateProposal(data, form.value['_id']);
+         } else {
+           await createProposal(data);
+         }
+       }
+     }
+   }
 
   Future<void> _generatePdfs(MedicalInvoiceRequest request) async {
     // PDF生成処理（簡略化）
