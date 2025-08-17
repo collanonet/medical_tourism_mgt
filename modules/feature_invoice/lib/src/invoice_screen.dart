@@ -11,6 +11,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'invoice_form.dart';
 import 'invoice_model.dart';
 import 'invoice_table_list.dart';
+import 'pre_member_list.dart';
 
 class InvoiceScreen extends StatelessWidget {
   const InvoiceScreen({super.key});
@@ -48,9 +49,9 @@ class InvoiceScreen extends StatelessWidget {
                       IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveTextField(
-                          formControlName: 'nameOfHospital',
+                          formControlName: 'diseaseName',
                           decoration: const InputDecoration(
-                            label: Text('病院名'),
+                            label: Text('病名'),
                           ),
                         ),
                       ),
@@ -147,29 +148,14 @@ class InvoiceScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const IntrinsicWidth(
-                        stepWidth: 200,
-                        child: ReactiveDropdownFormField(
-                          formControlName: 'invoice',
-                          items: [
-                            DropdownMenuItem(
-                              value: '見積書',
-                              child: Text(
-                                '見積書',
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: '精算書',
-                              child: Text(
-                                '精算書',
-                              ),
-                            ),
-                          ],
-                          decoration: InputDecoration(
-                            label: Text('見積書/精算書'),
-                          ),
-                        ),
-                      ),
+                    ],
+                  ),
+                  RowSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    children: [
                       IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDropdownFormField(
@@ -188,6 +174,26 @@ class InvoiceScreen extends StatelessWidget {
                               .toList(),
                           decoration: const InputDecoration(
                             label: Text('見込み'),
+                          ),
+                        ),
+                      ),
+                      IntrinsicWidth(
+                        stepWidth: 200,
+                        child: ReactiveDropdownFormField(
+                          formControlName: 'readStatus',
+                          items: [
+                            '未読',
+                            '既読',
+                          ]
+                              .map((e) => DropdownMenuItem(
+                                    value: e,
+                                    child: Text(
+                                      e,
+                                    ),
+                                  ))
+                              .toList(),
+                          decoration: const InputDecoration(
+                            label: Text('読み'),
                           ),
                         ),
                       ),
@@ -210,8 +216,8 @@ class InvoiceScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           context.read<InvoiceModel>().searchInvoices(
-                                nameOfHospital:
-                                    formGroup.control('nameOfHospital').value,
+                                diseaseName:
+                                    formGroup.control('diseaseName').value,
                                 agentName: formGroup.control('agentName').value,
                                 patientName:
                                     formGroup.control('patientName').value,
@@ -219,8 +225,8 @@ class InvoiceScreen extends StatelessWidget {
                                     formGroup.control('issue_date_from').value,
                                 issueDateTo:
                                     formGroup.control('issue_date_to').value,
-                                invoice: formGroup.control('invoice').value,
                                 prospects: formGroup.control('prospects').value,
+                                readStatus: formGroup.control('readStatus').value,
                               );
                         },
                         child: const Center(
@@ -233,7 +239,9 @@ class InvoiceScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: context.appTheme.spacing.marginMedium),
-            const Expanded(child: InvoiceTableList())
+            const Expanded(child: InvoiceTableList()),
+            SizedBox(height: context.appTheme.spacing.marginMedium),
+            const PreMemberList(),
           ],
         );
       },
