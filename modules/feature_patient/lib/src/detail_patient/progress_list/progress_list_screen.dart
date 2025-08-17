@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -71,16 +72,46 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                   builder: (context, value, child) {
                     return ReactiveFormConsumer(
                       builder: (context, form, _) {
-                        return ElevatedButton(
-                            onPressed: !value.loading && form.valid
-                                ? () => context
-                                    .read<ProgressListModel>()
-                                    .submitData(form)
-                                : null,
-                            child: WithLoadingButton(
-                              isLoading: value.loading,
-                              child: const Text('保存する'),
-                            ));
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                                onPressed: !value.loading && form.valid
+                                    ? () {
+                                        logger.d('保存ボタンが押されました');
+                                        logger.d('フォームの有効性: ${form.valid}');
+                                        logger.d('フォームの値: ${form.value}');
+                                        try {
+                                          context
+                                              .read<ProgressListModel>()
+                                              .submitData(form);
+                                        } catch (e) {
+                                          logger.e('保存処理でエラーが発生: $e');
+                                          snackBarWidget(
+                                            message: '保存処理でエラーが発生しました: $e',
+                                            backgroundColor: Colors.red,
+                                            prefixIcon: const Icon(Icons.error,
+                                                color: Colors.white),
+                                          );
+                                        }
+                                      }
+                                    : null,
+                                child: WithLoadingButton(
+                                  isLoading: value.loading,
+                                  child: const Text('保存する'),
+                                )),
+                            if (!form.valid) ...[
+                              const SizedBox(height: 8),
+                              Text(
+                                'フォームにエラーがあります: ${form.errors}',
+                                style: const TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ],
+                        );
                       },
                     );
                   }),
@@ -91,18 +122,20 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
     );
   }
 
-  ReactiveFormArray<Object?> section(FormGroup formGroup) {
+  Widget section(FormGroup formGroup) {
     return ReactiveFormArray(
       formArrayName: 'progressList',
       builder: (context, formArray, child) {
-        final rows =
-            formArray.controls.map((control) => control as FormGroup).map(
-                  (currentForm) => ReactiveForm(
-                    formGroup: currentForm,
-                    child: listOfItemInSection(
-                        formArray.controls.indexOf(currentForm)),
-                  ),
-                );
+        final rows = formArray.controls
+            .map((control) => control as FormGroup)
+            .map(
+              (currentForm) => ReactiveForm(
+                formGroup: currentForm,
+                child: listOfItemInSection(
+                    formArray.controls.indexOf(currentForm)),
+              ),
+            )
+            .toList();
 
         return ColumnSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,9 +148,11 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 onTap: () {
                   formArray.add(FormGroup({
                     'progress': FormArray([
-                      // record of item
-                      for (ItemProgress item
-                          in context.read<ProgressListModel>().titleList) ...{
+                    
+                      for (var (i, item) in context
+                          .read<ProgressListModel>()
+                          .titleList
+                          .indexed) ...{
                         FormGroup({
                           '_id': FormControl<String>(),
                           'completed': FormControl<bool>(value: false),
@@ -140,6 +175,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                           'type': FormControl<String>(
                             value: rows.length.toString(),
                           ),
+                          'order': FormControl<int>(value: i),
                         }),
                       }
                     ]),
@@ -170,25 +206,10 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
     );
   }
 
-  ReactiveFormArray<Object?> listOfItemInSection(int index) {
+  Widget listOfItemInSection(int index) {
     return ReactiveFormArray(
       formArrayName: 'progress',
       builder: (context, formArray, child) {
-        final rows = formArray.controls
-            .map((control) => control as FormGroup)
-            .map(
-              (currentForm) => ReactiveForm(
-                formGroup: currentForm,
-                child: ProgressRecordWidget(
-                  onDelete: () {
-                    final deleteIndex = formArray.controls.indexOf(currentForm);
-                    logger.d('deleteIndex: $deleteIndex');
-                    formArray.removeAt(deleteIndex);
-                  },
-                ),
-              ),
-            );
-
         return ColumnSeparated(
             crossAxisAlignment: CrossAxisAlignment.start,
             separatorBuilder: (BuildContext context, int index) => SizedBox(
@@ -201,62 +222,119 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
               ),
               Row(
                 children: [
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
+                  // ドラッグハンドルの幅に合わせる
+                  const SizedBox(width: 40), // Icon + Padding
                   Text('済/未', style: Theme.of(context).textTheme.bodySmall),
+                  SizedBox(width: context.appTheme.spacing.marginMedium),
                   SizedBox(
-                    width: context.appTheme.spacing.marginExtraLarge * 2,
+                    width: 100,
+                    child: Text('作業者',
+                        style: Theme.of(context).textTheme.bodySmall),
                   ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginExtraLarge,
-                  ),
+                  SizedBox(width: context.appTheme.spacing.marginMedium),
                   Expanded(
-                      flex: 4,
-                      child: Text('タスク',
-                          style: Theme.of(context).textTheme.bodySmall)),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                    flex: 4,
+                    child: Text('タスク',
+                        style: Theme.of(context).textTheme.bodySmall),
                   ),
+                  SizedBox(width: context.appTheme.spacing.marginMedium),
                   Expanded(
-                      flex: 2,
-                      child: Text('完了日',
-                          style: Theme.of(context).textTheme.bodySmall)),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                    flex: 1,
+                    child: Text('完了日',
+                        style: Theme.of(context).textTheme.bodySmall),
                   ),
+                  SizedBox(width: context.appTheme.spacing.marginMedium),
                   Expanded(
-                      flex: 2,
-                      child: Text('作業者',
-                          style: Theme.of(context).textTheme.bodySmall)),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                    flex: 2,
+                    child: Text('備考',
+                        style: Theme.of(context).textTheme.bodySmall),
                   ),
-                  Expanded(
-                      flex: 2,
-                      child: Text('備考',
-                          style: Theme.of(context).textTheme.bodySmall)),
                 ],
               ),
               const Divider(),
-              // 並び替え可能なリスト
               ReorderableListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: rows.length,
-                onReorder: (oldIndex, newIndex) {
-                  if (oldIndex < newIndex) {
-                    newIndex -= 1;
-                  }
-                  // フォーム配列の順序を変更
-                  final item = formArray.controls.removeAt(oldIndex);
-                  formArray.controls.insert(newIndex, item);
-                },
+                itemCount: formArray.controls.length,
                 buildDefaultDragHandles: false,
-                itemBuilder: (context, index) {
+                proxyDecorator:
+                    (Widget child, int index, Animation<double> animation) {
+                  return AnimatedBuilder(
+                    animation: animation,
+                    builder: (BuildContext context, Widget? child) {
+                      final animValue =
+                          Curves.easeInOut.transform(animation.value);
+                      final elevation = lerpDouble(0, 8, animValue)!;
+                      final scale = lerpDouble(1, 1.05, animValue)!;
+                      return Transform.scale(
+                        scale: scale,
+                        child: Material(
+                          elevation: elevation,
+                          shadowColor: Colors.black54,
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          borderRadius: BorderRadius.circular(8),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: child,
+                  );
+                },
+                onReorder: (oldIndex, newIndex) {
+                  setState(() {
+                    if (oldIndex < newIndex) {
+                      newIndex -= 1;
+                    }
+                    final item = formArray.controls.removeAt(oldIndex);
+                    formArray.controls.insert(newIndex, item);
+
+                    for (int i = 0; i < formArray.controls.length; i++) {
+                      final formGroup = formArray.controls[i] as FormGroup;
+                      // 'order'コントロールが存在するか確認してから値を設定
+                      if (formGroup.contains('order')) {
+                         formGroup.control('order').value = i;
+                      }
+                    }
+
+                    formArray.markAsTouched();
+                  });
+                },
+                itemBuilder: (context, itemIndex) {
+                  final formGroup = formArray.controls[itemIndex] as FormGroup;
+                  
+                  // ReorderableListViewが期待する構造：
+                  // トップレベルのウィジェットにキーを設定
                   return Container(
-                    key: ValueKey(formArray.controls[index].control('_id').value ?? index),
-                    child: rows[index],
+                    key: ObjectKey(formGroup),
+                    margin: const EdgeInsets.symmetric(vertical: 2),
+                    child: Row(
+                      children: [
+                        // ReorderableDragStartListenerをRowの子として配置
+                        ReorderableDragStartListener(
+                          index: itemIndex,
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                            child: Icon(
+                              Icons.drag_handle,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        // コンテンツ部分
+                        Expanded(
+                          child: ReactiveForm(
+                            formGroup: formGroup,
+                            child: ProgressRecordWidget(
+                              onDelete: () {
+                                setState(() {
+                                  formArray.removeAt(itemIndex);
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -279,6 +357,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       'remarks': FormControl<String>(),
                       'medicalRecord': FormControl<String>(),
                       'type': FormControl<String>(value: index.toString()),
+                      'order': FormControl<int>(value: formArray.controls.length),
                     }),
                   );
                 },
