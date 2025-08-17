@@ -14,14 +14,13 @@ import 'basic_info/basic_info_page.dart';
 import 'billing/billing_page.dart';
 import 'detail_patient_model.dart';
 import 'domestic_medical_data/domestic_medical_data_page.dart';
-import 'estimate/estimate_page.dart';
 import 'medical_payment_details/medical_payment_details_page.dart';
 import 'medical_summary/medical_summary_page.dart';
 import 'medical_visa/medical_visa_page.dart';
 import 'overseas_medical_data/overseas_medical_data_page.dart';
 import 'patient_response_data/patient_response_page.dart';
 import 'progress_list/progress_list_page.dart';
-import 'proposal/proposal_page.dart';
+import 'proposal_estimate/proposal_estimate_page.dart';
 import 'statement/statement_page.dart';
 import 'web_reservation/detail_patient_web_reservation_page.dart';
 
@@ -67,18 +66,17 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                           menu: [
                             '基本情報', // basic information
                             if (medicalRecord.hasData) ...[
-                              'Web予約', // Web reservation
                               '進捗一覧', // progress list
                               '患者回答データ', // Patient Response Data
                               '海外診療データ', // Overseas medical data
                               '診療サマリー', // Medical summary
-                              'ご提案', // proposal
-                              '医療ビザ', // medical visa
-                              '国内診療データ', // statement
-                              '見積書', // estimate
+                              '日本医療機関データ', // Japanese medical institution data
+                              'ご提案/見積書', // proposal/estimate
                               '請求書', // Statement
                               '精算履歴', // billing
                               '診療報酬明細', // billing details
+                              '医療ビザ', // medical visa
+                              'Web予約', // Web reservation
                             ],
                           ],
                           onPressed: (index) {
@@ -107,9 +105,6 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                           patient: widget.patient ?? patientData.data,
                         ),
                         if (medicalRecord.hasData) ...[
-                          DetailPatientWebReservationPage(
-                            patient: patientData.requireData,
-                          ),
                           ProgressListPage(
                             patient: patientData.requireData,
                           ),
@@ -122,18 +117,11 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                           MedicalSummaryPage(
                             patient: patientData.requireData,
                           ),
-                          ProposalPage(
-                            patient: patientData.requireData,
-                          ),
-                          MedicalVisaPage(
-                            patient: patientData.requireData,
-                            id: medicalRecord.requireData.id,
-                          ),
                           DomesticMedicalDataPage(
                             patient: patientData.requireData,
                             id: patientData.requireData.id,
                           ),
-                          EstimatePage(
+                          ProposalEstimatePage(
                             patient: patientData.requireData,
                             medicalRecord: medicalRecord.requireData,
                           ),
@@ -147,6 +135,13 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                           MedicalPaymentDetailsPage(
                             patient: patientData.requireData,
                             id: patientData.requireData.id,
+                          ),
+                          MedicalVisaPage(
+                            patient: patientData.requireData,
+                            id: medicalRecord.requireData.id,
+                          ),
+                          DetailPatientWebReservationPage(
+                            patient: patientData.requireData,
                           ),
                         ]
                       ][index],
