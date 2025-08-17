@@ -15,13 +15,7 @@ FormGroup progressListForm() {
             'key': FormControl<String>(),
             'tag': FormControl<String>(),
             'task': FormControl<String>(),
-            'completionDate': FormControl<DateTime>(
-              validators: [
-                Validators.pattern(
-                  ValidatorRegExp.date,
-                ),
-              ],
-            ),
+            'completionDate': FormControl<DateTime>(),
             'remarks': FormControl<String>(),
             'medicalRecord': FormControl<String>(),
             'type': FormControl<String>(),

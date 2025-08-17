@@ -108,11 +108,6 @@ class ProgressListModel {
             ),
             'completionDate': FormControl<DateTime>(
               value: record.completionDate,
-              validators: [
-                Validators.pattern(
-                  ValidatorRegExp.date,
-                ),
-              ],
             ),
             'remarks': FormControl<String>(
               value: record.remarks,
@@ -139,13 +134,7 @@ class ProgressListModel {
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
           'task': FormControl<String>(value: item.task),
-          'completionDate': FormControl<DateTime>(
-            validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
-              ),
-            ],
-          ),
+          'completionDate': FormControl<DateTime>(),
           'remarks': FormControl<String>(),
           'medicalRecord': FormControl<String>(),
           'type': FormControl<String>(value: '0'),
@@ -162,13 +151,7 @@ class ProgressListModel {
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
           'task': FormControl<String>(value: item.task),
-          'completionDate': FormControl<DateTime>(
-            validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
-              ),
-            ],
-          ),
+          'completionDate': FormControl<DateTime>(),
           'remarks': FormControl<String>(),
           'medicalRecord': FormControl<String>(),
           'type': FormControl<String>(value: '1'),
@@ -182,23 +165,32 @@ class ProgressListModel {
 
   Future<void> submitData(FormGroup formGroup) async {
     try {
+      logger.d('submitData開始');
       submit.value = const AsyncData(loading: true);
 
-      for (var element in formGroup.control('progressList').value) {
+      final progressListControl = formGroup.control('progressList');
+      logger.d('progressListコントロール: $progressListControl');
+      logger.d('progressListの値: ${progressListControl.value}');
+
+      for (var element in progressListControl.value) {
+        logger.d('処理中の要素: $element');
         for (var progress in element['progress']) {
-          logger.d(progress);
-          if (progress['_id'] == null) {
+          logger.d('処理中の進捗: $progress');
+          if (progress['_id'] == null || progress['_id'] == '') {
+            logger.d('新規作成: $progress');
             await patientRepository
                 .postMedicalRecordProgress(mapData(progress));
           } else {
+            logger.d('更新: ${progress['_id']} - $progress');
             await patientRepository.putMedicalRecordProgress(
                 progress['_id'], mapData(progress));
           }
         }
       }
+      logger.d('submitData完了');
       submit.value = const AsyncData(data: true);
     } catch (e) {
-      logger.d(e);
+      logger.e('submitDataでエラーが発生: $e');
       submit.value = AsyncData(error: e);
     }
   }

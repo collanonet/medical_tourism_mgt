@@ -9,9 +9,12 @@ import 'package:reactive_forms/reactive_forms.dart';
 class ProgressRecordWidget extends StatefulWidget {
   const ProgressRecordWidget({
     super.key,
+    this.index, // オプショナルに変更
     this.onDelete,
   });
 
+  // ドラッグ操作のためにインデックスを要求（オプショナル）
+  final int? index;
   // delete this row
   final Function? onDelete;
 
@@ -38,14 +41,9 @@ class _ProgressRecordWidgetState extends State<ProgressRecordWidget> {
         color: Colors.white,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // ドラッグ&ドロップハンドル
-          Icon(
-            Icons.drag_handle,
-            color: Colors.grey[400],
-            size: 20,
-          ),
-          SizedBox(width: context.appTheme.spacing.marginSmall),
+          // 済/未（チェックボックス）
           ReactiveCheckbox(
             formControlName: 'completed',
             shape: RoundedRectangleBorder(
@@ -54,81 +52,61 @@ class _ProgressRecordWidgetState extends State<ProgressRecordWidget> {
             ),
             checkColor: Colors.white,
           ),
-          ReactiveValueListenableBuilder<String?>(
-              formControlName: 'tag',
-              builder: (context, control, child) {
-                return control.value == null
-                    ? const SizedBox.shrink()
-                    : Container(
-                        width: context.appTheme.spacing.marginExtraLarge * 2,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 4),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: context.appTheme.primaryColor,
-                          ),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Center(
-                          child: Text(
-                            control.value ?? '',
-                            style: TextStyle(
-                                fontFamily: 'NotoSansJP',
-                                package: 'core_ui',
-                                color: context.appTheme.primaryColor),
-                          ),
-                        ),
-                      );
-              }),
+          SizedBox(width: context.appTheme.spacing.marginMedium),
+          
+          // 作業者（固定幅で制御）
           SizedBox(
-            width: context.appTheme.spacing.marginExtraLarge,
+            width: 100,
+            child: ReactiveTextField(
+              formControlName: 'tag',
+              decoration: const InputDecoration(
+                labelText: '作業者',
+                hintText: '当社、患者、病院など',
+              ),
+            ),
           ),
+          SizedBox(width: context.appTheme.spacing.marginMedium),
+          
+          // タスク
           Expanded(
             flex: 4,
             child: ReactiveTextField(
               formControlName: 'task',
             ),
           ),
-          SizedBox(
-            width: context.appTheme.spacing.marginMedium,
-          ),
-          const           Expanded(
-              flex: 2,
-              child: ReactiveDatePickerField(
-                formControlName: 'completionDate',
-              )),
-          SizedBox(
-            width: context.appTheme.spacing.marginMedium,
-          ),
+          SizedBox(width: context.appTheme.spacing.marginMedium),
+          
+          // 完了日
           Expanded(
-              flex: 2,
-              child: ReactiveTextField(
-                formControlName: 'tag',
-                decoration: const InputDecoration(
-                  labelText: '作業者',
-                  hintText: '当社、患者、病院など',
-                ),
-              )),
-          SizedBox(
-            width: context.appTheme.spacing.marginMedium,
+            flex: 1,
+            child: ReactiveDatePickerField(
+              formControlName: 'completionDate',
+            ),
           ),
+          SizedBox(width: context.appTheme.spacing.marginMedium),
+          
+          // 備考
           Expanded(
-              flex: 2,
-              child: ReactiveTextField(
-                formControlName: 'remarks',
-              )),
-          SizedBox(
-            width: context.appTheme.spacing.marginMedium,
+            flex: 2,
+            child: ReactiveTextField(
+              formControlName: 'remarks',
+            ),
           ),
+          SizedBox(width: context.appTheme.spacing.marginMedium),
+          
+          // 削除ボタン（右端に配置）
           if (widget.onDelete != null)
-            IconButton(
-              icon: const Icon(
-                Icons.remove_circle_outline_rounded,
-                color: Colors.red,
+            Container(
+              margin: const EdgeInsets.only(left: 8),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.remove_circle_outline_rounded,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  widget.onDelete?.call();
+                },
               ),
-              onPressed: () {
-                widget.onDelete?.call();
-              },
             ),
         ],
       ),
