@@ -39,6 +39,13 @@ class _ProgressRecordWidgetState extends State<ProgressRecordWidget> {
       ),
       child: Row(
         children: [
+          // ドラッグ&ドロップハンドル
+          Icon(
+            Icons.drag_handle,
+            color: Colors.grey[400],
+            size: 20,
+          ),
+          SizedBox(width: context.appTheme.spacing.marginSmall),
           ReactiveCheckbox(
             formControlName: 'completed',
             shape: RoundedRectangleBorder(
@@ -85,7 +92,7 @@ class _ProgressRecordWidgetState extends State<ProgressRecordWidget> {
           SizedBox(
             width: context.appTheme.spacing.marginMedium,
           ),
-          const Expanded(
+          const           Expanded(
               flex: 2,
               child: ReactiveDatePickerField(
                 formControlName: 'completionDate',
@@ -94,7 +101,19 @@ class _ProgressRecordWidgetState extends State<ProgressRecordWidget> {
             width: context.appTheme.spacing.marginMedium,
           ),
           Expanded(
-              flex: 3,
+              flex: 2,
+              child: ReactiveTextField(
+                formControlName: 'tag',
+                decoration: const InputDecoration(
+                  labelText: '作業者',
+                  hintText: '当社、患者、病院など',
+                ),
+              )),
+          SizedBox(
+            width: context.appTheme.spacing.marginMedium,
+          ),
+          Expanded(
+              flex: 2,
               child: ReactiveTextField(
                 formControlName: 'remarks',
               )),
