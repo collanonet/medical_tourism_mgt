@@ -86,13 +86,31 @@ class MedicalRecordAgentSection extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'nameInKana',
+                          child: ReactiveDropdownField<String>(
+                            formControlName: 'agentType',
                             decoration: const InputDecoration(
                               label: Text(
-                                '氏名（カナ）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                '種別', //   TODO: l10n 対応
                               ),
                             ),
+                            items: const [
+                              DropdownMenuItem(
+                                value: 'domestic_company',
+                                child: Text('日本国内企業'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'domestic_individual',
+                                child: Text('日本在住個人'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'overseas_company',
+                                child: Text('海外企業'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'overseas_individual',
+                                child: Text('海外在住個人'),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -103,3 +121,4 @@ class MedicalRecordAgentSection extends StatelessWidget {
             ));
   }
 }
+

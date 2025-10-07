@@ -10,7 +10,7 @@ class MedicalRecordAgent {
   final String id;
   String company;
   String nameInKanji;
-  String nameInKana;
+  String agentType;
   String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -19,7 +19,7 @@ class MedicalRecordAgent {
     required this.id,
     required this.company,
     required this.nameInKanji,
-    required this.nameInKana,
+    required this.agentType,
     required this.medicalRecord,
     required this.createdAt,
     required this.updatedAt,
@@ -33,15 +33,15 @@ class MedicalRecordAgent {
 
   static FormGroup buildFormGroup(MedicalRecordAgent? medicalRecordAgent) {
     return FormGroup({
-      '_id': FormControl<String>(value: medicalRecordAgent?.id),
-      'company': FormControl<String>(value: medicalRecordAgent?.company),
+      '_id': FormControl<String?>(value: medicalRecordAgent?.id),
+      'company': FormControl<String?>(value: medicalRecordAgent?.company),
       'nameInKanji':
-          FormControl<String>(value: medicalRecordAgent?.nameInKanji),
-      'nameInKana': FormControl<String>(value: medicalRecordAgent?.nameInKana),
+          FormControl<String?>(value: medicalRecordAgent?.nameInKanji),
+      'agentType': FormControl<String>(value: medicalRecordAgent?.agentType ?? ''),
       'medicalRecord':
-          FormControl<String>(value: medicalRecordAgent?.medicalRecord),
-      'createdAt': FormControl<DateTime>(value: medicalRecordAgent?.createdAt),
-      'updatedAt': FormControl<DateTime>(value: medicalRecordAgent?.updatedAt),
+          FormControl<String?>(value: medicalRecordAgent?.medicalRecord),
+      'createdAt': FormControl<DateTime?>(value: medicalRecordAgent?.createdAt),
+      'updatedAt': FormControl<DateTime?>(value: medicalRecordAgent?.updatedAt),
     });
   }
 }

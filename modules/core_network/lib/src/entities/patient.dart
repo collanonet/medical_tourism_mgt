@@ -26,6 +26,7 @@ class Patient {
   String? companyAGENTS;
   String? nameInKanjiAGENTS;
   String? nameInKanaAGENTS;
+  String? agentTypeAGENTS;
   String? progress;
   String? proposalNumber;
   List<String?>? type;
@@ -65,6 +66,7 @@ class Patient {
     this.companyAGENTS,
     this.nameInKanjiAGENTS,
     this.nameInKanaAGENTS,
+    this.agentTypeAGENTS,
     this.progress,
     this.proposalNumber,
     this.type,

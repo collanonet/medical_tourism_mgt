@@ -172,7 +172,7 @@ FormGroup basicInfoForm({
           'nameInKanji': FormControl<String?>(
             value: '',
           ),
-          'nameInKana': FormControl<String?>(
+          'agentType': FormControl<String>(
             value: '',
           ),
         }),

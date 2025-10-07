@@ -734,7 +734,7 @@ class BasicInformationModel {
     formGroup.control('_id').value = data?.id;
     formGroup.control('company').value = data?.company;
     formGroup.control('nameInKanji').value = data?.nameInKanji;
-    formGroup.control('nameInKana').value = data?.nameInKana;
+    formGroup.control('agentType').value = data?.agentType;
   }
 
   Future<void> createUpdateMedicalRecordAgents(FormGroup form) async {
@@ -742,7 +742,7 @@ class BasicInformationModel {
     MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
-      nameInKana: form.control('nameInKana').value ?? '',
+      agentType: form.control('agentType').value ?? '',
       medicalRecord: medicalRecordId.value.requireData,
     );
 
