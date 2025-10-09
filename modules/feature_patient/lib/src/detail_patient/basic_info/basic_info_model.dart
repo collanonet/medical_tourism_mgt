@@ -617,6 +617,7 @@ class BasicInformationModel {
     formGroup.control('progress').value = data?.progress;
     formGroup.control('advancePaymentDate').value = data?.advancePaymentDate;
     formGroup.control('receivingMethod').value = data?.receivingMethod;
+    formGroup.control('receivingMethodOther').value = data?.receivingMethodOther;
     formGroup.control('memo').value = data?.memo;
     formGroup.control('patient').value = data?.patient;
   }
@@ -654,6 +655,7 @@ class BasicInformationModel {
         advancePaymentDate:
             form.control('advancePaymentDate').value as DateTime?,
         receivingMethod: form.control('receivingMethod').value,
+        receivingMethodOther: form.control('receivingMethodOther').value,
         memo: form.control('memo').value,
         patient: patientData.value.requireData.id,
       );
@@ -742,7 +744,7 @@ class BasicInformationModel {
     MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
-      agentType: form.control('agentType').value ?? '',
+      agentType: form.control('agentType').value,
       medicalRecord: medicalRecordId.value.requireData,
     );
 

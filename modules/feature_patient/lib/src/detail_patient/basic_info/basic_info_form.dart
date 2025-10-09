@@ -80,6 +80,7 @@ FormGroup basicInfoForm({
           ],
         ),
         'receivingMethod': FormControl<String>(),
+        'receivingMethodOther': FormControl<String>(),
         'memo': FormControl<String>(),
         'patient': FormControl<String>(value: patientId),
         'deletedMedicalRecordHospitals': FormControl<List<String>>(value: []),
@@ -172,8 +173,8 @@ FormGroup basicInfoForm({
           'nameInKanji': FormControl<String?>(
             value: '',
           ),
-          'agentType': FormControl<String>(
-            value: '',
+          'agentType': FormControl<String?>(
+            value: null,
           ),
         }),
         'MEDICAL_RECORD_Referrers': FormGroup({

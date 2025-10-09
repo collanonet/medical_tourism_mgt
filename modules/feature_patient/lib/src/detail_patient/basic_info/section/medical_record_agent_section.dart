@@ -86,7 +86,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: ReactiveDropdownField<String>(
+                          child: ReactiveDropdownField<String?>(
                             formControlName: 'agentType',
                             decoration: const InputDecoration(
                               label: Text(

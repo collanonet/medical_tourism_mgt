@@ -33,6 +33,7 @@ class Patient {
   DateTime? dateOfEntry;
   DateTime? medicalDay;
   DateTime? returnDate;
+  DateTime? receptionDate;
   String? nationality;
   String? diseaseName;
   String? salesStaff;
@@ -73,6 +74,7 @@ class Patient {
     this.dateOfEntry,
     this.medicalDay,
     this.returnDate,
+    this.receptionDate,
     this.nationality,
     this.diseaseName,
     this.salesStaff,

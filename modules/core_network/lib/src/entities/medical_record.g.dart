@@ -35,6 +35,7 @@ MedicalRecord _$MedicalRecordFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['advancePaymentDate'] as String),
       receivingMethod: json['receivingMethod'] as String?,
+      receivingMethodOther: json['receivingMethodOther'] as String?,
       memo: json['memo'] as String?,
       patient: json['patient'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
@@ -58,6 +59,7 @@ Map<String, dynamic> _$MedicalRecordToJson(MedicalRecord instance) =>
       'progress': instance.progress,
       'advancePaymentDate': instance.advancePaymentDate?.toIso8601String(),
       'receivingMethod': instance.receivingMethod,
+      'receivingMethodOther': instance.receivingMethodOther,
       'memo': instance.memo,
       'patient': instance.patient,
       'createdAt': instance.createdAt.toIso8601String(),

@@ -37,7 +37,7 @@ class MedicalRecordAgent {
       'company': FormControl<String?>(value: medicalRecordAgent?.company),
       'nameInKanji':
           FormControl<String?>(value: medicalRecordAgent?.nameInKanji),
-      'agentType': FormControl<String>(value: medicalRecordAgent?.agentType ?? ''),
+      'agentType': FormControl<String?>(value: medicalRecordAgent?.agentType),
       'medicalRecord':
           FormControl<String?>(value: medicalRecordAgent?.medicalRecord),
       'createdAt': FormControl<DateTime?>(value: medicalRecordAgent?.createdAt),
