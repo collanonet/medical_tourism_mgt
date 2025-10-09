@@ -139,9 +139,11 @@ class _DetailPatientWebReservationScreenState
                                 .bookingByPatient
                                 .value;
 
-                            if (!data.hasData && !data.loading) {
+                            // エラーがある場合のみエラーメッセージを表示
+                            // データがない場合は正常（患者に既存の予約情報がない場合）
+                            if (data.hasError) {
                               snackBarWidget(
-                                  message: '予約が見つかりませんでした。',
+                                  message: '予約情報の取得に失敗しました。',
                                   backgroundColor: Colors.red);
                             }
                           },

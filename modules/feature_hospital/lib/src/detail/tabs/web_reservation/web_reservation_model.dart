@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -81,7 +82,13 @@ class WebAppointmentDetailModel {
     } catch (e) {
       logger.e(e);
       formGroup.control('noDesiredDate').value = true;
-      bookingByPatient.value = AsyncData(error: e);
+      
+      // 404エラーの場合は、データが存在しないだけなので、エラーとして扱わない
+      if (e is DioException && e.response?.statusCode == 404) {
+        bookingByPatient.value = const AsyncData(); // データなし（正常）
+      } else {
+        bookingByPatient.value = AsyncData(error: e); // 実際のエラー
+      }
     }
   }
 
