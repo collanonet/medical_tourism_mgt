@@ -23,11 +23,14 @@ class MedicalRecordCompanionRequest {
   String? relationship;
   DateTime? dateOfBirth;
   int? age;
+  double? height;
+  double? weight;
   bool? gender;
   String? mobileNumber;
   String? email;
   List<String?>? chatToolLink;
   String? passportNumber;
+  String? passportImage;
   DateTime? issueDate;
   DateTime? expirationDate;
   String? visaType;
@@ -53,11 +56,14 @@ class MedicalRecordCompanionRequest {
     this.relationship,
     this.dateOfBirth,
     this.age,
+    this.height,
+    this.weight,
     this.gender,
     this.mobileNumber,
     this.email,
     this.chatToolLink,
     this.passportNumber,
+    this.passportImage,
     this.issueDate,
     this.expirationDate,
     this.visaType,

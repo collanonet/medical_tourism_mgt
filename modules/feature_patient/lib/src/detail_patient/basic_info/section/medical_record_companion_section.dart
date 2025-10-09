@@ -533,7 +533,56 @@ class _MedicalRecordCompanionSectionState
                                                   ],
                                                 ),
                                               ],
-                                            )
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            IntrinsicWidth(
+                                              child: ReactiveTextField<double>(
+                                                formControlName: 'height',
+                                                keyboardType: TextInputType.number,
+                                                decoration: const InputDecoration(
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  label: Text(
+                                                    '身長',
+                                                  ),
+                                                  suffixText: 'cm',
+                                                ),
+                                                inputFormatters: [
+                                                  SingleDotInputFormatter(),
+                                                  FilteringTextInputFormatter.allow(
+                                                    RegExp(r'^[0-9]*\.?[0-9]*$'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            IntrinsicWidth(
+                                              child: ReactiveTextField<double>(
+                                                formControlName: 'weight',
+                                                keyboardType: TextInputType.numberWithOptions(
+                                                    decimal: true),
+                                                decoration: const InputDecoration(
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  label: Text(
+                                                    '体重',
+                                                  ),
+                                                  suffixText: 'kg',
+                                                ),
+                                                inputFormatters: [
+                                                  SingleDotInputFormatter(),
+                                                  FilteringTextInputFormatter.allow(
+                                                    RegExp(r'^[0-9]*\.?[0-9]*$'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -756,6 +805,7 @@ class _MedicalRecordCompanionSectionState
                                       ),
                                     ],
                                   ),
+                                  passportImageCompanion(currentForm, context),
 
                                   Row(
                                     children: [
@@ -910,6 +960,12 @@ class _MedicalRecordCompanionSectionState
                         ],
                       ),
                       'age': FormControl<int?>(),
+                      'height': FormControl<double>(
+                        value: 0,
+                      ), // 身長
+                      'weight': FormControl<double>(
+                        value: 0,
+                      ), // 体重
                       'gender': FormControl<bool>(
                         value: true,
                       ), // 性別
@@ -930,6 +986,7 @@ class _MedicalRecordCompanionSectionState
                       ]),
                       'chatQrImage': FormControl<FileSelect>(),
                       'passportNumber': FormControl<String?>(),
+                      'passportImage': FormControl<FileSelect>(), // パスポート画像
                       'issueDate': FormControl<DateTime>(
                         validators: [
                           Validators.pattern(
@@ -1038,6 +1095,80 @@ class _MedicalRecordCompanionSectionState
               currentForm.control('chatQrImage').value = null;
             },
             icon: Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+          )
+      ],
+    );
+  }
+
+  Widget passportImageCompanion(FormGroup currentForm, BuildContext context) {
+    final file = currentForm.control('passportImage').value as FileSelect?;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () {
+            imagePicker().then((value) {
+              currentForm.control('passportImage').value = value;
+            });
+          },
+          child: Container(
+            width: 250,
+            height: 250,
+            padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+            decoration: BoxDecoration(
+              border: Border.all(color: context.appTheme.primaryColor),
+              borderRadius: BorderRadius.circular(
+                  context.appTheme.spacing.borderRadiusMedium),
+            ),
+            child: file != null && file.file != null
+                ? Image.memory(
+                    file.file!,
+                    fit: BoxFit.fill,
+                  )
+                : file != null && file.url != null
+                    ? Avatar.network(
+                        file.url,
+                        placeholder: const AssetImage(
+                          Images.logoMadical,
+                          package: 'core_ui',
+                        ),
+                        shape: BoxShape.rectangle,
+                        customSize: const Size(250, 250),
+                      )
+                    : ColumnSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          );
+                        },
+                        children: [
+                          const Icon(Icons.copy_all_rounded),
+                          const Text('パスポートをここにドラッグ＆ドロップ'),
+                          ElevatedButton(
+                              onPressed: () {
+                                imagePicker().then((value) {
+                                  currentForm.control('passportImage').value =
+                                      value;
+                                });
+                              },
+                              child: const Text('またはファイルを選択する'))
+                        ],
+                      ),
+          ),
+        ),
+        if (file != null)
+          IconButton(
+            onPressed: () {
+              currentForm.control('passportImage').value = null;
+            },
+            icon: const Icon(
               Icons.delete,
               color: Colors.red,
             ),

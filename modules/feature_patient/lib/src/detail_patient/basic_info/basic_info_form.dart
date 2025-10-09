@@ -246,6 +246,12 @@ FormGroup basicInfoForm({
               ],
             ),
             'age': FormControl<int?>(),
+            'height': FormControl<double>(
+              value: 0,
+            ), // 身長
+            'weight': FormControl<double>(
+              value: 0,
+            ), // 体重
             'gender': FormControl<bool>(
               value: true,
             ), // 性別
@@ -266,6 +272,7 @@ FormGroup basicInfoForm({
             ]),
             'chatQrImage': FormControl<FileSelect>(),
             'passportNumber': FormControl<String?>(),
+            'passportImage': FormControl<FileSelect>(), // パスポート画像
             'issueDate': FormControl<DateTime>(
               validators: [
                 Validators.pattern(
