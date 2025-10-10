@@ -250,13 +250,28 @@ class StatementScreenForm extends StatelessWidget {
                 decoration: const InputDecoration(labelText: '請求書番号 :'),
               ),
             ),
+            // quotationNumber (見積書番号)
+            Expanded(
+              child: ReactiveTextField<String>(
+                formControlName: 'quotationNumber',
+                decoration: const InputDecoration(labelText: '見積書番号 :'),
+                readOnly: true, // 読み取り専用
+              ),
+            ),
             // invoiceDate
             const Expanded(
                 child: ReactiveDatePickerField(
               formControlName: 'invoiceDate',
               label: '発行日',
             )),
-
+          ],
+        ),
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: context.appTheme.spacing.formSpacing);
+          },
+          children: [
             Expanded(
               child: ReactiveTextField<String>(
                 formControlName: 'companyName',
@@ -468,43 +483,104 @@ class StatementScreenForm extends StatelessWidget {
         ReactiveValueListenableBuilder<bool>(
             formControlName: 'taxRateOption',
             builder: (context, control, child) {
-              return RowSeparated(
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: context.appTheme.spacing.formSpacing);
-                },
                 children: [
-                  IntrinsicWidth(
-                    child: CheckboxListTile(
-                      value: control.value == false,
-                      title: const Text('内税'),
-                      onChanged: (bool? value) {
-                        form.control('taxRateOption').value = false;
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                    ),
-                  ),
-                  IntrinsicWidth(
-                    child: CheckboxListTile(
-                      value: control.value == true,
-                      title: const Text('外税'),
-                      onChanged: (bool? value) {
-                        form.control('taxRateOption').value = true;
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                    ),
-                  ),
-                  if (control.value == true)
-                    SizedBox(
-                      width: 300,
-                      child: ReactiveTextField<int>(
-                        formControlName: 'taxRate',
-                        decoration: const InputDecoration(
-                          labelText: '消費税',
-                          suffix: Text('%'),
+                  RowSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(width: context.appTheme.spacing.formSpacing);
+                    },
+                    children: [
+                      IntrinsicWidth(
+                        child: CheckboxListTile(
+                          value: control.value == false,
+                          title: const Text('内税'),
+                          onChanged: (bool? value) {
+                            form.control('taxRateOption').value = false;
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
                         ),
                       ),
-                    ),
+                      IntrinsicWidth(
+                        child: CheckboxListTile(
+                          value: control.value == true,
+                          title: const Text('外税'),
+                          onChanged: (bool? value) {
+                            form.control('taxRateOption').value = true;
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: context.appTheme.spacing.marginSmall),
+                  ReactiveValueListenableBuilder<int?>(
+                    formControlName: 'taxRate',
+                    builder: (context, taxRateControl, child) {
+                      final taxRate = taxRateControl.value ?? 10;
+                      final isExternalTax = control.value == true;
+                      
+                      // アイテムから小計を計算
+                      final items = (form.control('item') as FormArray).value as List;
+                      double subtotal = 0;
+                      for (var item in items) {
+                        if (item is Map && item['details'] != null && item['details'] != '') {
+                          final quantity = (item['quantity'] as num?)?.toDouble() ?? 0;
+                          final unitPrice = (item['unitPrice'] as num?)?.toDouble() ?? 0;
+                          subtotal += quantity * unitPrice;
+                        }
+                      }
+                      
+                      // 消費税額の計算
+                      final taxAmount = subtotal * taxRate / 100;
+                      final total = subtotal + taxAmount;
+                      
+                      return RowSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(width: context.appTheme.spacing.formSpacing);
+                        },
+                        children: [
+                          SizedBox(
+                            width: 250,
+                            child: ReactiveDropdownField<int>(
+                              formControlName: 'taxRate',
+                              decoration: InputDecoration(
+                                labelText: '消費税率',
+                                suffix: const Text('%'),
+                              ),
+                              items: const [
+                                DropdownMenuItem(value: 10, child: Text('10%')),
+                                DropdownMenuItem(value: 8, child: Text('8%')),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '消費税（$taxRate%）（${isExternalTax ? '外税' : '内税'}）',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  isExternalTax 
+                                    ? '¥${taxAmount.toStringAsFixed(0)}'
+                                    : '¥${total.toStringAsFixed(0)}',
+                                  style: context.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ],
               );
             }),

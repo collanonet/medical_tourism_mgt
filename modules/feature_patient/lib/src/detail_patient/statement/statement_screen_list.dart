@@ -168,13 +168,14 @@ class _StatementScreenListState extends State<StatementScreenList> {
                           builder: (context, sels, _) {
                             return Checkbox(
                               value: sels.contains(data?.id),
-                              onChanged: (sel) {
-                                if (sel != null) {
+                              onChanged: data?.id == null ? null : (sel) {
+                                if (sel != null && data?.id != null) {
+                                  final dataId = data!.id;
                                   if (sel) {
-                                    selected.value = [...sels, data?.id ?? ''];
+                                    selected.value = [...sels, dataId];
                                   } else {
                                     selected.value = [
-                                      ...sels.where((e) => e != data?.id)
+                                      ...sels.where((e) => e != dataId)
                                     ];
                                   }
                                 }
@@ -207,7 +208,7 @@ class _StatementScreenListState extends State<StatementScreenList> {
                                       .appTheme.spacing.borderRadiusMedium),
                                 ),
                                 child: Text(
-                                  '精算書',
+                                  '請求書',
                                   style: context.textTheme.bodySmall?.copyWith(
                                     color: Colors.blue,
                                   ),
@@ -301,10 +302,21 @@ class _StatementScreenListState extends State<StatementScreenList> {
                       child: ValueListenableBuilder(
                         valueListenable: context.read<StatementModel>().delete,
                         builder: (context, value, _) {
-                          return OutlinedButton(
-                            onPressed: sels.isEmpty || value.loading
-                                ? null
-                                : () {
+                        return OutlinedButton(
+                          onPressed: value.loading
+                              ? null
+                              : () {
+                                    if (sels.isEmpty || sels.any((id) => id.isEmpty)) {
+                                      snackBarWidget(
+                                        message: '削除する項目を選んでください',
+                                        backgroundColor: Colors.orange,
+                                        prefixIcon: const Icon(
+                                          Icons.warning,
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                      return;
+                                    }
                                     showDialog(
                                         context: context,
                                         builder: (_) {

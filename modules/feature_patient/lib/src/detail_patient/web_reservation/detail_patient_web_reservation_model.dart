@@ -405,7 +405,7 @@ class DetailPatientWebReservationModel {
       bookingByPatient.value = const AsyncData(loading: true);
       final result = await repository.updateBooking(
           patient.value.requireData.id,
-          TreamentRequest.fromJson(data.toJson()));
+          data);
       bookingByPatient.value = AsyncData(data: result);
     } catch (e) {
       logger.e(e);
