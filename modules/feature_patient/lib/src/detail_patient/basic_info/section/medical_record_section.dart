@@ -499,24 +499,12 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                             ),
                             items: [
                               DropdownMenuItem(
-                                value: 'WeChat',
-                                child: Text('WeChat'),
+                                value: 'Credit Card',
+                                child: Text('Credit Card'),
                               ),
                               DropdownMenuItem(
-                                value: 'Visa Card',
-                                child: Text('Visa Card'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'Master Card',
-                                child: Text('Master Card'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'PayPal',
-                                child: Text('PayPal'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'Alipay',
-                                child: Text('Alipay'),
+                                value: 'Chinese QR code payment',
+                                child: Text('Chinese QR code payment'),
                               ),
                               DropdownMenuItem(
                                 value: 'Bank Transfer',
@@ -526,14 +514,34 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 value: 'Cash',
                                 child: Text('Cash'),
                               ),
+                              DropdownMenuItem(
+                                value: 'Local subsidiaries',
+                                child: Text('Local subsidiaries'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'Other',
+                                child: Text('Other'),
+                              ),
                             ],
                           ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        const Expanded(
-                          child: SizedBox(),
+                        Expanded(
+                          child: ReactiveValueListenableBuilder<String>(
+                            formControlName: 'receivingMethod',
+                            builder: (context, control, child) {
+                              return control.value == 'Other'
+                                  ? ReactiveTextField(
+                                      formControlName: 'receivingMethodOther',
+                                      decoration: InputDecoration(
+                                        label: Text('受取方法（その他）'),
+                                      ),
+                                    )
+                                  : const SizedBox();
+                            },
+                          ),
                         ),
                       ],
                     ),

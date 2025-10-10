@@ -51,7 +51,9 @@ FormGroup estimateForm() {
         'note': FormControl<String>(),
       })
     ]),
-    'taxRate': FormControl<int>(),
+    'taxRate': FormControl<int>(
+      value: 10, // デフォルト10%
+    ),
     'taxRateOption': FormControl<bool>(
       value: false,
     ),

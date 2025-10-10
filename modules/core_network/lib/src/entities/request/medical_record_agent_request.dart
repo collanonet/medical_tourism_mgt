@@ -7,13 +7,13 @@ part 'medical_record_agent_request.g.dart';
 class MedicalRecordAgentRequest {
   String? company;
   String? nameInKanji;
-  String? nameInKana;
+  String? agentType;
   String medicalRecord;
 
   MedicalRecordAgentRequest({
     this.company,
     this.nameInKanji,
-    this.nameInKana,
+    this.agentType,
     required this.medicalRecord,
   });
 

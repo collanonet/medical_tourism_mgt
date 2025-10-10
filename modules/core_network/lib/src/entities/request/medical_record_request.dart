@@ -19,6 +19,7 @@ class MedicalRecordRequest {
   String? progress;
   DateTime? advancePaymentDate;
   String? receivingMethod;
+  String? receivingMethodOther;
 
   String? memo;
   String patient;
@@ -38,6 +39,7 @@ class MedicalRecordRequest {
     this.progress,
     this.advancePaymentDate,
     this.receivingMethod,
+    this.receivingMethodOther,
     this.memo,
     required this.patient,
   });

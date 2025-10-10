@@ -36,7 +36,7 @@ Patient _$PatientFromJson(Map<String, dynamic> json) => Patient(
           json['firstNameJapaneseForNonChinese'] as String?,
       companyAGENTS: json['companyAGENTS'] as String?,
       nameInKanjiAGENTS: json['nameInKanjiAGENTS'] as String?,
-      nameInKanaAGENTS: json['nameInKanaAGENTS'] as String?,
+      agentTypeAGENTS: json['agentTypeAGENTS'] as String?,
       progress: json['progress'] as String?,
       proposalNumber: json['proposalNumber'] as String?,
       type: (json['type'] as List<dynamic>?)?.map((e) => e as String?).toList(),
@@ -49,6 +49,9 @@ Patient _$PatientFromJson(Map<String, dynamic> json) => Patient(
       returnDate: json['returnDate'] == null
           ? null
           : DateTime.parse(json['returnDate'] as String),
+      receptionDate: json['receptionDate'] == null
+          ? null
+          : DateTime.parse(json['receptionDate'] as String),
       nationality: json['nationality'] as String?,
       diseaseName: json['diseaseName'] as String?,
       salesStaff: json['salesStaff'] as String?,
@@ -83,13 +86,14 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
       'firstNameJapaneseForNonChinese': instance.firstNameJapaneseForNonChinese,
       'companyAGENTS': instance.companyAGENTS,
       'nameInKanjiAGENTS': instance.nameInKanjiAGENTS,
-      'nameInKanaAGENTS': instance.nameInKanaAGENTS,
+      'agentTypeAGENTS': instance.agentTypeAGENTS,
       'progress': instance.progress,
       'proposalNumber': instance.proposalNumber,
       'type': instance.type,
       'dateOfEntry': instance.dateOfEntry?.toIso8601String(),
       'medicalDay': instance.medicalDay?.toIso8601String(),
       'returnDate': instance.returnDate?.toIso8601String(),
+      'receptionDate': instance.receptionDate?.toIso8601String(),
       'nationality': instance.nationality,
       'diseaseName': instance.diseaseName,
       'salesStaff': instance.salesStaff,

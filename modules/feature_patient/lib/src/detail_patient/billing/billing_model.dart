@@ -53,7 +53,6 @@ class BillingModel {
       FormArray treatmentCost = formGroup.control('treatmentCost') as FormArray;
       formGroup.control('deposit').value = response.deposit;
       formGroup.control('settlementFee').value = response.settlementFee;
-      formGroup.control('balance').value = response.balance;
       if (response.treatmentCost?.isNotEmpty ?? false) {
         treatmentCost.reset();
         treatmentCost.clear();
@@ -71,11 +70,7 @@ class BillingModel {
                 ),
                 'hospitalName':
                     FormControl<String>(value: element.hospitalName),
-                'treatmentDetails':
-                    FormControl<String>(value: element.treatmentDetails),
                 'amount': FormControl<String>(value: element.amount),
-                'remainingAmount':
-                    FormControl<String>(value: element.remainingAmount),
                 'file': FormControl<FileSelect>(
                   value: element.file != null
                       ? FileSelect(
@@ -127,9 +122,7 @@ class BillingModel {
           TreatmentCostRequest(
             occurrenceDate: element['occurrenceDate'],
             hospitalName: element['hospitalName'],
-            treatmentDetails: element['treatmentDetails'],
             amount: element['amount'],
-            remainingAmount: element['remainingAmount'],
             file: file,
           ),
         );
@@ -138,7 +131,6 @@ class BillingModel {
       BillingRequest request = BillingRequest(
         deposit: formGroup.control('deposit').value,
         settlementFee: formGroup.control('settlementFee').value,
-        balance: formGroup.control('balance').value,
         treatmentCost: treatmentCos,
         remarks: formGroup.control('remarks').value,
         medicalRecord: medicalRecord.value.requireData.id,

@@ -617,6 +617,7 @@ class BasicInformationModel {
     formGroup.control('progress').value = data?.progress;
     formGroup.control('advancePaymentDate').value = data?.advancePaymentDate;
     formGroup.control('receivingMethod').value = data?.receivingMethod;
+    formGroup.control('receivingMethodOther').value = data?.receivingMethodOther;
     formGroup.control('memo').value = data?.memo;
     formGroup.control('patient').value = data?.patient;
   }
@@ -654,6 +655,7 @@ class BasicInformationModel {
         advancePaymentDate:
             form.control('advancePaymentDate').value as DateTime?,
         receivingMethod: form.control('receivingMethod').value,
+        receivingMethodOther: form.control('receivingMethodOther').value,
         memo: form.control('memo').value,
         patient: patientData.value.requireData.id,
       );
@@ -734,7 +736,7 @@ class BasicInformationModel {
     formGroup.control('_id').value = data?.id;
     formGroup.control('company').value = data?.company;
     formGroup.control('nameInKanji').value = data?.nameInKanji;
-    formGroup.control('nameInKana').value = data?.nameInKana;
+    formGroup.control('agentType').value = data?.agentType;
   }
 
   Future<void> createUpdateMedicalRecordAgents(FormGroup form) async {
@@ -742,7 +744,7 @@ class BasicInformationModel {
     MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
-      nameInKana: form.control('nameInKana').value ?? '',
+      agentType: form.control('agentType').value,
       medicalRecord: medicalRecordId.value.requireData,
     );
 
@@ -1069,6 +1071,12 @@ class BasicInformationModel {
               'age': FormControl<int?>(
                 value: element.age,
               ),
+              'height': FormControl<double>(
+                value: element.height ?? 0,
+              ), // 身長
+              'weight': FormControl<double>(
+                value: element.weight ?? 0,
+              ), // 体重
               'gender': FormControl<bool>(
                 value: element.gender,
               ),
@@ -1096,6 +1104,11 @@ class BasicInformationModel {
               'passportNumber': FormControl<String?>(
                 value: element.passportNumber,
               ),
+              'passportImage': FormControl<FileSelect>(
+                value: element.passportImage == null
+                    ? null
+                    : FileSelect(url: element.passportImage),
+              ), // パスポート画像
               'issueDate': FormControl<DateTime>(
                 value: element.issueDate,
                 validators: [
@@ -1563,6 +1576,25 @@ class BasicInformationModel {
           }
         }
 
+        String? passportFile;
+        if (element['passportImage'] != null) {
+          FileSelect docFile = element['passportImage'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              passportFile = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            passportFile = docFile.url;
+          }
+        }
+
         MedicalRecordCompanionRequest request = MedicalRecordCompanionRequest(
           leader: element['leader'],
           remarks: element['remarks'],
@@ -1587,12 +1619,15 @@ class BasicInformationModel {
           relationship: element['relationship'],
           dateOfBirth: element['dateOfBirth'],
           age: element['age'],
+          height: element['height'],
+          weight: element['weight'],
           gender: element['gender'],
           mobileNumber: element['mobileNumber'],
           email: element['email'],
           chatToolLink: chatToolLink,
           chatQrImage: file,
           passportNumber: element['passportNumber'],
+          passportImage: passportFile,
           issueDate: element['issueDate'],
           expirationDate: element['expirationDate'],
           visaType: element['visaType'],

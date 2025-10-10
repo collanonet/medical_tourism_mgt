@@ -25,23 +25,37 @@ class StatementScreen extends StatelessWidget {
         return ValueListenableBuilder(
             valueListenable: context.watch<StatementModel>().editData,
             builder: (context, editData, _) {
-              return Skeletonizer(
-                enabled: value.loading,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (!editData.hasData) const StatementScreenList(),
-                            if (!editData.hasData) const Divider(),
-                            const StatementScreenForm(),
-                            const Divider(),
-                          ],
+              return ValueListenableBuilder(
+                valueListenable: context.watch<StatementModel>().medicalQuotationData,
+                builder: (context, quotationData, _) {
+                  // 見積書データが取得されたら、フォームに最新の見積書番号を設定
+                  if (quotationData.hasData && quotationData.data!.isNotEmpty && !editData.hasData) {
+                    final latestQuotation = quotationData.data!.first;
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      final form = ReactiveForm.of(context) as FormGroup?;
+                      if (form != null && form.control('quotationNumber').value == null) {
+                        form.control('quotationNumber').value = latestQuotation.invoiceNumber;
+                      }
+                    });
+                  }
+                  
+                  return Skeletonizer(
+                    enabled: value.loading,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (!editData.hasData) const StatementScreenList(),
+                                if (!editData.hasData) const Divider(),
+                                const StatementScreenForm(),
+                                const Divider(),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
                     RowSeparated(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -118,8 +132,10 @@ class StatementScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
-                ),
+                      ],
+                    ),
+                  );
+                },
               );
             });
       },

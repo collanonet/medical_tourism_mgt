@@ -26,12 +26,14 @@ class Patient {
   String? companyAGENTS;
   String? nameInKanjiAGENTS;
   String? nameInKanaAGENTS;
+  String? agentTypeAGENTS;
   String? progress;
   String? proposalNumber;
   List<String?>? type;
   DateTime? dateOfEntry;
   DateTime? medicalDay;
   DateTime? returnDate;
+  DateTime? receptionDate;
   String? nationality;
   String? diseaseName;
   String? salesStaff;
@@ -65,12 +67,14 @@ class Patient {
     this.companyAGENTS,
     this.nameInKanjiAGENTS,
     this.nameInKanaAGENTS,
+    this.agentTypeAGENTS,
     this.progress,
     this.proposalNumber,
     this.type,
     this.dateOfEntry,
     this.medicalDay,
     this.returnDate,
+    this.receptionDate,
     this.nationality,
     this.diseaseName,
     this.salesStaff,

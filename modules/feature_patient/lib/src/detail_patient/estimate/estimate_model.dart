@@ -509,12 +509,20 @@ class EstimateModel {
 
           List<ItemRequest>? items = [];
           invoice.item?.forEach((item) {
-            items.add(ItemRequest.fromJson(item.toJson()));
+            items.add(ItemRequest(
+              itemCode: item.itemCode,
+              details: item.details,
+              quantity: item.quantity,
+              unit: item.unit,
+              unitPrice: item.unitPrice,
+            ));
           });
 
           List<NoteInvoiceRequest>? notes = [];
           invoice.notes?.forEach((note) {
-            notes.add(NoteInvoiceRequest.fromJson(note.toJson()));
+            notes.add(NoteInvoiceRequest(
+              note: note.note,
+            ));
           });
 
           final request = MedicalInvoiceRequest(
@@ -523,6 +531,7 @@ class EstimateModel {
             type: true,
             invoiceNumber: invoice.invoiceNumber,
             invoiceDate: invoice.invoiceDate,
+            startDate: invoice.startDate,
             companyName: invoice.companyName,
             address: invoice.address,
             telNumber: invoice.telNumber,
@@ -545,15 +554,15 @@ class EstimateModel {
             fileNamePdfZHTW: fileNamePdfZHTW,
           );
 
-          await patientRepository.putInvoice(id, request);
+          // 新しい請求書を作成（見積書を上書きしない）
+          await patientRepository.postInvoice(request);
 
           submitMoveToInvoice.value = AsyncData(data: id);
-          medicalQuotationData.value = AsyncData(
-            data: medicalQuotationData.value.data ?? []
-              ..removeWhere((element) => element.id == id),
-          );
+          // 見積書データは削除せずに残す（データ連携）
         }
       }
+      // データ連携後、見積書データを再取得して最新状態を表示
+      await fetchMedicalQuotation(medicalRecordId: medicalRecordData.value.requireData.id);
     } catch (e) {
       logger.e(e);
       submitMoveToInvoice.value = AsyncData(error: e);
@@ -735,9 +744,9 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
     switch (language) {
       case 'JP':
         title = '請求書';
-        subTitle = '下記の通り請求書いたします。ご用命の程宜しくお願い申し上げます。';
+        subTitle = '下記の通りご請求申し上げます。';
         quotationNumberLabel = '請求書番号: ';
-        quotationDateLabel = '請求書の日付: ';
+        quotationDateLabel = '発行日: ';
         totalAmountLabel = '合計金額: ';
         tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
         subTotalLabel = '計';

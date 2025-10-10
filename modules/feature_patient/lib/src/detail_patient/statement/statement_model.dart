@@ -30,6 +30,9 @@ class StatementModel {
 
   ValueNotifier<AsyncData<List<MedicalInvoiceResponse>>> medicalInvoiceData =
       ValueNotifier(const AsyncData());
+  
+  ValueNotifier<AsyncData<List<MedicalInvoiceResponse>>> medicalQuotationData =
+      ValueNotifier(const AsyncData());
 
   Future<void> initialData({
     required Patient patient,
@@ -41,6 +44,27 @@ class StatementModel {
     formGroup.control('medicalRecord').value = medicalRecord.id;
     formGroup.control('user').value = patient.id;
     await fetchMedicalInvoice(medicalRecordId: medicalRecord.id);
+    await fetchMedicalQuotation(medicalRecordId: medicalRecord.id);
+  }
+  
+  Future<void> fetchMedicalQuotation({required String medicalRecordId}) async {
+    try {
+      medicalQuotationData.value = const AsyncData(loading: true);
+      final response = await patientRepository.getInvoices(
+        medicalRecord: medicalRecordId,
+        type: false, // 見積書
+      );
+      medicalQuotationData.value = AsyncData(data: response);
+      // 最新の見積書番号を設定
+      if (response.isNotEmpty) {
+        // 最新のものを取得（一番最初の要素）
+        final latestQuotation = response.first;
+        // フォームに見積書番号を設定する処理は別途行う
+      }
+    } catch (e) {
+      logger.e(e);
+      medicalQuotationData.value = AsyncData(error: e);
+    }
   }
 
   ValueNotifier<AsyncData<MedicalInvoiceResponse>> editData =
@@ -78,6 +102,12 @@ class StatementModel {
     formGroup.control('remarks').value = invoice.remarks;
     formGroup.control('taxRate').value = invoice.taxRate;
     formGroup.control('taxRateOption').value = invoice.taxRateOption;
+    
+    // 見積書番号を設定（最新の見積書から取得）
+    if (medicalQuotationData.value.hasData && medicalQuotationData.value.data!.isNotEmpty) {
+      final latestQuotation = medicalQuotationData.value.data!.first;
+      formGroup.control('quotationNumber').value = latestQuotation.invoiceNumber;
+    }
 
     if (invoice.notes?.isNotEmpty == true) {
       FormArray notes = formGroup.control('notes') as FormArray;
@@ -472,9 +502,9 @@ Future<Uint8List?> generatePdfFromInvoice(
   switch (language) {
     case 'JP':
       title = '請求書';
-      subTitle = '下記の通り請求書いたします。ご用命の程宜しくお願い申し上げます。';
+      subTitle = '下記の通りご請求申し上げます。';
       invoiceNumberLabel = '請求書番号: ';
-      invoiceDateLabel = '請求書の日付: ';
+      invoiceDateLabel = '発行日: ';
       totalAmountLabel = '合計金額: ';
       tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
       subTotalLabel = '計';

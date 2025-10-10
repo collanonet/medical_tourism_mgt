@@ -38,6 +38,8 @@ MedicalRecordCompanionRequest _$MedicalRecordCompanionRequestFromJson(
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
       age: (json['age'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toDouble(),
+      weight: (json['weight'] as num?)?.toDouble(),
       gender: json['gender'] as bool?,
       mobileNumber: json['mobileNumber'] as String?,
       email: json['email'] as String?,
@@ -45,6 +47,7 @@ MedicalRecordCompanionRequest _$MedicalRecordCompanionRequestFromJson(
           ?.map((e) => e as String?)
           .toList(),
       passportNumber: json['passportNumber'] as String?,
+      passportImage: json['passportImage'] as String?,
       issueDate: json['issueDate'] == null
           ? null
           : DateTime.parse(json['issueDate'] as String),
@@ -79,11 +82,14 @@ Map<String, dynamic> _$MedicalRecordCompanionRequestToJson(
       'relationship': instance.relationship,
       'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
       'age': instance.age,
+      'height': instance.height,
+      'weight': instance.weight,
       'gender': instance.gender,
       'mobileNumber': instance.mobileNumber,
       'email': instance.email,
       'chatToolLink': instance.chatToolLink,
       'passportNumber': instance.passportNumber,
+      'passportImage': instance.passportImage,
       'issueDate': instance.issueDate?.toIso8601String(),
       'expirationDate': instance.expirationDate?.toIso8601String(),
       'visaType': instance.visaType,

@@ -178,16 +178,17 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                             builder: (context, sels, _) {
                               return Checkbox(
                                 value: sels.contains(data?.id),
-                                onChanged: (sel) {
-                                  if (sel != null) {
+                                onChanged: data?.id == null ? null : (sel) {
+                                  if (sel != null && data?.id != null) {
+                                    final dataId = data!.id;
                                     if (sel) {
                                       selected.value = [
                                         ...sels,
-                                        data?.id ?? ''
+                                        dataId
                                       ];
                                     } else {
                                       selected.value = [
-                                        ...sels.where((e) => e != data?.id)
+                                        ...sels.where((e) => e != dataId)
                                       ];
                                     }
                                   }
@@ -311,10 +312,21 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                         child: ValueListenableBuilder(
                           valueListenable: context.read<EstimateModel>().delete,
                           builder: (context, value, _) {
-                            return OutlinedButton(
-                              onPressed: sels.isEmpty || value.loading
-                                  ? null
-                                  : () {
+                          return OutlinedButton(
+                            onPressed: value.loading
+                                ? null
+                                : () {
+                                      if (sels.isEmpty || sels.any((id) => id.isEmpty)) {
+                                        snackBarWidget(
+                                          message: '削除する項目を選んでください',
+                                          backgroundColor: Colors.orange,
+                                          prefixIcon: const Icon(
+                                            Icons.warning,
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                        return;
+                                      }
                                       showDialog(
                                           context: context,
                                           builder: (_) {
@@ -371,7 +383,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                               submitMoveToInvoice.loading == false) {
                             selected.value = [];
                             snackBarWidget(
-                              message: '請求書に移動しました',
+                              message: '請求書へデータ連携しました',
                               prefixIcon: const Icon(Icons.check_circle,
                                   color: Colors.white),
                             );
@@ -379,7 +391,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                           if (submitMoveToInvoice.hasError) {
                             selected.value = [];
                             snackBarWidget(
-                              message: '請求書に移動できませんでした',
+                              message: '請求書へデータ連携できませんでした',
                               backgroundColor: Colors.red,
                               prefixIcon:
                                   const Icon(Icons.error, color: Colors.white),
@@ -397,6 +409,17 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                 onPressed: submitMoveToInvoice.loading
                                     ? null
                                     : () {
+                                        if (sels.isEmpty || sels.any((id) => id.isEmpty)) {
+                                          snackBarWidget(
+                                            message: '連携する項目を選んでください',
+                                            backgroundColor: Colors.orange,
+                                            prefixIcon: const Icon(
+                                              Icons.warning,
+                                              color: Colors.white,
+                                            ),
+                                          );
+                                          return;
+                                        }
                                         showDialog(
                                             context: context,
                                             builder: (_) {
@@ -404,9 +427,9 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                                 value: context
                                                     .read<EstimateModel>(),
                                                 child: AlertDialog(
-                                                  title: const Text('請求書に移動'),
+                                                  title: const Text('請求書へデータ連携'),
                                                   content: const Text(
-                                                      '選択したデータを請求書に移動しますか？'),
+                                                      '選択したデータを請求書へデータ連携しますか？'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () {
@@ -428,7 +451,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                                               .pop();
                                                         });
                                                       },
-                                                      child: const Text('移動する'),
+                                                      child: const Text('連携する'),
                                                     ),
                                                   ],
                                                 ),
@@ -438,7 +461,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                 child: WithLoadingButton(
                                   isLoading: submitMoveToInvoice.loading,
                                   child: const Text(
-                                    '請求書に移動',
+                                    '請求書へデータ連携',
                                   ),
                                 ),
                               );

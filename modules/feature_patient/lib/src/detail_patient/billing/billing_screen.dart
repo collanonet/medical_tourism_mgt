@@ -60,7 +60,7 @@ class _BillingScreenState extends State<BillingScreen> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    '預かり金（治療費）',
+                                    '預り金',
                                     style: context.textTheme.titleMedium,
                                   ),
                                 ),
@@ -115,7 +115,7 @@ class _BillingScreenState extends State<BillingScreen> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    '精算金（診療報酬明細書）',
+                                    '支払い済治療費等',
                                     style: context.textTheme.titleMedium,
                                   ),
                                 ),
@@ -152,62 +152,8 @@ class _BillingScreenState extends State<BillingScreen> {
                           SizedBox(
                             height: context.appTheme.spacing.marginMedium,
                           ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.yellow.withOpacity(0.1),
-                              border: Border.all(
-                                color: Colors.yellow,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    '残金',
-                                    style: context.textTheme.titleMedium,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(flex: 2, child: Text('日本円（税込）')),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                IntrinsicWidth(
-                                  stepWidth: 300,
-                                  child: ReactiveTextField(
-                                    formControlName: 'balance',
-                                    keyboardType: TextInputType.number,
-                                    valueAccessor: CurrencyValueAccessor(),
-                                    inputFormatters: [
-                                      CustomCurrencyFormatter(),
-                                    ],
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      // No border
-                                      filled: false,
-                                      // No background color
-                                      fillColor: Colors.transparent,
-                                      // Ensure the fill color is transparent
-                                      suffixText: '円',
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
                           Text(
-                            '治療費',
+                            '支払い済治療費等',
                             style: context.textTheme.titleMedium,
                           ),
                           SizedBox(
@@ -242,23 +188,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                               formControlName: 'hospitalName',
                                               decoration: const InputDecoration(
                                                 label: Text(
-                                                  '病院名',
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: ReactiveTextField(
-                                              formControlName:
-                                                  'treatmentDetails',
-                                              decoration: const InputDecoration(
-                                                label: Text(
-                                                  '治療内容',
+                                                  '病院名等',
                                                 ),
                                               ),
                                             ),
@@ -282,22 +212,9 @@ class _BillingScreenState extends State<BillingScreen> {
                                                 .appTheme.spacing.marginMedium,
                                           ),
                                           Expanded(
-                                            child: ReactiveTextField(
-                                              formControlName:
-                                                  'remainingAmount',
-                                              decoration: const InputDecoration(
-                                                label: Text(
-                                                  '残金',
-                                                ),
-                                              ),
-                                            ),
+                                            child: fileUpload(
+                                                context, currentForm, 'file'),
                                           ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          fileUpload(
-                                              context, currentForm, 'file'),
                                         ],
                                       ),
                                     ),
@@ -332,14 +249,8 @@ class _BillingScreenState extends State<BillingScreen> {
                                         ),
                                         'hospitalName':
                                             FormControl<String>(value: ''),
-                                        'treatmentDetails':
-                                            FormControl<String>(value: ''),
                                         'amount': FormControl<String>(
                                           value: '',
-                                        ),
-                                        'remainingAmount': FormControl<String>(
-                                          value: '',
-                                          disabled: true,
                                         ),
                                         'file': FormControl<FileSelect>(),
                                       }),
@@ -478,10 +389,12 @@ class _BillingScreenState extends State<BillingScreen> {
       BuildContext context, FormGroup currentForm, String fileName) {
     return ColumnSeparated(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       separatorBuilder: (context, index) => SizedBox(
         height: context.appTheme.spacing.formSpacing,
       ),
       children: [
+        const Text('診療報酬明細書等'),
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,

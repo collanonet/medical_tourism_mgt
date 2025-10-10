@@ -11,7 +11,7 @@ MedicalRecordAgentRequest _$MedicalRecordAgentRequestFromJson(
     MedicalRecordAgentRequest(
       company: json['company'] as String?,
       nameInKanji: json['nameInKanji'] as String?,
-      nameInKana: json['nameInKana'] as String?,
+      agentType: json['agentType'] as String?,
       medicalRecord: json['medicalRecord'] as String,
     );
 
@@ -20,6 +20,6 @@ Map<String, dynamic> _$MedicalRecordAgentRequestToJson(
     <String, dynamic>{
       'company': instance.company,
       'nameInKanji': instance.nameInKanji,
-      'nameInKana': instance.nameInKana,
+      'agentType': instance.agentType,
       'medicalRecord': instance.medicalRecord,
     };

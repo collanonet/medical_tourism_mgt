@@ -139,9 +139,11 @@ class _DetailPatientWebReservationScreenState
                                 .bookingByPatient
                                 .value;
 
-                            if (!data.hasData && !data.loading) {
+                            // エラーがある場合のみエラーメッセージを表示
+                            // データがない場合は正常（患者に既存の予約情報がない場合）
+                            if (data.hasError) {
                               snackBarWidget(
-                                  message: '予約が見つかりませんでした。',
+                                  message: '予約情報の取得に失敗しました。',
                                   backgroundColor: Colors.red);
                             }
                           },
@@ -241,11 +243,11 @@ class _DetailPatientWebReservationScreenState
                               child: ValueListenableListener(
                                 valueListenable: context
                                     .read<DetailPatientWebReservationModel>()
-                                    .hospital,
+                                    .hospitals,
                                 onListen: () {
                                   var data = context
                                       .read<DetailPatientWebReservationModel>()
-                                      .hospital
+                                      .hospitals
                                       .value;
 
                                   if (data.hasError) {
@@ -258,56 +260,113 @@ class _DetailPatientWebReservationScreenState
                                     valueListenable: context
                                         .watch<
                                             DetailPatientWebReservationModel>()
-                                        .hospital,
-                                    builder: (context, value, _) {
-                                      return ReactiveTextField<String>(
-                                        formControlName:
-                                            'medicalInstitutionName',
-                                        onSubmitted: (value) {
-                                          logger.d(value);
-                                          if (value.isNotNullOrEmpty) {
-                                            context
-                                                .read<
-                                                    DetailPatientWebReservationModel>()
-                                                .searchHospital(
-                                                    search: value.value);
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          label: const Text('医療機関名'),
-                                          suffixIcon: value.loading
-                                              ? const SizedBox(
-                                                  height: 30,
-                                                  width: 30,
-                                                  child:
-                                                      CircularProgressIndicator())
-                                              : ReactiveValueListenableBuilder<
-                                                      String>(
-                                                  formControlName:
-                                                      'medicalInstitutionName',
-                                                  builder:
-                                                      (context, control, _) {
-                                                    return IconButton(
-                                                      onPressed: () {
-                                                        if (control.value !=
-                                                                null &&
-                                                            control.value!
-                                                                .isNotEmpty) {
-                                                          context
-                                                              .read<
-                                                                  DetailPatientWebReservationModel>()
-                                                              .searchHospital(
-                                                                  search: control
-                                                                      .value);
-                                                        }
-                                                      },
-                                                      icon: const Icon(
-                                                        Icons.search,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    );
-                                                  }),
-                                        ),
+                                        .hospitals,
+                                    builder: (context, hospitalsList, _) {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ReactiveTextField<String>(
+                                            formControlName:
+                                                'medicalInstitutionName',
+                                            onSubmitted: (value) {
+                                              logger.d(value);
+                                              if (value.isNotNullOrEmpty) {
+                                                context
+                                                    .read<
+                                                        DetailPatientWebReservationModel>()
+                                                    .searchHospital(
+                                                        search: value.value);
+                                              }
+                                            },
+                                            decoration: InputDecoration(
+                                              label: const Text('医療機関名'),
+                                              suffixIcon: hospitalsList.loading
+                                                  ? const SizedBox(
+                                                      height: 30,
+                                                      width: 30,
+                                                      child:
+                                                          CircularProgressIndicator())
+                                                  : ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'medicalInstitutionName',
+                                                      builder:
+                                                          (context, control, _) {
+                                                        return IconButton(
+                                                          onPressed: () {
+                                                            if (control.value !=
+                                                                    null &&
+                                                                control.value!
+                                                                    .isNotEmpty) {
+                                                              context
+                                                                  .read<
+                                                                      DetailPatientWebReservationModel>()
+                                                                  .searchHospital(
+                                                                      search: control
+                                                                          .value);
+                                                            }
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons.search,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        );
+                                                      }),
+                                            ),
+                                          ),
+                                          if (hospitalsList.hasData &&
+                                              hospitalsList.requireData
+                                                  .isNotEmpty) ...[
+                                            SizedBox(
+                                              height: context
+                                                  .appTheme.spacing.marginSmall,
+                                            ),
+                                            Container(
+                                              constraints: const BoxConstraints(
+                                                  maxHeight: 200),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.grey[300]!),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount: hospitalsList
+                                                    .requireData.length,
+                                                itemBuilder: (context, index) {
+                                                  final hospital = hospitalsList
+                                                      .requireData[index];
+                                                  return ListTile(
+                                                    dense: true,
+                                                    title: Text(
+                                                      hospital
+                                                              .hospitalNameChinese ??
+                                                          'NoName',
+                                                      style: context
+                                                          .textTheme.bodyMedium,
+                                                    ),
+                                                    subtitle: Text(
+                                                      hospital
+                                                              .hospitalNameKatakana ??
+                                                          '',
+                                                      style: context
+                                                          .textTheme.bodySmall,
+                                                    ),
+                                                    onTap: () {
+                                                      context
+                                                          .read<
+                                                              DetailPatientWebReservationModel>()
+                                                          .selectHospital(
+                                                              hospital);
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ],
                                       );
                                     }),
                               ),
@@ -329,14 +388,14 @@ class _DetailPatientWebReservationScreenState
                                   if (data.hasData &&
                                       data.requireData.isEmpty) {
                                     snackBarWidget(
-                                        message: 'この病院には医者がいない。',
-                                        backgroundColor: Colors.red);
+                                        message: 'この病院には医者が登録されていません。医師名なしで保存できます。',
+                                        backgroundColor: Colors.orange);
                                   }
 
                                   if (data.hasError) {
                                     snackBarWidget(
-                                        message: 'この病院には医者がいない。',
-                                        backgroundColor: Colors.red);
+                                        message: '医者情報を取得できませんでした。',
+                                        backgroundColor: Colors.orange);
                                   }
                                 },
                                 child: ValueListenableBuilder(

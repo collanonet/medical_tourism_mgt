@@ -7,7 +7,6 @@ FormGroup billingForm() => FormGroup(
       {
         'deposit': FormControl<double>(),
         'settlementFee': FormControl<double>(),
-        'balance': FormControl<double>(),
         'treatmentCost': FormArray(
           [
             FormGroup(
@@ -20,9 +19,7 @@ FormGroup billingForm() => FormGroup(
                   ],
                 ),
                 'hospitalName': FormControl<String>(value: ''),
-                'treatmentDetails': FormControl<String>(value: ''),
                 'amount': FormControl<String>(),
-                'remainingAmount': FormControl<String>(),
                 'file': FormControl<FileSelect>(),
               },
             ),

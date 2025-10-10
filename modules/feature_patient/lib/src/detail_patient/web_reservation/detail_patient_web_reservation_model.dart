@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -83,11 +84,20 @@ class DetailPatientWebReservationModel {
     } catch (e) {
       logger.e(e);
       formGroup.control('noDesiredDate').value = true;
-      bookingByPatient.value = AsyncData(error: e);
+      
+      // 404エラーの場合は、データが存在しないだけなので、エラーとして扱わない
+      if (e is DioException && e.response?.statusCode == 404) {
+        bookingByPatient.value = const AsyncData(); // データなし（正常）
+      } else {
+        bookingByPatient.value = AsyncData(error: e); // 実際のエラー
+      }
     }
   }
 
   ValueNotifier<AsyncData<BasicInformationHospitalResponse>> hospital =
+      ValueNotifier(const AsyncData());
+
+  ValueNotifier<AsyncData<List<BasicInformationHospitalResponse>>> hospitals =
       ValueNotifier(const AsyncData());
 
   void getHospitalById(String id) async {
@@ -110,18 +120,28 @@ class DetailPatientWebReservationModel {
 
   void searchHospital({String? search}) async {
     try {
-      hospital.value = const AsyncData(loading: true);
+      hospitals.value = const AsyncData(loading: true);
       final result = await repository.webBookingSearchHospital(search: search);
-      hospital.value = AsyncData(data: result.first);
+      hospitals.value = AsyncData(data: result);
 
-      if (hospital.value.hasData) {
-        insertHospitalSchedule(search: search);
-        getDoctorsByHospitalId(hospital.value.requireData.id);
+      if (hospitals.value.hasData && hospitals.value.requireData.isNotEmpty) {
+        // 複数の病院が検索された場合、最初の病院を選択しない
+        // ユーザーが手動で選択する必要がある
       }
     } catch (e) {
       logger.e(e);
-      hospital.value = AsyncData(error: e);
+      hospitals.value = AsyncData(error: e);
     }
+  }
+
+  void selectHospital(BasicInformationHospitalResponse selectedHospital) {
+    hospital.value = AsyncData(data: selectedHospital);
+    formGroup.control('medicalInstitutionName').value =
+        selectedHospital.hospitalNameChinese;
+    insertHospitalSchedule();
+    getDoctorsByHospitalId(selectedHospital.id);
+    // 検索結果リストを非表示にする
+    hospitals.value = const AsyncData();
   }
 
   void insertHospitalSchedule({String? search}) {
@@ -385,7 +405,7 @@ class DetailPatientWebReservationModel {
       bookingByPatient.value = const AsyncData(loading: true);
       final result = await repository.updateBooking(
           patient.value.requireData.id,
-          TreamentRequest.fromJson(data.toJson()));
+          data);
       bookingByPatient.value = AsyncData(data: result);
     } catch (e) {
       logger.e(e);

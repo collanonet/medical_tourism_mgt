@@ -8,6 +8,7 @@ FormGroup statementForm() {
     'logoFile': FormControl<FileSelect>(),
     'stampFile': FormControl<FileSelect>(),
     'invoiceNumber': FormControl<String>(),
+    'quotationNumber': FormControl<String>(), // 見積書番号
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
@@ -51,7 +52,9 @@ FormGroup statementForm() {
         'note': FormControl<String>(),
       })
     ]),
-    'taxRate': FormControl<int>(),
+    'taxRate': FormControl<int>(
+      value: 10, // デフォルト10%
+    ),
     'taxRateOption': FormControl<bool>(
       value: false,
     ),
