@@ -11,6 +11,7 @@ class MedicalRecordOverseaData {
   @JsonKey(name: '_id')
   final String id;
   List<DicomDetailResponse>? file;
+  String? documentFile;
   List<CommentDicomFile>? commentDicomFile;
   String? hospitalName;
   String? category;
@@ -30,6 +31,7 @@ class MedicalRecordOverseaData {
   MedicalRecordOverseaData({
     required this.id,
     this.file,
+    this.documentFile,
     this.commentDicomFile,
     this.hospitalName,
     this.category,

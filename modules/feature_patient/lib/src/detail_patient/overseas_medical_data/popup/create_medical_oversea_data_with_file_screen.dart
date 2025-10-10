@@ -57,11 +57,68 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                     '病院',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  ReactiveTextField<String>(
-                    formControlName: 'hospitalName',
-                    decoration: const InputDecoration(
-                      hintText: '病院名を入力',
-                    ),
+                  ReactiveValueListenableBuilder<bool>(
+                    formControlName: 'isNewHospital',
+                    builder: (context, control, child) {
+                      final isNew = control.value ?? true;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: IntrinsicWidth(
+                                  child: ReactiveRadioListTile<bool>(
+                                    formControlName: 'isNewHospital',
+                                    title: const Text('新規入力'),
+                                    value: true,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: IntrinsicWidth(
+                                  child: ReactiveRadioListTile<bool>(
+                                    formControlName: 'isNewHospital',
+                                    title: const Text('既存病院'),
+                                    value: false,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (isNew)
+                            ReactiveTextField<String>(
+                              formControlName: 'hospitalName',
+                              decoration: const InputDecoration(
+                                hintText: '病院名を入力',
+                              ),
+                            )
+                          else
+                            ReactiveValueListenableBuilder<List<String>>(
+                              formControlName: 'existingHospitals',
+                              builder: (context, hospitalsControl, child) {
+                                final hospitals = hospitalsControl.value ?? [];
+                                return ReactiveDropdownFormField(
+                                  formControlName: 'selectedHospital',
+                                  decoration: const InputDecoration(
+                                    hintText: '病院を選択',
+                                  ),
+                                  items: hospitals
+                                      .map((h) => DropdownMenuItem<String>(
+                                            value: h,
+                                            child: Text(h),
+                                          ))
+                                      .toList(),
+                                  onChanged: (control) {
+                                    formGroup.control('hospitalName').value =
+                                        control.value;
+                                  },
+                                );
+                              },
+                            ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
@@ -78,7 +135,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                     'カテゴリ',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  Row(
+                  Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IntrinsicWidth(
@@ -88,14 +145,18 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                           value: '画像データ（DICOM）',
                         ),
                       ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
                       IntrinsicWidth(
                         child: ReactiveRadioListTile(
                           formControlName: 'category',
                           title: const Text('病状資料'),
                           value: '病状資料',
+                        ),
+                      ),
+                      IntrinsicWidth(
+                        child: ReactiveRadioListTile(
+                          formControlName: 'category',
+                          title: const Text('診断書'),
+                          value: '診断書',
                         ),
                       ),
                     ],
