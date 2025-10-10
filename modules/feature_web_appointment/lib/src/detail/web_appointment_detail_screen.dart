@@ -164,20 +164,18 @@ class _WebAppointmentDetailScreenState
                             valueListenable: context
                                 .read<WebAppointmentDetailModel>()
                                 .bookingByPatient,
-                             onListen: () {
-                               var data = context
-                                   .read<WebAppointmentDetailModel>()
-                                   .bookingByPatient
-                                   .value;
+                            onListen: () {
+                              var data = context
+                                  .read<WebAppointmentDetailModel>()
+                                  .bookingByPatient
+                                  .value;
 
-                               // エラーがある場合のみエラーメッセージを表示
-                               // データがない場合は正常（患者に既存の予約情報がない場合）
-                               if (data.hasError) {
-                                 snackBarWidget(
-                                     message: '予約情報の取得に失敗しました。',
-                                     backgroundColor: Colors.red);
-                               }
-                             },
+                              if (!data.hasData && !data.loading) {
+                                snackBarWidget(
+                                    message: '予約が見つかりませんでした。',
+                                    backgroundColor: Colors.red);
+                              }
+                            },
                             child: ValueListenableBuilder(
                                 valueListenable: context
                                     .read<WebAppointmentDetailModel>()
