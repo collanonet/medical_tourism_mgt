@@ -119,6 +119,49 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                         }),
                   );
                 }),
+            if (widget.medicalRecordOverseaData.documentFile != null &&
+                widget.medicalRecordOverseaData.documentFile?.isNotEmpty == true)
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '診断書・資料',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    InkWell(
+                      onTap: () {
+                        openUrlInBrowser(
+                            fileName: widget.medicalRecordOverseaData.documentFile!);
+                      },
+                      child: Row(
+                        children: [
+                          Icon(Icons.description,
+                              color: Theme.of(context).primaryColor),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              widget.medicalRecordOverseaData.documentFile!,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                          Icon(Icons.download,
+                              color: Theme.of(context).primaryColor),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             if (widget.medicalRecordOverseaData.file != null &&
                 widget.medicalRecordOverseaData.file?.isNotEmpty == true)
               Expanded(

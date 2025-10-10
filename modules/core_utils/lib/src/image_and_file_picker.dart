@@ -49,7 +49,7 @@ Future<FileSelect?> filePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: false,
     type: FileType.custom,
-    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
   );
 
   try {
@@ -72,7 +72,7 @@ Future<List<File>?> fileMultiplePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: true,
     type: FileType.custom,
-    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
   );
 
   try {
@@ -89,7 +89,7 @@ Future<List<File>?> fileMultiplePicker() async {
 }
 
 Future<List<File>?> fileWithSpecificExtensionPicker({
-  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg'],
+  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
 }) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
@@ -111,7 +111,7 @@ Future<List<File>?> fileWithSpecificExtensionPicker({
 }
 
 Future<List<File>?> fileMultipleWithSpecificExtensionPicker({
-  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg'],
+  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
 }) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,

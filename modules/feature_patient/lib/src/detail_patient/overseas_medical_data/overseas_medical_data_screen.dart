@@ -35,83 +35,153 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        InkWell(
-          onTap: () {
-            uploadDICOMFile().then((value) {
-              if (value.isNotEmpty) {
-                showCreateWithFileDialog(context, value);
-              }
-            }).catchError((e) {
-              snackBarWidget(
-                message:
-                    'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
-                backgroundColor: Colors.red,
-                prefixIcon: const Icon(Icons.error, color: Colors.white),
-              );
-            });
-          },
-          child: Container(
-            padding: EdgeInsets.all(
-              context.appTheme.spacing.marginExtraLarge,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(
-                context.appTheme.spacing.borderRadiusMedium,
-              )),
-              border: Border.all(
-                color: context.appTheme.primaryColor,
+        Row(
+          children: [
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  uploadDICOMFile().then((value) {
+                    if (value.isNotEmpty) {
+                      showCreateWithFileDialog(
+                          context, dicomFiles: value, documentFile: null);
+                    }
+                  }).catchError((e) {
+                    snackBarWidget(
+                      message:
+                          'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                      backgroundColor: Colors.red,
+                      prefixIcon: const Icon(Icons.error, color: Colors.white),
+                    );
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(
+                    context.appTheme.spacing.marginLarge,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(
+                      context.appTheme.spacing.borderRadiusMedium,
+                    )),
+                    border: Border.all(
+                      color: context.appTheme.primaryColor,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.medical_information,
+                        size: 40,
+                        color: context.appTheme.primaryColor,
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginSmall,
+                      ),
+                      Text(
+                        'DICOMデータ',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginSmall,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          uploadDICOMFile().then((value) {
+                            if (value.isNotEmpty) {
+                              showCreateWithFileDialog(
+                                  context, dicomFiles: value, documentFile: null);
+                            }
+                          }).catchError((e) {
+                            snackBarWidget(
+                              message:
+                                  'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                              backgroundColor: Colors.red,
+                              prefixIcon:
+                                  const Icon(Icons.error, color: Colors.white),
+                            );
+                          });
+                        },
+                        child: const Text(
+                          'DICOMを選択',
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.copy_all_rounded,
-                  size: 50,
-                  color: context.appTheme.primaryColor,
-                ),
-                SizedBox(
-                  width: context.appTheme.spacing.marginMedium,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      '診療データをここにドラッグ＆ドロップ',
-                      style: context.textTheme.bodySmall?.copyWith(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginMedium,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        uploadDICOMFile().then((value) {
-                          if (value.isNotEmpty) {
-                            showCreateWithFileDialog(context, value);
-                          }
-                        }).catchError((e) {
-                          snackBarWidget(
-                            message:
-                                'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
-                            backgroundColor: Colors.red,
-                            prefixIcon:
-                                const Icon(Icons.error, color: Colors.white),
-                          );
-                        });
-                      },
-                      child: const Text(
-                        'またはファイルを選択する',
-                      ),
-                    )
-                  ],
-                )
-              ],
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
             ),
-          ),
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  filePicker().then((value) {
+                    if (value != null) {
+                      showCreateWithFileDialog(
+                          context, dicomFiles: null, documentFile: value);
+                    }
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(
+                    context.appTheme.spacing.marginLarge,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(
+                      context.appTheme.spacing.borderRadiusMedium,
+                    )),
+                    border: Border.all(
+                      color: context.appTheme.primaryColor,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.description,
+                        size: 40,
+                        color: context.appTheme.primaryColor,
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginSmall,
+                      ),
+                      Text(
+                        '診断書・資料',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginSmall,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          filePicker().then((value) {
+                            if (value != null) {
+                              showCreateWithFileDialog(
+                                  context, dicomFiles: null, documentFile: value);
+                            }
+                          });
+                        },
+                        child: const Text(
+                          '診断書を選択',
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,
@@ -497,17 +567,32 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
   }
 
   void showCreateWithFileDialog(
-      BuildContext context, List<DicomDetailResponse> file) {
+    BuildContext context, {
+    List<DicomDetailResponse>? dicomFiles,
+    FileSelect? documentFile,
+  }) {
+    final model = context.read<OverseasMedicalDataModel>();
+    final existingHospitals = model.medicalRecordsOverseasData.value.hasData
+        ? model.medicalRecordsOverseasData.value.requireData
+            .map((e) => e.hospitalName ?? '')
+            .where((name) => name.isNotEmpty)
+            .toSet()
+            .toList()
+        : <String>[];
+    
     showDialog(
       context: context,
       builder: (_) => Provider.value(
-        value: context.read<OverseasMedicalDataModel>(),
+        value: model,
         child: AlertDialog(
           content: ReactiveFormConfig(
             validationMessages: validationMessages,
             child: ReactiveFormBuilder(
-              form: () => createMedicalOverseaDataWithFileForm(file)
-                ..markAllAsTouched(),
+              form: () => createMedicalOverseaDataWithFileForm(
+                dicomFiles,
+                documentFile,
+                existingHospitals,
+              )..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const CreateMedicalOverseaDataWithFileScreen();
               },
