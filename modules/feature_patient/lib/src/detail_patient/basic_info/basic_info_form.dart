@@ -127,9 +127,13 @@ FormGroup basicInfoForm({
           'familyNameJapaneseForChinese': FormControl<String?>(),
           'middleNameJapaneseForChinese': FormControl<String?>(),
           'firstNameJapaneseForChinese': FormControl<String?>(),
-          'familyNameJapaneseForNonChinese': FormControl<String?>(),
+          'familyNameJapaneseForNonChinese': FormControl<String?>(
+            validators: [Validators.required],
+          ),
           'middleNameJapaneseForNonChinese': FormControl<String?>(),
-          'firstNameJapaneseForNonChinese': FormControl<String?>(),
+          'firstNameJapaneseForNonChinese': FormControl<String?>(
+            validators: [Validators.required],
+          ),
         }),
         'PATIENT_NATIONALITIES': FormGroup({
           '_id': FormControl<String?>(),

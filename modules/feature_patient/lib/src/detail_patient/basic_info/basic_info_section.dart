@@ -12,7 +12,6 @@ import 'section/medical_record_budget_section.dart';
 import 'section/medical_record_companion_section.dart';
 import 'section/medical_record_hospital_section.dart';
 import 'section/medical_record_interpreter_section.dart';
-import 'section/medical_record_name_section.dart';
 import 'section/medical_record_nationality_section.dart';
 import 'section/medical_record_passport_section.dart';
 import 'section/medical_record_referrer_section.dart';
@@ -65,7 +64,6 @@ class BasicInfoSection extends StatelessWidget {
               ),
               const MedicalRecordTravelGroupSection(),
               const MedicalRecordUserAccountSection(),
-              const MedicalRecordNameSection(),
               const MedicalRecordNationalitySection(),
               Divider(
                 height: 0,
