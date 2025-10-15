@@ -276,7 +276,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                               Text(
                                 candidateData.isNotEmpty 
                                     ? 'ここにドロップしてください' 
-                                    : 'QRコードをここにドラッグ＆ドロップ',
+                                    : 'QRコードをアップロード',
                                 style: TextStyle(
                                   color: candidateData.isNotEmpty 
                                       ? Colors.green 
@@ -290,7 +290,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                           value;
                                     });
                                   },
-                                  child: const Text('またはファイルを選択する'))
+                                  child: const Text('ファイルを選択する'))
                             ],
                           ),
               ),

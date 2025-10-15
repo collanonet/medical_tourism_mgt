@@ -1009,7 +1009,7 @@ class _MedicalRecordCompanionSectionState
                               Text(
                                 candidateData.isNotEmpty 
                                     ? 'ここにドロップしてください' 
-                                    : 'QRコードをここにドラッグ＆ドロップ',
+                                    : 'QRコードをアップロード',
                                 style: TextStyle(
                                   color: candidateData.isNotEmpty 
                                       ? Colors.green 
@@ -1023,7 +1023,7 @@ class _MedicalRecordCompanionSectionState
                                           value;
                                     });
                                   },
-                                  child: const Text('またはファイルを選択する'))
+                                  child: const Text('ファイルを選択する'))
                             ],
                           ),
               ),
@@ -1124,7 +1124,7 @@ class _MedicalRecordCompanionSectionState
                               Text(
                                 candidateData.isNotEmpty 
                                     ? 'ここにドロップしてください' 
-                                    : 'パスポートをここにドラッグ＆ドロップ',
+                                    : 'パスポートをアップロード',
                                 style: TextStyle(
                                   color: candidateData.isNotEmpty 
                                       ? Colors.green 
@@ -1138,7 +1138,7 @@ class _MedicalRecordCompanionSectionState
                                           value;
                                     });
                                   },
-                                  child: const Text('またはファイルを選択する'))
+                                  child: const Text('ファイルを選択する'))
                             ],
                           ),
               ),

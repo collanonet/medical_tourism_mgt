@@ -325,23 +325,6 @@ class BasicInformationModel {
     formGroup.control('mobileNumber').value = data.mobileNumber;
     formGroup.control('patient').value = data.patient;
     formGroup.control('email').value = data.email;
-    final chatToolLink = formGroup.control('chatToolLink') as FormArray;
-    chatToolLink.clear();
-    data.chatToolLink?.forEach((element) {
-      chatToolLink.add(
-        FormGroup({
-          'chatToolLink': FormControl<String>(value: element ?? ''),
-        }),
-      );
-    });
-    if (data.chatToolLink == null || data.chatToolLink!.isEmpty) {
-      chatToolLink.clear();
-      chatToolLink.add(
-        FormGroup({
-          'chatToolLink': FormControl<String>(),
-        }),
-      );
-    }
 
     formGroup.control('chatQrImage').value =
         data.chatQrImage == null ? null : FileSelect(url: data.chatQrImage);
@@ -365,19 +348,6 @@ class BasicInformationModel {
   Future<void> createUpdatePatientNationalities(FormGroup form) async {
     patientNationalities.value = const AsyncData(loading: true);
 
-    List<String?> chatToolLink = [];
-    if (form.control('chatToolLink').value != null) {
-      for (var i = 0;
-          i < (form.control('chatToolLink').value as List<dynamic>).length;
-          i++) {
-        if ((form.control('chatToolLink').value as List<dynamic>)[i]
-                ['chatToolLink'] !=
-            null) {
-          chatToolLink.add((form.control('chatToolLink').value
-              as List<dynamic>)[i]['chatToolLink']);
-        }
-      }
-    }
 
     String? file;
     if (form.control('chatQrImage').value != null) {
@@ -405,7 +375,6 @@ class BasicInformationModel {
       currentAddress: form.control('currentAddress').value ?? '',
       mobileNumber: form.control('mobileNumber').value,
       email: form.control('email').value,
-      chatToolLink: chatToolLink.isEmpty ? null : chatToolLink,
       chatQrImage: file,
       patient: patientData.value.requireData.id,
     );
@@ -593,7 +562,6 @@ class BasicInformationModel {
     formGroup.control('isFemale').value = !(data?.gender == true);
     formGroup.control('arrivalDate').value = data?.arrivalDate;
     formGroup.control('consultationDate').value = data?.consultationDate;
-    formGroup.control('returnDate').value = data?.returnDate;
     formGroup.control('proposalNumber').value = data?.proposalNumber;
     formGroup.control('receptionDate').value = data?.receptionDate;
     final type = formGroup.control('type') as FormArray;
@@ -645,9 +613,7 @@ class BasicInformationModel {
         height: form.control('height').value ?? 0,
         weight: form.control('weight').value ?? 0,
         gender: form.control('gender').value,
-        arrivalDate: form.control('arrivalDate').value as DateTime?,
         consultationDate: form.control('consultationDate').value as DateTime?,
-        returnDate: form.control('returnDate').value as DateTime?,
         proposalNumber: form.control('proposalNumber').value,
         receptionDate: form.control('receptionDate').value,
         type: type.isEmpty ? null : type,
@@ -990,26 +956,6 @@ class BasicInformationModel {
       if (data.isNotEmpty) {
         formArray.clear();
         for (var element in data) {
-          FormArray chatToolLink = FormArray([]);
-          chatToolLink.clear();
-          if (element.chatToolLink != null &&
-              element.chatToolLink!.isNotEmpty) {
-            for (var i = 0; i < element.chatToolLink!.length; i++) {
-              chatToolLink.add(
-                FormGroup({
-                  'chatToolLink': FormControl<String>(
-                    value: element.chatToolLink![i],
-                  ),
-                }),
-              );
-            }
-          } else {
-            chatToolLink.add(
-              FormGroup({
-                'chatToolLink': FormControl<String>(),
-              }),
-            );
-          }
 
           formArray.add(
             FormGroup({
@@ -1095,7 +1041,6 @@ class BasicInformationModel {
                   Validators.email,
                 ],
               ),
-              'chatToolLink': chatToolLink,
               'chatQrImage': FormControl<FileSelect>(
                 value: element.chatQrImage == null
                     ? null
@@ -1542,20 +1487,6 @@ class BasicInformationModel {
           medicalRecordCompanions.value.copyWith(loading: true);
 
       for (var element in form.control('MEDICAL_RECORD_Companion').value) {
-        List<String?>? chatToolLink = [];
-        if (element['chatToolLink'] != null) {
-          for (var i = 0;
-              i < (element['chatToolLink'] as List<dynamic>).length;
-              i++) {
-            if ((element['chatToolLink'] as List<dynamic>)[i]['chatToolLink'] !=
-                    null ||
-                (element['chatToolLink'] as List<dynamic>)[i]['chatToolLink'] !=
-                    '') {
-              chatToolLink.add((element['chatToolLink'] as List<dynamic>)[i]
-                  ['chatToolLink']);
-            }
-          }
-        }
 
         String? file;
         if (element['chatQrImage'] != null) {
@@ -1624,7 +1555,6 @@ class BasicInformationModel {
           gender: element['gender'],
           mobileNumber: element['mobileNumber'],
           email: element['email'],
-          chatToolLink: chatToolLink,
           chatQrImage: file,
           passportNumber: element['passportNumber'],
           passportImage: passportFile,

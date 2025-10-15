@@ -250,8 +250,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       children: [
                         const Expanded(
                           child: ReactiveDatePickerField(
-                            formControlName: 'arrivalDate',
-                            label: '来日日',
+                            formControlName: 'receptionDate',
+                            label: '受付日',
                           ),
                         ),
                         SizedBox(
@@ -267,10 +267,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         const Expanded(
-                          child: ReactiveDatePickerField(
-                            formControlName: 'returnDate',
-                            label: '帰国日',
-                          ),
+                          child: SizedBox(),
                         ),
                       ],
                     ),
@@ -293,10 +290,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         const Expanded(
-                          child: ReactiveDatePickerField(
-                            formControlName: 'receptionDate',
-                            label: '受付日',
-                          ),
+                          child: SizedBox(),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
