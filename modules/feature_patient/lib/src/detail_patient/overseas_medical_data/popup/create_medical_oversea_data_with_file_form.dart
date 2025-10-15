@@ -25,6 +25,14 @@ FormGroup createMedicalOverseaDataWithFileForm(
         ),
       ],
     ),
+    'acquisitionDate': FormControl<DateTime>(
+      validators: [
+        Validators.required,
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
+    ),
     'commentHospital1': FormControl<String>(),
     'commentOurCompany': FormControl<String>(),
     'commentHospital2': FormControl<String>(),

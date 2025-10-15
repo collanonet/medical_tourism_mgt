@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
-import 'package:core_ui/widgets.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -165,10 +165,9 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
             if (widget.medicalRecordOverseaData.file != null &&
                 widget.medicalRecordOverseaData.file?.isNotEmpty == true)
               Expanded(
-                child: DicomWebViewer(
-                    seriesId: widget.medicalRecordOverseaData.file?.first
-                            .parentSeries ??
-                        ''),
+                child: DicomViewerWidget(
+                  dicomFiles: widget.medicalRecordOverseaData.file!,
+                ),
               ),
             if (widget.medicalRecordOverseaData.sharedUrl != null &&
                 widget.medicalRecordOverseaData.sharedUrl?.isNotEmpty == true)

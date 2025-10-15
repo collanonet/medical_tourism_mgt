@@ -2,6 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// Dart imports:
+import 'dart:html' as html;
+
 // Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
@@ -38,23 +41,41 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
         Row(
           children: [
             Expanded(
-              child: InkWell(
-                onTap: () {
-                  uploadDICOMFile().then((value) {
-                    if (value.isNotEmpty) {
+              child: DragTarget<List<html.File>>(
+                onAccept: (files) async {
+                  try {
+                    final dicomFiles = await uploadDICOMFilesFromDrop(files);
+                    if (dicomFiles.isNotEmpty) {
                       showCreateWithFileDialog(
-                          context, dicomFiles: value, documentFile: null);
+                          context, dicomFiles: dicomFiles, documentFile: null);
                     }
-                  }).catchError((e) {
+                  } catch (e) {
                     snackBarWidget(
                       message:
                           'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
                       backgroundColor: Colors.red,
                       prefixIcon: const Icon(Icons.error, color: Colors.white),
                     );
-                  });
+                  }
                 },
-                child: Container(
+                builder: (context, candidateData, rejectedData) {
+                  return InkWell(
+                    onTap: () {
+                      uploadDICOMFile().then((value) {
+                        if (value.isNotEmpty) {
+                          showCreateWithFileDialog(
+                              context, dicomFiles: value, documentFile: null);
+                        }
+                      }).catchError((e) {
+                        snackBarWidget(
+                          message:
+                              'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                          backgroundColor: Colors.red,
+                          prefixIcon: const Icon(Icons.error, color: Colors.white),
+                        );
+                      });
+                    },
+                    child: Container(
                   padding: EdgeInsets.all(
                     context.appTheme.spacing.marginLarge,
                   ),
@@ -112,23 +133,42 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                       )
                     ],
                   ),
-                ),
+                    ),
+                  );
+                },
               ),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
             Expanded(
-              child: InkWell(
-                onTap: () {
-                  filePicker().then((value) {
-                    if (value != null) {
+              child: DragTarget<List<html.File>>(
+                onAccept: (files) async {
+                  try {
+                    final documentFile = await handleFileDrop(files);
+                    if (documentFile != null) {
                       showCreateWithFileDialog(
-                          context, dicomFiles: null, documentFile: value);
+                          context, dicomFiles: null, documentFile: documentFile);
                     }
-                  });
+                  } catch (e) {
+                    snackBarWidget(
+                      message: 'ファイルのアップロードでエラーが発生しました: $e',
+                      backgroundColor: Colors.red,
+                      prefixIcon: const Icon(Icons.error, color: Colors.white),
+                    );
+                  }
                 },
-                child: Container(
+                builder: (context, candidateData, rejectedData) {
+                  return InkWell(
+                    onTap: () {
+                      filePicker().then((value) {
+                        if (value != null) {
+                          showCreateWithFileDialog(
+                              context, dicomFiles: null, documentFile: value);
+                        }
+                      });
+                    },
+                    child: Container(
                   padding: EdgeInsets.all(
                     context.appTheme.spacing.marginLarge,
                   ),
@@ -178,7 +218,9 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                       )
                     ],
                   ),
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -233,6 +275,11 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                 },
                               ),
                               Expanded(
+                                  child: Text(
+                                '入手日',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
                                   flex: 3,
                                   child: Text(
                                     '病院名',
@@ -256,7 +303,12 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                               )),
                               Expanded(
                                   child: Text(
-                                '発行日',
+                                '撮影日',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  child: Text(
+                                '入手日',
                                 style: context.textTheme.bodySmall,
                               )),
                               Expanded(
@@ -322,6 +374,11 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                               });
                                             },
                                           ),
+                                          Expanded(
+                                              child: Text(data.acquisitionDate != null
+                                                  ? Dates.formShortDate(
+                                                      data.acquisitionDate)
+                                                  : '--')),
                                           Expanded(
                                               flex: 3,
                                               child: Row(
@@ -402,6 +459,11 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                               child: Text(data.issueDate != null
                                                   ? Dates.formShortDate(
                                                       data.issueDate)
+                                                  : '--')),
+                                          Expanded(
+                                              child: Text(data.acquisitionDate != null
+                                                  ? Dates.formShortDate(
+                                                      data.acquisitionDate)
                                                   : '--')),
                                           Expanded(
                                               child: data.qrCode == null
