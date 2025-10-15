@@ -1,3 +1,6 @@
+// Dart imports:
+import 'dart:html' as html;
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -158,96 +161,6 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                             ),
                           ],
                         ),
-                        ReactiveFormArray(
-                          formArrayName: 'chatToolLink',
-                          builder: (context, formArray, child) {
-                            final rows = formArray.controls
-                                .map((control) => control as FormGroup)
-                                .map(
-                                  (currentForm) => ReactiveForm(
-                                    formGroup: currentForm,
-                                    child: RowSeparated(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        );
-                                      },
-                                      children: [
-                                        Expanded(
-                                          child: ReactiveTextField(
-                                            formControlName: 'chatToolLink',
-                                            keyboardType: TextInputType.url,
-                                            decoration: const InputDecoration(
-                                              label: Text(
-                                                'チャットツールリンク',
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.deny(
-                                                  RegExp(r'\s')),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-
-                            return ColumnSeparated(
-                              separatorBuilder:
-                                  (BuildContext context, int index) => SizedBox(
-                                height: context.appTheme.spacing.marginMedium,
-                              ),
-                              children: rows.toList(),
-                            );
-                          },
-                        ),
-                        InkWell(
-                          onTap: () {
-                            (formGroup.control('chatToolLink') as FormArray)
-                                .add(
-                              FormGroup({
-                                'chatToolLink': FormControl<String>(),
-                              }),
-                            );
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add_circle,
-                                color: context.appTheme.primaryColor,
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginSmall,
-                              ),
-                              Text(
-                                'チャットツールリンクを追加',
-                                style: TextStyle(
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
-                                    color: context.appTheme.primaryColor),
-                              )
-                            ],
-                          ),
-                        ),
                         RowSeparated(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           separatorBuilder: (BuildContext context, int index) {
@@ -290,58 +203,99 @@ class MedicalRecordNationalitySection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        InkWell(
-          onTap: () {
-            imagePicker().then((value) {
-              currentForm.control('chatQrImage').value = value;
-            });
+        DragTarget<List<html.File>>(
+          onWillAccept: (data) => true,
+          onAccept: (files) async {
+            try {
+              final fileSelect = await handleFileDrop(files);
+              if (fileSelect != null) {
+                currentForm.control('chatQrImage').value = fileSelect;
+              }
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('エラー: $e')),
+              );
+            }
           },
-          child: Container(
-            width: 250,
-            height: 250,
-            padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-            decoration: BoxDecoration(
-              border: Border.all(color: context.appTheme.primaryColor),
-              borderRadius: BorderRadius.circular(
-                  context.appTheme.spacing.borderRadiusMedium),
-            ),
-            child: file != null && file.file != null
-                ? Image.memory(
-                    file.file!,
-                    fit: BoxFit.fill,
-                  )
-                : file != null && file.url != null
-                    ? Avatar.network(
-                        file.url,
-                        placeholder: const AssetImage(
-                          Images.logoMadical,
-                          package: 'core_ui',
-                        ),
-                        shape: BoxShape.rectangle,
-                        customSize: const Size(200, 200),
+          builder: (context, candidateData, rejectedData) {
+            return InkWell(
+              onTap: () {
+                imagePicker().then((value) {
+                  currentForm.control('chatQrImage').value = value;
+                });
+              },
+              child: Container(
+                width: 250,
+                height: 250,
+                padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: candidateData.isNotEmpty 
+                        ? Colors.green 
+                        : context.appTheme.primaryColor,
+                    width: candidateData.isNotEmpty ? 3 : 1,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                      context.appTheme.spacing.borderRadiusMedium),
+                  color: candidateData.isNotEmpty 
+                      ? Colors.green.withOpacity(0.1) 
+                      : Colors.transparent,
+                ),
+                child: file != null && file.file != null
+                    ? Image.memory(
+                        file.file!,
+                        fit: BoxFit.fill,
                       )
-                    : ColumnSeparated(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          );
-                        },
-                        children: [
-                          const Icon(Icons.copy_all_rounded),
-                          const Text('QRコードをここにドラッグ＆ドロップ'),
-                          ElevatedButton(
-                              onPressed: () {
-                                imagePicker().then((value) {
-                                  currentForm.control('chatQrImage').value =
-                                      value;
-                                });
-                              },
-                              child: const Text('またはファイルを選択する'))
-                        ],
-                      ),
-          ),
+                    : file != null && file.url != null
+                        ? Avatar.network(
+                            file.url,
+                            placeholder: const AssetImage(
+                              Images.logoMadical,
+                              package: 'core_ui',
+                            ),
+                            shape: BoxShape.rectangle,
+                            customSize: const Size(200, 200),
+                          )
+                        : ColumnSeparated(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            separatorBuilder: (BuildContext context, int index) {
+                              return SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
+                              );
+                            },
+                            children: [
+                              Icon(
+                                candidateData.isNotEmpty 
+                                    ? Icons.cloud_upload 
+                                    : Icons.copy_all_rounded,
+                                color: candidateData.isNotEmpty 
+                                    ? Colors.green 
+                                    : null,
+                              ),
+                              Text(
+                                candidateData.isNotEmpty 
+                                    ? 'ここにドロップしてください' 
+                                    : 'QRコードをここにドラッグ＆ドロップ',
+                                style: TextStyle(
+                                  color: candidateData.isNotEmpty 
+                                      ? Colors.green 
+                                      : null,
+                                ),
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    imagePicker().then((value) {
+                                      currentForm.control('chatQrImage').value =
+                                          value;
+                                    });
+                                  },
+                                  child: const Text('またはファイルを選択する'))
+                            ],
+                          ),
+              ),
+            );
+          },
         ),
         if (file != null)
           IconButton(
