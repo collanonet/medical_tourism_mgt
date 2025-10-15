@@ -47,13 +47,6 @@ FormGroup basicInfoForm({
             ),
           ],
         ),
-        'returnDate': FormControl<DateTime>(
-          validators: [
-            Validators.pattern(
-              ValidatorRegExp.date,
-            ),
-          ],
-        ),
         'proposalNumber': FormControl<String>(validators: [
           Validators.required,
         ]),
@@ -150,11 +143,6 @@ FormGroup basicInfoForm({
               Validators.email,
             ],
           ),
-          'chatToolLink': FormArray([
-            FormGroup({
-              'chatToolLink': FormControl<String>(),
-            })
-          ]),
           'chatQrImage': FormControl<FileSelect>(),
           'patient': FormControl<String?>(),
         }),
@@ -265,11 +253,6 @@ FormGroup basicInfoForm({
                 Validators.email,
               ],
             ),
-            'chatToolLink': FormArray([
-              FormGroup({
-                'chatToolLink': FormControl<String>(),
-              })
-            ]),
             'chatQrImage': FormControl<FileSelect>(),
             'passportNumber': FormControl<String?>(),
             'passportImage': FormControl<FileSelect>(), // パスポート画像

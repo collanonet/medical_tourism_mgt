@@ -1,5 +1,8 @@
 // Dart imports:
+import 'dart:async';
 import 'dart:io';
+import 'dart:html' as html;
+import 'dart:typed_data';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
@@ -49,7 +52,7 @@ Future<FileSelect?> filePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: false,
     type: FileType.custom,
-    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'],
   );
 
   try {
@@ -72,7 +75,7 @@ Future<List<File>?> fileMultiplePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: true,
     type: FileType.custom,
-    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'],
   );
 
   try {
@@ -89,7 +92,7 @@ Future<List<File>?> fileMultiplePicker() async {
 }
 
 Future<List<File>?> fileWithSpecificExtensionPicker({
-  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
+  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'],
 }) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
@@ -111,7 +114,7 @@ Future<List<File>?> fileWithSpecificExtensionPicker({
 }
 
 Future<List<File>?> fileMultipleWithSpecificExtensionPicker({
-  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx'],
+  List<String> allowedExtensions = const ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'],
 }) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
@@ -129,5 +132,41 @@ Future<List<File>?> fileMultipleWithSpecificExtensionPicker({
     }
   } catch (e) {
     throw e.toString();
+  }
+}
+
+// Handle file drop from drag and drop
+Future<FileSelect?> handleFileDrop(List<html.File> files) async {
+  if (files.isEmpty) return null;
+  
+  final file = files.first;
+  final allowedExtensions = ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'];
+  final extension = file.name.split('.').last.toLowerCase();
+  
+  if (!allowedExtensions.contains(extension)) {
+    throw 'サポートされていないファイル形式です。許可された形式: ${allowedExtensions.join(', ')}';
+  }
+  
+  try {
+    final reader = html.FileReader();
+    final completer = Completer<Uint8List>();
+    
+    reader.onLoad.listen((e) {
+      completer.complete(reader.result as Uint8List);
+    });
+    
+    reader.onError.listen((e) {
+      completer.completeError('ファイルの読み込みに失敗しました');
+    });
+    
+    reader.readAsArrayBuffer(file);
+    final bytes = await completer.future;
+    
+    return FileSelect(
+      filename: file.name,
+      file: bytes,
+    );
+  } catch (e) {
+    throw 'ファイルの処理に失敗しました: $e';
   }
 }
