@@ -11,6 +11,7 @@ class DomesticMedicalDataRequest {
   String? documentName;
   String? remarks;
   DateTime? dateOfIssue;
+  DateTime? acquisitionDate;
   String? url;
   bool? disclosureToPatient;
   bool? disclosureToOtherMedicalInstitutions;
@@ -23,6 +24,7 @@ class DomesticMedicalDataRequest {
     this.documentName,
     this.remarks,
     this.dateOfIssue,
+    this.acquisitionDate,
     this.url,
     this.disclosureToPatient,
     this.disclosureToOtherMedicalInstitutions,

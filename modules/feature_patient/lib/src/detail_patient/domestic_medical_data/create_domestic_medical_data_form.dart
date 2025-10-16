@@ -19,6 +19,14 @@ FormGroup domesticMedicalDataForm(
         ),
       ],
     ),
+    'acquisitionDate': FormControl<DateTime>(
+      validators: [
+        Validators.required,
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
+    ),
     'sharedUrlIssue': FormControl<String>(),
     'disclosureToPatients': FormControl<String>(value: ''),
     'disclosureToOtherMedicalInstitutions': FormControl<String>(value: ''),

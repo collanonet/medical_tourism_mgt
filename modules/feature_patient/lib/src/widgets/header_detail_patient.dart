@@ -150,48 +150,53 @@ class HeaderDetailPatient extends StatelessWidget {
               SizedBox(
                 height: context.appTheme.spacing.marginMedium,
               ),
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.appTheme.spacing.marginMedium),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(
-                        color: context.appTheme.primaryColor,
+              ValueListenableBuilder(
+                valueListenable: context.read<DetailPatientModel>().medicalRecord,
+                builder: (context, medicalRecordValue, _) {
+                  return Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.appTheme.spacing.marginMedium),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(
+                            color: context.appTheme.primaryColor,
+                          ),
+                        ),
+                        child: Text('GP',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: context.appTheme.primaryColor,
+                            )),
                       ),
-                    ),
-                    child: Text('GP',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.appTheme.primaryColor,
-                        )),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginSmall,
-                  ),
-                  const Text('001-C-20'),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginExtraLarge,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.appTheme.spacing.marginMedium),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(
-                        color: context.appTheme.primaryColor,
+                      SizedBox(
+                        width: context.appTheme.spacing.marginSmall,
                       ),
-                    ),
-                    child: Text('進捗',
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.appTheme.primaryColor,
-                        )),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginSmall,
-                  ),
-                  const Text('見積&病院提案'),
-                ],
+                      Text(medicalRecordValue.data?.proposalNumber ?? '--'),
+                      SizedBox(
+                        width: context.appTheme.spacing.marginExtraLarge,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.appTheme.spacing.marginMedium),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(
+                            color: context.appTheme.primaryColor,
+                          ),
+                        ),
+                        child: Text('進捗',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: context.appTheme.primaryColor,
+                            )),
+                      ),
+                      SizedBox(
+                        width: context.appTheme.spacing.marginSmall,
+                      ),
+                      Text(medicalRecordValue.data?.progress ?? '--'),
+                    ],
+                  );
+                },
               ),
             ],
           )

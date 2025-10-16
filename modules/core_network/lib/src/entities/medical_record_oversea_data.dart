@@ -24,6 +24,7 @@ class MedicalRecordOverseaData {
   String? commentHospital2;
   DateTime? expirationDate;
   DateTime? issueDate;
+  DateTime? acquisitionDate;
   String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -37,6 +38,7 @@ class MedicalRecordOverseaData {
     this.category,
     this.documentName,
     this.issueDate,
+    this.acquisitionDate,
     this.sharedUrl,
     this.password,
     this.qrCode,

@@ -1,6 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Dart imports:
+import 'dart:html' as html;
+
 // Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
@@ -39,15 +42,31 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
         builder: (context, value, child) {
           return Column(
             children: [
-              InkWell(
-                onTap: () {
-                  filePicker().then((value) {
-                    if (value != null) {
-                      showCreateWithFileDialog(context, value);
+              DragTarget<List<html.File>>(
+                onAccept: (files) async {
+                  try {
+                    final documentFile = await handleFileDrop(files);
+                    if (documentFile != null) {
+                      showCreateWithFileDialog(context, documentFile);
                     }
-                  });
+                  } catch (e) {
+                    snackBarWidget(
+                      message: 'ファイルのアップロードでエラーが発生しました: $e',
+                      backgroundColor: Colors.red,
+                      prefixIcon: const Icon(Icons.error, color: Colors.white),
+                    );
+                  }
                 },
-                child: Container(
+                builder: (context, candidateData, rejectedData) {
+                  return InkWell(
+                    onTap: () {
+                      filePicker().then((value) {
+                        if (value != null) {
+                          showCreateWithFileDialog(context, value);
+                        }
+                      });
+                    },
+                    child: Container(
                   padding: EdgeInsets.all(
                     context.appTheme.spacing.marginExtraLarge,
                   ),
@@ -100,7 +119,9 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                       )
                     ],
                   ),
-                ),
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: context.appTheme.spacing.marginMedium,
@@ -131,6 +152,11 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                     },
                   ),
                   Expanded(
+                      child: Text(
+                    '入手日',
+                    style: context.textTheme.bodySmall,
+                  )),
+                  Expanded(
                       flex: 2,
                       child: Text(
                         '病院名', // Hospital name
@@ -154,7 +180,12 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                   ),
                   Expanded(
                       child: Text(
-                    '発行日', // Publication date
+                    '撮影日', // Publication date
+                    style: context.textTheme.bodySmall,
+                  )),
+                  Expanded(
+                      child: Text(
+                    '入手日',
                     style: context.textTheme.bodySmall,
                   )),
                   Expanded(
@@ -212,6 +243,14 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                                 },
                               ),
                               Expanded(
+                                child: Text(
+                                  item.acquisitionDate == null
+                                      ? '-'
+                                      : dateFormat
+                                          .format(item.acquisitionDate as DateTime),
+                                ),
+                              ),
+                              Expanded(
                                 flex: 2,
                                 child: Row(
                                   children: [
@@ -238,6 +277,14 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                                       ? '-'
                                       : dateFormat
                                           .format(item.dateOfIssue as DateTime),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  item.acquisitionDate == null
+                                      ? '-'
+                                      : dateFormat
+                                          .format(item.acquisitionDate as DateTime),
                                 ),
                               ),
                               const Expanded(
