@@ -41,6 +41,7 @@ dependencies:
   intl: ^0.18.1
   flutter_pdfview: ^1.4.0
   libphonenumber: ^2.0.2
+  video_player: ^2.8.1
 
 dev_dependencies:
   flutter_test:

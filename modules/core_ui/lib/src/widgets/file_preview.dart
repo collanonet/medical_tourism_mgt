@@ -22,6 +22,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:video_player/video_player.dart';
 
 class FilePreview extends StatefulWidget {
   const FilePreview({super.key, required this.fileSelect});
@@ -76,6 +77,29 @@ class _FilePreviewState extends State<FilePreview> {
           widget.fileSelect.file != null
               ? Image.memory(widget.fileSelect.file!)
               : Image.network(widget.fileSelect.url!),
+        ],
+      );
+    }
+
+    // Handle video files (MP4)
+    if (fileExtension == 'mp4') {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextButton(
+            onPressed: () {
+              openUrlInBrowser(fileName: widget.fileSelect.url ?? '');
+            },
+            child: const Text('Download Video'),
+          ),
+          SizedBox(
+            width: 400,
+            height: 300,
+            child: widget.fileSelect.file != null
+                ? VideoPlayerFromBytes(file: widget.fileSelect.file!)
+                : VideoPlayerFromUrl(url: widget.fileSelect.url!),
+          ),
         ],
       );
     }
@@ -177,6 +201,164 @@ class _PdfPreviewFromUrlState extends State<PdfPreviewFromUrl> {
       body: localPath == null
           ? const Center(child: CircularProgressIndicator())
           : PDFView(filePath: localPath!),
+    );
+  }
+}
+
+class VideoPlayerFromBytes extends StatefulWidget {
+  final Uint8List file;
+
+  const VideoPlayerFromBytes({Key? key, required this.file}) : super(key: key);
+
+  @override
+  State<VideoPlayerFromBytes> createState() => _VideoPlayerFromBytesState();
+}
+
+class _VideoPlayerFromBytesState extends State<VideoPlayerFromBytes> {
+  VideoPlayerController? _controller;
+  bool _isInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeVideo();
+  }
+
+  Future<void> _initializeVideo() async {
+    try {
+      final tempDir = await getTemporaryDirectory();
+      final tempFile = File('${tempDir.path}/temp_video.mp4');
+      await tempFile.writeAsBytes(widget.file);
+      
+      _controller = VideoPlayerController.file(tempFile);
+      await _controller!.initialize();
+      
+      if (mounted) {
+        setState(() {
+          _isInitialized = true;
+        });
+      }
+    } catch (e) {
+      print('Error initializing video: $e');
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isInitialized || _controller == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return AspectRatio(
+      aspectRatio: _controller!.value.aspectRatio,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          VideoPlayer(_controller!),
+          VideoProgressIndicator(_controller!, allowScrubbing: true),
+          Center(
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  if (_controller!.value.isPlaying) {
+                    _controller!.pause();
+                  } else {
+                    _controller!.play();
+                  }
+                });
+              },
+              icon: Icon(
+                _controller!.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                size: 50,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class VideoPlayerFromUrl extends StatefulWidget {
+  final String url;
+
+  const VideoPlayerFromUrl({Key? key, required this.url}) : super(key: key);
+
+  @override
+  State<VideoPlayerFromUrl> createState() => _VideoPlayerFromUrlState();
+}
+
+class _VideoPlayerFromUrlState extends State<VideoPlayerFromUrl> {
+  VideoPlayerController? _controller;
+  bool _isInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeVideo();
+  }
+
+  Future<void> _initializeVideo() async {
+    try {
+      _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url));
+      await _controller!.initialize();
+      
+      if (mounted) {
+        setState(() {
+          _isInitialized = true;
+        });
+      }
+    } catch (e) {
+      print('Error initializing video: $e');
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isInitialized || _controller == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return AspectRatio(
+      aspectRatio: _controller!.value.aspectRatio,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          VideoPlayer(_controller!),
+          VideoProgressIndicator(_controller!, allowScrubbing: true),
+          Center(
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  if (_controller!.value.isPlaying) {
+                    _controller!.pause();
+                  } else {
+                    _controller!.play();
+                  }
+                });
+              },
+              icon: Icon(
+                _controller!.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                size: 50,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
