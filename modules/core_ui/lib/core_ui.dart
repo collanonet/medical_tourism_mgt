@@ -5,3 +5,4 @@ export 'src/widgets/view_print_file.dart';
 export 'src/widgets/file_preview.dart';
 export 'src/widgets/preview_file.dart';
 export 'src/widgets/dicom_viewer_widget.dart';
+export 'src/widgets/column_separated.dart';

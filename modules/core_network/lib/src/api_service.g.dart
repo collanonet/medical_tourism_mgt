@@ -8396,6 +8396,7 @@ class _ApiService implements ApiService {
     DateTime? issueDateFrom,
     DateTime? issueDateTo,
     String? prospects,
+    String? diseaseName,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -8407,6 +8408,7 @@ class _ApiService implements ApiService {
       r'issueDateFrom': issueDateFrom?.toIso8601String(),
       r'issueDateTo': issueDateTo?.toIso8601String(),
       r'prospects': prospects,
+      r'diseaseName': diseaseName,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

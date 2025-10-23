@@ -18,6 +18,9 @@ DomesticMedicalDataResponse _$DomesticMedicalDataResponseFromJson(
       dateOfIssue: json['dateOfIssue'] == null
           ? null
           : DateTime.parse(json['dateOfIssue'] as String),
+      acquisitionDate: json['acquisitionDate'] == null
+          ? null
+          : DateTime.parse(json['acquisitionDate'] as String),
       url: json['url'] as String?,
       disclosureToPatient: json['disclosureToPatient'] as bool?,
       disclosureToOtherMedicalInstitutions:
@@ -35,6 +38,7 @@ Map<String, dynamic> _$DomesticMedicalDataResponseToJson(
       'documentName': instance.documentName,
       'remarks': instance.remarks,
       'dateOfIssue': instance.dateOfIssue?.toIso8601String(),
+      'acquisitionDate': instance.acquisitionDate?.toIso8601String(),
       'url': instance.url,
       'disclosureToPatient': instance.disclosureToPatient,
       'disclosureToOtherMedicalInstitutions':

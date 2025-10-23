@@ -23,6 +23,9 @@ MedicalRecordOverseaData _$MedicalRecordOverseaDataFromJson(
       issueDate: json['issueDate'] == null
           ? null
           : DateTime.parse(json['issueDate'] as String),
+      acquisitionDate: json['acquisitionDate'] == null
+          ? null
+          : DateTime.parse(json['acquisitionDate'] as String),
       sharedUrl: json['sharedUrl'] as String?,
       password: json['password'] as String?,
       qrCode: json['qrCode'] as String?,
@@ -55,6 +58,7 @@ Map<String, dynamic> _$MedicalRecordOverseaDataToJson(
       'commentHospital2': instance.commentHospital2,
       'expirationDate': instance.expirationDate?.toIso8601String(),
       'issueDate': instance.issueDate?.toIso8601String(),
+      'acquisitionDate': instance.acquisitionDate?.toIso8601String(),
       'medicalRecord': instance.medicalRecord,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
