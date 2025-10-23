@@ -32,6 +32,7 @@ class InvoiceRepositoryIml extends InvoiceRepository {
     DateTime? issueDateFrom,
     DateTime? issueDateTo,
     String? prospects,
+    String? diseaseName,
   }) {
     return remote.getInvoices(
       medicalRecord: medicalRecord,
@@ -42,6 +43,7 @@ class InvoiceRepositoryIml extends InvoiceRepository {
       issueDateFrom: issueDateFrom,
       issueDateTo: issueDateTo,
       prospects: prospects,
+      diseaseName: diseaseName,
     );
   }
 

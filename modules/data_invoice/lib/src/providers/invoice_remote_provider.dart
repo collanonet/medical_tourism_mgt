@@ -34,6 +34,7 @@ class InvoiceRemoteProvider {
     DateTime? issueDateFrom,
     DateTime? issueDateTo,
     String? prospects,
+    String? diseaseName,
   }) {
     return apiService.getInvoices(
       medicalRecord: medicalRecord,
@@ -44,6 +45,7 @@ class InvoiceRemoteProvider {
       issueDateFrom: issueDateFrom,
       issueDateTo: issueDateTo,
       prospects: prospects,
+      diseaseName: diseaseName,
     );
   }
 

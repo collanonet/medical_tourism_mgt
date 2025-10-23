@@ -31,6 +31,48 @@ class DicomDetailResponse {
       _$DicomDetailResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$DicomDetailResponseToJson(this);
+
+  // Getters for MainDicomTags properties
+  int? get numberOfFrames => mainDicomTags.numberOfFrames != null 
+      ? int.tryParse(mainDicomTags.numberOfFrames!) 
+      : null;
+  String? get instanceNumber => mainDicomTags.instanceNumber;
+  String? get instanceCreationDate => mainDicomTags.instanceCreationDate;
+  String? get instanceCreationTime => mainDicomTags.instanceCreationTime;
+  String? get sopInstanceUID => mainDicomTags.sopInstanceUID;
+
+  // Placeholder getters for patient and study information
+  // These should be populated from actual DICOM metadata when available
+  String? get patientName => null;
+  String? get patientId => null;
+  String? get patientSex => null;
+  DateTime? get patientBirthDate => null;
+  DateTime? get acquisitionDate => _parseDate(instanceCreationDate);
+  String? get acquisitionTime => instanceCreationTime;
+  int? get acquisitionNumber => null;
+  String? get seriesDescription => null;
+  int? get seriesNumber => null;
+  String? get studyDescription => null;
+  String? get studyId => null;
+  String? get institutionName => null;
+  double? get sliceThickness => null;
+  String? get imagePositionPatient => null;
+
+  // Helper method to parse DICOM date format (YYYYMMDD) to DateTime
+  DateTime? _parseDate(String? dateString) {
+    if (dateString == null || dateString.isEmpty) return null;
+    try {
+      if (dateString.length >= 8) {
+        final year = int.parse(dateString.substring(0, 4));
+        final month = int.parse(dateString.substring(4, 6));
+        final day = int.parse(dateString.substring(6, 8));
+        return DateTime(year, month, day);
+      }
+    } catch (e) {
+      // If parsing fails, return null
+    }
+    return null;
+  }
 }
 
 @JsonSerializable()

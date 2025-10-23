@@ -1630,6 +1630,7 @@ abstract class ApiService {
     @Query('issueDateFrom') DateTime? issueDateFrom,
     @Query('issueDateTo') DateTime? issueDateTo,
     @Query('prospects') String? prospects,
+    @Query('diseaseName') String? diseaseName,
   });
 
   @GET('${EndPoints.INVOICE}/medicalRecord/{medicalRecordId}')
