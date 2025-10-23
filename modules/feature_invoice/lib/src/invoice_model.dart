@@ -19,24 +19,24 @@ class InvoiceModel {
       ValueNotifier(const AsyncData());
 
   Future<void> searchInvoices({
-    String? nameOfHospital,
+    String? diseaseName,
     String? agentName,
     String? patientName,
     DateTime? issueDateFrom,
     DateTime? issueDateTo,
-    String? invoice,
     String? prospects,
+    String? readStatus,
   }) async {
     try {
       medicalInvoiceData.value = const AsyncData(loading: true);
       final response = await invoiceRepository.getInvoices(
-        nameOfHospital: nameOfHospital,
+        diseaseName: diseaseName,
         agentName: agentName,
         patientName: patientName,
         issueDateFrom: issueDateFrom,
         issueDateTo: issueDateTo,
-        type: invoice == '精算書' ? true : false,
         prospects: prospects,
+        readStatus: readStatus,
       );
       medicalInvoiceData.value = AsyncData(data: response);
     } catch (e) {

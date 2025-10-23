@@ -11,7 +11,8 @@ abstract class InvoiceRepository {
     DateTime? issueDateFrom,
     DateTime? issueDateTo,
     String? prospects,
-    String? diseaseName,
+    String? diseaseName,    
+    String? readStatus,     
   });
 
   Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(

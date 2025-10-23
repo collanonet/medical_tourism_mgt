@@ -33,6 +33,11 @@ class MedicalInvoiceResponse {
   String? fexNumber;
   String? inCharge;
 
+  // 新しく追加するフィールド
+  String? caseNumber; // 案件番号（8桁）
+  bool? isIssued; // 発行済かどうかのステータス
+  String? originalEstimateId; // 元の見積書へのリンク用ID
+
   MedicalRecord medicalRecord;
   User? user;
   Patient? patient;
@@ -65,6 +70,9 @@ class MedicalInvoiceResponse {
     this.fexNumber,
     this.inCharge,
     this.totalAmount,
+    this.caseNumber,
+    this.isIssued,
+    this.originalEstimateId,
     required this.medicalRecord,
     this.user,
     this.patient,
