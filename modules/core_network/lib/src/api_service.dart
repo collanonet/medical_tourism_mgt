@@ -1631,6 +1631,7 @@ abstract class ApiService {
     @Query('issueDateTo') DateTime? issueDateTo,
     @Query('prospects') String? prospects,
     @Query('diseaseName') String? diseaseName,
+    @Query('readStatus') String? readStatus,
   });
 
   @GET('${EndPoints.INVOICE}/medicalRecord/{medicalRecordId}')

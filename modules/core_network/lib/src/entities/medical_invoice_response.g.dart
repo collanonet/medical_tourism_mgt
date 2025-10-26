@@ -43,6 +43,12 @@ abstract class _$MedicalInvoiceResponseCWProxy {
 
   MedicalInvoiceResponse totalAmount(double? totalAmount);
 
+  MedicalInvoiceResponse caseNumber(String? caseNumber);
+
+  MedicalInvoiceResponse isIssued(bool? isIssued);
+
+  MedicalInvoiceResponse originalEstimateId(String? originalEstimateId);
+
   MedicalInvoiceResponse medicalRecord(MedicalRecord medicalRecord);
 
   MedicalInvoiceResponse user(User? user);
@@ -91,6 +97,9 @@ abstract class _$MedicalInvoiceResponseCWProxy {
     String? fexNumber,
     String? inCharge,
     double? totalAmount,
+    String? caseNumber,
+    bool? isIssued,
+    String? originalEstimateId,
     MedicalRecord? medicalRecord,
     User? user,
     Patient? patient,
@@ -180,6 +189,17 @@ class _$MedicalInvoiceResponseCWProxyImpl
       this(totalAmount: totalAmount);
 
   @override
+  MedicalInvoiceResponse caseNumber(String? caseNumber) =>
+      this(caseNumber: caseNumber);
+
+  @override
+  MedicalInvoiceResponse isIssued(bool? isIssued) => this(isIssued: isIssued);
+
+  @override
+  MedicalInvoiceResponse originalEstimateId(String? originalEstimateId) =>
+      this(originalEstimateId: originalEstimateId);
+
+  @override
   MedicalInvoiceResponse medicalRecord(MedicalRecord medicalRecord) =>
       this(medicalRecord: medicalRecord);
 
@@ -246,6 +266,9 @@ class _$MedicalInvoiceResponseCWProxyImpl
     Object? fexNumber = const $CopyWithPlaceholder(),
     Object? inCharge = const $CopyWithPlaceholder(),
     Object? totalAmount = const $CopyWithPlaceholder(),
+    Object? caseNumber = const $CopyWithPlaceholder(),
+    Object? isIssued = const $CopyWithPlaceholder(),
+    Object? originalEstimateId = const $CopyWithPlaceholder(),
     Object? medicalRecord = const $CopyWithPlaceholder(),
     Object? user = const $CopyWithPlaceholder(),
     Object? patient = const $CopyWithPlaceholder(),
@@ -331,6 +354,18 @@ class _$MedicalInvoiceResponseCWProxyImpl
           ? _value.totalAmount
           // ignore: cast_nullable_to_non_nullable
           : totalAmount as double?,
+      caseNumber: caseNumber == const $CopyWithPlaceholder()
+          ? _value.caseNumber
+          // ignore: cast_nullable_to_non_nullable
+          : caseNumber as String?,
+      isIssued: isIssued == const $CopyWithPlaceholder()
+          ? _value.isIssued
+          // ignore: cast_nullable_to_non_nullable
+          : isIssued as bool?,
+      originalEstimateId: originalEstimateId == const $CopyWithPlaceholder()
+          ? _value.originalEstimateId
+          // ignore: cast_nullable_to_non_nullable
+          : originalEstimateId as String?,
       medicalRecord:
           medicalRecord == const $CopyWithPlaceholder() || medicalRecord == null
               ? _value.medicalRecord
@@ -417,6 +452,9 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
       fexNumber: json['fexNumber'] as String?,
       inCharge: json['inCharge'] as String?,
       totalAmount: (json['totalAmount'] as num?)?.toDouble(),
+      caseNumber: json['caseNumber'] as String?,
+      isIssued: json['isIssued'] as bool?,
+      originalEstimateId: json['originalEstimateId'] as String?,
       medicalRecord:
           MedicalRecord.fromJson(json['medicalRecord'] as Map<String, dynamic>),
       user: json['user'] == null
@@ -463,6 +501,9 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
       'telNumber': instance.telNumber,
       'fexNumber': instance.fexNumber,
       'inCharge': instance.inCharge,
+      'caseNumber': instance.caseNumber,
+      'isIssued': instance.isIssued,
+      'originalEstimateId': instance.originalEstimateId,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
       'patient': instance.patient,
