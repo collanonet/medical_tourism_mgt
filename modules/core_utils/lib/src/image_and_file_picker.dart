@@ -140,11 +140,17 @@ Future<FileSelect?> handleFileDrop(List<html.File> files) async {
   if (files.isEmpty) return null;
   
   final file = files.first;
-  final allowedExtensions = ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'];
+  final allowedExtensions = [
+    'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'tif', 'webp',  // 画像
+    'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt',  // ドキュメント
+    'mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv',  // ビデオ
+    'dcm', 'dicom', 'nii', 'nrrd', 'mha', 'mhd', 'nifti',  // 医療画像（DICOM等）
+    'zip', 'rar', '7z', 'tar', 'gz',  // 圧縮ファイル
+  ];
   final extension = file.name.split('.').last.toLowerCase();
   
-  if (!allowedExtensions.contains(extension)) {
-    throw 'サポートされていないファイル形式です。許可された形式: ${allowedExtensions.join(', ')}';
+  if (!allowedExtensions.contains(extension) && file.name.contains('.')) {
+    throw 'サポートされていないファイル形式です。許可された形式: jpg, jpeg, png, pdf, doc, docx, xls, xlsx, mp4, dcm, dicom など';
   }
   
   try {
