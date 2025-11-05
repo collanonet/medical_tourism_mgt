@@ -17,7 +17,7 @@ FormGroup createMedicalOverseaDataWithFileForm(
     'selectedHospital': FormControl<String>(),
     'category': FormControl<String>(value: '画像データ（DICOM）'),
     'documentName': FormControl<String>(validators: [Validators.required]),
-    'issueDate': FormControl<DateTime>(
+    'shootingDate': FormControl<DateTime>(
       validators: [
         Validators.required,
         Validators.pattern(
@@ -26,6 +26,7 @@ FormGroup createMedicalOverseaDataWithFileForm(
       ],
     ),
     'acquisitionDate': FormControl<DateTime>(
+      value: DateTime.now(),
       validators: [
         Validators.required,
         Validators.pattern(

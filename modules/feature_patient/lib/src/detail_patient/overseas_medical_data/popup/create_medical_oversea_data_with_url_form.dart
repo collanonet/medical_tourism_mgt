@@ -9,7 +9,15 @@ FormGroup createMedicalOverseaDataWithUrlForm() {
     'hospitalName': FormControl<String>(),
     'category': FormControl<String>(value: '画像データ（DICOM）'),
     'documentName': FormControl<String>(),
-    'issueDate': FormControl<DateTime>(
+    'shootingDate': FormControl<DateTime>(
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
+    ),
+    'acquisitionDate': FormControl<DateTime>(
+      value: DateTime.now(),
       validators: [
         Validators.pattern(
           ValidatorRegExp.date,

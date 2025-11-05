@@ -1,6 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Dart imports:
+import 'dart:html' as html;
+
 // Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
@@ -41,70 +44,40 @@ class _MedicalPaymentDetailScreenState
           var dateFormat = DateFormat('yyyy-MM-dd');
           return Column(
             children: [
-              InkWell(
-                onTap: () {
-                  filePicker().then((value) {
-                    if (value != null) {
-                      showCreateWithFileDialog(context, value);
-                    } else {
-                      logger.d('null');
+              DragTarget<List<html.File>>(
+                onAccept: (files) async {
+                  try {
+                    final documentFile = await handleFileDrop(files);
+                    if (documentFile != null) {
+                      showCreateWithFileDialog(context, documentFile);
                     }
-                  });
+                  } catch (e) {
+                    snackBarWidget(
+                      message: 'ファイルのアップロードでエラーが発生しました: $e',
+                      backgroundColor: Colors.red,
+                      prefixIcon: const Icon(Icons.error, color: Colors.white),
+                    );
+                  }
                 },
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginExtraLarge,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                builder: (context, candidateData, rejectedData) {
+                  return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.copy_all_rounded,
-                        size: 50,
-                        color: context.appTheme.primaryColor,
+                      ElevatedButton(
+                        onPressed: () {
+                          filePicker().then((value) {
+                            if (value != null) {
+                              showCreateWithFileDialog(context, value);
+                            }
+                          });
+                        },
+                        child: const Text(
+                          'ファイルを選択する',
+                        ),
                       ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            '診療データをここにドラッグ＆ドロップ',
-                            style: context.textTheme.bodySmall?.copyWith(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              filePicker().then((value) {
-                                if (value != null) {
-                                  showCreateWithFileDialog(context, value);
-                                }
-                              });
-                            },
-                            child: const Text(
-                              'またはファイルを選択する',
-                            ),
-                          )
-                        ],
-                      )
                     ],
-                  ),
-                ),
+                  );
+                },
               ),
               SizedBox(
                 height: context.appTheme.spacing.marginMedium,
@@ -177,7 +150,11 @@ class _MedicalPaymentDetailScreenState
                 children: List.generate(value.data?.length ?? 0, (index) {
                   final data = value.data?[index];
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      if (data?.file != null) {
+                        openUrlInBrowser(fileName: data!.file!);
+                      }
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Row(
