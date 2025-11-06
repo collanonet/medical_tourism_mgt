@@ -90,6 +90,18 @@ class ProgressListModel {
         int index = groupByType.keys.toList().indexOf(type);
         FormArray formArrayProgress = FormArray([]);
 
+        // Sort records by titleList order
+        records.sort((a, b) {
+          int indexA = titleList.indexWhere((item) => item.task == a.task);
+          int indexB = titleList.indexWhere((item) => item.task == b.task);
+          
+          // If task not found in titleList, put it at the end
+          if (indexA == -1) indexA = titleList.length;
+          if (indexB == -1) indexB = titleList.length;
+          
+          return indexA.compareTo(indexB);
+        });
+
         // Insert data for each group
         for (var record in records) {
           formArrayProgress.add(FormGroup({

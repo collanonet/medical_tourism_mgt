@@ -71,6 +71,178 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         fontWeight: FontWeight.bold,
                       ),
                     ), // TODO: l10n 対応 (本人)  (patient)
+                    // 氏名（ローマ字）
+                    const Text(
+                      '氏名（ローマ字）',
+                      style: TextStyle(
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    RowSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
+                        );
+                      },
+                      children: [
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.familyNameRomanized',
+                            decoration: const InputDecoration(
+                              label: Text('ファミリーネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.middleNameRomanized',
+                            decoration: const InputDecoration(
+                              label: Text('ミドルネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.firstNameRomanized',
+                            decoration: const InputDecoration(
+                              label: Text('ファーストネーム'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // 氏名（中国語漢字/ベトナム語表記）
+                    const Text(
+                      '氏名（中国語漢字/ベトナム語表記）',
+                      style: TextStyle(
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    RowSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
+                        );
+                      },
+                      children: [
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.familyNameChineseOrVietnamese',
+                            decoration: const InputDecoration(
+                              label: Text('ファミリーネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.middleNameChineseOrVietnamese',
+                            decoration: const InputDecoration(
+                              label: Text('ミドルネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.firstNameChineseOrVietnamese',
+                            decoration: const InputDecoration(
+                              label: Text('ファーストネーム'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // 氏名（日本語漢字）※中国人のみ
+                    const Text(
+                      '氏名（日本語漢字）※中国人のみ',
+                      style: TextStyle(
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    RowSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
+                        );
+                      },
+                      children: [
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.familyNameJapaneseForChinese',
+                            decoration: const InputDecoration(
+                              label: Text('ファミリーネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.middleNameJapaneseForChinese',
+                            decoration: const InputDecoration(
+                              label: Text('ミドルネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.firstNameJapaneseForChinese',
+                            decoration: const InputDecoration(
+                              label: Text('ファーストネーム'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // 氏名（カナ）
+                    const Text(
+                      '氏名（カナ）',
+                      style: TextStyle(
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    RowSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
+                        );
+                      },
+                      children: [
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.familyNameJapaneseForNonChinese',
+                            decoration: const InputDecoration(
+                              label: Text('ファミリーネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.middleNameJapaneseForNonChinese',
+                            decoration: const InputDecoration(
+                              label: Text('ミドルネーム'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'PATIENT_NAMES.firstNameJapaneseForNonChinese',
+                            decoration: const InputDecoration(
+                              label: Text('ファーストネーム'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -241,178 +413,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               //   ),
                               // )
                             ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    // 氏名（ローマ字）
-                    const Text(
-                      '氏名（ローマ字）',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    RowSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        );
-                      },
-                      children: [
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.familyNameRomanized',
-                            decoration: const InputDecoration(
-                              label: Text('ファミリーネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.middleNameRomanized',
-                            decoration: const InputDecoration(
-                              label: Text('ミドルネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.firstNameRomanized',
-                            decoration: const InputDecoration(
-                              label: Text('ファーストネーム'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // 氏名（中国語漢字/ベトナム語表記）
-                    const Text(
-                      '氏名（中国語漢字/ベトナム語表記）',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    RowSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        );
-                      },
-                      children: [
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.familyNameChineseOrVietnamese',
-                            decoration: const InputDecoration(
-                              label: Text('ファミリーネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.middleNameChineseOrVietnamese',
-                            decoration: const InputDecoration(
-                              label: Text('ミドルネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.firstNameChineseOrVietnamese',
-                            decoration: const InputDecoration(
-                              label: Text('ファーストネーム'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // 氏名（日本語漢字）※中国人のみ
-                    const Text(
-                      '氏名（日本語漢字）※中国人のみ',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    RowSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        );
-                      },
-                      children: [
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.familyNameJapaneseForChinese',
-                            decoration: const InputDecoration(
-                              label: Text('ファミリーネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.middleNameJapaneseForChinese',
-                            decoration: const InputDecoration(
-                              label: Text('ミドルネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.firstNameJapaneseForChinese',
-                            decoration: const InputDecoration(
-                              label: Text('ファーストネーム'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // 氏名（カナ）
-                    const Text(
-                      '氏名（カナ）',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    RowSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        );
-                      },
-                      children: [
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.familyNameJapaneseForNonChinese',
-                            decoration: const InputDecoration(
-                              label: Text('ファミリーネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.middleNameJapaneseForNonChinese',
-                            decoration: const InputDecoration(
-                              label: Text('ミドルネーム'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'PATIENT_NAMES.firstNameJapaneseForNonChinese',
-                            decoration: const InputDecoration(
-                              label: Text('ファーストネーム'),
-                            ),
                           ),
                         ),
                       ],

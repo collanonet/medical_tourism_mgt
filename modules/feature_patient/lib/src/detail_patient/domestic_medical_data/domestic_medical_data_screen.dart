@@ -58,68 +58,22 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                   }
                 },
                 builder: (context, candidateData, rejectedData) {
-                  return InkWell(
-                    onTap: () {
-                      filePicker().then((value) {
-                        if (value != null) {
-                          showCreateWithFileDialog(context, value);
-                        }
-                      });
-                    },
-                    child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginExtraLarge,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.copy_all_rounded,
-                        size: 50,
-                        color: context.appTheme.primaryColor,
+                      ElevatedButton(
+                        onPressed: () {
+                          filePicker().then((value) {
+                            if (value != null) {
+                              showCreateWithFileDialog(context, value);
+                            }
+                          });
+                        },
+                        child: const Text(
+                          'ファイルを選択する',
+                        ),
                       ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            '診療データをここにドラッグ＆ドロップ',
-                            style: context.textTheme.bodySmall?.copyWith(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              filePicker().then((value) {
-                                if (value != null) {
-                                  showCreateWithFileDialog(context, value);
-                                }
-                              });
-                            },
-                            child: const Text(
-                              'またはファイルを選択する',
-                            ),
-                          )
-                        ],
-                      )
                     ],
-                  ),
-                    ),
                   );
                 },
               ),
@@ -218,7 +172,11 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                       var item = value.data![index];
                       var dateFormat = DateFormat('yyyy-MM-dd');
                       return InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          if (item.file != null) {
+                            openUrlInBrowser(fileName: item.file!);
+                          }
+                        },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Row(

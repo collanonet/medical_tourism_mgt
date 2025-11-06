@@ -207,7 +207,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
           ],
         ),
         Text(
-          '発行日',
+          '撮影日',
           style: Theme.of(context).textTheme.bodySmall,
         ),
         Row(
@@ -215,8 +215,8 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
           children: [
             const Expanded(
               child: ReactiveDatePickerField(
-                formControlName: 'issueDate',
-                label: '発行日',
+                formControlName: 'shootingDate',
+                label: '撮影日',
               ),
             ),
             SizedBox(
