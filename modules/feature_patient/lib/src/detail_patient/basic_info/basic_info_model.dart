@@ -684,9 +684,34 @@ class BasicInformationModel {
     await patientRepository
         .medicalRecordAgentsByMedicalRecord(medicalRecordId)
         .then((value) {
-      medicalRecordAgents.value = AsyncData(data: value.firstOrNull);
+      try {
+        logger.d(
+          'Fetched MedicalRecordAgents: ${value.map((e) => e.toJson()).toList()}',
+        );
+      } catch (e) {
+        logger.d(e);
+      }
+      final latestAgent = value.isEmpty
+          ? null
+          : value.reduce((current, next) {
+              final currentKey = current.updatedAt.isAfter(current.createdAt)
+                  ? current.updatedAt
+                  : current.createdAt;
+              final nextKey = next.updatedAt.isAfter(next.createdAt)
+                  ? next.updatedAt
+                  : next.createdAt;
+              if (nextKey.isAfter(currentKey)) {
+                return next;
+              }
+              if (nextKey.isAtSameMomentAs(currentKey) &&
+                  next.createdAt.isAfter(current.createdAt)) {
+                return next;
+              }
+              return current;
+            });
+      medicalRecordAgents.value = AsyncData(data: latestAgent);
       insertMEDICALRECORDAGENTS(
-        data: value.firstOrNull,
+        data: latestAgent,
         formGroup: formGroup.control('MEDICAL_RECORD_AGENTS') as FormGroup,
       );
     }).catchError((error) {
@@ -713,11 +738,33 @@ class BasicInformationModel {
       agentType: form.control('agentType').value,
       medicalRecord: medicalRecordId.value.requireData,
     );
+    try {
+      logger.d(
+        'Saving MedicalRecordAgent ${form.control('_id').value}: ${request.toJson()}',
+      );
+    } catch (e) {
+      logger.d(e);
+    }
 
     if (form.control('_id').value != null) {
       await updateMedicalRecordAgents(form, form.control('_id').value, request);
     } else {
       await postMedicalRecordAgents(form, request);
+    }
+
+    final updatedAgent = medicalRecordAgents.value.data;
+    if (updatedAgent != null) {
+      try {
+        logger.d(
+          'Latest MedicalRecordAgent after save: ${updatedAgent.toJson()}',
+        );
+      } catch (e) {
+        logger.d(e);
+      }
+      insertMEDICALRECORDAGENTS(
+        data: updatedAgent,
+        formGroup: form,
+      );
     }
   }
 
