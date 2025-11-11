@@ -32,14 +32,21 @@ class NormalSummaryModel {
       fileSummaryListData =
       ValueNotifier(const AsyncData<List<MedicalRecordFileSummaryResponse>>());
 
-  Future<void> getMedicalRecords(
-      {String? patientId, required FormGroup formGroup}) async {
+  ValueNotifier<AsyncData<List<MedicalRecordOverseaData>>> overseasMedicalData =
+      ValueNotifier(const AsyncData());
+
+  final Map<String, List<String>> _overseasSelectionCache = {};
+
+  Future<void> getMedicalRecords({
+    String? patientId,
+    required FormGroup formGroup,
+  }) async {
     logger.d('patientId: $patientId');
     if (patientId != null) {
       try {
         medicalRecord.value = const AsyncData(loading: true);
 
-        var result = await patientRepository.medicalRecordsByPatient(patientId);
+        final result = await patientRepository.medicalRecordsByPatient(patientId);
         logger.d('result: $result');
         if (result.isNotEmpty) {
           medicalRecord.value = AsyncData(data: result.first);
@@ -51,9 +58,17 @@ class NormalSummaryModel {
           formGroup.control('medicalRecord').value =
               medicalRecord.value.requireData.id;
           await getPatientNationalities(
-              patientId: patientId, formGroup: formGroup);
-          await getPatientNames(patientId: patientId, formGroup: formGroup);
+            patientId: patientId,
+            formGroup: formGroup,
+          );
+          await getPatientNames(
+            patientId: patientId,
+            formGroup: formGroup,
+          );
           await getMedicalRecordSummary(formGroup);
+          await getMedicalRecordOverseasDatas(
+            medicalRecordId: medicalRecord.value.requireData.id,
+          );
 
           if (!medicalRecordSummary.value.hasData) {
             await createUpdateMedicalRecordSummary(formGroup);
@@ -82,7 +97,7 @@ class NormalSummaryModel {
         .then((value) {
       if (value.isNotEmpty) {
         patientNationalities.value = AsyncData(data: value.first);
-        insertPATIENTNATIONALITIES(
+        insertPatientNationalities(
           data: value.first,
           formGroup: formGroup,
         );
@@ -95,7 +110,7 @@ class NormalSummaryModel {
     });
   }
 
-  void insertPATIENTNATIONALITIES({
+  void insertPatientNationalities({
     required PatientNationality data,
     required FormGroup formGroup,
   }) {
@@ -107,7 +122,19 @@ class NormalSummaryModel {
     try {
       medicalRecordSummary.value = const AsyncData(loading: true);
       var result = await patientRepository.getMedicalRecordSummary(
-          medicalRecord: medicalRecord.value.requireData.id);
+        medicalRecord: medicalRecord.value.requireData.id,
+      );
+      final cachedIds =
+          _overseasSelectionCache[medicalRecord.value.requireData.id] ?? [];
+      if (cachedIds.isNotEmpty ||
+          (result.overseasDataIds != null && result.overseasDataIds!.isNotEmpty)) {
+        final idsToUse = result.overseasDataIds?.toList() ?? cachedIds;
+        result = _withOverseasIds(result, idsToUse);
+        _overseasSelectionCache[medicalRecord.value.requireData.id] =
+            idsToUse;
+      } else {
+        _overseasSelectionCache[medicalRecord.value.requireData.id] = [];
+      }
       medicalRecordSummary.value = AsyncData(data: result);
       insertDataToForm(formGroup, result);
       await fetchSummaryList(result.id);
@@ -147,6 +174,8 @@ class NormalSummaryModel {
       'remarks': result.remarks,
       'medicalRecord': medicalRecord.value.requireData.id,
     });
+    formGroup.control('overseasDataIds').value =
+        result.overseasDataIds ?? <String>[];
   }
 
   ValueNotifier<AsyncData<PatientName>> patientNames = ValueNotifier(
@@ -201,7 +230,6 @@ class NormalSummaryModel {
 
   ValueNotifier<AsyncData<bool>> submitData = ValueNotifier(const AsyncData());
 
-  // submit page
   Future<void> submitSummary(FormGroup formGroup) async {
     try {
       submitData.value = const AsyncData(loading: true);
@@ -216,7 +244,11 @@ class NormalSummaryModel {
   Future<void> createUpdateMedicalRecordSummary(FormGroup formGroup) async {
     try {
       medicalRecordSummary.value = const AsyncData(loading: true);
-      var request = MedicalRecordSummaryRequest(
+      final selectedIds = List<String>.from(
+        formGroup.control('overseasDataIds').value ?? <String>[],
+      );
+      _overseasSelectionCache[medicalRecord.value.requireData.id] = selectedIds;
+      final request = MedicalRecordSummaryRequest(
         entryDate: formGroup.control('entryDate').value,
         namePassport: formGroup.control('namePassport').value,
         dateOfBirth: formGroup.control('dateOfBirth').value,
@@ -253,9 +285,13 @@ class NormalSummaryModel {
         patientsAddressStay: formGroup.control('patientsAddressStay').value,
         emergencyContact: formGroup.control('emergencyContact').value,
         remarks: formGroup.control('remarks').value,
+        overseasDataIds:
+            (formGroup.control('overseasDataIds').value as List<String>?),
         medicalRecord: medicalRecord.value.requireData.id,
       );
-      var result = await patientRepository.postMedicalRecordSummary(request);
+      var result =
+          await patientRepository.postMedicalRecordSummary(request);
+      result = _withOverseasIds(result, selectedIds);
       medicalRecordSummary.value = AsyncData(data: result);
       createMedicalRecordSummary.value = AsyncData(data: result);
     } catch (e) {
@@ -270,13 +306,15 @@ class NormalSummaryModel {
   Future<void> uploadFileSummary(FormGroup formGroup) async {
     try {
       submitFile.value = const AsyncData(loading: true);
-      FileSelect fileUpdate = formGroup.control('file').value;
+      final FileSelect fileUpdate = formGroup.control('file').value;
       String? pathFile;
       if (fileUpdate.file != null) {
         try {
-          String base64Image = base64Encode(fileUpdate.file!);
-          var filUpload = await patientRepository.uploadFileBase64(
-              base64Image, fileUpdate.filename ?? '');
+          final base64Image = base64Encode(fileUpdate.file!);
+          final filUpload = await patientRepository.uploadFileBase64(
+            base64Image,
+            fileUpdate.filename ?? '',
+          );
           pathFile = filUpload.filename;
         } catch (e) {
           logger.e(e);
@@ -285,7 +323,7 @@ class NormalSummaryModel {
       }
 
       if (pathFile != null) {
-        var fileRequest = MedicalRecordFileSummaryRequest(
+        final fileRequest = MedicalRecordFileSummaryRequest(
           pathFile: pathFile,
           documentName: formGroup.control('documentName').value,
           publicationDate: formGroup.control('publicationDate').value,
@@ -295,7 +333,7 @@ class NormalSummaryModel {
           medicalRecord: medicalRecord.value.requireData.id,
         );
 
-        var result = await patientRepository.postFileSummary(fileRequest);
+        final result = await patientRepository.postFileSummary(fileRequest);
         fileSummaryListData.value = AsyncData(data: [
           ...fileSummaryListData.value.data ?? [],
           result,
@@ -307,4 +345,28 @@ class NormalSummaryModel {
       submitFile.value = AsyncData(error: e);
     }
   }
+
+  Future<void> getMedicalRecordOverseasDatas({
+    required String medicalRecordId,
+  }) async {
+    try {
+      overseasMedicalData.value = const AsyncData(loading: true);
+      final result = await patientRepository
+          .medicalRecordOverseaDataByMedicalRecord(medicalRecordId);
+      overseasMedicalData.value = AsyncData(data: result);
+    } catch (e) {
+      logger.e(e);
+      overseasMedicalData.value = AsyncData(error: e);
+    }
+  }
+
+  MedicalRecordSummary _withOverseasIds(
+    MedicalRecordSummary summary,
+    List<String> ids,
+  ) {
+    final json = summary.toJson();
+    json['overseasDataIds'] = ids;
+    return MedicalRecordSummary.fromJson(json);
+  }
 }
+

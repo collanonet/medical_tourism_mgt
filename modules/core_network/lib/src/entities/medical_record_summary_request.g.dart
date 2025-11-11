@@ -46,6 +46,9 @@ MedicalRecordSummaryRequest _$MedicalRecordSummaryRequestFromJson(
       patientsAddressStay: json['patientsAddressStay'] as String?,
       emergencyContact: json['emergencyContact'] as String?,
       remarks: json['remarks'] as String?,
+      overseasDataIds: (json['overseasDataIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       medicalRecord: json['medicalRecord'] as String,
     );
 
@@ -83,5 +86,6 @@ Map<String, dynamic> _$MedicalRecordSummaryRequestToJson(
       'patientsAddressStay': instance.patientsAddressStay,
       'emergencyContact': instance.emergencyContact,
       'remarks': instance.remarks,
+      'overseasDataIds': instance.overseasDataIds,
       'medicalRecord': instance.medicalRecord,
     };

@@ -63,6 +63,7 @@ FormGroup normalSummaryForm() {
     'patientsAddressStay': FormControl<String>(),
     'emergencyContact': FormControl<String>(),
     'remarks': FormControl<String>(),
+    'overseasDataIds': FormControl<List<String>>(value: <String>[]),
     'attachDocuments': FormArray([
       FormGroup({
         'attachDocumentsName': FormControl<FileSelect>(),

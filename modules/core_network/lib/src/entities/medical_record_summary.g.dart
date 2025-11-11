@@ -48,6 +48,9 @@ MedicalRecordSummary _$MedicalRecordSummaryFromJson(
       patientsAddressStay: json['patientsAddressStay'] as String?,
       emergencyContact: json['emergencyContact'] as String?,
       remarks: json['remarks'] as String?,
+      overseasDataIds: (json['overseasDataIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       medicalRecord: json['medicalRecord'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
@@ -89,6 +92,7 @@ Map<String, dynamic> _$MedicalRecordSummaryToJson(
       'patientsAddressStay': instance.patientsAddressStay,
       'emergencyContact': instance.emergencyContact,
       'remarks': instance.remarks,
+      'overseasDataIds': instance.overseasDataIds,
       'medicalRecord': instance.medicalRecord,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),

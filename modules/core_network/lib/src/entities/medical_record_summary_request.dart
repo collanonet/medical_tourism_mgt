@@ -34,6 +34,7 @@ class MedicalRecordSummaryRequest {
   final String? patientsAddressStay;
   final String? emergencyContact;
   final String? remarks;
+  final List<String>? overseasDataIds;
   String medicalRecord;
 
   MedicalRecordSummaryRequest({
@@ -66,6 +67,7 @@ class MedicalRecordSummaryRequest {
     this.patientsAddressStay,
     this.emergencyContact,
     this.remarks,
+    this.overseasDataIds,
     required this.medicalRecord,
   });
 
