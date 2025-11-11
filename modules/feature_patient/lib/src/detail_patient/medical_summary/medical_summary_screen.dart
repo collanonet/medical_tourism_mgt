@@ -36,10 +36,8 @@ class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
                   TabBarWidget(
                     selectedIndex: value,
                     menu: const [
-                      // '自動翻訳', // Auto translate
-                      'サマリー（通常版）', // Summary (Normal version)
-                      'サマリー（簡易版）', // Summary (Simple version)
-                      'サマリー一覧', // Summary list
+                      'サマリー',
+                      'サマリー一覧',
                     ],
                     onPressed: (index) {
                       _selectedIndex.value = index;
@@ -67,9 +65,7 @@ class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
                   color: Colors.white,
                 ),
                 child: [
-                  // const AutoTranslatePage(),
                   NormalSummaryPage(patientId: widget.patientId),
-                  ShortSummaryPage(patientId: widget.patientId),
                   SummaryListPage(patientId: widget.patientId),
                 ][index],
               ),
