@@ -194,9 +194,29 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                               formGroup.control('documentName').setValidators([
                                 Validators.required,
                               ]);
-                              formGroup.control('issueDate').setValidators([
+                              formGroup.control('shootingDate').setValidators([
                                 Validators.required,
+                                Validators.pattern(ValidatorRegExp.date),
                               ]);
+                              formGroup
+                                  .control('acquisitionDate')
+                                  .setValidators([
+                                Validators.required,
+                                Validators.pattern(ValidatorRegExp.date),
+                              ]);
+                              formGroup.control('hospitalName')
+                                ..updateValueAndValidity()
+                                ..markAsTouched();
+                              formGroup.control('documentName')
+                                ..updateValueAndValidity()
+                                ..markAsTouched();
+                              formGroup.control('shootingDate')
+                                ..updateValueAndValidity()
+                                ..markAsTouched();
+                              formGroup.control('acquisitionDate')
+                                ..updateValueAndValidity()
+                                ..markAsTouched();
+                              formGroup.control('isNewHospital').value = true;
                               setState(() {
                                 isSaveurl = true;
                               });

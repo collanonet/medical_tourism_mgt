@@ -24,6 +24,32 @@ class SummaryListScreen extends StatefulWidget {
 class _SummaryListScreenState extends State<SummaryListScreen> {
   ValueNotifier<List<String>> selected = ValueNotifier([]);
 
+  Future<void> _showExportFormatDialog(BuildContext context) async {
+    final model = context.read<SummaryListModel>();
+    final format = await showDialog<SummaryExportFormat>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: const Text('出力形式を選択'),
+        children: [
+          SimpleDialogOption(
+            onPressed: () =>
+                Navigator.of(context).pop(SummaryExportFormat.word),
+            child: const Text('Word (.doc)'),
+          ),
+          SimpleDialogOption(
+            onPressed: () =>
+                Navigator.of(context).pop(SummaryExportFormat.pdf),
+            child: const Text('PDF (.pdf)'),
+          ),
+        ],
+      ),
+    );
+
+    if (format != null) {
+      await model.exportSummary(format: format);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -287,14 +313,126 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                     width: context.appTheme.spacing.marginMedium,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (sels.isEmpty) {
+                        snackBarWidget(
+                          message: 'ファイルが選択されていません',
+                          backgroundColor: Colors.red,
+                          prefixIcon: const Icon(
+                            Icons.error,
+                            color: Colors.white,
+                          ),
+                        );
+                        return;
+                      }
+
+                      final files = context
+                          .read<SummaryListModel>()
+                          .fileSummaryListData
+                          .value
+                          .data
+                          ?.where((item) => sels.contains(item.id))
+                          .map((item) => item.pathFile)
+                          .whereType<String>()
+                          .toList();
+
+                      if (files == null || files.isEmpty) {
+                        snackBarWidget(
+                          message: 'ダウンロード可能なファイルがありません',
+                          backgroundColor: Colors.red,
+                          prefixIcon: const Icon(
+                            Icons.error,
+                            color: Colors.white,
+                          ),
+                        );
+                        return;
+                      }
+
+                      for (final file in files) {
+                        try {
+                          final fileName = file.split('/').last;
+                          await downloadFile(
+                            fileName: file,
+                            downloadName: fileName,
+                          );
+                        } catch (_) {
+                          snackBarWidget(
+                            message: 'ファイルのダウンロードに失敗しました',
+                            backgroundColor: Colors.red,
+                            prefixIcon: const Icon(
+                              Icons.error,
+                              color: Colors.white,
+                            ),
+                          );
+                          break;
+                        }
+                      }
+                    },
                     child: const Text(
-                      '閲覧する',
+                      'ダウンロードする',
                       style: TextStyle(
                         fontFamily: 'NotoSansJP',
                         package: 'core_ui',
                         color: Colors.white,
                       ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  ValueListenableListener(
+                    valueListenable:
+                        context.read<SummaryListModel>().exportSummaryState,
+                    onListen: () {
+                      final value = context
+                          .read<SummaryListModel>()
+                          .exportSummaryState
+                          .value;
+
+                      if (value.hasData) {
+                        snackBarWidget(
+                          message: 'サマリーを出力しました',
+                          prefixIcon: const Icon(
+                            Icons.check_circle,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+
+                      if (value.hasError) {
+                        snackBarWidget(
+                          message: 'サマリーの出力に失敗しました',
+                          backgroundColor: Colors.red,
+                          prefixIcon: const Icon(
+                            Icons.error,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                    },
+                    child: ValueListenableBuilder(
+                      valueListenable:
+                          context.read<SummaryListModel>().exportSummaryState,
+                      builder: (context, value, _) {
+                        return ElevatedButton(
+                          onPressed: value.loading
+                              ? null
+                              : () {
+                                  _showExportFormatDialog(context);
+                                },
+                          child: WithLoadingButton(
+                            isLoading: value.loading,
+                            child: const Text(
+                              '出力する',
+                              style: TextStyle(
+                                fontFamily: 'NotoSansJP',
+                                package: 'core_ui',
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(

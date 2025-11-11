@@ -77,8 +77,8 @@ class _ProgressRecordWidgetState extends State<ProgressRecordWidget> {
           SizedBox(width: context.appTheme.spacing.marginMedium),
           
           // 完了日
-          Expanded(
-            flex: 1,
+          SizedBox(
+            width: 160,
             child: ReactiveDatePickerField(
               formControlName: 'completionDate',
             ),

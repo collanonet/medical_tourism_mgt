@@ -8,18 +8,18 @@ part 'medical_record_agent.g.dart';
 class MedicalRecordAgent {
   @JsonKey(name: '_id')
   final String id;
-  String company;
-  String nameInKanji;
-  String agentType;
+  String? company;
+  String? nameInKanji;
+  String? agentType;
   String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   MedicalRecordAgent({
     required this.id,
-    required this.company,
-    required this.nameInKanji,
-    required this.agentType,
+    this.company,
+    this.nameInKanji,
+    this.agentType,
     required this.medicalRecord,
     required this.createdAt,
     required this.updatedAt,

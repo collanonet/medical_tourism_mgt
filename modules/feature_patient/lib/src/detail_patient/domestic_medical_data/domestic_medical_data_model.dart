@@ -75,6 +75,9 @@ class DomesticMedicalDataModel {
         disclosureToOtherMedicalInstitutions = false;
       }
 
+      final now = DateTime.now();
+      formGroup.control('acquisitionDate').value ??= now;
+
       final response = await patientRepository.postDomesticMedicalData(
         DomesticMedicalDataRequest(
           file: file,
@@ -84,6 +87,8 @@ class DomesticMedicalDataModel {
           documentName: formGroup.control('documentName').value,
           remarks: formGroup.control('remark').value,
           dateOfIssue: formGroup.control('dateOfIssue').value,
+          acquisitionDate:
+              formGroup.control('acquisitionDate').value ?? now,
           url: formGroup.control('sharedUrlIssue').value,
           disclosureToPatient: disclosureToPatient,
           disclosureToOtherMedicalInstitutions:
@@ -91,6 +96,9 @@ class DomesticMedicalDataModel {
           medicalRecord: formGroup.control('medicalRecordId').value,
         ),
       );
+      if (response.acquisitionDate == null) {
+        response.acquisitionDate = now;
+      }
       domesticMedicalData.value =
           AsyncData(data: domesticMedicalData.value.data!..add(response));
       submit.value = AsyncData(data: response);

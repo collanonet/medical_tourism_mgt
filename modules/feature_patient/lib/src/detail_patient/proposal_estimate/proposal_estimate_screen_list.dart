@@ -16,7 +16,7 @@ class ProposalEstimateScreenList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = GetIt.I<ProposalEstimateModel>();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,44 +34,50 @@ class ProposalEstimateScreenList extends StatelessWidget {
             }
             
             final quotations = value.data ?? [];
-            
+
             if (quotations.isEmpty) {
               return const Text('見積書がありません');
             }
-            
-            return ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: quotations.length,
-              itemBuilder: (context, index) {
-                final quotation = quotations[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(quotation.invoiceNumber ?? '見積書 ${index + 1}'),
-                    subtitle: Text(quotation.companyName ?? ''),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            model.editQuotation(
-                              invoice: quotation,
-                              formGroup: ReactiveForm.of(context) as FormGroup,
-                            );
-                          },
-                          icon: const Icon(Icons.edit),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            model.deleteInvoice([quotation.id]);
-                          },
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                        ),
-                      ],
+
+            final formGroup = ReactiveForm.of(context) as FormGroup?;
+
+            return Column(
+              children: [
+                for (var i = 0; i < quotations.length; i++) ...[
+                  Card(
+                    child: ListTile(
+                      title: Text(
+                        quotations[i].invoiceNumber ?? '見積書 ${i + 1}',
+                      ),
+                      subtitle: Text(quotations[i].companyName ?? ''),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: formGroup == null
+                                ? null
+                                : () {
+                                    model.editQuotation(
+                                      invoice: quotations[i],
+                                      formGroup: formGroup,
+                                    );
+                                  },
+                            icon: const Icon(Icons.edit),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              model.deleteInvoice([quotations[i].id]);
+                            },
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                );
-              },
+                  if (i != quotations.length - 1)
+                    SizedBox(height: context.appTheme.spacing.marginSmall),
+                ],
+              ],
             );
           },
         ),

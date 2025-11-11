@@ -376,22 +376,61 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          if (sels.isNotEmpty) {
-                            showDetailDialog(
-                              context,
-                              context
-                                  .read<DomesticMedicalDataModel>()
-                                  .domesticMedicalData
-                                  .value
-                                  .requireData
-                                  .where((element) {
-                                return sels.contains(element.id);
-                              }).toList(),
+                        onPressed: () async {
+                          if (sels.isEmpty) {
+                            return;
+                          }
+
+                          final selectedItems = context
+                              .read<DomesticMedicalDataModel>()
+                              .domesticMedicalData
+                              .value
+                              .requireData
+                              .where((element) => sels.contains(element.id))
+                              .toList();
+
+                          final itemsWithFiles = selectedItems
+                              .where(
+                                (element) =>
+                                    element.file != null &&
+                                    element.file!.isNotEmpty,
+                              )
+                              .toList();
+
+                          if (itemsWithFiles.isEmpty) {
+                            snackBarWidget(
+                              message: 'ダウンロード可能なファイルがありません',
+                              backgroundColor: Colors.red,
+                              prefixIcon: const Icon(
+                                Icons.error,
+                                color: Colors.white,
+                              ),
                             );
+                            return;
+                          }
+
+                          for (final item in itemsWithFiles) {
+                            final file = item.file!;
+                            final downloadName = file.split('/').last;
+                            try {
+                              await downloadFile(
+                                fileName: file,
+                                downloadName: downloadName,
+                              );
+                            } catch (_) {
+                              snackBarWidget(
+                                message: 'ファイルのダウンロードに失敗しました',
+                                backgroundColor: Colors.red,
+                                prefixIcon: const Icon(
+                                  Icons.error,
+                                  color: Colors.white,
+                                ),
+                              );
+                              break;
+                            }
                           }
                         },
-                        child: const Text('閲覧する'),
+                        child: const Text('ダウンロードする'),
                       ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,

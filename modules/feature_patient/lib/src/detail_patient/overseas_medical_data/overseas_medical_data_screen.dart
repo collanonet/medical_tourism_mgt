@@ -608,16 +608,26 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
   }
 
   void showCreateWithUrlDialog(BuildContext context) {
+    final model = context.read<OverseasMedicalDataModel>();
+    final existingHospitals = model.medicalRecordsOverseasData.value.hasData
+        ? model.medicalRecordsOverseasData.value.requireData
+            .map((e) => e.hospitalName ?? '')
+            .where((name) => name.isNotEmpty)
+            .toSet()
+            .toList()
+        : <String>[];
+
     showDialog(
       context: context,
       builder: (_) => Provider.value(
-        value: context.read<OverseasMedicalDataModel>(),
+        value: model,
         child: AlertDialog(
           content: ReactiveFormConfig(
             validationMessages: validationMessages,
             child: ReactiveFormBuilder(
-              form: () =>
-                  createMedicalOverseaDataWithUrlForm()..markAllAsTouched(),
+              form: () => createMedicalOverseaDataWithUrlForm(
+                existingHospitals,
+              )..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const CreateMedicalOverseaDataWithUrlScreen();
               },

@@ -9,9 +9,9 @@ part of 'medical_record_agent.dart';
 MedicalRecordAgent _$MedicalRecordAgentFromJson(Map<String, dynamic> json) =>
     MedicalRecordAgent(
       id: json['_id'] as String,
-      company: json['company'] as String,
-      nameInKanji: json['nameInKanji'] as String,
-      agentType: json['agentType'] as String,
+      company: json['company'] as String?,
+      nameInKanji: json['nameInKanji'] as String?,
+      agentType: json['agentType'] as String?,
       medicalRecord: json['medicalRecord'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),

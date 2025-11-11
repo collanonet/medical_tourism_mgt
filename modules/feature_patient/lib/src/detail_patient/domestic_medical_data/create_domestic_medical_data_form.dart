@@ -20,6 +20,7 @@ FormGroup domesticMedicalDataForm(
       ],
     ),
     'acquisitionDate': FormControl<DateTime>(
+      value: DateTime.now(),
       validators: [
         Validators.required,
         Validators.pattern(
