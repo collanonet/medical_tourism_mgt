@@ -93,9 +93,6 @@ class BasicInformationModel {
         if (medicalRecordId.value.hasData) {
           await createUpdateMedicalRecordHospital(form);
 
-          await createUpdateMedicalRecordAgents(
-              form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
-
           await createUpdateMedicalRecordReferrers(
               form.control('MEDICAL_RECORD_Referrers') as FormGroup);
 
@@ -106,6 +103,8 @@ class BasicInformationModel {
               form.control('travelGroup') as FormGroup);
 
           await createUpdateMedicalRecordCompanions(form);
+          await createUpdateMedicalRecordAgents(
+              form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
           await createUpdateMedicalRecordInterpreters(
               form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
 
