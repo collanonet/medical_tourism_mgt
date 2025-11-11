@@ -25,9 +25,9 @@ class _PreMemberListState extends State<PreMemberList> {
       ),
       padding: const EdgeInsets.all(20),
       child: ColumnSeparated(
-        separatorBuilder: (context, index) => SizedBox(
-          height: context.appTheme.spacing.marginMedium,
-        ),
+        separatorBuilder: (context, index) =>
+            SizedBox(height: context.appTheme.spacing.marginMedium),
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -36,7 +36,6 @@ class _PreMemberListState extends State<PreMemberList> {
                 style: context.textTheme.titleMedium,
               ),
               const Spacer(),
-              // フィルターボタン
               Row(
                 children: [
                   _buildFilterButton('受注のみ'),
@@ -50,7 +49,6 @@ class _PreMemberListState extends State<PreMemberList> {
               ),
             ],
           ),
-          // フィルター項目
           RowSeparated(
             separatorBuilder: (context, index) => SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -119,7 +117,6 @@ class _PreMemberListState extends State<PreMemberList> {
               ),
             ],
           ),
-          // 検索・クリアボタン
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -142,54 +139,51 @@ class _PreMemberListState extends State<PreMemberList> {
               ),
             ],
           ),
-          // プレ会員テーブル
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text('患者')),
-                  DataColumn(label: Text('エージェント')),
-                  DataColumn(label: Text('案件番号')),
-                  DataColumn(label: Text('受付')),
-                  DataColumn(label: Text('入国日')),
-                  DataColumn(label: Text('出国日')),
-                  DataColumn(label: Text('国籍')),
-                  DataColumn(label: Text('病名')),
-                ],
-                rows: [
-                  _buildDataRow(
-                    'testito testtakashi',
-                    'エージェント1',
-                    '202506061',
-                    '見積書',
-                    '2025/04/10',
-                    '2025/04/11',
-                    'ベトナム',
-                    '病名1',
-                  ),
-                  _buildDataRow(
-                    'THANH VINH DO',
-                    '25/1 (MV)',
-                    '20250401KC',
-                    '見積書',
-                    '2025/04/10',
-                    '2025/04/11',
-                    'ベトナム',
-                    '病名2',
-                  ),
-                  _buildDataRow(
-                    'suzuki tarou',
-                    'エージェント2',
-                    '202506031',
-                    '請求書',
-                    '2025/04/10',
-                    '2025/04/11',
-                    '日本',
-                    '病名3',
-                  ),
-                ],
-              ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              columns: const [
+                DataColumn(label: Text('患者')),
+                DataColumn(label: Text('エージェント')),
+                DataColumn(label: Text('案件番号')),
+                DataColumn(label: Text('受付')),
+                DataColumn(label: Text('入国日')),
+                DataColumn(label: Text('出国日')),
+                DataColumn(label: Text('国籍')),
+                DataColumn(label: Text('病名')),
+              ],
+              rows: [
+                _buildDataRow(
+                  'testito testtakashi',
+                  'エージェント1',
+                  '202506061',
+                  '見積書',
+                  '2025/04/10',
+                  '2025/04/11',
+                  'ベトナム',
+                  '病名1',
+                ),
+                _buildDataRow(
+                  'THANH VINH DO',
+                  '25/1 (MV)',
+                  '20250401KC',
+                  '見積書',
+                  '2025/04/10',
+                  '2025/04/11',
+                  'ベトナム',
+                  '病名2',
+                ),
+                _buildDataRow(
+                  'suzuki tarou',
+                  'エージェント2',
+                  '202506031',
+                  '請求書',
+                  '2025/04/10',
+                  '2025/04/11',
+                  '日本',
+                  '病名3',
+                ),
+              ],
             ),
           ),
         ],
