@@ -3,10 +3,16 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup createMedicalOverseaDataWithUrlForm() {
+FormGroup createMedicalOverseaDataWithUrlForm(
+  List<String> existingHospitals,
+) {
   return FormGroup({
-    'file': FormControl<FileSelect>(),
+    'file': FormControl<List<DicomDetailResponse>>(),
+    'documentFile': FormControl<FileSelect>(),
     'hospitalName': FormControl<String>(),
+    'existingHospitals': FormControl<List<String>>(value: existingHospitals),
+    'isNewHospital': FormControl<bool>(value: true),
+    'selectedHospital': FormControl<String>(),
     'category': FormControl<String>(value: '画像データ（DICOM）'),
     'documentName': FormControl<String>(),
     'shootingDate': FormControl<DateTime>(

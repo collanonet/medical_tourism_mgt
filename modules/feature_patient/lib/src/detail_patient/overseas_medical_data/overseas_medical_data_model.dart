@@ -137,6 +137,9 @@ class OverseasMedicalDataModel {
         }
       }
 
+      final now = DateTime.now();
+      formGroup.control('acquisitionDate').value = now;
+
       var medicalRecordOverseaDataRequest = MedicalRecordOverseaDataRequest(
         file: formGroup.control('file').value,
         documentFile: documentFile,
@@ -144,7 +147,7 @@ class OverseasMedicalDataModel {
         category: formGroup.control('category').value,
         documentName: formGroup.control('documentName').value,
         issueDate: formGroup.control('shootingDate').value,
-        acquisitionDate: formGroup.control('acquisitionDate').value ?? DateTime.now(),
+        acquisitionDate: formGroup.control('acquisitionDate').value ?? now,
         sharedUrl: formGroup.control('sharedUrl').value,
         password: formGroup.control('password').value,
         expirationDate: formGroup.control('expirationDate').value,
@@ -157,6 +160,10 @@ class OverseasMedicalDataModel {
 
       var result = await patientRepository
           .postMedicalRecordOverseaData(medicalRecordOverseaDataRequest);
+
+      if (result.acquisitionDate == null) {
+        result.acquisitionDate = now;
+      }
 
       createMedicalOverseaData.value = AsyncData(data: result);
       if (medicalRecordsOverseasData.value.hasData) {
