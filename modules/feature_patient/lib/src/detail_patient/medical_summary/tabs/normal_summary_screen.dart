@@ -498,6 +498,17 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
+                                  formControlName: 'agentName',
+                                  decoration: const InputDecoration(
+                                    label: Text('代理者（コーディネーター）'),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              Expanded(
+                                child: ReactiveTextField(
                                   formControlName: 'symptoms',
                                   decoration: const InputDecoration(
                                     label: Text(
@@ -749,8 +760,6 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                 child: ReactiveTextField(
                                   formControlName: 'agentName',
                                   decoration: const InputDecoration(
-                                    filled: true,
-                                    fillColor: Color(0xffF0F3F5),
                                     label: Text(
                                       '名称',
                                     ),
