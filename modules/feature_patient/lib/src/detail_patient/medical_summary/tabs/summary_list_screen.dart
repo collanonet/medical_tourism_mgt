@@ -159,26 +159,45 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                                         child: Row(
                                       children: [
                                         Flexible(
-                                            child:
-                                                Text(item.documentName ?? '')),
-                                        const Spacer(),
-                                        Container(
-                                          padding: const EdgeInsets.all(4),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            border: Border.all(
-                                                color: context
-                                                    .appTheme.primaryColor),
-                                          ),
-                                          child: Text(
-                                            '通常版',
-                                            style: context.textTheme.bodySmall
-                                                ?.copyWith(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 6,
+                                                  vertical: 2,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  border: Border.all(
                                                     color: context
-                                                        .appTheme.primaryColor),
+                                                        .appTheme.primaryColor,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  '通常版',
+                                                  style: context
+                                                      .textTheme.bodySmall
+                                                      ?.copyWith(
+                                                    color: context
+                                                        .appTheme.primaryColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text(
+                                                  item.documentName ?? '',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        )
+                                        ),
                                       ],
                                     )),
                                     Expanded(

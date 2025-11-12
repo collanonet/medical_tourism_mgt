@@ -1,5 +1,6 @@
 // Dart imports:
 import 'dart:convert';
+import 'dart:typed_data';
 
 // Flutter imports:
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,10 @@ import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
+import '../utils/summary_html_builder.dart';
 
 @injectable
 class NormalSummaryModel {
@@ -216,6 +221,9 @@ class NormalSummaryModel {
   Future<void> createUpdateMedicalRecordSummary(FormGroup formGroup) async {
     try {
       medicalRecordSummary.value = const AsyncData(loading: true);
+      final previousSummary = medicalRecordSummary.value.hasData
+          ? medicalRecordSummary.value.requireData
+          : null;
       var request = MedicalRecordSummaryRequest(
         entryDate: formGroup.control('entryDate').value,
         namePassport: formGroup.control('namePassport').value,
@@ -258,6 +266,26 @@ class NormalSummaryModel {
       var result = await patientRepository.postMedicalRecordSummary(request);
       medicalRecordSummary.value = AsyncData(data: result);
       createMedicalRecordSummary.value = AsyncData(data: result);
+      final existingHistories =
+          fileSummaryListData.value.data ?? <MedicalRecordFileSummaryResponse>[];
+      if (previousSummary != null &&
+          !existingHistories.any(
+            (item) =>
+                item.publicationDate != null &&
+                item.publicationDate!
+                    .isAtSameMomentAs(previousSummary.updatedAt),
+          )) {
+        await _archiveSummaryVersion(
+          previousSummary,
+          timestamp: previousSummary.updatedAt,
+          suffix: '（更新前）',
+        );
+      }
+      await _archiveSummaryVersion(
+        result,
+        timestamp: result.updatedAt,
+      );
+      await fetchSummaryList(result.id);
     } catch (e) {
       logger.e(e);
       medicalRecordSummary.value = AsyncData(error: e);
@@ -266,6 +294,37 @@ class NormalSummaryModel {
   }
 
   ValueNotifier<AsyncData<bool>> submitFile = ValueNotifier(const AsyncData());
+
+  Future<void> _archiveSummaryVersion(
+    MedicalRecordSummary summary, {
+    required DateTime timestamp,
+    String suffix = '',
+  }) async {
+    try {
+      final htmlContent = buildSummaryHtml(summary);
+      final docBytes = Uint8List.fromList(utf8.encode(htmlContent));
+      final fileBaseName = DateFormat('yyyyMMdd_HHmm').format(timestamp);
+      final uploadResponse = await patientRepository.uploadFileBase64(
+        base64Encode(docBytes),
+        'summary_history_$fileBaseName.doc',
+      );
+      final displayDate = DateFormat('yyyy/MM/dd HH:mm').format(timestamp);
+      final request = MedicalRecordFileSummaryRequest(
+        pathFile: uploadResponse.filename,
+        documentName: '診療サマリー $displayDate$suffix',
+        publicationDate: timestamp,
+        share: '○',
+        disclosureToAgent: '○',
+        recordSummary: summary.id,
+        medicalRecord: summary.medicalRecord,
+      );
+      await patientRepository.postFileSummary(request);
+    } catch (e, stackTrace) {
+      logger.e(
+        'Failed to archive medical summary version: $e\n$stackTrace',
+      );
+    }
+  }
 
   Future<void> uploadFileSummary(FormGroup formGroup) async {
     try {
