@@ -16,7 +16,12 @@ import '../../detail_patient_model.dart';
 import '../basic_info_model.dart';
 
 class MedicalRecordSection extends StatefulWidget {
-  const MedicalRecordSection({super.key});
+  const MedicalRecordSection({
+    super.key,
+    this.showHeader = true,
+  });
+
+  final bool showHeader;
 
   @override
   State<MedicalRecordSection> createState() => _MedicalRecordSectionState();
@@ -63,14 +68,15 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     );
                   },
                   children: [
-                    const Text(
-                      '本人',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ), // TODO: l10n 対応 (本人)  (patient)
+                    if (widget.showHeader)
+                      const Text(
+                        '本人',
+                        style: TextStyle(
+                          fontFamily: 'NotoSansJP',
+                          package: 'core_ui',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ), // TODO: l10n 対応 (本人)  (patient)
                     // 氏名（ローマ字）
                     const Text(
                       '氏名（ローマ字）',
