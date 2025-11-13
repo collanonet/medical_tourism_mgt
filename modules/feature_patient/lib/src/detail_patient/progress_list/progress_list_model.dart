@@ -24,12 +24,14 @@ class ProgressListModel {
     ProgressSectionTemplate(
       id: 'treatment',
       title: '治療',
+      displayTitle: '訪日治療の流れ',
       serverType: 'treatment',
       isDefault: true,
     ),
     ProgressSectionTemplate(
       id: 'medical_checkup',
       title: '健診',
+      displayTitle: '訪日健診の流れ',
       serverType: 'medical_checkup',
       legacyTypes: ['0'],
       isDefault: true,
@@ -37,27 +39,32 @@ class ProgressListModel {
     ProgressSectionTemplate(
       id: 'regenerative',
       title: '再生医療',
+      displayTitle: '訪日再生医療の流れ',
       serverType: 'regenerative',
       legacyTypes: ['1'],
     ),
     ProgressSectionTemplate(
       id: 'beauty',
       title: '美容',
+      displayTitle: '訪日美容医療の流れ',
       serverType: 'beauty',
     ),
     ProgressSectionTemplate(
       id: 'blood_purification',
       title: '血液浄化療法（アフェレーシス）・透析',
+      displayTitle: '訪日血液浄化療法の流れ',
       serverType: 'blood_purification',
     ),
     ProgressSectionTemplate(
       id: 'risk_check',
       title: 'リスク検査',
+      displayTitle: '訪日リスク検査の流れ',
       serverType: 'risk_check',
     ),
     ProgressSectionTemplate(
       id: 'others',
       title: 'その他',
+      displayTitle: '訪日その他の流れ',
       serverType: 'others',
     ),
   ];
@@ -474,6 +481,7 @@ class ProgressSectionTemplate {
 
   final String id;
   final String title;
+  final String displayTitle;
   final String serverType;
   final List<String> legacyTypes;
   final bool isDefault;

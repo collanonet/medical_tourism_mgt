@@ -197,34 +197,80 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
   Future<ProgressSectionTemplate?> _selectSectionTemplate(
       BuildContext context) async {
     final templates = context.read<ProgressListModel>().sectionTemplates;
+    if (templates.isEmpty) return null;
     return showModalBottomSheet<ProgressSectionTemplate>(
       context: context,
       builder: (context) {
+        String selectedId = templates.first.id;
         return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
+          child: StatefulBuilder(
+            builder: (context, setStateSB) {
+              final selectedTemplate = templates.firstWhereOrNull(
+                (template) => template.id == selectedId,
+              );
+              return FractionallySizedBox(
+                heightFactor: 0.6,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: Text(
+                        'セクションを選択',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                    const Divider(height: 1),
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        children: templates
+                            .map(
+                              (template) => RadioListTile<String>(
+                                title: Text(template.title),
+                                value: template.id,
+                                groupValue: selectedId,
+                                onChanged: (value) {
+                                  if (value == null) return;
+                                  setStateSB(() {
+                                    selectedId = value;
+                                  });
+                                },
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                    const Divider(height: 1),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: Row(
+                        children: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text('キャンセル'),
+                          ),
+                          const Spacer(),
+                          ElevatedButton(
+                            onPressed: selectedTemplate == null
+                                ? null
+                                : () => Navigator.of(context)
+                                    .pop(selectedTemplate),
+                            child: const Text('決定'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                child: Text(
-                  'セクションを選択',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-              const Divider(height: 1),
-              for (final template in templates) ...[
-                ListTile(
-                  title: Text(template.title),
-                  onTap: () => Navigator.of(context).pop(template),
-                ),
-                const Divider(height: 1),
-              ],
-              const SizedBox(height: 8),
-            ],
+              );
+            },
           ),
         );
       },
@@ -249,7 +295,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 ),
             children: [
               Text(
-                template.title,
+                template.displayTitle,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Row(
