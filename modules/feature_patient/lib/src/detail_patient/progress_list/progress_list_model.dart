@@ -67,6 +67,7 @@ class ProgressListModel {
           await patientRepository.medicalRecordsProgressByMedicalRecord(
               medicalRecord.value.requireData.id);
       insertDataAllForm(formGroup, result);
+      await _updateProgressFromRecords(result);
       medicalRecordsProgress.value = AsyncData(data: result);
     } catch (e) {
       logger.d(e);
@@ -200,6 +201,7 @@ class ProgressListModel {
         }
       }
       logger.d('submitData完了');
+      await _updateProgressFromFormGroup(formGroup);
       submit.value = const AsyncData(data: true);
     } catch (e) {
       logger.e('submitDataでエラーが発生: $e');
@@ -219,6 +221,155 @@ class ProgressListModel {
       type: element['type'],
     );
   }
+
+  Future<void> _updateProgressFromRecords(
+    List<MedicalRecordProgress> records,
+  ) async {
+    final latestTask = _findLatestTaskFromRecords(records);
+    await _persistProgress(latestTask);
+  }
+
+  Future<void> _updateProgressFromFormGroup(FormGroup formGroup) async {
+    final control = formGroup.control('progressList');
+    final value = control.value;
+    final latestTask = _findLatestTaskFromDynamicList(value);
+    await _persistProgress(latestTask);
+  }
+
+  String? _findLatestTaskFromRecords(List<MedicalRecordProgress> records) {
+    final completed = records
+        .where((record) => record.completionDate != null)
+        .toList(growable: false);
+
+    if (completed.isEmpty) {
+      return null;
+    }
+
+    completed.sort((a, b) {
+      final cmp = b.completionDate!.compareTo(a.completionDate!);
+      if (cmp != 0) {
+        return cmp;
+      }
+
+      final orderA = _resolveOrder(a.task);
+      final orderB = _resolveOrder(b.task);
+      return orderB.compareTo(orderA);
+    });
+
+    return completed.first.task;
+  }
+
+  String? _findLatestTaskFromDynamicList(dynamic value) {
+    if (value is! List) {
+      return null;
+    }
+
+    final entries = <_ProgressCandidate>[];
+
+    for (final element in value) {
+      if (element is! Map<String, dynamic>) continue;
+      final progressList = element['progress'];
+      if (progressList is! List) continue;
+
+      for (final rawItem in progressList) {
+        if (rawItem is! Map<String, dynamic>) continue;
+        final task = rawItem['task'] as String?;
+        final completionDate =
+            _tryParseCompletionDate(rawItem['completionDate']);
+
+        if (task == null || task.trim().isEmpty || completionDate == null) {
+          continue;
+        }
+
+        final order = _resolveOrder(task);
+        entries.add(
+          _ProgressCandidate(
+            task: task,
+            completionDate: completionDate,
+            order: order,
+          ),
+        );
+      }
+    }
+
+    if (entries.isEmpty) {
+      return null;
+    }
+
+    entries.sort((a, b) {
+      final cmp = b.completionDate.compareTo(a.completionDate);
+      if (cmp != 0) {
+        return cmp;
+      }
+      return b.order.compareTo(a.order);
+    });
+
+    return entries.first.task;
+  }
+
+  DateTime? _tryParseCompletionDate(dynamic value) {
+    if (value is DateTime) {
+      return value;
+    }
+
+    if (value is String && value.isNotEmpty) {
+      return DateTime.tryParse(value);
+    }
+    return null;
+  }
+
+  int _resolveOrder(String? task) {
+    if (task == null) {
+      return -1;
+    }
+    final index = titleList.indexWhere((item) => item.task == task);
+    return index >= 0 ? index : -1;
+  }
+
+  Future<void> _persistProgress(String? latestTask) async {
+    if (!medicalRecord.value.hasData) {
+      return;
+    }
+
+    final record = medicalRecord.value.requireData;
+    final normalized = latestTask?.trim();
+    final newProgress =
+        (normalized == null || normalized.isEmpty) ? null : normalized;
+
+    if (record.progress == newProgress) {
+      return;
+    }
+
+    record.progress = newProgress;
+    medicalRecord.value = medicalRecord.value.copyWith(data: record);
+
+    try {
+      await patientRepository.putMedicalRecord(
+        record.id,
+        MedicalRecordRequest(
+          dateOfBirth: record.dateOfBirth,
+          age: record.age,
+          height: record.height,
+          weight: record.weight,
+          gender: record.gender,
+          arrivalDate: record.arrivalDate,
+          consultationDate: record.consultationDate,
+          returnDate: record.returnDate,
+          proposalNumber: record.proposalNumber,
+          receptionDate: record.receptionDate,
+          type: record.type,
+          progress: record.progress,
+          advancePaymentDate: record.advancePaymentDate,
+          receivingMethod: record.receivingMethod,
+          receivingMethodOther: record.receivingMethodOther,
+          memo: record.memo,
+          patient: record.patient,
+        ),
+      );
+    } catch (e) {
+      logger.e('進捗の更新に失敗しました: $e');
+    }
+  }
 }
 
 class ItemProgress {
@@ -229,4 +380,16 @@ class ItemProgress {
     required this.tag,
     required this.task,
   });
+}
+
+class _ProgressCandidate {
+  _ProgressCandidate({
+    required this.task,
+    required this.completionDate,
+    required this.order,
+  });
+
+  final String task;
+  final DateTime completionDate;
+  final int order;
 }

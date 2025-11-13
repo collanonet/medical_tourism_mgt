@@ -63,20 +63,18 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 onListen: () {
                   final value = context.read<ProgressListModel>().submit.value;
                   if (value.hasData) {
+                    final latest =
+                        context.read<ProgressListModel>().medicalRecord.value;
+                    if (latest.hasData) {
+                      context
+                          .read<DetailPatientModel>()
+                          .updateMedicalRecord(latest.requireData);
+                    }
                     snackBarWidget(
                       message: '正常に保存されました',
                       prefixIcon:
                           const Icon(Icons.check_circle, color: Colors.white),
                     );
-                    final updatedRecord = context
-                        .read<ProgressListModel>()
-                        .medicalRecord
-                        .value;
-                    if (updatedRecord.hasData) {
-                      context
-                          .read<DetailPatientModel>()
-                          .updateMedicalRecord(updatedRecord.requireData);
-                    }
                   }
 
                   if (value.hasError) {
