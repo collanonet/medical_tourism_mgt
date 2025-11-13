@@ -64,7 +64,7 @@ class ProgressListModel {
     ProgressSectionTemplate(
       id: 'others',
       title: 'その他',
-      displayTitle: '訪日その他の流れ',
+      displayTitle: 'その他の流れ',
       serverType: 'others',
     ),
   ];
@@ -474,10 +474,11 @@ class ProgressSectionTemplate {
   const ProgressSectionTemplate({
     required this.id,
     required this.title,
+    String? displayTitle,
     required this.serverType,
     this.legacyTypes = const [],
     this.isDefault = false,
-  });
+  }) : displayTitle = displayTitle ?? title;
 
   final String id;
   final String title;
