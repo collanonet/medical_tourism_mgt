@@ -217,6 +217,12 @@ class ProgressListModel {
       }
       logger.d('submitData完了');
       await _updateProgressFromFormGroup(formGroup);
+    if (medicalRecord.value.hasData) {
+      await getMedicalRecords(
+        formGroup,
+        patientId: medicalRecord.value.requireData.patient,
+      );
+    }
       submit.value = const AsyncData(data: true);
     } catch (e) {
       logger.e('submitDataでエラーが発生: $e');
