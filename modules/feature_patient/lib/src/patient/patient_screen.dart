@@ -14,6 +14,8 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../feature_patient.dart';
 import 'filter_patient.dart';
 import 'patient_model.dart';
+import '../utils/progress_stage_helper.dart';
+import '../widgets/progress_badge.dart';
 
 class PatientScreen extends StatefulWidget {
   const PatientScreen({super.key});
@@ -168,358 +170,382 @@ class _PatientScreenState extends State<PatientScreen> {
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: SizedBox(
-                  width: 1600,
-                  child: Skeletonizer(
-                    enabled: model.patientData.loading,
-                    child: DynamicTable(
-                      rowsPerPage: model.patientData.data?.items.length ?? 0,
-                      totalPages: model.patientData.data?.totalPages ?? 1,
-                      isLoading: model.patientData.loading,
-                      onScrollMax: () {
-                        if (model.patientData.loading == false) {
-                          model.fetchMorePatients();
-                        }
-                      },
-                      data: TableData(
-                        columns: [
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: const SizedBox(),
-                          ),
-                          HeaderTableData(
-                            flex: 2,
-                            titleHeader: Row(
-                              children: [
-                                Text(context.l10n.labelPatient),
-                                const SizedBox(width: 8),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Color.fromARGB(255, 9, 239, 235),
-                                      size: 16,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 2,
-                            titleHeader: Row(
-                              children: [
-                                Text(context.l10n.labelAgent),
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 16,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: Row(
-                              children: [
-                                Text(context.l10n.labelProgress),
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: Row(
-                              children: [
-                                Text(context.l10n.labelCaseNumber),
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: Row(
-                              children: [
-                                Text(context.l10n.labelClassification),
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: Row(
-                              children: [
-                                const Text('受付日'), // 受付日
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: Row(
-                              children: [
-                                const Text('受診日'), // 診療日から受診日に変更
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: Row(
-                              children: [
-                                Text(context.l10n.labelNationality),
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          HeaderTableData(
-                            flex: 1,
-                            titleHeader: Row(
-                              children: [
-                                Text(context.l10n.labelNumberOfGroupMembers),
-                                const SizedBox(width: 4),
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Color.fromARGB(255, 9, 239, 235),
-                                    size: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                        rows: (model.patientData.data?.items.length ?? 0) == 0
-                            ? []
-                            : List<RowTableData>.generate(
-                                model.patientData.data?.items.length ?? 0,
-                                (index) {
-                                  var item =
-                                      model.patientData.data?.items[index];
-                                  return RowTableData(
-                                    onTap: () {
-                                      context.router.push(
-                                        DetailPatientRoute(
-                                          patient: item,
-                                          id: item?.id,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(
+                    width: 1600,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Skeletonizer(
+                        enabled: model.patientData.loading,
+                        child: DynamicTable(
+                          rowsPerPage: model.patientData.data?.items.length ?? 0,
+                          totalPages: model.patientData.data?.totalPages ?? 1,
+                          isLoading: model.patientData.loading,
+                          onScrollMax: () {
+                            if (model.patientData.loading == false) {
+                              model.fetchMorePatients();
+                            }
+                          },
+                          data: TableData(
+                            columns: [
+                              HeaderTableData(
+                                flex: 1,
+                                titleHeader: const SizedBox(),
+                              ),
+                              HeaderTableData(
+                                flex: 2,
+                                titleHeader: Row(
+                                  children: [
+                                    Text(context.l10n.labelPatient),
+                                    const SizedBox(width: 8),
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: const Center(
+                                        child: Icon(
+                                          Icons.arrow_drop_down,
+                                          color:
+                                              Color.fromARGB(255, 9, 239, 235),
+                                          size: 16,
                                         ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 2,
+                                titleHeader: Row(
+                                  children: [
+                                    Text(context.l10n.labelAgent),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 16,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 2,
+                                titleHeader: Row(
+                                  children: [
+                                    Text(context.l10n.labelProgress),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 14,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 1,
+                                titleHeader: Row(
+                                  children: [
+                                    Text(context.l10n.labelCaseNumber),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 14,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 1,
+                                titleHeader: Row(
+                                  children: [
+                                    Text(context.l10n.labelClassification),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 14,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 1,
+                                titleHeader: Row(
+                                  children: [
+                                    const Text('受付日'),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 14,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 1,
+                                titleHeader: Row(
+                                  children: [
+                                    const Text('受診日'),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 14,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 1,
+                                titleHeader: Row(
+                                  children: [
+                                    Text(context.l10n.labelNationality),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 14,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              HeaderTableData(
+                                flex: 1,
+                                titleHeader: Row(
+                                  children: [
+                                    Text(context.l10n.labelNumberOfGroupMembers),
+                                    const SizedBox(width: 4),
+                                    Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_drop_down,
+                                        color:
+                                            Color.fromARGB(255, 9, 239, 235),
+                                        size: 14,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                            rows: (model.patientData.data?.items.length ?? 0) ==
+                                    0
+                                ? []
+                                : List<RowTableData>.generate(
+                                    model.patientData.data?.items.length ?? 0,
+                                    (index) {
+                                  final item =
+                                          model.patientData.data?.items[index];
+                                  final stage =
+                                      resolveProgressStage(item?.progress);
+                                      return RowTableData(
+                                        onTap: () {
+                                          context.router.push(
+                                            DetailPatientRoute(
+                                              patient: item,
+                                              id: item?.id,
+                                            ),
+                                          );
+                                        },
+                                        cell: [
+                                          const SizedBox(width: 12),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${item?.familyNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.firstNameRomanized ?? '-'}',
+                                                style: TextStyle(
+                                                  color: context
+                                                      .appTheme.primaryColor,
+                                                  fontFamily: 'NotoSansJP',
+                                                  package: 'core_ui',
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              Text(
+                                                '${item?.familyNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.firstNameChineseOrVietnamese ?? '-'} / ${item?.familyNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.firstNameJapaneseForChinese ?? '-'} / ${item?.familyNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.firstNameJapaneseForNonChinese ?? '-'} ',
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                item?.companyAGENTS ?? '-',
+                                                style: const TextStyle(
+                                                  color: Colors.blueGrey,
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              Text(
+                                                '${item?.nameInKanjiAGENTS ?? '--'} / ${item?.nameInKanaAGENTS ?? '--'}',
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: ProgressBadge(
+                                              stage: stage,
+                                              maxWidth: 220,
+                                            ),
+                                          ),
+                                          Text(
+                                            item?.proposalNumber ?? '--',
+                                            style:
+                                                const TextStyle(fontSize: 13),
+                                          ),
+                                          Wrap(
+                                            spacing: 3,
+                                            runSpacing: 3,
+                                            children: item?.type?.map((e) {
+                                                  return e == null
+                                                      ? const SizedBox()
+                                                      : Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            horizontal: 6,
+                                                            vertical: 3,
+                                                          ),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors
+                                                                .blueGrey,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4),
+                                                          ),
+                                                          child: Text(
+                                                            e,
+                                                            style:
+                                                                const TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 11,
+                                                            ),
+                                                          ),
+                                                        );
+                                                }).toList() ??
+                                                [],
+                                          ),
+                                          Text(
+                                            Dates.formShortDate(
+                                                item?.receptionDate),
+                                            style:
+                                                const TextStyle(fontSize: 13),
+                                          ),
+                                          Text(
+                                            Dates.formShortDate(
+                                                item?.medicalDay),
+                                            style:
+                                                const TextStyle(fontSize: 13),
+                                          ),
+                                          Text(
+                                            item?.nationality ?? '--',
+                                            style:
+                                                const TextStyle(fontSize: 13),
+                                          ),
+                                          Text(
+                                            item?.groupSize ?? '--',
+                                            style:
+                                                const TextStyle(fontSize: 13),
+                                          ),
+                                        ],
                                       );
                                     },
-                                    cell: [
-                                      const SizedBox(width: 50),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            '${item?.familyNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.firstNameRomanized ?? '-'}',
-                                            style: TextStyle(
-                                              color:
-                                                  context.appTheme.primaryColor,
-                                              fontFamily: 'NotoSansJP',
-                                              package: 'core_ui',
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Text(
-                                              '${item?.familyNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.firstNameChineseOrVietnamese ?? '-'} / ${item?.familyNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.firstNameJapaneseForChinese ?? '-'} / ${item?.familyNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.firstNameJapaneseForNonChinese ?? '-'} ',
-                                              style: const TextStyle(fontSize: 12, color: Colors.black54),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            item?.companyAGENTS ?? '-',
-                                            style: const TextStyle(
-                                                color: Colors.blueGrey,
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          Text(
-                                              '${item?.nameInKanjiAGENTS ?? '--'} / ${item?.nameInKanaAGENTS ?? '--'}',
-                                              style: const TextStyle(fontSize: 12, color: Colors.black54),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 3),
-                                            decoration: BoxDecoration(
-                                                color: Colors.greenAccent,
-                                                borderRadius:
-                                                    BorderRadius.circular(4)),
-                                            child: Text(
-                                              item?.progress ?? '--',
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        item?.proposalNumber ?? '--',
-                                        style: const TextStyle(fontSize: 13),
-                                      ),
-                                      Wrap(
-                                        spacing: 3,
-                                        runSpacing: 3,
-                                        children: item?.type?.map((e) {
-                                              return e == null
-                                                  ? const SizedBox()
-                                                  : Container(
-                                                      padding:
-                                                          const EdgeInsets
-                                                              .symmetric(horizontal: 6, vertical: 3),
-                                                      decoration:
-                                                          BoxDecoration(
-                                                        color:
-                                                            Colors.blueGrey,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    4),
-                                                      ),
-                                                      child: Text(
-                                                        e,
-                                                        style:
-                                                            const TextStyle(
-                                                          color:
-                                                              Colors.white,
-                                                          fontSize: 11,
-                                                        ),
-                                                      ),
-                                                    );
-                                            }).toList() ??
-                                            [],
-                                      ),
-                                      Text(
-                                        Dates.formShortDate(item?.receptionDate), // 受付日
-                                        style: const TextStyle(fontSize: 13),
-                                      ),
-                                      Text(
-                                        Dates.formShortDate(item?.medicalDay), // 受診日
-                                        style: const TextStyle(fontSize: 13),
-                                      ),
-                                      Text(
-                                        item?.nationality ?? '--',
-                                        style: const TextStyle(fontSize: 13),
-                                      ),
-                                      Text(
-                                        item?.groupSize ?? '--',
-                                        style: const TextStyle(fontSize: 13),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
+                                  ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
