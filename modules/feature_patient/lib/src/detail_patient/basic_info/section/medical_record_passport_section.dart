@@ -1,10 +1,15 @@
+// Dart imports:
+import 'dart:html' as html;
+
 // Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Package imports:
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/widgets.dart';
@@ -159,18 +164,13 @@ class _MedicalRecordPassportSectionState
                     children: [
                       Expanded(
                         child: Column(
-                          mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
                               'ビザ', //  TODO: l10n 対応 (ビザ) (visa)
                             ),
                             Row(
                               children: <Widget>[
-                                // addRadioButton(
-                                //     0, 'medicalGuarantee', formGroup),
-                                // addRadioButton(1, 'other', formGroup),
                                 IntrinsicWidth(
                                   stepWidth: 50,
                                   child: ReactiveRadioListTile<String?>(
@@ -195,61 +195,187 @@ class _MedicalRecordPassportSectionState
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('ビザ種類'),
-                            ReactiveTextField(
-                              formControlName: 'visaCategory',
-                              decoration: const InputDecoration(
-                                hintText: 'ビザ種類',
-                              ),
+                            SizedBox(height: context.appTheme.spacing.marginSmall),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('ビザ種類'),
+                                    ConstrainedBox(
+                                      constraints:
+                                          const BoxConstraints(maxWidth: 320),
+                                      child: ReactiveTextField(
+                                        formControlName: 'visaCategory',
+                                        decoration: const InputDecoration(
+                                          hintText: 'ビザ種類',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginLarge,
+                                ),
+                                IntrinsicWidth(
+                                  stepWidth: 50,
+                                  child: ReactiveRadioListTile<bool?>(
+                                    value: false,
+                                    contentPadding: EdgeInsets.zero,
+                                    formControlName: 'underConfirmation',
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    title: const Text('確認中'),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
-
-                      // Expanded(
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       setState(() {
-                      //         formGroup.control('underConfirmation').value =
-                      //             !selectUnderConfirmation;
-                      //         selectUnderConfirmation =
-                      //             !selectUnderConfirmation;
-                      //       });
-                      //     },
-                      //     child: addRadioUnderConfirmationButton(
-                      //         selectUnderConfirmation ? 0 : 1),
-                      //   ),
-                      // )
-                      Column(
-                        children: [
-                          const SizedBox(height: 20),
-                          IntrinsicWidth(
-                            stepWidth: 50,
-                            child: ReactiveRadioListTile<bool?>(
-                              value: false,
-                              contentPadding: EdgeInsets.zero,
-                              formControlName: 'underConfirmation',
-                              controlAffinity: ListTileControlAffinity.leading,
-                              title: const Text('確認中'),
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
+                  _buildPassportImageField(formGroup),
                 ],
               ),
             ),
           );
         });
+  }
+
+  Widget _buildPassportImageField(FormGroup formGroup) {
+    if (!formGroup.contains('passportImage')) {
+      return const SizedBox.shrink();
+    }
+
+    final control = formGroup.control('passportImage');
+    final file = control.value as FileSelect?;
+
+    return ColumnSeparated(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      separatorBuilder: (context, index) =>
+          SizedBox(height: context.appTheme.spacing.marginSmall),
+      children: [
+        const Text(
+          'パスポート画像',
+          style: TextStyle(
+            fontFamily: 'NotoSansJP',
+            package: 'core_ui',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DragTarget<List<html.File>>(
+              onWillAccept: (data) => true,
+              onAccept: (files) async {
+                try {
+                  final fileSelect = await handleFileDrop(files);
+                  if (fileSelect != null) {
+                    control.value = fileSelect;
+                  }
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('エラー: $e')),
+                  );
+                }
+              },
+              builder: (context, candidateData, rejectedData) {
+                final isHovering = candidateData.isNotEmpty;
+                return InkWell(
+                  onTap: () async {
+                    final result = await imagePicker();
+                    if (result != null) {
+                      control.value = result;
+                    }
+                  },
+                  child: Container(
+                    width: 250,
+                    height: 250,
+                    padding:
+                        EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: isHovering
+                            ? Colors.green
+                            : context.appTheme.primaryColor,
+                        width: isHovering ? 3 : 1,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                          context.appTheme.spacing.borderRadiusMedium),
+                      color: isHovering
+                          ? Colors.green.withOpacity(0.1)
+                          : Colors.transparent,
+                    ),
+                    child: file != null && file.file != null
+                        ? Image.memory(
+                            file.file!,
+                            fit: BoxFit.cover,
+                          )
+                        : file != null && file.url != null
+                            ? Avatar.network(
+                                file.url,
+                                placeholder: const AssetImage(
+                                  Images.logoMadical,
+                                  package: 'core_ui',
+                                ),
+                                shape: BoxShape.rectangle,
+                                customSize: const Size(250, 250),
+                              )
+                            : ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                separatorBuilder: (context, index) => SizedBox(
+                                  height:
+                                      context.appTheme.spacing.marginMedium,
+                                ),
+                                children: [
+                                  Icon(
+                                    isHovering
+                                        ? Icons.cloud_upload
+                                        : Icons.copy_all_rounded,
+                                    color: isHovering ? Colors.green : null,
+                                  ),
+                                  Text(
+                                    isHovering
+                                        ? 'ここにドロップしてください'
+                                        : 'パスポートをアップロード',
+                                    style: TextStyle(
+                                      color:
+                                          isHovering ? Colors.green : null,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      final result = await imagePicker();
+                                      if (result != null) {
+                                        control.value = result;
+                                      }
+                                    },
+                                    child: const Text('ファイルを選択する'),
+                                  ),
+                                ],
+                              ),
+                  ),
+                );
+              },
+            ),
+            if (file != null)
+              IconButton(
+                onPressed: () {
+                  control.value = null;
+                },
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
+          ],
+        ),
+      ],
+    );
   }
 }

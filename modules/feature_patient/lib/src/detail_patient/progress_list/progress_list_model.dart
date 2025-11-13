@@ -26,6 +26,8 @@ class ProgressListModel {
       title: '治療',
       displayTitle: '訪日治療の流れ',
       serverType: 'treatment',
+      apiType: 'treatment',
+      legacyTypes: ['treatment'],
       isDefault: true,
     ),
     ProgressSectionTemplate(
@@ -33,7 +35,8 @@ class ProgressListModel {
       title: '健診',
       displayTitle: '訪日健診の流れ',
       serverType: 'medical_checkup',
-      legacyTypes: ['0'],
+      apiType: '0',
+      legacyTypes: ['0', 'medical_checkup'],
       isDefault: true,
     ),
     ProgressSectionTemplate(
@@ -41,31 +44,40 @@ class ProgressListModel {
       title: '再生医療',
       displayTitle: '訪日再生医療の流れ',
       serverType: 'regenerative',
-      legacyTypes: ['1'],
+      apiType: '1',
+      legacyTypes: ['1', 'regenerative'],
     ),
     ProgressSectionTemplate(
       id: 'beauty',
       title: '美容',
       displayTitle: '訪日美容医療の流れ',
       serverType: 'beauty',
+      apiType: 'beauty',
+      legacyTypes: ['beauty'],
     ),
     ProgressSectionTemplate(
       id: 'blood_purification',
       title: '血液浄化療法（アフェレーシス）・透析',
       displayTitle: '訪日血液浄化療法の流れ',
       serverType: 'blood_purification',
+      apiType: 'blood_purification',
+      legacyTypes: ['blood_purification'],
     ),
     ProgressSectionTemplate(
       id: 'risk_check',
       title: 'リスク検査',
       displayTitle: '訪日リスク検査の流れ',
       serverType: 'risk_check',
+      apiType: 'risk_check',
+      legacyTypes: ['risk_check'],
     ),
     ProgressSectionTemplate(
       id: 'others',
       title: 'その他',
       displayTitle: 'その他の流れ',
       serverType: 'others',
+      apiType: 'others',
+      legacyTypes: ['others'],
     ),
   ];
 
@@ -128,58 +140,37 @@ class ProgressListModel {
     FormGroup formGroup,
     List<MedicalRecordProgress> data,
   ) async {
+    FormArray formArray = formGroup.control('progressList') as FormArray;
+    formArray.clear();
+
     if (data.isNotEmpty) {
-      // Group by type
-      var groupByType = groupBy(data, (MedicalRecordProgress e) => e.type);
+      final Map<String, List<MedicalRecordProgress>> sectionRecords =
+          <String, List<MedicalRecordProgress>>{};
 
-      FormArray formArray = formGroup.control('progressList') as FormArray;
-      formArray.clear();
+      for (final record in data) {
+        final template = _resolveTemplateForRecord(record);
+        sectionRecords.putIfAbsent(template.id, () => <MedicalRecordProgress>[])
+          ..add(record);
+      }
 
-      final keys = groupByType.keys.toList();
-      groupByType.forEach((type, records) {
-        final template =
-            resolveTemplateByType(type, fallbackIndex: keys.indexOf(type));
-        FormArray formArrayProgress = FormArray([]);
-
-        // Sort records by titleList order
-        records.sort((a, b) {
-          int indexA = titleList.indexWhere((item) => item.task == a.task);
-          int indexB = titleList.indexWhere((item) => item.task == b.task);
-
-          if (indexA == -1) indexA = titleList.length;
-          if (indexB == -1) indexB = titleList.length;
-
-          return indexA.compareTo(indexB);
-        });
-
-        for (var (orderIndex, record) in records.indexed) {
-          formArrayProgress.add(FormGroup({
-            '_id': FormControl<String>(value: record.id),
-            'completed': FormControl<bool>(value: record.completed),
-            'key': FormControl<String>(value: record.key),
-            'tag': FormControl<String>(value: record.tag),
-            'task': FormControl<String>(value: record.task),
-            'completionDate':
-                FormControl<DateTime>(value: record.completionDate),
-            'remarks': FormControl<String>(value: record.remarks),
-            'medicalRecord': FormControl<String>(value: record.medicalRecord),
-            'type': FormControl<String>(
-              value: record.type ?? template.serverType,
-            ),
-            'order': FormControl<int>(value: orderIndex),
-          }));
+      for (final template in sectionTemplates) {
+        final records = sectionRecords[template.id];
+        if (records != null && records.isNotEmpty) {
+          formArray.add(_createSectionGroupFromRecords(template, records));
+        } else if (template.isDefault) {
+          formArray.add(createSectionFormGroup(template));
         }
+      }
 
-        formArray.add(
-          FormGroup({
-            'sectionType': FormControl<String>(value: template.id),
-            'progress': formArrayProgress,
-          }),
-        );
-      });
+      if (formArray.controls.isEmpty) {
+        final defaults = sectionTemplates.where((e) => e.isDefault).toList();
+        final templatesToAdd =
+            defaults.isEmpty ? [sectionTemplates.first] : defaults;
+        for (final template in templatesToAdd) {
+          formArray.add(createSectionFormGroup(template));
+        }
+      }
     } else {
-      FormArray formArray = formGroup.control('progressList') as FormArray;
-      formArray.clear();
       final defaults = sectionTemplates.where((e) => e.isDefault).toList();
       final templatesToAdd =
           defaults.isEmpty ? [sectionTemplates.first] : defaults;
@@ -428,20 +419,81 @@ class ProgressListModel {
     return sectionTemplates.first;
   }
 
+  ProgressSectionTemplate _resolveTemplateForRecord(
+      MedicalRecordProgress record) {
+    if (record.key.isNotEmpty) {
+      final match = sectionTemplates.firstWhereOrNull(
+        (template) => template.id == record.key,
+      );
+      if (match != null) {
+        return match;
+      }
+    }
+
+    if (record.type.isNotEmpty) {
+      final match = sectionTemplates.firstWhereOrNull(
+        (template) => template.matches(record.type),
+      );
+      if (match != null) {
+        return match;
+      }
+    }
+
+    return sectionTemplates.first;
+  }
+
+  FormGroup _createSectionGroupFromRecords(
+    ProgressSectionTemplate template,
+    List<MedicalRecordProgress> records,
+  ) {
+    final sortedRecords = [...records];
+    sortedRecords.sort((a, b) {
+      final orderA = _resolveOrder(a.task);
+      final orderB = _resolveOrder(b.task);
+      return orderA.compareTo(orderB);
+    });
+
+    final progressArray = FormArray([]);
+
+    for (final (index, record) in sortedRecords.indexed) {
+      progressArray.add(
+        FormGroup({
+          '_id': FormControl<String>(value: record.id),
+          'completed': FormControl<bool>(value: record.completed),
+          'key': FormControl<String>(
+            value: (record.key.isNotEmpty) ? record.key : template.id,
+          ),
+          'tag': FormControl<String>(value: record.tag),
+          'task': FormControl<String>(value: record.task),
+          'completionDate': FormControl<DateTime>(value: record.completionDate),
+          'remarks': FormControl<String>(value: record.remarks),
+          'medicalRecord': FormControl<String>(value: record.medicalRecord),
+          'type': FormControl<String>(value: template.apiType ?? template.serverType),
+          'order': FormControl<int>(value: index),
+        }),
+      );
+    }
+
+    return FormGroup({
+      'sectionType': FormControl<String>(value: template.id),
+      'progress': progressArray,
+    });
+  }
+
   FormGroup createSectionFormGroup(ProgressSectionTemplate template) {
     final progressArray = FormArray([]);
     for (final (index, item) in titleList.indexed) {
       progressArray.add(
         FormGroup({
-          '_id': FormControl<String>(),
-          'completed': FormControl<bool>(value: false),
-          'key': FormControl<String>(),
+           '_id': FormControl<String>(),
+           'completed': FormControl<bool>(value: false),
+          'key': FormControl<String>(value: template.id),
           'tag': FormControl<String>(value: item.tag),
           'task': FormControl<String>(value: item.task),
           'completionDate': FormControl<DateTime>(),
           'remarks': FormControl<String>(),
           'medicalRecord': FormControl<String>(),
-          'type': FormControl<String>(value: template.serverType),
+          'type': FormControl<String>(value: template.apiType ?? template.serverType),
           'order': FormControl<int>(value: index),
         }),
       );
@@ -482,6 +534,7 @@ class ProgressSectionTemplate {
     required this.title,
     String? displayTitle,
     required this.serverType,
+    this.apiType,
     this.legacyTypes = const [],
     this.isDefault = false,
   }) : displayTitle = displayTitle ?? title;
@@ -490,9 +543,12 @@ class ProgressSectionTemplate {
   final String title;
   final String displayTitle;
   final String serverType;
+  final String? apiType;
   final List<String> legacyTypes;
   final bool isDefault;
 
   bool matches(String value) =>
-      value == serverType || legacyTypes.contains(value);
+      value == serverType ||
+      value == apiType ||
+      legacyTypes.contains(value);
 }

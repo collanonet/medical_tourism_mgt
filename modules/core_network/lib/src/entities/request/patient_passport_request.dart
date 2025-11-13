@@ -11,6 +11,7 @@ class PatientPassportRequest {
    String? visaType;
    String? visaCategory;
    bool? underConfirmation;
+  String? passportImage;
    String? patient;
 
   PatientPassportRequest({
@@ -20,6 +21,7 @@ class PatientPassportRequest {
      this.visaType,
      this.visaCategory,
      this.underConfirmation,
+     this.passportImage,
      this.patient,
   });
 

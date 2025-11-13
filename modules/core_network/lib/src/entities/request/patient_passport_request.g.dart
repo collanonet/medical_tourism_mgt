@@ -19,6 +19,7 @@ PatientPassportRequest _$PatientPassportRequestFromJson(
       visaType: json['visaType'] as String?,
       visaCategory: json['visaCategory'] as String?,
       underConfirmation: json['underConfirmation'] as bool?,
+      passportImage: json['passportImage'] as String?,
       patient: json['patient'] as String?,
     );
 
@@ -31,5 +32,6 @@ Map<String, dynamic> _$PatientPassportRequestToJson(
       'visaType': instance.visaType,
       'visaCategory': instance.visaCategory,
       'underConfirmation': instance.underConfirmation,
+      'passportImage': instance.passportImage,
       'patient': instance.patient,
     };

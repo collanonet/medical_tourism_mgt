@@ -13,6 +13,7 @@ class PatientPassport {
   String visaType;
   String? visaCategory;
   bool? underConfirmation;
+  String? passportImage;
   String patient;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -25,6 +26,7 @@ class PatientPassport {
     required this.visaType,
     this.visaCategory,
     this.underConfirmation,
+    this.passportImage,
     required this.patient,
     required this.createdAt,
     required this.updatedAt,

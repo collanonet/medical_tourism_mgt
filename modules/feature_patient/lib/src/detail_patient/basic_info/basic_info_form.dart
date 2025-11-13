@@ -189,6 +189,7 @@ FormGroup basicInfoForm({
         'PATIENT_PASSPORTS': FormGroup({
           '_id': FormControl<String?>(),
           'passportNumber': FormControl<String?>(),
+          'passportImage': FormControl<FileSelect>(),
           'issueDate': FormControl<DateTime>(
             validators: [
               Validators.pattern(

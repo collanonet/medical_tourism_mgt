@@ -425,7 +425,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       FormGroup({
                         '_id': FormControl<String>(),
                         'completed': FormControl<bool>(value: false),
-                        'key': FormControl<String>(),
+                        'key': FormControl<String>(value: template.id),
                         'tag': FormControl<String>(value: '当社'),
                         'task': FormControl<String>(),
                         'completionDate': FormControl<DateTime>(
