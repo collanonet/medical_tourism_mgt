@@ -55,9 +55,7 @@ FormGroup normalSummaryForm() {
     'presenceOfAnticancerDrugTreatment': FormControl<bool>(),
     'biopsy': FormControl<bool>(),
     'patientsWishes': FormControl<String>(),
-    'agentName': FormControl<String>(
-      disabled: true,
-    ),
+    'agentName': FormControl<String>(),
     'personInChargeName': FormControl<String>(),
     'mobileNumber': FormControl<String>(),
     'patientsAddressStay': FormControl<String>(),

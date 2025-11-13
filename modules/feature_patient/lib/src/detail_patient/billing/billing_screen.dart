@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:core_network/entities.dart';
@@ -23,6 +24,7 @@ class BillingScreen extends StatefulWidget {
 
 class _BillingScreenState extends State<BillingScreen> {
   final formatter = InputFormatter();
+  static const _halfWidthNote = '※半角で入力してください';
 
   @override
   Widget build(BuildContext context) {
@@ -56,41 +58,55 @@ class _BillingScreenState extends State<BillingScreen> {
                                 color: context.appTheme.primaryColor,
                               ),
                             ),
-                            child: Row(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Text(
-                                    '預り金',
-                                    style: context.textTheme.titleMedium,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(flex: 2, child: Text('日本円（税込）')),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                IntrinsicWidth(
-                                  stepWidth: 300,
-                                  child: ReactiveTextField(
-                                    formControlName: 'deposit',
-                                    keyboardType: TextInputType.number,
-                                    valueAccessor: CurrencyValueAccessor(),
-                                    inputFormatters: [
-                                      CustomCurrencyFormatter(),
-                                    ],
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      // No border
-                                      filled: false,
-                                      // No background color
-                                      fillColor: Colors.transparent,
-                                      // Ensure the fill color is transparent
-                                      suffixText: '円',
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '預り金',
+                                        style: context.textTheme.titleMedium,
+                                      ),
                                     ),
-                                  ),
-                                )
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    const Expanded(
+                                        flex: 2, child: Text('日本円（税込）')),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ReactiveTextField(
+                                        formControlName: 'deposit',
+                                        keyboardType: TextInputType.number,
+                                        valueAccessor: CurrencyValueAccessor(),
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]'),
+                                          ),
+                                          CustomCurrencyFormatter(),
+                                        ],
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          // No border
+                                          filled: false,
+                                          // No background color
+                                          fillColor: Colors.transparent,
+                                          // Ensure the fill color is transparent
+                                          suffixText: '円',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                            
+                                _buildHint(context),
                               ],
                             ),
                           ),
@@ -111,41 +127,55 @@ class _BillingScreenState extends State<BillingScreen> {
                                 color: context.appTheme.primaryColor,
                               ),
                             ),
-                            child: Row(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Text(
-                                    '支払い済治療費等',
-                                    style: context.textTheme.titleMedium,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(flex: 2, child: Text('日本円（税込）')),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                IntrinsicWidth(
-                                  stepWidth: 300,
-                                  child: ReactiveTextField(
-                                    keyboardType: TextInputType.number,
-                                    valueAccessor: CurrencyValueAccessor(),
-                                    inputFormatters: [
-                                      CustomCurrencyFormatter(),
-                                    ],
-                                    formControlName: 'settlementFee',
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      // No border
-                                      filled: false,
-                                      // No background color
-                                      fillColor: Colors.transparent,
-                                      // Ensure the fill color is transparent
-                                      suffixText: '円',
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '支払い済治療費等',
+                                        style: context.textTheme.titleMedium,
+                                      ),
                                     ),
-                                  ),
-                                )
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    const Expanded(
+                                        flex: 2, child: Text('日本円（税込）')),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ReactiveTextField(
+                                        keyboardType: TextInputType.number,
+                                        valueAccessor: CurrencyValueAccessor(),
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]'),
+                                          ),
+                                          CustomCurrencyFormatter(),
+                                        ],
+                                        formControlName: 'settlementFee',
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          // No border
+                                          filled: false,
+                                          // No background color
+                                          fillColor: Colors.transparent,
+                                          // Ensure the fill color is transparent
+                                          suffixText: '円',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                
+                                _buildHint(context),
                               ],
                             ),
                           ),
@@ -170,50 +200,83 @@ class _BillingScreenState extends State<BillingScreen> {
                                   .map(
                                     (currentForm) => ReactiveForm(
                                       formGroup: currentForm,
-                                      child: Row(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          const Expanded(
-                                            child: ReactiveDatePickerField(
-                                              formControlName: 'occurrenceDate',
-                                              label: '発生日',
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: ReactiveTextField(
-                                              formControlName: 'hospitalName',
-                                              decoration: const InputDecoration(
-                                                label: Text(
-                                                  '病院名等',
+                                          Row(
+                                            children: [
+                                              const Expanded(
+                                                child: ReactiveDatePickerField(
+                                                  formControlName:
+                                                      'occurrenceDate',
+                                                  label: '発生日',
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
-                                            child: ReactiveTextField(
-                                              formControlName: 'amount',
-                                              decoration: const InputDecoration(
-                                                label: Text(
-                                                  '金額',
+                                              SizedBox(
+                                                width: context
+                                                    .appTheme.spacing
+                                                    .marginMedium,
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: ReactiveTextField(
+                                                  formControlName:
+                                                      'hospitalName',
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    label: Text(
+                                                      '病院名等',
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
+                                              SizedBox(
+                                                width: context
+                                                    .appTheme.spacing
+                                                    .marginMedium,
+                                              ),
+                                              Expanded(
+                                                child: ReactiveTextField(
+                                                  formControlName: 'amount',
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .allow(
+                                                      RegExp(r'[0-9]'),
+                                                    ),
+                                                    CustomCurrencyFormatter(),
+                                                  ],
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    label: Text(
+                                                      '金額',
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: context
+                                                    .appTheme.spacing
+                                                    .marginMedium,
+                                              ),
+                                              Expanded(
+                                                child: fileUpload(
+                                                    context,
+                                                    currentForm,
+                                                    'file'),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 4),
+                                          
+                                          _buildHint(
+                                            context,
+                                            alignment: Alignment.centerLeft,
+                                            padding: const EdgeInsets.only(
+                                              left: 985,
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
-                                            child: fileUpload(
-                                                context, currentForm, 'file'),
                                           ),
                                         ],
                                       ),
@@ -451,6 +514,36 @@ class _BillingScreenState extends State<BillingScreen> {
           ],
         )
       ],
+    );
+  }
+
+  Widget _halfWidthHintText(BuildContext context) {
+    final baseStyle = context.textTheme.bodySmall;
+    final hintColor = baseStyle?.color?.withOpacity(0.7) ?? Colors.grey;
+    return Text(
+      _halfWidthNote,
+      style: baseStyle?.copyWith(
+            color: hintColor,
+            fontSize: 12,
+          ) ??
+          TextStyle(
+            color: hintColor,
+            fontSize: 12,
+          ),
+    );
+  }
+
+  Widget _buildHint(
+    BuildContext context, {
+    Alignment alignment = Alignment.centerRight,
+    EdgeInsetsGeometry? padding,
+  }) {
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: padding ?? EdgeInsets.zero,
+        child: _halfWidthHintText(context),
+      ),
     );
   }
 }

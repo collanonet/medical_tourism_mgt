@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:collection/collection.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
@@ -12,6 +13,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
+import '../detail_patient_model.dart';
 import 'progress_list_model.dart';
 import 'progress_record_widget.dart';
 
@@ -27,98 +29,116 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
 
-    return Column(
-      children: [
-        const SizedBox(height: 16),
-        Expanded(
-          child: ValueListenableBuilder(
-            valueListenable:
-                context.read<ProgressListModel>().medicalRecordsProgress,
-            builder: (context, value, child) => Skeletonizer(
-              enabled: value.loading,
-              child: SingleChildScrollView(
-                child: section(formGroup),
+    return ValueListenableListener(
+      valueListenable: context.read<ProgressListModel>().medicalRecord,
+      onListen: () {
+        final value = context.read<ProgressListModel>().medicalRecord.value;
+        if (value.hasData) {
+          context
+              .read<DetailPatientModel>()
+              .updateMedicalRecord(value.requireData);
+        }
+      },
+      child: Column(
+        children: [
+          const SizedBox(height: 16),
+          Expanded(
+            child: ValueListenableBuilder(
+              valueListenable:
+                  context.read<ProgressListModel>().medicalRecordsProgress,
+              builder: (context, value, child) => Skeletonizer(
+                enabled: value.loading,
+                child: SingleChildScrollView(
+                  child: section(formGroup),
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ValueListenableListener(
-              valueListenable: context.read<ProgressListModel>().submit,
-              onListen: () {
-                final value = context.read<ProgressListModel>().submit.value;
-                if (value.hasData) {
-                  snackBarWidget(
-                    message: '正常に保存されました',
-                    prefixIcon:
-                        const Icon(Icons.check_circle, color: Colors.white),
-                  );
-                }
-
-                if (value.hasError) {
-                  snackBarWidget(
-                    message: '保存できませんでした。 もう一度試してください。',
-                    backgroundColor: Colors.red,
-                    prefixIcon: const Icon(Icons.error, color: Colors.white),
-                  );
-                }
-              },
-              child: ValueListenableBuilder(
-                  valueListenable: context.read<ProgressListModel>().submit,
-                  builder: (context, value, child) {
-                    return ReactiveFormConsumer(
-                      builder: (context, form, _) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                                onPressed: !value.loading && form.valid
-                                    ? () {
-                                        logger.d('保存ボタンが押されました');
-                                        logger.d('フォームの有効性: ${form.valid}');
-                                        logger.d('フォームの値: ${form.value}');
-                                        try {
-                                          context
-                                              .read<ProgressListModel>()
-                                              .submitData(form);
-                                        } catch (e) {
-                                          logger.e('保存処理でエラーが発生: $e');
-                                          snackBarWidget(
-                                            message: '保存処理でエラーが発生しました: $e',
-                                            backgroundColor: Colors.red,
-                                            prefixIcon: const Icon(Icons.error,
-                                                color: Colors.white),
-                                          );
-                                        }
-                                      }
-                                    : null,
-                                child: WithLoadingButton(
-                                  isLoading: value.loading,
-                                  child: const Text('保存する'),
-                                )),
-                            if (!form.valid) ...[
-                              const SizedBox(height: 8),
-                              Text(
-                                'フォームにエラーがあります: ${form.errors}',
-                                style: const TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ],
-                        );
-                      },
+          const SizedBox(height: 16),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ValueListenableListener(
+                valueListenable: context.read<ProgressListModel>().submit,
+                onListen: () {
+                  final value = context.read<ProgressListModel>().submit.value;
+                  if (value.hasData) {
+                    final latest =
+                        context.read<ProgressListModel>().medicalRecord.value;
+                    if (latest.hasData) {
+                      context
+                          .read<DetailPatientModel>()
+                          .updateMedicalRecord(latest.requireData);
+                    }
+                    snackBarWidget(
+                      message: '正常に保存されました',
+                      prefixIcon:
+                          const Icon(Icons.check_circle, color: Colors.white),
                     );
-                  }),
-            )
-          ],
-        )
-      ],
+                  }
+
+                  if (value.hasError) {
+                    snackBarWidget(
+                      message: '保存できませんでした。 もう一度試してください。',
+                      backgroundColor: Colors.red,
+                      prefixIcon: const Icon(Icons.error, color: Colors.white),
+                    );
+                  }
+                },
+                child: ValueListenableBuilder(
+                    valueListenable: context.read<ProgressListModel>().submit,
+                    builder: (context, value, child) {
+                      return ReactiveFormConsumer(
+                        builder: (context, form, _) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: !value.loading && form.valid
+                                      ? () {
+                                          logger.d('保存ボタンが押されました');
+                                          logger.d('フォームの有効性: ${form.valid}');
+                                          logger.d('フォームの値: ${form.value}');
+                                          try {
+                                            context
+                                                .read<ProgressListModel>()
+                                                .submitData(form);
+                                          } catch (e) {
+                                            logger.e('保存処理でエラーが発生: $e');
+                                            snackBarWidget(
+                                              message: '保存処理でエラーが発生しました: $e',
+                                              backgroundColor: Colors.red,
+                                              prefixIcon: const Icon(Icons.error,
+                                                  color: Colors.white),
+                                            );
+                                          }
+                                        }
+                                      : null,
+                                  child: WithLoadingButton(
+                                    isLoading: value.loading,
+                                    child: const Text('保存する'),
+                                  )),
+                              if (!form.valid) ...[
+                                const SizedBox(height: 8),
+                                Text(
+                                  'フォームにエラーがあります: ${form.errors}',
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          );
+                        },
+                      );
+                    }),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -126,90 +146,148 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
     return ReactiveFormArray(
       formArrayName: 'progressList',
       builder: (context, formArray, child) {
-        final rows = formArray.controls
-            .map((control) => control as FormGroup)
-            .map(
-              (currentForm) => ReactiveForm(
-                formGroup: currentForm,
-                child: listOfItemInSection(
-                    formArray.controls.indexOf(currentForm)),
-              ),
-            )
-            .toList();
+        final rows =
+            formArray.controls.map((control) => control as FormGroup).toList();
+        final model = context.read<ProgressListModel>();
 
         return ColumnSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
           children: [
-            ...rows,
-            if (rows.length < 3)
-              InkWell(
-                onTap: () {
-                  formArray.add(FormGroup({
-                    'progress': FormArray([
-                    
-                      for (var (i, item) in context
-                          .read<ProgressListModel>()
-                          .titleList
-                          .indexed) ...{
-                        FormGroup({
-                          '_id': FormControl<String>(),
-                          'completed': FormControl<bool>(value: false),
-                          'key': FormControl<String>(),
-                          'tag': FormControl<String>(
-                            value: item.tag,
-                          ),
-                          'task': FormControl<String>(
-                            value: item.task,
-                          ),
-                          'completionDate': FormControl<DateTime>(
-                            validators: [
-                              Validators.pattern(
-                                ValidatorRegExp.date,
-                              ),
-                            ],
-                          ),
-                          'remarks': FormControl<String>(),
-                          'medicalRecord': FormControl<String>(),
-                          'type': FormControl<String>(
-                            value: rows.length.toString(),
-                          ),
-                          'order': FormControl<int>(value: i),
-                        }),
-                      }
-                    ]),
-                  }));
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add_box_rounded,
-                      color: context.appTheme.primaryColor,
-                    ),
-                    SizedBox(
-                      width: context.appTheme.spacing.marginSmall,
-                    ),
-                    Text(
-                      'さらにセクションを追加',
-                      style: TextStyle(color: context.appTheme.primaryColor),
-                    )
-                  ],
-                ),
-              )
+            for (final (sectionIndex, sectionForm) in rows.indexed)
+              ReactiveForm(
+                formGroup: sectionForm,
+                child: listOfItemInSection(sectionForm, sectionIndex),
+              ),
+            InkWell(
+              onTap: () async {
+                final template = await _selectSectionTemplate(context);
+                if (template == null) return;
+                setState(() {
+                  formArray.add(model.createSectionFormGroup(template));
+                  formArray.markAsDirty();
+                });
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_box_rounded,
+                    color: context.appTheme.primaryColor,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginSmall,
+                  ),
+                  Text(
+                    'さらにセクションを追加',
+                    style: TextStyle(color: context.appTheme.primaryColor),
+                  )
+                ],
+              ),
+            )
           ],
         );
       },
     );
   }
 
-  Widget listOfItemInSection(int index) {
+  Future<ProgressSectionTemplate?> _selectSectionTemplate(
+      BuildContext context) async {
+    final templates = context.read<ProgressListModel>().sectionTemplates;
+    if (templates.isEmpty) return null;
+    return showModalBottomSheet<ProgressSectionTemplate>(
+      context: context,
+      builder: (context) {
+        String selectedId = templates.first.id;
+        return SafeArea(
+          child: StatefulBuilder(
+            builder: (context, setStateSB) {
+              final selectedTemplate = templates.firstWhereOrNull(
+                (template) => template.id == selectedId,
+              );
+              return FractionallySizedBox(
+                heightFactor: 0.6,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: Text(
+                        'セクションを選択',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                    const Divider(height: 1),
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        children: templates
+                            .map(
+                              (template) => RadioListTile<String>(
+                                title: Text(template.title),
+                                value: template.id,
+                                groupValue: selectedId,
+                                onChanged: (value) {
+                                  if (value == null) return;
+                                  setStateSB(() {
+                                    selectedId = value;
+                                  });
+                                },
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                    const Divider(height: 1),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: Row(
+                        children: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text('キャンセル'),
+                          ),
+                          const Spacer(),
+                          ElevatedButton(
+                            onPressed: selectedTemplate == null
+                                ? null
+                                : () => Navigator.of(context)
+                                    .pop(selectedTemplate),
+                            child: const Text('決定'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget listOfItemInSection(FormGroup sectionGroup, int index) {
     return ReactiveFormArray(
       formArrayName: 'progress',
       builder: (context, formArray, child) {
+        final model = context.read<ProgressListModel>();
+        final sectionType = sectionGroup.contains('sectionType')
+            ? sectionGroup.control('sectionType').value as String?
+            : null;
+        final template =
+            model.resolveTemplateById(sectionType, fallbackIndex: index);
+
         return ColumnSeparated(
             crossAxisAlignment: CrossAxisAlignment.start,
             separatorBuilder: (BuildContext context, int index) => SizedBox(
@@ -217,7 +295,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 ),
             children: [
               Text(
-                index == 0 ? '訪日検診の流れ' : '訪日再生医療の流れ',
+                template.displayTitle,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Row(
@@ -342,26 +420,31 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
               ),
               InkWell(
                 onTap: () {
-                  formArray.add(
-                    FormGroup({
-                      '_id': FormControl<String>(),
-                      'completed': FormControl<bool>(value: false),
-                      'key': FormControl<String>(),
-                      'tag': FormControl<String>(value: '当社'),
-                      'task': FormControl<String>(),
-                      'completionDate': FormControl<DateTime>(
-                        validators: [
-                          Validators.pattern(
-                            ValidatorRegExp.date,
-                          ),
-                        ],
-                      ),
-                      'remarks': FormControl<String>(),
-                      'medicalRecord': FormControl<String>(),
-                      'type': FormControl<String>(value: index.toString()),
-                      'order': FormControl<int>(value: formArray.controls.length),
-                    }),
-                  );
+                  setState(() {
+                    formArray.add(
+                      FormGroup({
+                        '_id': FormControl<String>(),
+                        'completed': FormControl<bool>(value: false),
+                        'key': FormControl<String>(value: template.id),
+                        'tag': FormControl<String>(value: '当社'),
+                        'task': FormControl<String>(),
+                        'completionDate': FormControl<DateTime>(
+                          validators: [
+                            Validators.pattern(
+                              ValidatorRegExp.date,
+                            ),
+                          ],
+                        ),
+                        'remarks': FormControl<String>(),
+                        'medicalRecord': FormControl<String>(),
+                        'type':
+                            FormControl<String>(value: template.serverType),
+                        'order':
+                            FormControl<int>(value: formArray.controls.length),
+                      }),
+                    );
+                    formArray.markAsDirty();
+                  });
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

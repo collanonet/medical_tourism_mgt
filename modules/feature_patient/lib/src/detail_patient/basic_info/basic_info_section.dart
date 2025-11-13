@@ -51,8 +51,28 @@ class BasicInfoSection extends StatelessWidget {
               ), // TODO: l10n 対応 (memo)
 
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MedicalRecordSection(),
+                  const Text(
+                    '本人',
+                    style: TextStyle(
+                      fontFamily: 'NotoSansJP',
+                      package: 'core_ui',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
+                  const MedicalRecordUserAccountSection(),
+                  SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
+                  const MedicalRecordQrSection(),
+                  SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
+                  const MedicalRecordSection(showHeader: false),
                   Divider(
                     color: Colors.grey,
                     height: 0,
@@ -63,8 +83,6 @@ class BasicInfoSection extends StatelessWidget {
                 ],
               ),
               const MedicalRecordTravelGroupSection(),
-              const MedicalRecordUserAccountSection(),
-              const MedicalRecordNationalitySection(),
               Divider(
                 height: 0,
                 color: context.appTheme.dividerColor,

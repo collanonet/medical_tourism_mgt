@@ -303,18 +303,6 @@ class _MedicalPaymentDetailScreenState
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
-                        child: const Text(
-                          '印刷する',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      ElevatedButton(
                         onPressed: () {
                           if (sels.isNotEmpty) {
                             showDetailDialog(

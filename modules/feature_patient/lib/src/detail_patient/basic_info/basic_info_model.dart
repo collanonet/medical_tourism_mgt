@@ -435,10 +435,34 @@ class BasicInformationModel {
     formGroup.control('visaCategory').value = data?.visaCategory ?? '';
     formGroup.control('underConfirmation').value =
         data?.underConfirmation ?? false;
+    if (formGroup.contains('passportImage')) {
+      formGroup.control('passportImage').value = data?.passportImage == null
+          ? null
+          : FileSelect(url: data?.passportImage);
+    }
   }
 
   Future<void> createUpdatePatientPassports(FormGroup form) async {
     patientPassport.value = const AsyncData(loading: true);
+    String? passportFile;
+    final fileSelect = form.control('passportImage').value;
+    if (fileSelect is FileSelect) {
+      if (fileSelect.file != null && fileSelect.filename != null) {
+        try {
+          final base64Image = base64Encode(fileSelect.file!);
+          final fileData = await patientRepository.uploadFileBase64(
+            base64Image,
+            fileSelect.filename!,
+          );
+          passportFile = fileData.filename;
+        } catch (e) {
+          logger.e(e);
+        }
+      } else {
+        passportFile = fileSelect.url;
+      }
+    }
+
     PatientPassportRequest request = PatientPassportRequest(
       passportNumber: form.control('passportNumber').value ?? '',
       issueDate: form.control('issueDate').value,
@@ -446,6 +470,7 @@ class BasicInformationModel {
       visaType: form.control('visaType').value,
       visaCategory: form.control('visaCategory').value,
       underConfirmation: form.control('underConfirmation').value,
+      passportImage: passportFile,
       patient: patientData.value.requireData.id,
     );
 
@@ -453,6 +478,15 @@ class BasicInformationModel {
       await updatePatientPassports(form, form.control('_id').value, request);
     } else {
       await postPatientPassports(form, request);
+    }
+
+    final updated = patientPassport.value.data;
+    if (updated != null) {
+      insertPATIENTPASSPORTS(data: updated, formGroup: form);
+    } else {
+      form.control('passportImage').value = passportFile == null
+          ? null
+          : FileSelect(url: passportFile);
     }
   }
 

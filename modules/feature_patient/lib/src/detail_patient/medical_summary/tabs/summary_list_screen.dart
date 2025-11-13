@@ -1,7 +1,6 @@
 // Flutter imports:
-
-// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
@@ -159,26 +158,45 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                                         child: Row(
                                       children: [
                                         Flexible(
-                                            child:
-                                                Text(item.documentName ?? '')),
-                                        const Spacer(),
-                                        Container(
-                                          padding: const EdgeInsets.all(4),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            border: Border.all(
-                                                color: context
-                                                    .appTheme.primaryColor),
-                                          ),
-                                          child: Text(
-                                            '通常版',
-                                            style: context.textTheme.bodySmall
-                                                ?.copyWith(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 6,
+                                                  vertical: 2,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  border: Border.all(
                                                     color: context
-                                                        .appTheme.primaryColor),
+                                                        .appTheme.primaryColor,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  '通常版',
+                                                  style: context
+                                                      .textTheme.bodySmall
+                                                      ?.copyWith(
+                                                    color: context
+                                                        .appTheme.primaryColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text(
+                                                  item.documentName ?? '',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        )
+                                        ),
                                       ],
                                     )),
                                     Expanded(
@@ -191,10 +209,41 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                                         child: Row(
                                       children: [
                                         if (item.share == '○')
-                                          Icon(
-                                            Icons.person,
-                                            color:
-                                                context.appTheme.primaryColor,
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.person,
+                                              color:
+                                                  context.appTheme.primaryColor,
+                                            ),
+                                            tooltip: '共有URLをコピー',
+                                            onPressed: () async {
+                                              final path = item.pathFile;
+                                              if (path == null ||
+                                                  path.isEmpty) {
+                                                snackBarWidget(
+                                                  message: '共有URLを取得できません',
+                                                  backgroundColor: Colors.red,
+                                                  prefixIcon: const Icon(
+                                                    Icons.error,
+                                                    color: Colors.white,
+                                                  ),
+                                                );
+                                                return;
+                                              }
+                                              final baseUrl =
+                                                  GetIt.I<String>(instanceName: 'fileUrl');
+                                              final shareUrl = '$baseUrl$path';
+                                              await Clipboard.setData(
+                                                ClipboardData(text: shareUrl),
+                                              );
+                                              snackBarWidget(
+                                                message: '共有URLをコピーしました',
+                                                prefixIcon: const Icon(
+                                                  Icons.check_circle,
+                                                  color: Colors.white,
+                                                ),
+                                              );
+                                            },
                                           ),
                                       ],
                                     )),

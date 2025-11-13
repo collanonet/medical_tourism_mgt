@@ -19,7 +19,7 @@ FormGroup billingForm() => FormGroup(
                   ],
                 ),
                 'hospitalName': FormControl<String>(value: ''),
-                'amount': FormControl<String>(),
+                'amount': FormControl<String>(value: ''),
                 'file': FormControl<FileSelect>(),
               },
             ),
