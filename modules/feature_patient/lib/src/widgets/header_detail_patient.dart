@@ -8,6 +8,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
 import '../detail_patient/detail_patient_model.dart';
+import '../utils/progress_stage_helper.dart';
 
 class HeaderDetailPatient extends StatelessWidget {
   const HeaderDetailPatient({super.key});
@@ -126,7 +127,8 @@ class HeaderDetailPatient extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xffDBE238),
+                      backgroundColor: const Color(0xff5A8F29),
+                      foregroundColor: Colors.white,
                     ),
                     onPressed: () {},
                     child: const Text('医療ビザ'),
@@ -138,12 +140,26 @@ class HeaderDetailPatient extends StatelessWidget {
                   SizedBox(
                     width: context.appTheme.spacing.marginSmall,
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xffB76D0F),
-                    ),
-                    onPressed: () {},
-                    child: const Text('受注'),
+                  ValueListenableBuilder(
+                    valueListenable:
+                        context.read<DetailPatientModel>().medicalRecord,
+                    builder: (context, value, _) {
+                      final stage = resolveProgressStage(value.data?.progress);
+                      final background = stage.color;
+                      final foreground =
+                          ThemeData.estimateBrightnessForColor(background) ==
+                                  Brightness.dark
+                              ? Colors.white
+                              : Colors.black87;
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: background,
+                          foregroundColor: foreground,
+                        ),
+                        onPressed: () {},
+                        child: Text(stage.category),
+                      );
+                    },
                   ),
                 ],
               ),

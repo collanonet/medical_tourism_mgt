@@ -12,6 +12,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
+import '../detail_patient_model.dart';
 import 'progress_list_model.dart';
 import 'progress_record_widget.dart';
 
@@ -27,98 +28,118 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
 
-    return Column(
-      children: [
-        const SizedBox(height: 16),
-        Expanded(
-          child: ValueListenableBuilder(
-            valueListenable:
-                context.read<ProgressListModel>().medicalRecordsProgress,
-            builder: (context, value, child) => Skeletonizer(
-              enabled: value.loading,
-              child: SingleChildScrollView(
-                child: section(formGroup),
+    return ValueListenableListener(
+      valueListenable: context.read<ProgressListModel>().medicalRecord,
+      onListen: () {
+        final value = context.read<ProgressListModel>().medicalRecord.value;
+        if (value.hasData) {
+          context
+              .read<DetailPatientModel>()
+              .updateMedicalRecord(value.requireData);
+        }
+      },
+      child: Column(
+        children: [
+          const SizedBox(height: 16),
+          Expanded(
+            child: ValueListenableBuilder(
+              valueListenable:
+                  context.read<ProgressListModel>().medicalRecordsProgress,
+              builder: (context, value, child) => Skeletonizer(
+                enabled: value.loading,
+                child: SingleChildScrollView(
+                  child: section(formGroup),
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ValueListenableListener(
-              valueListenable: context.read<ProgressListModel>().submit,
-              onListen: () {
-                final value = context.read<ProgressListModel>().submit.value;
-                if (value.hasData) {
-                  snackBarWidget(
-                    message: '正常に保存されました',
-                    prefixIcon:
-                        const Icon(Icons.check_circle, color: Colors.white),
-                  );
-                }
-
-                if (value.hasError) {
-                  snackBarWidget(
-                    message: '保存できませんでした。 もう一度試してください。',
-                    backgroundColor: Colors.red,
-                    prefixIcon: const Icon(Icons.error, color: Colors.white),
-                  );
-                }
-              },
-              child: ValueListenableBuilder(
-                  valueListenable: context.read<ProgressListModel>().submit,
-                  builder: (context, value, child) {
-                    return ReactiveFormConsumer(
-                      builder: (context, form, _) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                                onPressed: !value.loading && form.valid
-                                    ? () {
-                                        logger.d('保存ボタンが押されました');
-                                        logger.d('フォームの有効性: ${form.valid}');
-                                        logger.d('フォームの値: ${form.value}');
-                                        try {
-                                          context
-                                              .read<ProgressListModel>()
-                                              .submitData(form);
-                                        } catch (e) {
-                                          logger.e('保存処理でエラーが発生: $e');
-                                          snackBarWidget(
-                                            message: '保存処理でエラーが発生しました: $e',
-                                            backgroundColor: Colors.red,
-                                            prefixIcon: const Icon(Icons.error,
-                                                color: Colors.white),
-                                          );
-                                        }
-                                      }
-                                    : null,
-                                child: WithLoadingButton(
-                                  isLoading: value.loading,
-                                  child: const Text('保存する'),
-                                )),
-                            if (!form.valid) ...[
-                              const SizedBox(height: 8),
-                              Text(
-                                'フォームにエラーがあります: ${form.errors}',
-                                style: const TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ],
-                        );
-                      },
+          const SizedBox(height: 16),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ValueListenableListener(
+                valueListenable: context.read<ProgressListModel>().submit,
+                onListen: () {
+                  final value = context.read<ProgressListModel>().submit.value;
+                  if (value.hasData) {
+                    snackBarWidget(
+                      message: '正常に保存されました',
+                      prefixIcon:
+                          const Icon(Icons.check_circle, color: Colors.white),
                     );
-                  }),
-            )
-          ],
-        )
-      ],
+                    final updatedRecord = context
+                        .read<ProgressListModel>()
+                        .medicalRecord
+                        .value;
+                    if (updatedRecord.hasData) {
+                      context
+                          .read<DetailPatientModel>()
+                          .updateMedicalRecord(updatedRecord.requireData);
+                    }
+                  }
+
+                  if (value.hasError) {
+                    snackBarWidget(
+                      message: '保存できませんでした。 もう一度試してください。',
+                      backgroundColor: Colors.red,
+                      prefixIcon: const Icon(Icons.error, color: Colors.white),
+                    );
+                  }
+                },
+                child: ValueListenableBuilder(
+                    valueListenable: context.read<ProgressListModel>().submit,
+                    builder: (context, value, child) {
+                      return ReactiveFormConsumer(
+                        builder: (context, form, _) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: !value.loading && form.valid
+                                      ? () {
+                                          logger.d('保存ボタンが押されました');
+                                          logger.d('フォームの有効性: ${form.valid}');
+                                          logger.d('フォームの値: ${form.value}');
+                                          try {
+                                            context
+                                                .read<ProgressListModel>()
+                                                .submitData(form);
+                                          } catch (e) {
+                                            logger.e('保存処理でエラーが発生: $e');
+                                            snackBarWidget(
+                                              message: '保存処理でエラーが発生しました: $e',
+                                              backgroundColor: Colors.red,
+                                              prefixIcon: const Icon(Icons.error,
+                                                  color: Colors.white),
+                                            );
+                                          }
+                                        }
+                                      : null,
+                                  child: WithLoadingButton(
+                                    isLoading: value.loading,
+                                    child: const Text('保存する'),
+                                  )),
+                              if (!form.valid) ...[
+                                const SizedBox(height: 8),
+                                Text(
+                                  'フォームにエラーがあります: ${form.errors}',
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          );
+                        },
+                      );
+                    }),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 

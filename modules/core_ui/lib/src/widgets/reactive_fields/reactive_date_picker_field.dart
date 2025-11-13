@@ -77,6 +77,7 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
 
   final String _datePattern =
       r'^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])$';
+  bool _isRequired = false;
 
   @override
   void initState() {
@@ -95,6 +96,8 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
 
     final control = formGroup.control(widget.formControlName);
 
+    _isRequired = control.validators.contains(Validators.required);
+
     final currentValue = control.value;
     if (currentValue != null) {
       _dateController.text = dateFormat.format(currentValue);
@@ -106,6 +109,9 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
       } else {
         _dateController.clear();
       }
+      if (mounted) {
+        setState(() {});
+      }
     });
 
     if (control.validators.contains(Validators.required)) {
@@ -116,6 +122,9 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
 
   String? _validateDate(String? value) {
     if (value == null || value.isEmpty) {
+      if (!_isRequired) {
+        return null;
+      }
       return '日付を入力してください';
     }
 
@@ -143,6 +152,20 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
 
   final inputFormatter = InputFormatter();
 
+  void _clearDate() {
+    final formGroup = ReactiveForm.of(context) as FormGroup?;
+    if (formGroup == null) return;
+
+    final control = formGroup.control(widget.formControlName);
+    control.removeError('invalidDate');
+    control.markAsDirty();
+    control.updateValue(null);
+    _dateController.clear();
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ReactiveDatePicker(
@@ -169,12 +192,26 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
             decoration: InputDecoration(
               label: widget.label != null ? Text(widget.label!) : null,
               hintText: widget.helperText ?? 'YYYY/MM/DD',
-              suffixIcon: IconButton(
-                onPressed: picker.showPicker,
-                icon: const Icon(
-                  CupertinoIcons.calendar,
-                  color: Colors.grey,
-                ),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (_dateController.text.isNotEmpty)
+                    IconButton(
+                      onPressed: _clearDate,
+                      tooltip: 'クリア',
+                      icon: const Icon(
+                        Icons.close,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  IconButton(
+                    onPressed: picker.showPicker,
+                    icon: const Icon(
+                      CupertinoIcons.calendar,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -207,5 +244,11 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
     final month = int.parse(parts[1]);
     final day = int.parse(parts[2]);
     return DateTime(year, month, day);
+  }
+
+  @override
+  void dispose() {
+    _dateController.dispose();
+    super.dispose();
   }
 }
