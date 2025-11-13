@@ -363,19 +363,75 @@ class _MedicalRecordPassportSectionState
                 );
               },
             ),
-            if (file != null)
-              IconButton(
-                onPressed: () {
-                  control.value = null;
-                },
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.red,
-                ),
+            if (file != null) ...[
+              SizedBox(width: context.appTheme.spacing.marginSmall),
+              Column(
+                children: [
+                  IconButton(
+                    tooltip: 'ダウンロード',
+                    onPressed: () => _downloadPassportFile(file),
+                    icon: const Icon(Icons.download),
+                  ),
+                  SizedBox(height: context.appTheme.spacing.marginSmall),
+                  IconButton(
+                    tooltip: '削除',
+                    onPressed: () {
+                      control.value = null;
+                    },
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
               ),
+            ],
           ],
         ),
       ],
     );
+  }
+
+  Future<void> _downloadPassportFile(FileSelect file) async {
+    final downloadName = file.filename ?? 'passport_image';
+    try {
+      if (file.path != null && file.path!.isNotEmpty) {
+        await downloadFile(
+          fileName: file.path!,
+          downloadName: downloadName,
+        );
+        return;
+      }
+
+      if (file.url != null && file.url!.isNotEmpty) {
+        final anchor = html.AnchorElement(href: file.url)
+          ..download = downloadName
+          ..target = '_blank';
+        html.document.body?.append(anchor);
+        anchor.click();
+        anchor.remove();
+        return;
+      }
+
+      if (file.file != null && file.file!.isNotEmpty) {
+        final blob = html.Blob([file.file!]);
+        final objectUrl = html.Url.createObjectUrlFromBlob(blob);
+        final anchor = html.AnchorElement(href: objectUrl)
+          ..download = downloadName;
+        html.document.body?.append(anchor);
+        anchor.click();
+        anchor.remove();
+        html.Url.revokeObjectUrl(objectUrl);
+        return;
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('ダウンロードできるファイルが見つかりませんでした')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('ダウンロードに失敗しました: $e')),
+      );
+    }
   }
 }
