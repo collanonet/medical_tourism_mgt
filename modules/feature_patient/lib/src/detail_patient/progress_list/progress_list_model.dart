@@ -20,6 +20,48 @@ class ProgressListModel {
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
+  final List<ProgressSectionTemplate> sectionTemplates = [
+    ProgressSectionTemplate(
+      id: 'treatment',
+      title: '治療',
+      serverType: 'treatment',
+      isDefault: true,
+    ),
+    ProgressSectionTemplate(
+      id: 'medical_checkup',
+      title: '健診',
+      serverType: 'medical_checkup',
+      legacyTypes: ['0'],
+      isDefault: true,
+    ),
+    ProgressSectionTemplate(
+      id: 'regenerative',
+      title: '再生医療',
+      serverType: 'regenerative',
+      legacyTypes: ['1'],
+    ),
+    ProgressSectionTemplate(
+      id: 'beauty',
+      title: '美容',
+      serverType: 'beauty',
+    ),
+    ProgressSectionTemplate(
+      id: 'blood_purification',
+      title: '血液浄化療法（アフェレーシス）・透析',
+      serverType: 'blood_purification',
+    ),
+    ProgressSectionTemplate(
+      id: 'risk_check',
+      title: 'リスク検査',
+      serverType: 'risk_check',
+    ),
+    ProgressSectionTemplate(
+      id: 'others',
+      title: 'その他',
+      serverType: 'others',
+    ),
+  ];
+
   List<ItemProgress> titleList = [
     ItemProgress(tag: '患者', task: 'お問い合せ'),
     ItemProgress(tag: '患者', task: 'お申込み'),
@@ -86,91 +128,57 @@ class ProgressListModel {
       FormArray formArray = formGroup.control('progressList') as FormArray;
       formArray.clear();
 
+      final keys = groupByType.keys.toList();
       groupByType.forEach((type, records) {
-        // Create form group for each group
-        int index = groupByType.keys.toList().indexOf(type);
+        final template =
+            resolveTemplateByType(type, fallbackIndex: keys.indexOf(type));
         FormArray formArrayProgress = FormArray([]);
 
         // Sort records by titleList order
         records.sort((a, b) {
           int indexA = titleList.indexWhere((item) => item.task == a.task);
           int indexB = titleList.indexWhere((item) => item.task == b.task);
-          
-          // If task not found in titleList, put it at the end
+
           if (indexA == -1) indexA = titleList.length;
           if (indexB == -1) indexB = titleList.length;
-          
+
           return indexA.compareTo(indexB);
         });
 
-        // Insert data for each group
-        for (var record in records) {
+        for (var (orderIndex, record) in records.indexed) {
           formArrayProgress.add(FormGroup({
-            '_id': FormControl<String>(
-              value: record.id,
-            ),
+            '_id': FormControl<String>(value: record.id),
             'completed': FormControl<bool>(value: record.completed),
-            'key': FormControl<String>(
-              value: record.key,
-            ),
-            'tag': FormControl<String>(
-              value: record.tag,
-            ),
-            'task': FormControl<String>(
-              value: record.task,
-            ),
-            'completionDate': FormControl<DateTime>(
-              value: record.completionDate,
-            ),
-            'remarks': FormControl<String>(
-              value: record.remarks,
-            ),
-            'medicalRecord': FormControl<String>(
-              value: record.medicalRecord,
-            ),
+            'key': FormControl<String>(value: record.key),
+            'tag': FormControl<String>(value: record.tag),
+            'task': FormControl<String>(value: record.task),
+            'completionDate':
+                FormControl<DateTime>(value: record.completionDate),
+            'remarks': FormControl<String>(value: record.remarks),
+            'medicalRecord': FormControl<String>(value: record.medicalRecord),
             'type': FormControl<String>(
-              value: index.toString(),
+              value: record.type ?? template.serverType,
             ),
+            'order': FormControl<int>(value: orderIndex),
           }));
         }
 
-        formArray.add(FormGroup({'progress': formArrayProgress}));
+        formArray.add(
+          FormGroup({
+            'sectionType': FormControl<String>(value: template.id),
+            'progress': formArrayProgress,
+          }),
+        );
       });
     } else {
       FormArray formArray = formGroup.control('progressList') as FormArray;
       formArray.clear();
-      FormArray formArrayProgress = FormArray([]);
-      for (var item in titleList) {
-        formArrayProgress.add(FormGroup({
-          '_id': FormControl<String>(),
-          'completed': FormControl<bool>(value: false),
-          'key': FormControl<String>(),
-          'tag': FormControl<String>(value: item.tag),
-          'task': FormControl<String>(value: item.task),
-          'completionDate': FormControl<DateTime>(),
-          'remarks': FormControl<String>(),
-          'medicalRecord': FormControl<String>(),
-          'type': FormControl<String>(value: '0'),
-        }));
+      final defaults = sectionTemplates.where((e) => e.isDefault).toList();
+      final templatesToAdd =
+          defaults.isEmpty ? [sectionTemplates.first] : defaults;
+      for (final template in templatesToAdd) {
+        formArray.add(createSectionFormGroup(template));
       }
-      formArray.add(FormGroup({'progress': formArrayProgress}));
-
-      FormArray formArrayProgress2 = FormArray([]);
-
-      for (var item in titleList) {
-        formArrayProgress2.add(FormGroup({
-          '_id': FormControl<String>(),
-          'completed': FormControl<bool>(value: false),
-          'key': FormControl<String>(),
-          'tag': FormControl<String>(value: item.tag),
-          'task': FormControl<String>(value: item.task),
-          'completionDate': FormControl<DateTime>(),
-          'remarks': FormControl<String>(),
-          'medicalRecord': FormControl<String>(),
-          'type': FormControl<String>(value: '1'),
-        }));
-      }
-      formArray.add(FormGroup({'progress': formArrayProgress2}));
     }
   }
 
@@ -370,6 +378,67 @@ class ProgressListModel {
       logger.e('進捗の更新に失敗しました: $e');
     }
   }
+
+  ProgressSectionTemplate resolveTemplateByType(
+    String? type, {
+    int fallbackIndex = 0,
+  }) {
+    if (type != null) {
+      final match = sectionTemplates.firstWhereOrNull(
+        (template) => template.matches(type),
+      );
+      if (match != null) {
+        return match;
+      }
+    }
+    if (fallbackIndex >= 0 && fallbackIndex < sectionTemplates.length) {
+      return sectionTemplates[fallbackIndex];
+    }
+    return sectionTemplates.first;
+  }
+
+  ProgressSectionTemplate resolveTemplateById(
+    String? id, {
+    int fallbackIndex = 0,
+  }) {
+    if (id != null) {
+      final match = sectionTemplates.firstWhereOrNull(
+        (template) => template.id == id,
+      );
+      if (match != null) {
+        return match;
+      }
+    }
+    if (fallbackIndex >= 0 && fallbackIndex < sectionTemplates.length) {
+      return sectionTemplates[fallbackIndex];
+    }
+    return sectionTemplates.first;
+  }
+
+  FormGroup createSectionFormGroup(ProgressSectionTemplate template) {
+    final progressArray = FormArray([]);
+    for (final (index, item) in titleList.indexed) {
+      progressArray.add(
+        FormGroup({
+          '_id': FormControl<String>(),
+          'completed': FormControl<bool>(value: false),
+          'key': FormControl<String>(),
+          'tag': FormControl<String>(value: item.tag),
+          'task': FormControl<String>(value: item.task),
+          'completionDate': FormControl<DateTime>(),
+          'remarks': FormControl<String>(),
+          'medicalRecord': FormControl<String>(),
+          'type': FormControl<String>(value: template.serverType),
+          'order': FormControl<int>(value: index),
+        }),
+      );
+    }
+
+    return FormGroup({
+      'sectionType': FormControl<String>(value: template.id),
+      'progress': progressArray,
+    });
+  }
 }
 
 class ItemProgress {
@@ -392,4 +461,23 @@ class _ProgressCandidate {
   final String task;
   final DateTime completionDate;
   final int order;
+}
+
+class ProgressSectionTemplate {
+  const ProgressSectionTemplate({
+    required this.id,
+    required this.title,
+    required this.serverType,
+    this.legacyTypes = const [],
+    this.isDefault = false,
+  });
+
+  final String id;
+  final String title;
+  final String serverType;
+  final List<String> legacyTypes;
+  final bool isDefault;
+
+  bool matches(String value) =>
+      value == serverType || legacyTypes.contains(value);
 }

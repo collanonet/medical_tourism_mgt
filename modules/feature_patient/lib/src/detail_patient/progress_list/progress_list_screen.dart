@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:collection/collection.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
@@ -145,90 +146,102 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
     return ReactiveFormArray(
       formArrayName: 'progressList',
       builder: (context, formArray, child) {
-        final rows = formArray.controls
-            .map((control) => control as FormGroup)
-            .map(
-              (currentForm) => ReactiveForm(
-                formGroup: currentForm,
-                child: listOfItemInSection(
-                    formArray.controls.indexOf(currentForm)),
-              ),
-            )
-            .toList();
+        final rows =
+            formArray.controls.map((control) => control as FormGroup).toList();
+        final model = context.read<ProgressListModel>();
 
         return ColumnSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
           children: [
-            ...rows,
-            if (rows.length < 3)
-              InkWell(
-                onTap: () {
-                  formArray.add(FormGroup({
-                    'progress': FormArray([
-                    
-                      for (var (i, item) in context
-                          .read<ProgressListModel>()
-                          .titleList
-                          .indexed) ...{
-                        FormGroup({
-                          '_id': FormControl<String>(),
-                          'completed': FormControl<bool>(value: false),
-                          'key': FormControl<String>(),
-                          'tag': FormControl<String>(
-                            value: item.tag,
-                          ),
-                          'task': FormControl<String>(
-                            value: item.task,
-                          ),
-                          'completionDate': FormControl<DateTime>(
-                            validators: [
-                              Validators.pattern(
-                                ValidatorRegExp.date,
-                              ),
-                            ],
-                          ),
-                          'remarks': FormControl<String>(),
-                          'medicalRecord': FormControl<String>(),
-                          'type': FormControl<String>(
-                            value: rows.length.toString(),
-                          ),
-                          'order': FormControl<int>(value: i),
-                        }),
-                      }
-                    ]),
-                  }));
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add_box_rounded,
-                      color: context.appTheme.primaryColor,
-                    ),
-                    SizedBox(
-                      width: context.appTheme.spacing.marginSmall,
-                    ),
-                    Text(
-                      'さらにセクションを追加',
-                      style: TextStyle(color: context.appTheme.primaryColor),
-                    )
-                  ],
-                ),
-              )
+            for (final (sectionIndex, sectionForm) in rows.indexed)
+              ReactiveForm(
+                formGroup: sectionForm,
+                child: listOfItemInSection(sectionForm, sectionIndex),
+              ),
+            InkWell(
+              onTap: () async {
+                final template = await _selectSectionTemplate(context);
+                if (template == null) return;
+                setState(() {
+                  formArray.add(model.createSectionFormGroup(template));
+                  formArray.markAsDirty();
+                });
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_box_rounded,
+                    color: context.appTheme.primaryColor,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginSmall,
+                  ),
+                  Text(
+                    'さらにセクションを追加',
+                    style: TextStyle(color: context.appTheme.primaryColor),
+                  )
+                ],
+              ),
+            )
           ],
         );
       },
     );
   }
 
-  Widget listOfItemInSection(int index) {
+  Future<ProgressSectionTemplate?> _selectSectionTemplate(
+      BuildContext context) async {
+    final templates = context.read<ProgressListModel>().sectionTemplates;
+    return showModalBottomSheet<ProgressSectionTemplate>(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                child: Text(
+                  'セクションを選択',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              const Divider(height: 1),
+              for (final template in templates) ...[
+                ListTile(
+                  title: Text(template.title),
+                  onTap: () => Navigator.of(context).pop(template),
+                ),
+                const Divider(height: 1),
+              ],
+              const SizedBox(height: 8),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget listOfItemInSection(FormGroup sectionGroup, int index) {
     return ReactiveFormArray(
       formArrayName: 'progress',
       builder: (context, formArray, child) {
+        final model = context.read<ProgressListModel>();
+        final sectionType = sectionGroup.contains('sectionType')
+            ? sectionGroup.control('sectionType').value as String?
+            : null;
+        final template =
+            model.resolveTemplateById(sectionType, fallbackIndex: index);
+
         return ColumnSeparated(
             crossAxisAlignment: CrossAxisAlignment.start,
             separatorBuilder: (BuildContext context, int index) => SizedBox(
@@ -236,7 +249,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 ),
             children: [
               Text(
-                index == 0 ? '訪日検診の流れ' : '訪日再生医療の流れ',
+                template.title,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Row(
@@ -361,26 +374,31 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
               ),
               InkWell(
                 onTap: () {
-                  formArray.add(
-                    FormGroup({
-                      '_id': FormControl<String>(),
-                      'completed': FormControl<bool>(value: false),
-                      'key': FormControl<String>(),
-                      'tag': FormControl<String>(value: '当社'),
-                      'task': FormControl<String>(),
-                      'completionDate': FormControl<DateTime>(
-                        validators: [
-                          Validators.pattern(
-                            ValidatorRegExp.date,
-                          ),
-                        ],
-                      ),
-                      'remarks': FormControl<String>(),
-                      'medicalRecord': FormControl<String>(),
-                      'type': FormControl<String>(value: index.toString()),
-                      'order': FormControl<int>(value: formArray.controls.length),
-                    }),
-                  );
+                  setState(() {
+                    formArray.add(
+                      FormGroup({
+                        '_id': FormControl<String>(),
+                        'completed': FormControl<bool>(value: false),
+                        'key': FormControl<String>(),
+                        'tag': FormControl<String>(value: '当社'),
+                        'task': FormControl<String>(),
+                        'completionDate': FormControl<DateTime>(
+                          validators: [
+                            Validators.pattern(
+                              ValidatorRegExp.date,
+                            ),
+                          ],
+                        ),
+                        'remarks': FormControl<String>(),
+                        'medicalRecord': FormControl<String>(),
+                        'type':
+                            FormControl<String>(value: template.serverType),
+                        'order':
+                            FormControl<int>(value: formArray.controls.length),
+                      }),
+                    );
+                    formArray.markAsDirty();
+                  });
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
