@@ -1,7 +1,6 @@
 // Flutter imports:
-
-// Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
@@ -210,10 +209,41 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                                         child: Row(
                                       children: [
                                         if (item.share == '○')
-                                          Icon(
-                                            Icons.person,
-                                            color:
-                                                context.appTheme.primaryColor,
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.person,
+                                              color:
+                                                  context.appTheme.primaryColor,
+                                            ),
+                                            tooltip: '共有URLをコピー',
+                                            onPressed: () async {
+                                              final path = item.pathFile;
+                                              if (path == null ||
+                                                  path.isEmpty) {
+                                                snackBarWidget(
+                                                  message: '共有URLを取得できません',
+                                                  backgroundColor: Colors.red,
+                                                  prefixIcon: const Icon(
+                                                    Icons.error,
+                                                    color: Colors.white,
+                                                  ),
+                                                );
+                                                return;
+                                              }
+                                              final baseUrl =
+                                                  GetIt.I<String>(instanceName: 'fileUrl');
+                                              final shareUrl = '$baseUrl$path';
+                                              await Clipboard.setData(
+                                                ClipboardData(text: shareUrl),
+                                              );
+                                              snackBarWidget(
+                                                message: '共有URLをコピーしました',
+                                                prefixIcon: const Icon(
+                                                  Icons.check_circle,
+                                                  color: Colors.white,
+                                                ),
+                                              );
+                                            },
                                           ),
                                       ],
                                     )),
