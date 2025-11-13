@@ -9,6 +9,7 @@ import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
@@ -18,6 +19,7 @@ class BillingModel {
   });
 
   final PatientRepository patientRepository;
+  final NumberFormat _amountFormatter = NumberFormat('#,##0', 'ja_JP');
 
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier(const AsyncData());
@@ -70,7 +72,9 @@ class BillingModel {
                 ),
                 'hospitalName':
                     FormControl<String>(value: element.hospitalName),
-                'amount': FormControl<String>(value: element.amount),
+                'amount': FormControl<String>(
+                  value: _formatAmountDisplay(element.amount),
+                ),
                 'file': FormControl<FileSelect>(
                   value: element.file != null
                       ? FileSelect(
@@ -122,7 +126,7 @@ class BillingModel {
           TreatmentCostRequest(
             occurrenceDate: element['occurrenceDate'],
             hospitalName: element['hospitalName'],
-            amount: element['amount'],
+            amount: _sanitizeAmountString(element['amount']),
             file: file,
           ),
         );
@@ -142,5 +146,31 @@ class BillingModel {
       logger.e(e);
       submit.value = AsyncData(error: e);
     }
+  }
+
+  String _formatAmountDisplay(String? amount) {
+    if (amount == null || amount.trim().isEmpty) {
+      return '';
+    }
+    final numericText = amount.replaceAll(RegExp(r'[^0-9]'), '');
+    if (numericText.isEmpty) {
+      return '';
+    }
+    final parsed = int.tryParse(numericText);
+    if (parsed == null) {
+      return numericText;
+    }
+    return _amountFormatter.format(parsed);
+  }
+
+  String? _sanitizeAmountString(dynamic amount) {
+    if (amount == null) {
+      return null;
+    }
+    final numericText = amount.toString().replaceAll(RegExp(r'[^0-9]'), '');
+    if (numericText.isEmpty) {
+      return null;
+    }
+    return numericText;
   }
 }
