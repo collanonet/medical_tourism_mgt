@@ -726,92 +726,79 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(left: 16),
-                                          child: Text(
-                                            'オンライン診療', //
+                                    const SizedBox(width: 24),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text('オンライン診療'),
+                                          Row(
+                                            children: [
+                                              IntrinsicWidth(
+                                                child: ReactiveRadioListTile(
+                                                  formControlName: 'onlineCheck',
+                                                  value: '可',
+                                                  title: Text(
+                                                    '可',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ),
+                                              ),
+                                              IntrinsicWidth(
+                                                child: ReactiveRadioListTile(
+                                                  formControlName: 'onlineCheck',
+                                                  value: '不可',
+                                                  title: Text(
+                                                    '不可',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'onlineCheck',
-                                                value: '可',
-                                                title: Text(
-                                                  '可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                              ),
-                                            ),
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'onlineCheck',
-                                                value: '不可',
-                                                title: Text(
-                                                  '不可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(left: 18),
-                                          child: Text(
-                                            '医師の指名', //
+                                    const SizedBox(width: 24),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text('医師の指名'),
+                                          Row(
+                                            children: [
+                                              IntrinsicWidth(
+                                                child: ReactiveRadioListTile(
+                                                  formControlName: 'appointment',
+                                                  value: '可',
+                                                  onChanged: (value) {},
+                                                  title: Text(
+                                                    '可',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ),
+                                              ),
+                                              IntrinsicWidth(
+                                                child: ReactiveRadioListTile(
+                                                  formControlName: 'appointment',
+                                                  value: '不可',
+                                                  onChanged: (value) {},
+                                                  title: Text(
+                                                    '不可',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'appointment',
-                                                value: '可',
-                                                onChanged: (value) {},
-                                                title: Text(
-                                                  '可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                              ),
-                                            ),
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'appointment',
-                                                value: '不可',
-                                                onChanged: (value) {},
-                                                title: Text(
-                                                  '不可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
