@@ -317,7 +317,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                   ),
                   SizedBox(width: context.appTheme.spacing.marginMedium),
                   SizedBox(
-                    width: 160,
+                    width: 240,
                     child: Text(
                       '完了日',
                       style: Theme.of(context).textTheme.bodySmall,

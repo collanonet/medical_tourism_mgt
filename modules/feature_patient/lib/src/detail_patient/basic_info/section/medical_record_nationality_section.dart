@@ -76,43 +76,22 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              child: ReactiveTextField(
-                                formControlName: 'nativeLanguage',
-                                decoration: const InputDecoration(
-                                  label: Text(
-                                    '母国語', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Expanded(child: SizedBox())
-                          ],
-                        ),
-                        RowSeparated(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(
-                              width: context.appTheme.spacing.marginMedium,
-                            );
-                          },
-                          children: [
-                            Expanded(
-                              child: ReactiveTextField(
-                                formControlName: 'residentialArea',
-                                decoration: const InputDecoration(
-                                  label: Text(
-                                    '居住地域', // Todo: l10n (国籍)
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
                               flex: 2,
                               child: ReactiveTextField(
                                 formControlName: 'currentAddress',
                                 decoration: const InputDecoration(
                                   label: Text(
-                                    '住所（つづき）',
+                                    '住所',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: ReactiveTextField(
+                                formControlName: 'nativeLanguage',
+                                decoration: const InputDecoration(
+                                  label: Text(
+                                    '母国語', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                                   ),
                                 ),
                               ),
@@ -226,38 +205,19 @@ class MedicalRecordQrSection extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'nativeLanguage',
-                          decoration: const InputDecoration(
-                            label: Text('母国語'),
-                          ),
-                        ),
-                      ),
-                      const Expanded(child: SizedBox()),
-                    ],
-                  ),
-                  RowSeparated(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      );
-                    },
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'residentialArea',
-                          decoration: const InputDecoration(
-                            label: Text('居住地域'),
-                          ),
-                        ),
-                      ),
-                      Expanded(
                         flex: 2,
                         child: ReactiveTextField(
                           formControlName: 'currentAddress',
                           decoration: const InputDecoration(
-                            label: Text('住所（つづき）'),
+                            label: Text('住所'),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ReactiveTextField(
+                          formControlName: 'nativeLanguage',
+                          decoration: const InputDecoration(
+                            label: Text('母国語'),
                           ),
                         ),
                       ),

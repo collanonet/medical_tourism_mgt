@@ -105,8 +105,6 @@ class BasicInformationModel {
           await createUpdateMedicalRecordCompanions(form);
           await createUpdateMedicalRecordAgents(
               form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
-          await createUpdateMedicalRecordInterpreters(
-              form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
 
           logger.d('createUpdateAll');
           loading.value = const AsyncData(data: true);
@@ -319,8 +317,12 @@ class BasicInformationModel {
     formGroup.control('_id').value = data.id;
     formGroup.control('nationality').value = data.nationality;
     formGroup.control('nativeLanguage').value = data.nativeLanguage;
-    formGroup.control('residentialArea').value = data.residentialArea;
-    formGroup.control('currentAddress').value = data.currentAddress;
+    final combinedAddress = [
+      data.residentialArea,
+      data.currentAddress,
+    ].where((element) => element != null && element!.isNotEmpty).join(' ').trim();
+    formGroup.control('residentialArea').value = combinedAddress;
+    formGroup.control('currentAddress').value = combinedAddress;
     formGroup.control('mobileNumber').value = data.mobileNumber;
     formGroup.control('patient').value = data.patient;
     formGroup.control('email').value = data.email;
@@ -367,11 +369,13 @@ class BasicInformationModel {
       }
     }
 
+    final addressValue = form.control('currentAddress').value ?? '';
+
     PatientNationalityRequest request = PatientNationalityRequest(
       nationality: form.control('nationality').value ?? '',
       nativeLanguage: form.control('nativeLanguage').value ?? '',
-      residentialArea: form.control('residentialArea').value ?? '',
-      currentAddress: form.control('currentAddress').value ?? '',
+      residentialArea: addressValue,
+      currentAddress: addressValue,
       mobileNumber: form.control('mobileNumber').value,
       email: form.control('email').value,
       chatQrImage: file,
@@ -560,11 +564,6 @@ class BasicInformationModel {
         formGroup: formGroup,
       );
       getMedicalRecordReferrers(
-        medicalRecordId: medicalRecordId.value.requireData,
-        formGroup: formGroup,
-      );
-
-      getMedicalRecordInterpreters(
         medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
@@ -1390,88 +1389,6 @@ class BasicInformationModel {
       logger.d(error);
       medicalRecordHospitals.value = AsyncData(error: error);
     });
-  }
-
-// //GET_MEDICAL_RECORD_INTERPRETERS
-  ValueNotifier<AsyncData<MedicalRecordInterpreter>> medicalRecordInterpreters =
-      ValueNotifier(
-    const AsyncData(),
-  );
-
-  Future<void> getMedicalRecordInterpreters({
-    required String medicalRecordId,
-    required FormGroup formGroup,
-  }) async {
-    medicalRecordInterpreters.value = const AsyncData(loading: true);
-
-    await patientRepository
-        .medicalRecordInterpretersByMedicalRecord(medicalRecordId)
-        .then((value) {
-      medicalRecordInterpreters.value = AsyncData(data: value.firstOrNull);
-      insertMedicalRecordInterpreters(
-        data: value.firstOrNull,
-        formGroup: formGroup.control('MEDICAL_RECORD_Interpreter') as FormGroup,
-      );
-    }).catchError((error) {
-      logger.d(error);
-      medicalRecordInterpreters.value = AsyncData(error: error);
-    });
-  }
-
-  void insertMedicalRecordInterpreters({
-    MedicalRecordInterpreter? data,
-    required FormGroup formGroup,
-  }) {
-    formGroup.control('_id').value = data?.id;
-    formGroup.control('requiredOrUnnnecessary').value =
-        data?.requiredOrUnnnecessary == true ? '要' : '不要';
-    formGroup.control('interpreter').value = data?.interpreter;
-  }
-
-  // post MEDICAL_RECORD_INTERPRETERS
-  Future<void> postMedicalRecordInterpreters(
-    MedicalRecordInterpreterRequest medicalRecordInterpreterRequest,
-  ) async {
-    await patientRepository
-        .postMedicalRecordInterpreter(medicalRecordInterpreterRequest)
-        .then((value) {
-      medicalRecordInterpreters.value = AsyncData(data: value);
-    }).catchError((error) {
-      logger.d(error);
-      medicalRecordInterpreters.value = AsyncData(error: error);
-    });
-  }
-
-  // update MEDICAL_RECORD_INTERPRETERS
-  Future<void> updateMedicalRecordInterpreters(
-    String id,
-    MedicalRecordInterpreterRequest medicalRecordInterpreterRequest,
-  ) async {
-    await patientRepository
-        .putMedicalRecordInterpreter(id, medicalRecordInterpreterRequest)
-        .then((value) {
-      medicalRecordInterpreters.value = AsyncData(data: value);
-    }).catchError((error) {
-      logger.d(error);
-      medicalRecordInterpreters.value = AsyncData(error: error);
-    });
-  }
-
-  Future<void> createUpdateMedicalRecordInterpreters(FormGroup control) async {
-    medicalRecordInterpreters.value = const AsyncData(loading: true);
-    MedicalRecordInterpreterRequest request = MedicalRecordInterpreterRequest(
-      requiredOrUnnnecessary:
-          control.control('requiredOrUnnnecessary').value == '要' ? true : false,
-      interpreter: control.control('interpreter').value,
-      medicalRecord: medicalRecordId.value.requireData,
-    );
-
-    if (control.control('_id').value != null) {
-      await updateMedicalRecordInterpreters(
-          control.control('_id').value, request);
-    } else {
-      await postMedicalRecordInterpreters(request);
-    }
   }
 
   ValueNotifier<AsyncData<MedicalRecordTravelGroup>> medicalRecordTravelGroups =

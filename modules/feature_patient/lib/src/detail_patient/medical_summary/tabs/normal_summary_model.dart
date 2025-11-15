@@ -1,5 +1,6 @@
 // Dart imports:
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 // Flutter imports:
@@ -10,8 +11,8 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 import 'package:intl/intl.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
 import '../utils/summary_html_builder.dart';
@@ -302,16 +303,33 @@ class NormalSummaryModel {
   }) async {
     try {
       final htmlContent = buildSummaryHtml(summary);
-      final docBytes = Uint8List.fromList(utf8.encode(htmlContent));
-      final fileBaseName = DateFormat('yyyyMMdd_HHmm').format(timestamp);
+      final pdfResult = await generatePdfFromHtml(htmlContent);
+
+      if (pdfResult == null) {
+        throw Exception('PDFの生成に失敗しました');
+      }
+
+      Uint8List fileBytes;
+      if (pdfResult is Uint8List) {
+        fileBytes = pdfResult;
+      } else if (pdfResult is String) {
+        fileBytes = await File(pdfResult).readAsBytes();
+      } else {
+        throw Exception('PDFデータの取得に失敗しました');
+      }
+
+      final localTimestamp = timestamp.toLocal();
+      final fileBaseName =
+          DateFormat('yyyyMMdd_HHmmss_SSS').format(localTimestamp);
       final uploadResponse = await patientRepository.uploadFileBase64(
-        base64Encode(docBytes),
-        'summary_history_$fileBaseName.doc',
+        base64Encode(fileBytes),
+        'summary_history_$fileBaseName.pdf',
       );
-      final displayDate = DateFormat('yyyy/MM/dd HH:mm').format(timestamp);
+      final displayDate = DateFormat('yyyy/MM/dd HH:mm').format(localTimestamp);
+      final versionLabel = '「$displayDate」バージョン';
       final request = MedicalRecordFileSummaryRequest(
         pathFile: uploadResponse.filename,
-        documentName: '診療サマリー $displayDate$suffix',
+        documentName: '診療サマリー $versionLabel$suffix（PDF）',
         publicationDate: timestamp,
         share: '○',
         disclosureToAgent: '○',

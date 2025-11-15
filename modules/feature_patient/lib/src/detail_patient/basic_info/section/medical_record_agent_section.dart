@@ -70,7 +70,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                             formControlName: 'company',
                             decoration: const InputDecoration(
                               label: Text(
-                                '企業', // Todo: l10n (国籍)
+                                'エージェント企業名（任意）',
                               ),
                             ),
                           ),
@@ -80,7 +80,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                             formControlName: 'nameInKanji',
                             decoration: const InputDecoration(
                               label: Text(
-                                '氏名（漢字）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                '担当者',
                               ),
                             ),
                           ),

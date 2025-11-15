@@ -159,9 +159,9 @@ FormGroup basicInfoForm({
         }),
         'MEDICAL_RECORD_AGENTS': FormGroup({
           '_id': FormControl<String?>(),
-          'company': FormControl<String?>(value: '', validators: [
-            Validators.required,
-          ]),
+          'company': FormControl<String?>(
+            value: '',
+          ),
           'nameInKanji': FormControl<String?>(
             value: '',
           ),
@@ -180,11 +180,6 @@ FormGroup basicInfoForm({
           'nameInKana': FormControl<String?>(
             value: '',
           ),
-        }),
-        'MEDICAL_RECORD_Interpreter': FormGroup({
-          '_id': FormControl<String?>(),
-          'requiredOrUnnnecessary': FormControl<String>(),
-          'interpreter': FormControl<String>(),
         }),
         'PATIENT_PASSPORTS': FormGroup({
           '_id': FormControl<String?>(),
