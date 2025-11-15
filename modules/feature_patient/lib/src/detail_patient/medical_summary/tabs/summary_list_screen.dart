@@ -23,30 +23,10 @@ class SummaryListScreen extends StatefulWidget {
 class _SummaryListScreenState extends State<SummaryListScreen> {
   ValueNotifier<List<String>> selected = ValueNotifier([]);
 
-  Future<void> _showExportFormatDialog(BuildContext context) async {
-    final model = context.read<SummaryListModel>();
-    final format = await showDialog<SummaryExportFormat>(
-      context: context,
-      builder: (context) => SimpleDialog(
-        title: const Text('出力形式を選択'),
-        children: [
-          SimpleDialogOption(
-            onPressed: () =>
-                Navigator.of(context).pop(SummaryExportFormat.word),
-            child: const Text('Word (.doc)'),
-          ),
-          SimpleDialogOption(
-            onPressed: () =>
-                Navigator.of(context).pop(SummaryExportFormat.pdf),
-            child: const Text('PDF (.pdf)'),
-          ),
-        ],
-      ),
-    );
-
-    if (format != null) {
-      await model.exportSummary(format: format);
-    }
+  Future<void> _exportWord(BuildContext context) async {
+    await context
+        .read<SummaryListModel>()
+        .exportSummary(format: SummaryExportFormat.word);
   }
 
   @override
@@ -95,10 +75,14 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                           style: context.textTheme.bodySmall,
                         )),
                         Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
                             child: Text(
-                          '発行日',
-                          style: context.textTheme.bodySmall,
-                        )),
+                              '発行日',
+                              style: context.textTheme.bodySmall,
+                            ),
+                          ),
+                        ),
                         Expanded(
                             child: Text(
                           '共有',
@@ -200,10 +184,16 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                                       ],
                                     )),
                                     Expanded(
-                                      child: Text(item.publicationDate == null
-                                          ? ''
-                                          : Dates.formShortDate(
-                                              item.publicationDate)),
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          item.publicationDate == null
+                                              ? ''
+                                              : Dates.formShortDate(
+                                                  item.publicationDate),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
                                     ),
                                     Expanded(
                                         child: Row(
@@ -467,12 +457,12 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                           onPressed: value.loading
                               ? null
                               : () {
-                                  _showExportFormatDialog(context);
+                                  _exportWord(context);
                                 },
                           child: WithLoadingButton(
                             isLoading: value.loading,
                             child: const Text(
-                              '出力する',
+                              'Word出力',
                               style: TextStyle(
                                 fontFamily: 'NotoSansJP',
                                 package: 'core_ui',

@@ -88,9 +88,10 @@ class SummaryListModel {
       final summary = await _getMedicalRecordSummary();
       final htmlContent = buildSummaryHtml(summary);
 
-      final now = DateTime.now();
-      final timestamp = DateFormat('yyyyMMdd_HHmm').format(now);
-      final documentName = '診療サマリー_$timestamp';
+      final now = DateTime.now().toLocal();
+      final timestamp = DateFormat('yyyyMMdd_HHmmss_SSS').format(now);
+      final displayDate = DateFormat('yyyy/MM/dd HH:mm').format(now);
+      final versionLabel = '「$displayDate」バージョン';
 
       Uint8List fileBytes;
       String fileExtension;
@@ -121,7 +122,7 @@ class SummaryListModel {
       final request = MedicalRecordFileSummaryRequest(
         pathFile: uploadResponse.filename,
         documentName:
-            '$documentName (${format == SummaryExportFormat.pdf ? 'PDF' : 'Word'})',
+            '診療サマリー $versionLabel（${format == SummaryExportFormat.pdf ? 'PDF' : 'Word'}）',
         publicationDate: now,
         share: '○',
         disclosureToAgent: '○',
