@@ -24,6 +24,60 @@ class BasicInfoSection extends StatefulWidget {
 class _BasicInfoSectionState extends State<BasicInfoSection> {
   final formatter = InputFormatter();
 
+  Future<void> _generateQrCode(FormGroup formGroup) async {
+    final link = formGroup.control('googleMap').value as String?;
+    if (link == null || link.trim().isEmpty) {
+      snackBarWidget(
+        message: 'GoogleMapリンクを入力してください',
+        backgroundColor: Colors.red,
+        prefixIcon: const Icon(
+          Icons.error,
+          color: Colors.white,
+        ),
+      );
+      return;
+    }
+
+    final uri = Uri.tryParse(link.trim());
+    if (uri == null ||
+        !(uri.scheme.toLowerCase() == 'http' ||
+            uri.scheme.toLowerCase() == 'https')) {
+      snackBarWidget(
+        message: '有効なURLを入力してください',
+        backgroundColor: Colors.red,
+        prefixIcon: const Icon(
+          Icons.error,
+          color: Colors.white,
+        ),
+      );
+      return;
+    }
+
+    final qrUrl =
+        'https://quickchart.io/qr?text=${Uri.encodeComponent(link.trim())}&size=400';
+
+    try {
+      await openLinkInBrowser(url: qrUrl);
+      snackBarWidget(
+        message: '新しいタブでQRコードを開きました',
+        prefixIcon: const Icon(
+          Icons.check_circle,
+          color: Colors.white,
+        ),
+      );
+    } catch (e) {
+      logger.e('Failed to open QR code: $e');
+      snackBarWidget(
+        message: 'QRコードを開けませんでした',
+        backgroundColor: Colors.red,
+        prefixIcon: const Icon(
+          Icons.error,
+          color: Colors.white,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup)
@@ -166,7 +220,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               ElevatedButton(
-                                  onPressed: () async {},
+                                  onPressed: () => _generateQrCode(formGroup),
                                   child: const Text('QR コードを生成'))
                             ],
                           ),
