@@ -584,17 +584,32 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                 ReactiveValueListenableBuilder<FileSelect>(
                                     formControlName: 'fileDoctor',
                                     builder: (context, control, _) {
+                                      final file = control.value;
                                       return InkWell(
                                         onTap: () {
-                                          if (control.value?.url != null) {
-                                            openUrlInBrowser(
-                                                fileName: control.value!.url!);
+                                          final url = file?.url;
+                                          if (url != null && url.isNotEmpty) {
+                                            openUrlInBrowser(fileName: url);
+                                          } else if (file?.file != null &&
+                                              file?.filename != null) {
+                                            downloadFile(
+                                              fileName:
+                                                  file!.filename ?? 'file',
+                                              downloadName:
+                                                  file.filename ?? 'file',
+                                            );
                                           }
                                         },
                                         child: Text(
-                                          control.value?.filename ??
-                                              'File Input .....',
-                                          style: context.textTheme.bodySmall,
+                                          file == null
+                                              ? 'File Input .....'
+                                              : file.url != null
+                                                  ? file.url!
+                                                  : file.filename ??
+                                                      'File Input .....',
+                                          style: context.textTheme.bodySmall
+                                              ?.copyWith(
+                                                  color: Colors.lightBlue),
                                         ),
                                       );
                                     }),
