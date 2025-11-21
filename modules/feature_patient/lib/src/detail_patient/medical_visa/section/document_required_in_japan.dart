@@ -17,7 +17,7 @@ class DocumentRequired extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('日本で必要な書類', style: context.textTheme.titleMedium),
+        Text('医療ビザ申請書類（身元保証書・治療計画書など）', style: context.textTheme.titleMedium),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,
         ),
@@ -61,95 +61,84 @@ class DocumentRequired extends StatelessWidget {
                                   height: context.appTheme.spacing.marginMedium,
                                 ),
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.start,
                                   children: [
-                                    const Expanded(child: Text('身元保証書')),
-                                    // SizedBox(
-                                    //   width:
-                                    //       context.appTheme.spacing.marginMedium,
-                                    // ),
-                                    const IntrinsicWidth(
+                                    const Row(
+                                      children: [
+                                        Text('身元保証書'),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        IntrinsicWidth(
                                       stepWidth: 200,
                                       child: ReactiveDatePickerField(
                                         formControlName:
                                             'letterOfGuaranteeDate',
                                       ),
                                     ),
-                                    // SizedBox(
-                                    //   width:
-                                    //       context.appTheme.spacing.marginMedium,
-                                    // ),
-                                    SizedBox(
-                                      width: 600,
-                                      child: Row(
+                                      ],
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          Expanded(
-                                            child: ReactiveRadioListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
+                                          ReactiveRadio(
                                               value: 'true',
                                               formControlName: 'sendBy',
-                                              title: const Text('原本送付'),
                                             ),
-                                          ),
+                                          const SizedBox(width: 5),
+                                          const Text('原本送付'),
+                                          const SizedBox(width: 5),
                                           const Text('（'),
-                                          Expanded(
-                                            child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
+                                          ReactiveCheckbox(
                                               formControlName: 'byEMS',
-                                              title: const Text('EMS'),
-                                            ),
                                           ),
-                                          Expanded(
-                                            child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
+                                          const SizedBox(width: 2),
+                                          const Text('EMS'),
+                                          const SizedBox(width: 4),
+                                          ReactiveCheckbox(
                                               formControlName: 'byFedex',
-                                              title: const Text('Fedex'),
-                                            ),
                                           ),
-                                          Expanded(
-                                            child: ReactiveCheckboxListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
+                                          const SizedBox(width: 2),
+                                          const Text('Fedex'),
+                                          const SizedBox(width: 4),
+                                          ReactiveCheckbox(
                                               formControlName: 'byOthers',
-                                              title: const Text('その他'),
                                             ),
-                                          ),
-                                          const Text('）'),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
-                                            child: ReactiveRadioListTile(
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              contentPadding: EdgeInsets.zero,
+                                            const SizedBox(width: 2),
+                                            const Text('その他'),
+                                            const SizedBox(width: 12),
+                                            const Text('備考欄　：　'),
+                                            SizedBox(
+                                              width: 250,
+                                              child: ReactiveTextField(
+                                                formControlName: 'byOthersRemarks',
+                                                decoration: const InputDecoration(
+                                                  hintText: '',
+                                                  contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                                                  isDense: true,
+                                                  border: UnderlineInputBorder(),
+                                                  enabledBorder: UnderlineInputBorder(),
+                                                  focusedBorder: UnderlineInputBorder(),
+                                                  disabledBorder: UnderlineInputBorder(),
+                                                ),
+                                              ),
+                                            ),
+                                          const Text('　）'),
+                                          const SizedBox(width: 8),
+                                          ReactiveRadio(
                                               value: 'false',
                                               formControlName: 'sendBy',
-                                              title: const Text('PDF送付'),
-                                            ),
                                           ),
+                                          const SizedBox(width: 2),
+                                          const Text('PDF送付'),
                                         ],
                                       ),
-                                    ),
-                                    // SizedBox(
-                                    //   width:
-                                    //       context.appTheme.spacing.marginMedium,
-                                    // ),
+                                    const Spacer(),
                                     SizedBox(
                                       width: 200,
                                       child: ColumnSeparated(
@@ -261,8 +250,6 @@ class DocumentRequired extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    // fileUpload(context, currentForm,
-                                    //       'letterOfGuaranteeFileSelect'),
                                   ],
                                 ),
                               ],
@@ -310,6 +297,7 @@ class DocumentRequired extends StatelessWidget {
                               'byEMS': FormControl<bool>(value: false),
                               'byFedex': FormControl<bool>(value: false),
                               'byOthers': FormControl<bool>(value: false),
+                              'byOthersRemarks': FormControl<String>(value: ''),
                             },
                           ),
                         ),
@@ -343,7 +331,7 @@ class DocumentRequired extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               ReactiveFormArray(
-                formArrayName: 'schedule',
+                formArrayName: 'otherApplicationDocuments',
                 builder: (context, formArray, _) {
                   final rows = formArray.controls
                       .map((control) => control as FormGroup)
@@ -354,20 +342,19 @@ class DocumentRequired extends StatelessWidget {
                               children: [
                                 const Row(
                                   children: [
-                                    Text('治療予定表'),
+                                    Text('その他申請書類'),
                                     SizedBox(
                                       width: 150,
                                     ),
                                     IntrinsicWidth(
                                       stepWidth: 200,
                                       child: ReactiveDatePickerField(
-                                        formControlName: 'treatmentSchedule',
+                                        formControlName: 'date',
                                       ),
                                     ),
                                   ],
                                 ),
-                                fileUpload(context, currentForm,
-                                    'treatmentScheduleFileSelect'),
+                                fileUpload(context, currentForm, 'fileSelect'),
                               ],
                             ),
                           ))
@@ -389,20 +376,14 @@ class DocumentRequired extends StatelessWidget {
                       InkWell(
                         onTap: () => formArray.add(FormGroup(
                           {
-                            'treatmentSchedule': FormControl<DateTime>(
+                            'date': FormControl<DateTime>(
                               validators: [
                                 Validators.pattern(
                                   ValidatorRegExp.date,
                                 ),
                               ],
                             ),
-                            'statementOfReasonsDate': FormControl<DateTime>(
-                              validators: [
-                                Validators.pattern(
-                                  ValidatorRegExp.date,
-                                ),
-                              ],
-                            ),
+                            'fileSelect': FormControl<FileSelect>(),
                           },
                         )),
                         child: Row(
@@ -418,7 +399,7 @@ class DocumentRequired extends StatelessWidget {
                               width: context.appTheme.spacing.marginSmall,
                             ),
                             Text(
-                              '治療予定表を追加',
+                              'その他申請書類を追加',
                               style: TextStyle(
                                   fontFamily: 'NotoSansJP',
                                   package: 'core_ui',
@@ -435,59 +416,38 @@ class DocumentRequired extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Row(
-                    children: [
-                      Text('理由書'),
-                      SizedBox(
-                        width: 178,
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'paymentStatus',
+                      decoration: const InputDecoration(
+                        label: Text('入金状況'),
                       ),
-                      IntrinsicWidth(
-                        stepWidth: 200,
-                        child: ReactiveDatePickerField(
-                          formControlName: 'statementOfReasonsDate',
-                        ),
-                      ),
-                    ],
-                  ),
-                  fileUpload(
-                      context,
-                      formGroup.control('requiredInJapan') as FormGroup,
-                      'statementOfReasonsFileSelect'),
-                ],
+                    ),
               ),
               SizedBox(
-                height: context.appTheme.spacing.marginMedium,
+                    width: context.appTheme.spacing.marginMedium,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Row(
-                    children: [
-                      Text('同行者リスト'),
-                      SizedBox(
-                        width: 135,
-                      ),
-                      IntrinsicWidth(
-                        stepWidth: 200,
-                        child: ReactiveDatePickerField(
-                          formControlName: 'travelCompanionListDate',
-                        ),
-                      ),
-                    ],
+                  Expanded(
+                    child: SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
                   ),
-                  fileUpload(
-                      context,
-                      formGroup.control('requiredInJapan') as FormGroup,
-                      'travelCompanionListFileSelect'),
                 ],
               ),
               SizedBox(
                 height: context.appTheme.spacing.marginMedium,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    '出入国情報',
+                    style: context.textTheme.titleMedium,
+                  ),
+                  SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
                   ReactiveFormArray(
                     formArrayName: 'travelInfo',
                     builder: (context, formArray, _) {
@@ -593,6 +553,58 @@ class DocumentRequired extends StatelessWidget {
                                                             .marginMedium,
                                                       ),
                                                     )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    const Expanded(
+                                                      child: ReactiveDatePickerField(
+                                                        formControlName: 'landingPermitDate',
+                                                        label: '上陸許可証',
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: fileUpload(
+                                                        context,
+                                                        currentForm,
+                                                        'landingPermitFileSelect',
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    const Expanded(
+                                                      child: ReactiveDatePickerField(
+                                                        formControlName: 'returnFlightTicketDate',
+                                                        label: '帰国時の飛行機のチケット',
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: fileUpload(
+                                                        context,
+                                                        currentForm,
+                                                        'returnFlightTicketFileSelect',
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                                 SizedBox(
@@ -927,6 +939,22 @@ class DocumentRequired extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                                  'landingPermitDate': FormControl<DateTime>(
+                                    validators: [
+                                      Validators.pattern(
+                                        ValidatorRegExp.date,
+                                      ),
+                                    ],
+                                  ),
+                                  'landingPermitFileSelect': FormControl<FileSelect>(),
+                                  'returnFlightTicketDate': FormControl<DateTime>(
+                                    validators: [
+                                      Validators.pattern(
+                                        ValidatorRegExp.date,
+                                      ),
+                                    ],
+                                  ),
+                                  'returnFlightTicketFileSelect': FormControl<FileSelect>(),
 
                                   // 入国 hand in
                                   'departureIn': FormControl<String>(value: ''),

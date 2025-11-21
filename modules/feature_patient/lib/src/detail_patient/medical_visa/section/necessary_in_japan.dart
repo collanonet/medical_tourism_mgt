@@ -341,7 +341,7 @@ class NecessaryInJapan extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               ReactiveFormArray(
-                formArrayName: 'schedule',
+                formArrayName: 'otherApplicationDocuments',
                 builder: (context, formArray, _) {
                   final rows = formArray.controls
                       .map((control) => control as FormGroup)
@@ -352,20 +352,19 @@ class NecessaryInJapan extends StatelessWidget {
                               children: [
                                 const Row(
                                   children: [
-                                    Text('治療予定表'),
+                                    Text('その他申請書類'),
                                     SizedBox(
-                                      width: 150,
+                                      width: 120,
                                     ),
                                     IntrinsicWidth(
                                       stepWidth: 200,
                                       child: ReactiveDatePickerField(
-                                        formControlName: 'treatmentSchedule',
+                                        formControlName: 'date',
                                       ),
                                     ),
                                   ],
                                 ),
-                                fileUpload(context, currentForm,
-                                    'treatmentScheduleFileSelect'),
+                                fileUpload(context, currentForm, 'fileSelect'),
                               ],
                             ),
                           ))
@@ -388,15 +387,14 @@ class NecessaryInJapan extends StatelessWidget {
                         onTap: () => formArray.add(
                           FormGroup(
                             {
-                              'treatmentSchedule': FormControl<DateTime>(
+                              'date': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
                                     ValidatorRegExp.date,
                                   ),
                                 ],
                               ),
-                              'treatmentScheduleFileSelect':
-                                  FormControl<FileSelect>(),
+                              'fileSelect': FormControl<FileSelect>(),
                             },
                           ),
                         ),
@@ -413,7 +411,7 @@ class NecessaryInJapan extends StatelessWidget {
                               width: context.appTheme.spacing.marginSmall,
                             ),
                             Text(
-                              '治療予定表を追加',
+                              'その他申請書類を追加',
                               style: TextStyle(
                                   fontFamily: 'NotoSansJP',
                                   package: 'core_ui',
@@ -425,58 +423,6 @@ class NecessaryInJapan extends StatelessWidget {
                     ],
                   );
                 },
-              ),
-              SizedBox(
-                height: context.appTheme.spacing.marginMedium,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Row(
-                    children: [
-                      Text('理由書'),
-                      SizedBox(
-                        width: 175,
-                      ),
-                      IntrinsicWidth(
-                        stepWidth: 200,
-                        child: ReactiveDatePickerField(
-                          formControlName: 'statementOfReasonsDate',
-                        ),
-                      ),
-                    ],
-                  ),
-                  fileUpload(
-                      context,
-                      formGroup.control('necessaryInJapan') as FormGroup,
-                      'statementOfReasonsFileSelect'),
-                ],
-              ),
-              SizedBox(
-                height: context.appTheme.spacing.marginMedium,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Row(
-                    children: [
-                      Text('同行者リスト'),
-                      SizedBox(
-                        width: 135,
-                      ),
-                      IntrinsicWidth(
-                        stepWidth: 200,
-                        child: ReactiveDatePickerField(
-                          formControlName: 'travelCompanionListDate',
-                        ),
-                      ),
-                    ],
-                  ),
-                  fileUpload(
-                      context,
-                      formGroup.control('necessaryInJapan') as FormGroup,
-                      'travelCompanionListFileSelect'),
-                ],
               ),
               SizedBox(
                 height: context.appTheme.spacing.marginMedium,

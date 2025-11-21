@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -151,25 +152,24 @@ class YourVisa extends StatelessWidget {
                                               .appTheme.spacing.marginMedium,
                                         ),
                                         Expanded(
-                                          child: ReactiveTextField(
-                                            formControlName: 'paymentStatus',
-                                            decoration: const InputDecoration(
-                                              label: Text(
-                                                '入金状況',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        ),
-                                        Expanded(
                                           child: SizedBox(
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
                                         ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text('ビザのページ'),
+                                        fileUpload(context, currentForm,
+                                            'visaPageFileName'),
                                       ],
                                     ),
                                   ],
@@ -250,7 +250,7 @@ class YourVisa extends StatelessWidget {
                         'visaIssuingOverseasEstablishments':
                             FormControl<String>(value: ''),
                         'remarks': FormControl<String>(value: ''),
-                        'paymentStatus': FormControl<String>(value: ''),
+                        'visaPageFileName': FormControl<FileSelect>(),
                       },
                     ),
                   ),
@@ -280,6 +280,76 @@ class YourVisa extends StatelessWidget {
             );
           },
         ),
+      ],
+    );
+  }
+
+  Widget fileUpload(
+      BuildContext context, FormGroup currentForm, String fileName) {
+    return ColumnSeparated(
+      mainAxisAlignment: MainAxisAlignment.start,
+      separatorBuilder: (context, index) => SizedBox(
+        height: context.appTheme.spacing.formSpacing,
+      ),
+      children: [
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          separatorBuilder: (context, index) => SizedBox(
+            width: context.appTheme.spacing.formSpacing,
+          ),
+          children: [
+            RowSeparated(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              separatorBuilder: (context, index) => SizedBox(
+                width: context.appTheme.spacing.marginExtraSmall,
+              ),
+              children: [
+                ReactiveValueListenableBuilder<FileSelect>(
+                  formControlName: fileName,
+                  builder: (context, control, _) {
+                    return InkWell(
+                      onTap: () {
+                        if (control.value != null) {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: PreviewFile(fileSelect: control.value!),
+                            ),
+                          );
+                        }
+                      },
+                      child: Text(
+                        control.value?.url ??
+                            control.value?.filename ??
+                            'File Name',
+                        style: context.textTheme.bodySmall,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: () {
+                filePicker().then((value) {
+                  if (value != null) {
+                    currentForm.control(fileName).value = value;
+                    logger.d('Value Not Null');
+                  }
+                });
+              },
+              child: Chip(
+                label: const Text('ファイル選択'),
+                labelStyle: TextStyle(
+                  color: context.appTheme.secondaryBackgroundColor,
+                ),
+                backgroundColor: context.appTheme.primaryColor,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

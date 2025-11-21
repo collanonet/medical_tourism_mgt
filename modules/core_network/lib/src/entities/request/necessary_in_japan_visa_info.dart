@@ -12,6 +12,7 @@ class VisaInfo {
   bool? byEMS;
   bool? byFedex;
   bool? byOthers;
+  String? byOthersRemarks;
 
   VisaInfo({
     this.passportDate,
@@ -22,6 +23,7 @@ class VisaInfo {
     this.byEMS,
     this.byFedex,
     this.byOthers,
+    this.byOthersRemarks,
   });
   factory VisaInfo.fromJson(Map<String, dynamic> json) => _$VisaInfoFromJson(json);
   Map<String, dynamic> toJson() => _$VisaInfoToJson(this);

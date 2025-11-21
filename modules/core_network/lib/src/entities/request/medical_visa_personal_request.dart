@@ -12,6 +12,7 @@ class MedicalVisaPersonalRequest {
   String? visaIssuingOverseasEstablishments;
   String? remarks;
   String? paymentStatus;
+  String? visaPageFileName;
 
   MedicalVisaPersonalRequest({
     this.medicalVisa,
@@ -22,6 +23,7 @@ class MedicalVisaPersonalRequest {
     this.visaIssuingOverseasEstablishments,
     this.remarks,
     this.paymentStatus,
+    this.visaPageFileName,
   });
 
   factory MedicalVisaPersonalRequest.fromJson(Map<String, dynamic> json) => _$MedicalVisaPersonalRequestFromJson(json);
