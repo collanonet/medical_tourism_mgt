@@ -78,6 +78,71 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
     }
   }
 
+  Widget _languageCheckbox(
+    BuildContext context,
+    FormGroup formGroup,
+    String label,
+    String controlName,
+  ) {
+    return IntrinsicWidth(
+      child: ReactiveCheckboxListTile(
+        checkboxShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        contentPadding: EdgeInsets.zero,
+        formControlName: controlName,
+        controlAffinity: ListTileControlAffinity.leading,
+        onChanged: (value) {
+          formGroup.control(controlName).value = value.value == true;
+        },
+        title: Text(
+          label,
+          style: context.textTheme.labelLarge,
+        ),
+      ),
+    );
+  }
+
+  Widget _radioGroup(
+    BuildContext context, {
+    required String title,
+    required String formControl,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title),
+        Wrap(
+          spacing: context.appTheme.spacing.marginSmall,
+          children: [
+            SizedBox(
+              width: 120,
+              child: ReactiveRadioListTile(
+                formControlName: formControl,
+                value: '可',
+                title: Text(
+                  '可',
+                  style: context.textTheme.bodySmall,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 120,
+              child: ReactiveRadioListTile(
+                formControlName: formControl,
+                value: '不可',
+                title: Text(
+                  '不可',
+                  style: context.textTheme.bodySmall,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup)
@@ -579,190 +644,48 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               ),
                             ],
                           ),
-                          Row(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            '日本語以外に提出可能なサマリーの言語', //
-                                          ),
-                                          RowSeparated(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            separatorBuilder:
-                                                (BuildContext context,
-                                                    int index) {
-                                              return SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              );
-                                            },
-                                            children: <Widget>[
-                                              IntrinsicWidth(
-                                                child: ReactiveCheckboxListTile(
-                                                  checkboxShape:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                  contentPadding:
-                                                      EdgeInsets.zero,
-                                                  formControlName: 'english',
-                                                  controlAffinity:
-                                                      ListTileControlAffinity
-                                                          .leading,
-                                                  onChanged: (value) {
-                                                    formGroup
-                                                            .control('english')
-                                                            .value =
-                                                        value.value == true;
-                                                  },
-                                                  title: Text('英語',
-                                                      style: context.textTheme
-                                                          .labelLarge),
-                                                ),
-                                              ),
-                                              IntrinsicWidth(
-                                                child: ReactiveCheckboxListTile(
-                                                  checkboxShape:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                  contentPadding:
-                                                      EdgeInsets.zero,
-                                                  formControlName: 'chinese',
-                                                  controlAffinity:
-                                                      ListTileControlAffinity
-                                                          .leading,
-                                                  onChanged: (value) {
-                                                    formGroup
-                                                            .control('chinese')
-                                                            .value =
-                                                        value.value == true;
-                                                  },
-                                                  title: Text('中国語',
-                                                      style: context.textTheme
-                                                          .labelLarge),
-                                                ),
-                                              ),
-                                              IntrinsicWidth(
-                                                child: ReactiveCheckboxListTile(
-                                                  checkboxShape:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                  contentPadding:
-                                                      EdgeInsets.zero,
-                                                  formControlName: 'vietnamese',
-                                                  controlAffinity:
-                                                      ListTileControlAffinity
-                                                          .leading,
-                                                  onChanged: (value) {
-                                                    formGroup
-                                                        .control('vietnamese')
-                                                        .value = value
-                                                            .value ==
-                                                        true;
-                                                  },
-                                                  title: Text('ベトナム語',
-                                                      style: context.textTheme
-                                                          .labelLarge),
-                                                ),
-                                              ),
-                                              IntrinsicWidth(
-                                                child: ReactiveCheckboxListTile(
-                                                  checkboxShape:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                  contentPadding:
-                                                      EdgeInsets.zero,
-                                                  formControlName:
-                                                      'otherLanguages',
-                                                  controlAffinity:
-                                                      ListTileControlAffinity
-                                                          .leading,
-                                                  onChanged: (value) {
-                                                    formGroup
-                                                        .control(
-                                                            'otherLanguages')
-                                                        .value = value
-                                                            .value ==
-                                                        true;
-                                                  },
-                                                  title: Text('その他の言語',
-                                                      style: context.textTheme
-                                                          .labelLarge),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 120,
-                                                child: ReactiveTextField(
-                                                  formControlName: 'languages',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(left: 16),
-                                          child: Text(
-                                            'オンライン診療', //
-                                          ),
+                                        const Text(
+                                          '日本語以外に提出可能なサマリーの言語',
                                         ),
-                                        Row(
+                                        RowSeparated(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          separatorBuilder:
+                                              (BuildContext context, int index) =>
+                                                  SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
                                           children: [
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'onlineCheck',
-                                                value: '可',
-                                                title: Text(
-                                                  '可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                              ),
-                                            ),
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'onlineCheck',
-                                                value: '不可',
-                                                title: Text(
-                                                  '不可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
+                                            _languageCheckbox(
+                                                context, formGroup, '英語', 'english'),
+                                            _languageCheckbox(context, formGroup,
+                                                '中国語', 'chinese'),
+                                            _languageCheckbox(context, formGroup,
+                                                'ベトナム語', 'vietnamese'),
+                                            _languageCheckbox(context, formGroup,
+                                                'その他の言語', 'otherLanguages'),
+                                            SizedBox(
+                                              width: 120,
+                                              child: ReactiveTextField(
+                                                formControlName: 'languages',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  fillColor: Colors.white,
+                                                  filled: true,
                                                 ),
                                               ),
                                             ),
@@ -770,51 +693,30 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                         ),
                                       ],
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(left: 18),
-                                          child: Text(
-                                            '医師の指名', //
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'appointment',
-                                                value: '可',
-                                                onChanged: (value) {},
-                                                title: Text(
-                                                  '可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                              ),
-                                            ),
-                                            IntrinsicWidth(
-                                              child: ReactiveRadioListTile(
-                                                formControlName: 'appointment',
-                                                value: '不可',
-                                                onChanged: (value) {},
-                                                title: Text(
-                                                  '不可',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                  height:
+                                      context.appTheme.spacing.marginLarge),
+                              ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                separatorBuilder: (context, index) => SizedBox(
+                                  height:
+                                      context.appTheme.spacing.marginSmall,
                                 ),
+                                children: [
+                                  _radioGroup(
+                                    context,
+                                    title: 'オンライン診療',
+                                    formControl: 'onlineCheck',
+                                  ),
+                                  _radioGroup(
+                                    context,
+                                    title: '医師の指名',
+                                    formControl: 'appointment',
+                                  ),
+                                ],
                               ),
                             ],
                           ),
