@@ -36,56 +36,25 @@ class AfterGettingVisa extends StatelessWidget {
                       .map((control) => control as FormGroup)
                       .map((currentForm) => ReactiveForm(
                             formGroup: currentForm,
-                            child: Column(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                const Row(
                                   children: [
-                                    const Row(
-                                      children: [
-                                        Text('ビザのページ'),
-                                        SizedBox(
-                                          width: 140,
-                                        ),
-                                        IntrinsicWidth(
-                                          stepWidth: 200,
-                                          child: ReactiveDatePickerField(
-                                            formControlName: 'visaPage',
-
-                                          ),
-                                        ),
-                                      ],
+                                    Text('上陸許可証'),
+                                    SizedBox(
+                                      width: 150,
                                     ),
-                                    fileUpload(context, currentForm,
-                                        'visaPageFileName'),
+                                    IntrinsicWidth(
+                                      stepWidth: 200,
+                                      child: ReactiveDatePickerField(
+                                        formControlName: 'landingPermit',
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: context.appTheme.spacing.marginMedium,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Row(
-                                      children: [
-                                        Text('上陸許可証'),
-                                        SizedBox(
-                                          width: 150,
-                                        ),
-                                        IntrinsicWidth(
-                                          stepWidth: 200,
-                                          child: ReactiveDatePickerField(
-                                            formControlName: 'landingPermit',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    fileUpload(context, currentForm,
-                                        'landingPermitFileName'),
-                                  ],
-                                ),
+                                fileUpload(context, currentForm,
+                                    'landingPermitFileName'),
                               ],
                             ),
                           ))
@@ -109,14 +78,6 @@ class AfterGettingVisa extends StatelessWidget {
                           formArray.add(
                             FormGroup(
                               {
-                                'visaPage': FormControl<DateTime>(
-                                  validators: [
-                                    Validators.pattern(
-                                      ValidatorRegExp.date,
-                                    ),
-                                  ],
-                                ),
-                                'visaPageFileName': FormControl<FileSelect>(),
                                 'landingPermit': FormControl<DateTime>(
                                   validators: [
                                     Validators.pattern(

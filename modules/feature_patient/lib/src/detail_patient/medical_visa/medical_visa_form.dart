@@ -39,7 +39,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
               'visaIssuingOverseasEstablishments':
                   FormControl<String>(value: ''),
               'remarks': FormControl<String>(value: ''),
-              'paymentStatus': FormControl<String>(value: ''),
+              'visaPageFileName': FormControl<FileSelect>(),
             },
           ),
         ],
@@ -95,6 +95,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
                   'byEMS': FormControl<bool>(value: false),
                   'byFedex': FormControl<bool>(value: false),
                   'byOthers': FormControl<bool>(value: false),
+                  'byOthersRemarks': FormControl<String>(value: ''),
                 },
               ),
             ],
@@ -131,6 +132,23 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
             ],
           ),
           'travelCompanionListFileSelect': FormControl<FileSelect>(),
+          'otherApplicationDocuments': FormArray(
+            [
+              FormGroup(
+                {
+                  'date': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'fileSelect': FormControl<FileSelect>(),
+                },
+              )
+            ],
+          ),
+          'paymentStatus': FormControl<String>(value: ''),
           'travelInfo': FormArray(
             [
               FormGroup(
@@ -163,6 +181,22 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
                       ),
                     ],
                   ),
+                  'landingPermitDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'landingPermitFileSelect': FormControl<FileSelect>(),
+                  'returnFlightTicketDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'returnFlightTicketFileSelect': FormControl<FileSelect>(),
 
                   // 入国 hand in
                   'departureIn': FormControl<String>(value: ''),
@@ -189,6 +223,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
 
       'visaWithdrawal': FormGroup({
         'subjectVisaWithdrawal': FormControl<bool>(value: false),
+        'reason': FormControl<String>(value: ''),
         'deathOrOccurrenceEventDate': FormControl<DateTime>(
           validators: [
             Validators.pattern(
@@ -203,14 +238,6 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
         {
           'vasaInfo': FormArray([
             FormGroup({
-              'visaPage': FormControl<DateTime>(
-                validators: [
-                  Validators.pattern(
-                    ValidatorRegExp.date,
-                  ),
-                ],
-              ),
-              'visaPageFileName': FormControl<FileSelect>(),
               'landingPermit': FormControl<DateTime>(
                 validators: [
                   Validators.pattern(
@@ -308,6 +335,22 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
                       ),
                     ],
                   ),
+                  'landingPermitDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'landingPermitFileSelect': FormControl<FileSelect>(),
+                  'returnFlightTicketDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'returnFlightTicketFileSelect': FormControl<FileSelect>(),
 
                   // 入国 hand in
                   'departureIn': FormControl<String>(value: ''),
@@ -328,8 +371,6 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
             ],
           ),
           'travelRemarks': FormControl<String>(value: ''),
-          'visaWithdrawalTarget': FormControl<bool>(value: false),
-          'reason': FormControl<String>(value: ''),
           'remarks': FormControl<String>(value: ''),
           'vasaInfo': FormArray([
             FormGroup({
@@ -425,6 +466,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
                   'byEMS': FormControl<bool>(value: false),
                   'byFedex': FormControl<bool>(value: false),
                   'byOthers': FormControl<bool>(value: false),
+                  'byOthersRemarks': FormControl<String>(value: ''),
                 },
               ),
             ],
@@ -461,6 +503,24 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
             ],
           ),
           'travelCompanionListFileSelect': FormControl<FileSelect>(),
+          'visaPageFileName': FormControl<FileSelect>(),
+          'otherApplicationDocuments': FormArray(
+            [
+              FormGroup(
+                {
+                  'date': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'fileSelect': FormControl<FileSelect>(),
+                },
+              )
+            ],
+          ),
+          'paymentStatus': FormControl<String>(value: ''),
         },
       ),
 
@@ -534,6 +594,92 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
           'remarks': FormControl<String>(),
         },
       ),
+
+      // ビザの取り下げ・変更情報のタブごとのファイル添付
+      'visaChangeInfo': FormGroup({
+        'tabs': FormArray([
+          // 短期滞在の期間の延長
+          FormGroup({
+            'documents': FormArray([
+              FormGroup({
+                'documentName': FormControl<String>(value: ''),
+                'issueDate': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+                'fileSelect': FormControl<FileSelect>(),
+              }),
+            ]),
+          }),
+          // 特定活動の期間の延長
+          FormGroup({
+            'documents': FormArray([
+              FormGroup({
+                'documentName': FormControl<String>(value: ''),
+                'issueDate': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+                'fileSelect': FormControl<FileSelect>(),
+              }),
+            ]),
+          }),
+          // 短期滞在　医療ビザ→特定活動
+          FormGroup({
+            'documents': FormArray([
+              FormGroup({
+                'documentName': FormControl<String>(value: ''),
+                'issueDate': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+                'fileSelect': FormControl<FileSelect>(),
+              }),
+            ]),
+          }),
+          // 海外での特定活動ビザ変更
+          FormGroup({
+            'documents': FormArray([
+              FormGroup({
+                'documentName': FormControl<String>(value: ''),
+                'issueDate': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+                'fileSelect': FormControl<FileSelect>(),
+              }),
+            ]),
+          }),
+          // 日程変更届
+          FormGroup({
+            'documents': FormArray([
+              FormGroup({
+                'documentName': FormControl<String>(value: ''),
+                'issueDate': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+                'fileSelect': FormControl<FileSelect>(),
+              }),
+            ]),
+          }),
+        ]),
+      }),
     },
   );
 }

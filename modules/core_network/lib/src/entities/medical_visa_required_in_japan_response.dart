@@ -44,6 +44,7 @@ class VisaInfo {
   bool? byEMS;
   bool? byFedex;
   bool? byOthers;
+  String? byOthersRemarks;
 
   VisaInfo({
     this.passportDate,
@@ -54,6 +55,7 @@ class VisaInfo {
     this.byEMS,
     this.byFedex,
     this.byOthers,
+    this.byOthersRemarks,
   });
 
   factory VisaInfo.fromJson(Map<String, dynamic> json) =>
@@ -89,6 +91,10 @@ class TravelInfo {
   DateTime? visaValidityPeriodExpirationDate;
   DateTime? dateOfEntryIntoJapan;
   DateTime? departureDateFromJapan;
+  DateTime? landingPermitDate;
+  String? landingPermitFileSelect;
+  DateTime? returnFlightTicketDate;
+  String? returnFlightTicketFileSelect;
   String? departureIn;
   String? arrivalIn;
   String? flightNumberIn;
@@ -108,6 +114,10 @@ class TravelInfo {
     this.visaValidityPeriodExpirationDate,
     this.dateOfEntryIntoJapan,
     this.departureDateFromJapan,
+    this.landingPermitDate,
+    this.landingPermitFileSelect,
+    this.returnFlightTicketDate,
+    this.returnFlightTicketFileSelect,
     this.departureIn,
     this.arrivalIn,
     this.flightNumberIn,

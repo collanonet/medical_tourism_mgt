@@ -21,35 +21,49 @@ class VisaWithdrawal extends StatelessWidget {
           ),
           ReactiveForm(
             formGroup: formGroup.control('visaWithdrawal') as FormGroup,
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: ReactiveCheckboxListTile(
-                    controlAffinity: ListTileControlAffinity.leading,
-                    contentPadding: EdgeInsets.zero,
-                    formControlName: 'subjectVisaWithdrawal',
-                    title: const Text('ビザ取下対象とする'),
-                  ),
-                ),
-                SizedBox(
-                  width: context.appTheme.spacing.marginMedium,
-                ),
-                const Expanded(
-                  child: ReactiveDatePickerField(
-                    formControlName: 'deathOrOccurrenceEventDate',
-                    label: '死亡日または事由発生日',
-                  ),
-                ),
-                SizedBox(
-                  width: context.appTheme.spacing.marginMedium,
-                ),
-                Expanded(
-                  child: ReactiveTextField(
-                    formControlName: 'remarks',
-                    decoration: const InputDecoration(
-                      label: Text('備考'),
+                Row(
+                  children: [
+                    ReactiveCheckbox(
+                      formControlName: 'subjectVisaWithdrawal',
                     ),
-                  ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    const Text('ビザ取下対象とする'),
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    const Text('理由'),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ReactiveRadio(
+                      value: 'PatientDeath',
+                      formControlName: 'reason',
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    const Text('患者死亡'),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ReactiveRadio(
+                      value: 'others',
+                      formControlName: 'reason',
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    const Text('その他'),
+                  ],
                 ),
               ],
             ),

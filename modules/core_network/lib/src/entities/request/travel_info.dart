@@ -9,6 +9,10 @@ class TravelInfoRequest {
   DateTime? visaValidityPeriodExpirationDate;
   DateTime? dateOfEntryIntoJapan;
   DateTime? departureDateFromJapan;
+  DateTime? landingPermitDate;
+  String? landingPermitFileSelect;
+  DateTime? returnFlightTicketDate;
+  String? returnFlightTicketFileSelect;
   String? departureIn;
   String? arrivalIn;
   String? flightNumberIn;
@@ -27,6 +31,10 @@ class TravelInfoRequest {
     this.visaValidityPeriodExpirationDate,
     this.dateOfEntryIntoJapan,
     this.departureDateFromJapan,
+    this.landingPermitDate,
+    this.landingPermitFileSelect,
+    this.returnFlightTicketDate,
+    this.returnFlightTicketFileSelect,
     this.departureIn,
     this.arrivalIn,
     this.flightNumberIn,

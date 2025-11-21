@@ -69,46 +69,6 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '査証',
-                                style: context.textTheme.bodySmall,
-                              ),
-                              SizedBox(
-                                height:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              ReactiveTextField(
-                                formControlName: 'visa',
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '報告書',
-                                style: context.textTheme.bodySmall,
-                              ),
-                              SizedBox(
-                                height:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              ReactiveTextField(
-                                formControlName: 'report',
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 16),
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
                             contentPadding: EdgeInsets.zero,

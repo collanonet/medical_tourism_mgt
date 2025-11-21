@@ -261,6 +261,58 @@ class TravelCompanion extends StatelessWidget {
                                           height: context
                                               .appTheme.spacing.marginMedium,
                                         ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Expanded(
+                                              child: ReactiveDatePickerField(
+                                                formControlName: 'landingPermitDate',
+                                                label: '上陸許可証',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme
+                                                  .spacing.marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: fileUpload(
+                                                context,
+                                                currentForm,
+                                                'landingPermitFileSelect',
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Expanded(
+                                              child: ReactiveDatePickerField(
+                                                formControlName: 'returnFlightTicketDate',
+                                                label: '帰国時の飛行機のチケット',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme
+                                                  .spacing.marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: fileUpload(
+                                                context,
+                                                currentForm,
+                                                'returnFlightTicketFileSelect',
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
                                         const Text('入国'),
                                         SizedBox(
                                           height: context
@@ -540,6 +592,22 @@ class TravelCompanion extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                                'landingPermitDate': FormControl<DateTime>(
+                                  validators: [
+                                    Validators.pattern(
+                                      ValidatorRegExp.date,
+                                    ),
+                                  ],
+                                ),
+                                'landingPermitFileSelect': FormControl<FileSelect>(),
+                                'returnFlightTicketDate': FormControl<DateTime>(
+                                  validators: [
+                                    Validators.pattern(
+                                      ValidatorRegExp.date,
+                                    ),
+                                  ],
+                                ),
+                                'returnFlightTicketFileSelect': FormControl<FileSelect>(),
 
                                 // 入国 hand in
                                 'departureIn': FormControl<String>(value: ''),
@@ -612,76 +680,6 @@ class TravelCompanion extends StatelessWidget {
                     Expanded(
                       child: SizedBox(
                         width: context.appTheme.spacing.marginMedium,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: context.appTheme.spacing.marginMedium,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('ビザの取り下げ', style: context.textTheme.titleMedium),
-                SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                ),
-                Row(
-                  children: [
-                    IntrinsicWidth(
-                      stepWidth: 300,
-                      child: ReactiveCheckboxListTile(
-                        controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.zero,
-                        formControlName: 'visaWithdrawalTarget',
-                        title: const Text('ビザ取下対象とする'),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text('理由'),
-                        Row(
-                          children: [
-                            IntrinsicWidth(
-                              stepWidth: 100,
-                              child: ReactiveRadioListTile(
-                                value: 'PatientDeath',
-                                controlAffinity:
-                                    ListTileControlAffinity.leading,
-                                contentPadding: EdgeInsets.zero,
-                                formControlName: 'reason',
-                                title: const Text('患者死亡'),
-                              ),
-                            ),
-                            IntrinsicWidth(
-                              stepWidth: 100,
-                              child: ReactiveRadioListTile(
-                                value: 'others',
-                                controlAffinity:
-                                    ListTileControlAffinity.leading,
-                                contentPadding: EdgeInsets.zero,
-                                formControlName: 'reason',
-                                title: const Text('その他'),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      width: context.appTheme.spacing.marginMedium,
-                    ),
-                    Expanded(
-                      child: ReactiveTextField(
-                        formControlName: 'remarks',
-                        decoration: const InputDecoration(
-                          label: Text('備考'),
-                        ),
                       ),
                     ),
                   ],
