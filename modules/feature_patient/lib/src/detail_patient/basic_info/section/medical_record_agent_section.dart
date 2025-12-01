@@ -86,6 +86,16 @@ class MedicalRecordAgentSection extends StatelessWidget {
                           ),
                         ),
                         Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'nameInKana',
+                            decoration: const InputDecoration(
+                              label: Text(
+                                '担当者 (カナ)',
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
                           child: ReactiveDropdownField<String?>(
                             formControlName: 'agentType',
                             decoration: const InputDecoration(

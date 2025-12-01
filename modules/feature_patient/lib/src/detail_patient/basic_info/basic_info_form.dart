@@ -165,6 +165,9 @@ FormGroup basicInfoForm({
           'nameInKanji': FormControl<String?>(
             value: '',
           ),
+          'nameInKana': FormControl<String?>(
+            value: '',
+          ),
           'agentType': FormControl<String?>(
             value: null,
           ),

@@ -60,6 +60,7 @@ VisaInfo _$VisaInfoFromJson(Map<String, dynamic> json) => VisaInfo(
       byEMS: json['byEMS'] as bool?,
       byFedex: json['byFedex'] as bool?,
       byOthers: json['byOthers'] as bool?,
+      byOthersRemarks: json['byOthersRemarks'] as String?,
     );
 
 Map<String, dynamic> _$VisaInfoToJson(VisaInfo instance) => <String, dynamic>{
@@ -72,6 +73,7 @@ Map<String, dynamic> _$VisaInfoToJson(VisaInfo instance) => <String, dynamic>{
       'byEMS': instance.byEMS,
       'byFedex': instance.byFedex,
       'byOthers': instance.byOthers,
+      'byOthersRemarks': instance.byOthersRemarks,
     };
 
 Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
@@ -105,6 +107,15 @@ TravelInfo _$TravelInfoFromJson(Map<String, dynamic> json) => TravelInfo(
       departureDateFromJapan: json['departureDateFromJapan'] == null
           ? null
           : DateTime.parse(json['departureDateFromJapan'] as String),
+      landingPermitDate: json['landingPermitDate'] == null
+          ? null
+          : DateTime.parse(json['landingPermitDate'] as String),
+      landingPermitFileSelect: json['landingPermitFileSelect'] as String?,
+      returnFlightTicketDate: json['returnFlightTicketDate'] == null
+          ? null
+          : DateTime.parse(json['returnFlightTicketDate'] as String),
+      returnFlightTicketFileSelect:
+          json['returnFlightTicketFileSelect'] as String?,
       departureIn: json['departureIn'] as String?,
       arrivalIn: json['arrivalIn'] as String?,
       flightNumberIn: json['flightNumberIn'] as String?,
@@ -129,6 +140,11 @@ Map<String, dynamic> _$TravelInfoToJson(TravelInfo instance) =>
       'dateOfEntryIntoJapan': instance.dateOfEntryIntoJapan?.toIso8601String(),
       'departureDateFromJapan':
           instance.departureDateFromJapan?.toIso8601String(),
+      'landingPermitDate': instance.landingPermitDate?.toIso8601String(),
+      'landingPermitFileSelect': instance.landingPermitFileSelect,
+      'returnFlightTicketDate':
+          instance.returnFlightTicketDate?.toIso8601String(),
+      'returnFlightTicketFileSelect': instance.returnFlightTicketFileSelect,
       'departureIn': instance.departureIn,
       'arrivalIn': instance.arrivalIn,
       'flightNumberIn': instance.flightNumberIn,

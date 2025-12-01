@@ -10,6 +10,7 @@ class MedicalRecordAgent {
   final String id;
   String? company;
   String? nameInKanji;
+  String? nameInKana;
   String? agentType;
   String medicalRecord;
   final DateTime createdAt;
@@ -19,6 +20,7 @@ class MedicalRecordAgent {
     required this.id,
     this.company,
     this.nameInKanji,
+    this.nameInKana,
     this.agentType,
     required this.medicalRecord,
     required this.createdAt,
@@ -37,6 +39,7 @@ class MedicalRecordAgent {
       'company': FormControl<String?>(value: medicalRecordAgent?.company),
       'nameInKanji':
           FormControl<String?>(value: medicalRecordAgent?.nameInKanji),
+      'nameInKana': FormControl<String?>(value: medicalRecordAgent?.nameInKana),
       'agentType': FormControl<String?>(value: medicalRecordAgent?.agentType),
       'medicalRecord':
           FormControl<String?>(value: medicalRecordAgent?.medicalRecord),
