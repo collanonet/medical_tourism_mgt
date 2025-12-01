@@ -22,6 +22,7 @@ MedicalVisaPersonalResponse _$MedicalVisaPersonalResponseFromJson(
           json['visaIssuingOverseasEstablishments'] as String?,
       remarks: json['remarks'] as String?,
       paymentStatus: json['paymentStatus'] as String?,
+      visaPageFileName: json['visaPageFileName'] as String?,
     )..applicationDate = json['applicationDate'] == null
         ? null
         : DateTime.parse(json['applicationDate'] as String);
@@ -39,4 +40,5 @@ Map<String, dynamic> _$MedicalVisaPersonalResponseToJson(
           instance.visaIssuingOverseasEstablishments,
       'remarks': instance.remarks,
       'paymentStatus': instance.paymentStatus,
+      'visaPageFileName': instance.visaPageFileName,
     };

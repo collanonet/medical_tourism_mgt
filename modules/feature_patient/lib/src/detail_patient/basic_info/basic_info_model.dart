@@ -116,10 +116,10 @@ class BasicInformationModel {
         logger.d(error);
         loading.value = AsyncData(error: error);
       } finally {
-        initialData(
-          patient: patientData.value.requireData,
-          formGroup: form,
-        );
+        // initialData(
+        //   patient: patientData.value.requireData,
+        //   formGroup: form,
+        // );
       }
     }
   }
@@ -242,6 +242,13 @@ class BasicInformationModel {
         await updatePatientNames(form, form.control('_id').value, request);
       } else {
         await postPatientNames(form, request);
+      }
+
+      if (patientNames.value.hasData) {
+        insertPatientName(
+          data: patientNames.value.requireData,
+          formGroup: form,
+        );
       }
     } catch (error) {
       logger.d(error);
@@ -387,6 +394,13 @@ class BasicInformationModel {
     } else {
       await postPatientNationalities(form, request);
     }
+
+    if (patientNationalities.value.hasData) {
+      insertPATIENTNATIONALITIES(
+        data: patientNationalities.value.requireData,
+        formGroup: form,
+      );
+    }
   }
 
   // update PATIENT_NATIONALITIES
@@ -486,7 +500,10 @@ class BasicInformationModel {
 
     final updated = patientPassport.value.data;
     if (updated != null) {
-      insertPATIENTPASSPORTS(data: updated, formGroup: form);
+      insertPATIENTPASSPORTS(
+        data: updated,
+        formGroup: form,
+      );
     } else {
       form.control('passportImage').value = passportFile == null
           ? null
@@ -662,6 +679,13 @@ class BasicInformationModel {
       } else {
         await postMedicalRecords(form, request);
       }
+
+      if (medicalRecord.value.hasData) {
+        insertMedicalRecord(
+          data: medicalRecord.value.requireData,
+          formGroup: form,
+        );
+      }
     } catch (error) {
       logger.d(error);
       medicalRecord.value =
@@ -716,13 +740,6 @@ class BasicInformationModel {
     await patientRepository
         .medicalRecordAgentsByMedicalRecord(medicalRecordId)
         .then((value) {
-      try {
-        logger.d(
-          'Fetched MedicalRecordAgents: ${value.map((e) => e.toJson()).toList()}',
-        );
-      } catch (e) {
-        logger.d(e);
-      }
       final latestAgent = value.isEmpty
           ? null
           : value.reduce((current, next) {
@@ -741,6 +758,7 @@ class BasicInformationModel {
               }
               return current;
             });
+
       medicalRecordAgents.value = AsyncData(data: latestAgent);
       insertMEDICALRECORDAGENTS(
         data: latestAgent,
@@ -759,6 +777,7 @@ class BasicInformationModel {
     formGroup.control('_id').value = data?.id;
     formGroup.control('company').value = data?.company;
     formGroup.control('nameInKanji').value = data?.nameInKanji;
+    formGroup.control('nameInKana').value = data?.nameInKana;
     formGroup.control('agentType').value = data?.agentType;
   }
 
@@ -767,15 +786,26 @@ class BasicInformationModel {
     MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
-      agentType: form.control('agentType').value,
+      nameInKana: form.control('nameInKana').value ?? '',
+      agentType: form.control('agentType').value ?? '',
       medicalRecord: medicalRecordId.value.requireData,
     );
     try {
+      logger.d('FIX APPLIED: agentType is "${request.agentType}", nameInKana is "${request.nameInKana}"');
       logger.d(
         'Saving MedicalRecordAgent ${form.control('_id').value}: ${request.toJson()}',
       );
     } catch (e) {
       logger.d(e);
+    }
+
+    if (form.control('_id').value == null &&
+        (request.company?.isEmpty ?? true) &&
+        (request.nameInKanji?.isEmpty ?? true) &&
+        (request.nameInKana?.isEmpty ?? true) &&
+        (request.agentType?.isEmpty ?? true)) {
+      medicalRecordAgents.value = const AsyncData();
+      return;
     }
 
     if (form.control('_id').value != null) {
@@ -877,11 +907,26 @@ class BasicInformationModel {
       medicalRecord: medicalRecordId.value.requireData,
     );
 
+    if (form.control('_id').value == null &&
+        (request.company?.isEmpty ?? true) &&
+        (request.nameInKanji?.isEmpty ?? true) &&
+        (request.nameInKana?.isEmpty ?? true)) {
+      medicalRecordReferrers.value = const AsyncData();
+      return;
+    }
+
     if (form.control('_id').value != null) {
       await updateMedicalRecordReferrers(
           form, form.control('_id').value, request);
     } else {
       await postMedicalRecordReferrers(form, request);
+    }
+
+    if (medicalRecordReferrers.value.hasData) {
+      insertMEDICALRECORDReferrers(
+        data: medicalRecordReferrers.value.requireData,
+        formGroup: form,
+      );
     }
   }
 
@@ -982,6 +1027,13 @@ class BasicInformationModel {
       await updateMedicalRecordBudgets(form, form.control('_id').value, request);
     } else {
       await postMedicalRecordBudgets(form, request);
+    }
+
+    if (medicalRecordBudgets.value.hasData) {
+      insertMEDICALRECORDBUDGETS(
+        data: medicalRecordBudgets.value.requireData,
+        formGroup: form,
+      );
     }
   }
 
@@ -1270,39 +1322,48 @@ class BasicInformationModel {
       medicalRecordHospitals.value =
           medicalRecordHospitals.value.copyWith(loading: true);
       logger.d(formGroup.control('deletedMedicalRecordHospitals').value);
-      await formGroup.control('deletedMedicalRecordHospitals').value.forEach(
-        (element) async {
-          if (element != null) {
-            await deleteMedicalRecordHospitals(element);
-          }
-        },
-      );
+      final deletedHospitals =
+          formGroup.control('deletedMedicalRecordHospitals').value as List;
+      for (var element in deletedHospitals) {
+        if (element != null) {
+          await deleteMedicalRecordHospitals(element);
+        }
+      }
+
       logger.d('medical-record-hospitals 111');
       logger.d(formGroup.control('MEDICAL_RECORD_HOSPITALS').value);
 
-      await formGroup.control('MEDICAL_RECORD_HOSPITALS').value.forEach(
-        (element) async {
-          MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
-            medicalCardNumber: element['medicalCardNumber'] ?? '',
-            hospitalName: element['hospitalName'] ?? '',
-            medicalRecord: medicalRecordId.value.requireData,
-          );
+      final hospitals =
+          formGroup.control('MEDICAL_RECORD_HOSPITALS').value as List;
+      for (var element in hospitals) {
+        MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
+          medicalCardNumber: element['medicalCardNumber'] ?? '',
+          hospitalName: element['hospitalName'] ?? '',
+          medicalRecord: medicalRecordId.value.requireData,
+        );
 
-          if (element['_id'] != null) {
-            if (element['hospitalName'].isEmpty &&
-                element['medicalCardNumber'].isEmpty) {
-              await deleteMedicalRecordHospitals(element['_id']);
-            } else {
-              await updateMedicalRecordHospitals(element['_id'], request);
-            }
+        if (element['_id'] != null) {
+          if ((element['hospitalName'] as String? ?? '').isEmpty &&
+              (element['medicalCardNumber'] as String? ?? '').isEmpty) {
+            await deleteMedicalRecordHospitals(element['_id']);
           } else {
-            if (element['hospitalName'] != null &&
-                element['medicalCardNumber'] != null) {
-              await postMedicalRecordHospitals(formGroup, request);
-            }
+            await updateMedicalRecordHospitals(element['_id'], request);
           }
-        },
-      );
+        } else {
+          if (element['hospitalName'] != null &&
+              element['medicalCardNumber'] != null) {
+            await postMedicalRecordHospitals(formGroup, request);
+          }
+        }
+      }
+
+      if (medicalRecordHospitals.value.hasData) {
+        insertMedicalRecordHospitals(
+          data: medicalRecordHospitals.value.requireData,
+          formArray:
+              formGroup.control('MEDICAL_RECORD_HOSPITALS') as FormArray,
+        );
+      }
       medicalRecordHospitals.value = medicalRecordHospitals.value.copyWith(
         loading: false,
       );
@@ -1471,6 +1532,10 @@ class BasicInformationModel {
       var result =
           await patientRepository.postMedicalRecordTravelGroup(request);
       medicalRecordTravelGroups.value = AsyncData(data: result);
+      insertMedicalRecordTravelGroups(
+        data: result,
+        formGroup: control,
+      );
     } catch (e) {
       logger.d(e);
       medicalRecordTravelGroups.value = AsyncData(error: e);
@@ -1570,6 +1635,13 @@ class BasicInformationModel {
 
       medicalRecordCompanions.value =
           medicalRecordCompanions.value.copyWith(loading: false);
+
+      if (medicalRecordCompanions.value.hasData) {
+        insertMEDICALRECORDCOMPANIONS(
+          data: medicalRecordCompanions.value.requireData,
+          formArray: form.control('MEDICAL_RECORD_Companion') as FormArray,
+        );
+      }
     } catch (e) {
       logger.d(e);
       medicalRecordCompanions.value = AsyncData(error: e);

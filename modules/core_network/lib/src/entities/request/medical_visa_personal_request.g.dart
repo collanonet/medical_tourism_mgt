@@ -24,6 +24,7 @@ MedicalVisaPersonalRequest _$MedicalVisaPersonalRequestFromJson(
           json['visaIssuingOverseasEstablishments'] as String?,
       remarks: json['remarks'] as String?,
       paymentStatus: json['paymentStatus'] as String?,
+      visaPageFileName: json['visaPageFileName'] as String?,
     );
 
 Map<String, dynamic> _$MedicalVisaPersonalRequestToJson(
@@ -38,4 +39,5 @@ Map<String, dynamic> _$MedicalVisaPersonalRequestToJson(
           instance.visaIssuingOverseasEstablishments,
       'remarks': instance.remarks,
       'paymentStatus': instance.paymentStatus,
+      'visaPageFileName': instance.visaPageFileName,
     };

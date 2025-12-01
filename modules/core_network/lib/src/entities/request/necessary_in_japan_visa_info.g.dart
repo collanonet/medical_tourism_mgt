@@ -20,6 +20,7 @@ VisaInfo _$VisaInfoFromJson(Map<String, dynamic> json) => VisaInfo(
       byEMS: json['byEMS'] as bool?,
       byFedex: json['byFedex'] as bool?,
       byOthers: json['byOthers'] as bool?,
+      byOthersRemarks: json['byOthersRemarks'] as String?,
     );
 
 Map<String, dynamic> _$VisaInfoToJson(VisaInfo instance) => <String, dynamic>{
@@ -32,4 +33,5 @@ Map<String, dynamic> _$VisaInfoToJson(VisaInfo instance) => <String, dynamic>{
       'byEMS': instance.byEMS,
       'byFedex': instance.byFedex,
       'byOthers': instance.byOthers,
+      'byOthersRemarks': instance.byOthersRemarks,
     };

@@ -22,6 +22,15 @@ TravelInfoRequest _$TravelInfoRequestFromJson(Map<String, dynamic> json) =>
       departureDateFromJapan: json['departureDateFromJapan'] == null
           ? null
           : DateTime.parse(json['departureDateFromJapan'] as String),
+      landingPermitDate: json['landingPermitDate'] == null
+          ? null
+          : DateTime.parse(json['landingPermitDate'] as String),
+      landingPermitFileSelect: json['landingPermitFileSelect'] as String?,
+      returnFlightTicketDate: json['returnFlightTicketDate'] == null
+          ? null
+          : DateTime.parse(json['returnFlightTicketDate'] as String),
+      returnFlightTicketFileSelect:
+          json['returnFlightTicketFileSelect'] as String?,
       departureIn: json['departureIn'] as String?,
       arrivalIn: json['arrivalIn'] as String?,
       flightNumberIn: json['flightNumberIn'] as String?,
@@ -45,6 +54,11 @@ Map<String, dynamic> _$TravelInfoRequestToJson(TravelInfoRequest instance) =>
       'dateOfEntryIntoJapan': instance.dateOfEntryIntoJapan?.toIso8601String(),
       'departureDateFromJapan':
           instance.departureDateFromJapan?.toIso8601String(),
+      'landingPermitDate': instance.landingPermitDate?.toIso8601String(),
+      'landingPermitFileSelect': instance.landingPermitFileSelect,
+      'returnFlightTicketDate':
+          instance.returnFlightTicketDate?.toIso8601String(),
+      'returnFlightTicketFileSelect': instance.returnFlightTicketFileSelect,
       'departureIn': instance.departureIn,
       'arrivalIn': instance.arrivalIn,
       'flightNumberIn': instance.flightNumberIn,
