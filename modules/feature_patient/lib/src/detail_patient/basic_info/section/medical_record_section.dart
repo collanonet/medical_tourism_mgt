@@ -333,7 +333,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                             child: ReactiveRadioListTile(
                                               value: true,
                                               contentPadding: EdgeInsets.zero,
-                                              formControlName: 'isMale',
+                                              formControlName: 'gender',
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .leading,
@@ -344,7 +344,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                             child: ReactiveRadioListTile(
                                               value: false,
                                               contentPadding: EdgeInsets.zero,
-                                              formControlName: 'isMale',
+                                              formControlName: 'gender',
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .leading,

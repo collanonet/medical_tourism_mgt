@@ -190,7 +190,7 @@ class NormalSummaryModel {
     formGroup.control('nameChineseKanjiVietnamese').value =
         '${data.familyNameChineseOrVietnamese} ${data.middleNameChineseOrVietnamese} ${data.firstNameChineseOrVietnamese}';
     formGroup.control('nameKana').value =
-        '${data.familyNameJapaneseForChinese} ${data.middleNameJapaneseForChinese} ${data.firstNameJapaneseForChinese}';
+        '${data.familyNameJapaneseForNonChinese} ${data.middleNameJapaneseForNonChinese} ${data.firstNameJapaneseForNonChinese}';
   }
 
   Future<void> fetchSummaryList(String summaryId) async {
@@ -322,8 +322,10 @@ class NormalSummaryModel {
       final fileBaseName =
           DateFormat('yyyyMMdd_HHmmss_SSS').format(localTimestamp);
       final uploadResponse = await patientRepository.uploadFileBase64(
-        base64Encode(fileBytes),
-        'summary_history_$fileBaseName.pdf',
+        FileUploadRequest(
+          file: base64Encode(fileBytes),
+          filename: 'summary_history_$fileBaseName.pdf',
+        ),
       );
       final displayDate = DateFormat('yyyy/MM/dd HH:mm').format(localTimestamp);
       final versionLabel = '「$displayDate」バージョン';
@@ -353,7 +355,11 @@ class NormalSummaryModel {
         try {
           String base64Image = base64Encode(fileUpdate.file!);
           var filUpload = await patientRepository.uploadFileBase64(
-              base64Image, fileUpdate.filename ?? '');
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileUpdate.filename ?? '',
+            ),
+          );
           pathFile = filUpload.filename;
         } catch (e) {
           logger.e(e);

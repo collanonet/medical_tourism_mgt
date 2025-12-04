@@ -9,8 +9,7 @@ abstract class PatientRepository {
   );
 
   Future<FileResponse> uploadFileBase64(
-    String file,
-    String filename,
+    FileUploadRequest fileUploadRequest,
   );
 
   Future<Paginated<PrePatient>> prePatients({

@@ -163,8 +163,10 @@ class EstimateModel {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             logoFile = fileData.filename;
           } catch (e) {
@@ -182,8 +184,10 @@ class EstimateModel {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             stampFile = fileData.filename;
           } catch (e) {
@@ -227,8 +231,10 @@ class EstimateModel {
         try {
           String base64Image = base64Encode(pathFileJP);
           patientRepository.uploadFileBase64(
-            base64Image,
-            fileNamePdfJP,
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileNamePdfJP,
+            ),
           );
         } catch (e) {
           logger.e(e);
@@ -245,8 +251,10 @@ class EstimateModel {
         try {
           String base64Image = base64Encode(pathFileZH);
           patientRepository.uploadFileBase64(
-            base64Image,
-            fileNamePdfZH,
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileNamePdfZH,
+            ),
           );
         } catch (e) {
           logger.e(e);
@@ -263,8 +271,10 @@ class EstimateModel {
         try {
           String base64Image = base64Encode(pathFileZHTW);
           patientRepository.uploadFileBase64(
-            base64Image,
-            fileNamePdfZHTW,
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileNamePdfZHTW,
+            ),
           );
         } catch (e) {
           logger.e(e);
@@ -281,8 +291,10 @@ class EstimateModel {
         try {
           String base64Image = base64Encode(pathFileVN);
           patientRepository.uploadFileBase64(
-            base64Image,
-            fileNamePdfVN,
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileNamePdfVN,
+            ),
           );
         } catch (e) {
           logger.e(e);
@@ -299,8 +311,10 @@ class EstimateModel {
         try {
           String base64Image = base64Encode(pathFileEN);
           patientRepository.uploadFileBase64(
-            base64Image,
-            fileNamePdfEN,
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileNamePdfEN,
+            ),
           );
         } catch (e) {
           logger.e(e);
@@ -419,8 +433,10 @@ class EstimateModel {
             try {
               String base64Image = base64Encode(pathFileJP);
               patientRepository.uploadFileBase64(
-                base64Image,
-                fileNamePdfJP,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: fileNamePdfJP,
+                ),
               );
             } catch (e) {
               logger.e(e);
@@ -439,8 +455,10 @@ class EstimateModel {
             try {
               String base64Image = base64Encode(pathFileZH);
               patientRepository.uploadFileBase64(
-                base64Image,
-                fileNamePdfZH,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: fileNamePdfZH,
+                ),
               );
             } catch (e) {
               logger.e(e);
@@ -459,8 +477,10 @@ class EstimateModel {
             try {
               String base64Image = base64Encode(pathFileZHTW);
               patientRepository.uploadFileBase64(
-                base64Image,
-                fileNamePdfZHTW,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: fileNamePdfZHTW,
+                ),
               );
             } catch (e) {
               logger.e(e);
@@ -479,8 +499,10 @@ class EstimateModel {
             try {
               String base64Image = base64Encode(pathFileVN);
               patientRepository.uploadFileBase64(
-                base64Image,
-                fileNamePdfVN,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: fileNamePdfVN,
+                ),
               );
             } catch (e) {
               logger.e(e);
@@ -499,8 +521,10 @@ class EstimateModel {
             try {
               String base64Image = base64Encode(pathFileEN);
               patientRepository.uploadFileBase64(
-                base64Image,
-                fileNamePdfEN,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: fileNamePdfEN,
+                ),
               );
             } catch (e) {
               logger.e(e);

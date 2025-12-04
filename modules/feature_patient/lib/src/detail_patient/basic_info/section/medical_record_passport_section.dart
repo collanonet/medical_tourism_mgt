@@ -286,7 +286,7 @@ class _MedicalRecordPassportSectionState
                 final isHovering = candidateData.isNotEmpty;
                 return InkWell(
                   onTap: () async {
-                    final result = await imagePicker();
+                    final result = await filePicker();
                     if (result != null) {
                       control.value = result;
                     }
@@ -350,7 +350,7 @@ class _MedicalRecordPassportSectionState
                                   ),
                                   ElevatedButton(
                                     onPressed: () async {
-                                      final result = await imagePicker();
+                                      final result = await filePicker();
                                       if (result != null) {
                                         control.value = result;
                                       }

@@ -41,8 +41,7 @@ abstract class ApiService {
 
   @POST('/files/upload-base64')
   Future<FileResponse> uploadFileBase64(
-    @Field('file') String file,
-    @Field('filename') String filename,
+    @Body() FileUploadRequest fileUploadRequest,
   );
 
   //GET_PRE_PATIENTS

@@ -113,8 +113,10 @@ class OverseasMedicalDataModel {
           FileSelect qrFile = formGroup.control('qrCode').value;
           String base64Image = base64Encode(qrFile.file!);
           FileResponse qrData = await patientRepository.uploadFileBase64(
-            base64Image,
-            qrFile.filename!,
+            FileUploadRequest(
+              file: base64Image,
+              filename: qrFile.filename!,
+            ),
           );
           qrCode = qrData.filename;
         } catch (e) {
@@ -128,8 +130,10 @@ class OverseasMedicalDataModel {
           FileSelect docFile = formGroup.control('documentFile').value;
           String base64Image = base64Encode(docFile.file!);
           FileResponse docData = await patientRepository.uploadFileBase64(
-            base64Image,
-            docFile.filename!,
+            FileUploadRequest(
+              file: base64Image,
+              filename: docFile.filename!,
+            ),
           );
           documentFile = docData.filename;
         } catch (e) {

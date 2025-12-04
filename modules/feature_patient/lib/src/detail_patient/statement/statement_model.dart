@@ -193,8 +193,10 @@ class StatementModel {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             logoFile = fileData.filename;
           } catch (e) {
@@ -212,8 +214,10 @@ class StatementModel {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             stampFile = fileData.filename;
           } catch (e) {
@@ -255,9 +259,11 @@ class StatementModel {
         try {
           String base64Image = base64Encode(pathFileJP);
           FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_JP.pdf',
+            FileUploadRequest(
+              file: base64Image,
+              // get timestamp to avoid duplicate file name
+              filename: 'quotation_${DateTime.now().millisecondsSinceEpoch}_JP.pdf',
+            ),
           );
           fileNamePdfJP = fileData.filename;
         } catch (e) {
@@ -273,9 +279,11 @@ class StatementModel {
         try {
           String base64Image = base64Encode(pathFileZH);
           FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_ZH.pdf',
+            FileUploadRequest(
+              file: base64Image,
+              // get timestamp to avoid duplicate file name
+              filename: 'quotation_${DateTime.now().millisecondsSinceEpoch}_ZH.pdf',
+            ),
           );
           fileNamePdfZH = fileData.filename;
         } catch (e) {
@@ -291,9 +299,11 @@ class StatementModel {
         try {
           String base64Image = base64Encode(pathFileZHTW);
           FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_ZHTW.pdf',
+            FileUploadRequest(
+              file: base64Image,
+              // get timestamp to avoid duplicate file name
+              filename: 'quotation_${DateTime.now().millisecondsSinceEpoch}_ZHTW.pdf',
+            ),
           );
           fileNamePdfZHTW = fileData.filename;
         } catch (e) {
@@ -309,9 +319,11 @@ class StatementModel {
         try {
           String base64Image = base64Encode(pathFileVN);
           FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_VN.pdf',
+            FileUploadRequest(
+              file: base64Image,
+              // get timestamp to avoid duplicate file name
+              filename: 'quotation_${DateTime.now().millisecondsSinceEpoch}_VN.pdf',
+            ),
           );
           fileNamePdfVN = fileData.filename;
         } catch (e) {
@@ -327,9 +339,11 @@ class StatementModel {
         try {
           String base64Image = base64Encode(pathFileEN);
           FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_EN.pdf',
+            FileUploadRequest(
+              file: base64Image,
+              // get timestamp to avoid duplicate file name
+              filename: 'quotation_${DateTime.now().millisecondsSinceEpoch}_EN.pdf',
+            ),
           );
           fileNamePdfEN = fileData.filename;
         } catch (e) {

@@ -360,16 +360,22 @@ class BasicInformationModel {
     String? file;
     if (form.control('chatQrImage').value != null) {
       FileSelect docFile = form.control('chatQrImage').value;
+      print('DEBUG: chatQrImage value: $docFile');
       if (docFile.file != null) {
         try {
+          print('DEBUG: Uploading chatQrImage...');
           String base64Image = base64Encode(docFile.file!);
           FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            docFile.filename!,
+            FileUploadRequest(
+              file: base64Image,
+              filename: docFile.filename!,
+            ),
           );
+          print('DEBUG: Upload success. Filename: ${fileData.filename}');
           file = fileData.filename;
         } catch (e) {
           logger.e(e);
+          throw 'ファイルのアップロードに失敗しました: $e';
         }
       } else {
         file = docFile.url;
@@ -388,6 +394,7 @@ class BasicInformationModel {
       chatQrImage: file,
       patient: patientData.value.requireData.id,
     );
+    print('DEBUG: Saving PatientNationalityRequest with chatQrImage: $file');
 
     if (form.control('_id').value != null) {
       await updatePatientNationalities(form, form.control('_id').value, request);
@@ -465,16 +472,22 @@ class BasicInformationModel {
     String? passportFile;
     final fileSelect = form.control('passportImage').value;
     if (fileSelect is FileSelect) {
+      print('DEBUG: passportImage value: $fileSelect');
       if (fileSelect.file != null && fileSelect.filename != null) {
         try {
+          print('DEBUG: Uploading passportImage...');
           final base64Image = base64Encode(fileSelect.file!);
           final fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            fileSelect.filename!,
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileSelect.filename!,
+            ),
           );
+          print('DEBUG: Upload success. Filename: ${fileData.filename}');
           passportFile = fileData.filename;
         } catch (e) {
           logger.e(e);
+          throw 'ファイルのアップロードに失敗しました: $e';
         }
       } else {
         passportFile = fileSelect.url;
@@ -491,6 +504,7 @@ class BasicInformationModel {
       passportImage: passportFile,
       patient: patientData.value.requireData.id,
     );
+    print('DEBUG: Saving PatientPassportRequest with passportImage: $passportFile');
 
     if (form.control('_id').value != null) {
       await updatePatientPassports(form, form.control('_id').value, request);
@@ -1557,12 +1571,15 @@ class BasicInformationModel {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               file = fileData.filename;
             } catch (e) {
               logger.e(e);
+              throw 'ファイルのアップロードに失敗しました: $e';
             }
           } else {
             file = docFile.url;
@@ -1576,12 +1593,15 @@ class BasicInformationModel {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               passportFile = fileData.filename;
             } catch (e) {
               logger.e(e);
+              throw 'ファイルのアップロードに失敗しました: $e';
             }
           } else {
             passportFile = docFile.url;

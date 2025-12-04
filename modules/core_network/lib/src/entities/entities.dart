@@ -76,3 +76,4 @@ export 'dicom_response.dart';
 export 'chat.dart';
 export 'message.dart';
 export 'chat_group_request.dart';
+export 'request/file_upload_request.dart';

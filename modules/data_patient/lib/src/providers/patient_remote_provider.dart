@@ -14,10 +14,9 @@ class PatientRemoteProvider {
   final FileUploadService fileUploadService;
 
   Future<FileResponse> uploadFileBase64(
-    String file,
-    String filename,
+    FileUploadRequest fileUploadRequest,
   ) async =>
-      await apiService.uploadFileBase64(file, filename);
+      await apiService.uploadFileBase64(fileUploadRequest);
 
   Future<Paginated<PrePatient>> prePatients({
     int? page,

@@ -262,6 +262,17 @@ class MedicalRecordQrSection extends StatelessWidget {
             SizedBox(
               height: context.appTheme.spacing.marginMedium,
             ),
+            const Text(
+              '患者SNS',
+              style: TextStyle(
+                fontFamily: 'NotoSansJP',
+                package: 'core_ui',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: context.appTheme.spacing.marginMedium,
+            ),
             RowSeparated(
               crossAxisAlignment: CrossAxisAlignment.start,
               separatorBuilder: (BuildContext context, int index) {
@@ -319,7 +330,7 @@ Widget _qrUploadArea(FormGroup currentForm, BuildContext context) {
         builder: (context, candidateData, rejectedData) {
           return InkWell(
             onTap: () {
-              imagePicker().then((value) {
+              filePicker().then((value) {
                 currentForm.control('chatQrImage').value = value;
               });
             },
@@ -384,7 +395,7 @@ Widget _qrUploadArea(FormGroup currentForm, BuildContext context) {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                imagePicker().then((value) {
+                                filePicker().then((value) {
                                   currentForm.control('chatQrImage').value =
                                       value;
                                 });
