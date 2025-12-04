@@ -635,6 +635,14 @@ class _MedicalRecordCompanionSectionState
                                       ),
                                     ],
                                   ),
+                                  const Text(
+                                    '同行者SNS',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   RowSeparated(
                                     separatorBuilder:
                                         (BuildContext context, int index) {
@@ -953,7 +961,7 @@ class _MedicalRecordCompanionSectionState
           builder: (context, candidateData, rejectedData) {
             return InkWell(
               onTap: () {
-                imagePicker().then((value) {
+                filePicker().then((value) {
                   currentForm.control('chatQrImage').value = value;
                 });
               },
@@ -1018,7 +1026,7 @@ class _MedicalRecordCompanionSectionState
                               ),
                               ElevatedButton(
                                   onPressed: () {
-                                    imagePicker().then((value) {
+                                    filePicker().then((value) {
                                       currentForm.control('chatQrImage').value =
                                           value;
                                     });
@@ -1068,7 +1076,7 @@ class _MedicalRecordCompanionSectionState
           builder: (context, candidateData, rejectedData) {
             return InkWell(
               onTap: () {
-                imagePicker().then((value) {
+                filePicker().then((value) {
                   currentForm.control('passportImage').value = value;
                 });
               },
@@ -1133,7 +1141,7 @@ class _MedicalRecordCompanionSectionState
                               ),
                               ElevatedButton(
                                   onPressed: () {
-                                    imagePicker().then((value) {
+                                    filePicker().then((value) {
                                       currentForm.control('passportImage').value =
                                           value;
                                     });

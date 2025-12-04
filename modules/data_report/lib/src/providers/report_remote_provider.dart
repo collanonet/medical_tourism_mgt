@@ -15,7 +15,9 @@ class ReportRemoteProvider {
     String file,
     String filename,
   ) async =>
-      await apiService.uploadFileBase64(file, filename);
+      await apiService.uploadFileBase64(
+        FileUploadRequest(file: file, filename: filename),
+      );
 
   Future<List<TypeResponse>> getTypes() async {
     return apiService.getTypes();

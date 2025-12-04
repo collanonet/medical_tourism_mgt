@@ -244,7 +244,9 @@ class HospitalRemoteProvider {
   }
 
   Future<FileResponse> uploadFileBase64(String file, String filename) {
-    return apiService.uploadFileBase64(file, filename);
+    return apiService.uploadFileBase64(
+      FileUploadRequest(file: file, filename: filename),
+    );
   }
 
   Future<void> deleteHealth({required String id}) {

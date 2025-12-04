@@ -115,8 +115,10 @@ class SummaryListModel {
 
       final fileName = 'summary_$timestamp.$fileExtension';
       final uploadResponse = await patientRepository.uploadFileBase64(
-        base64Encode(fileBytes),
-        fileName,
+        FileUploadRequest(
+          file: base64Encode(fileBytes),
+          filename: fileName,
+        ),
       );
 
       final request = MedicalRecordFileSummaryRequest(

@@ -52,8 +52,10 @@ class MedicalPaymentDetailModel {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             file = fileData.filename;
           } catch (e) {

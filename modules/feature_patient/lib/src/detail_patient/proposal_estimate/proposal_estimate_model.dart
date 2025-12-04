@@ -248,8 +248,10 @@ class ProposalEstimateModel {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             logoFile = fileData.filename;
           } catch (e) {
@@ -267,8 +269,10 @@ class ProposalEstimateModel {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             stampFile = fileData.filename;
           } catch (e) {
@@ -386,7 +390,12 @@ class ProposalEstimateModel {
 
         if (pdfBytes != null) {
           String base64Image = base64Encode(pdfBytes);
-          await patientRepository.uploadFileBase64(base64Image, fileName);
+          await patientRepository.uploadFileBase64(
+            FileUploadRequest(
+              file: base64Image,
+              filename: fileName,
+            ),
+          );
         }
       }
     } catch (e) {

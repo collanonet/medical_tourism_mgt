@@ -1162,8 +1162,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               visaPageFileName = fileData.filename;
             } catch (e) {
@@ -1221,8 +1223,10 @@ class MedicalVisaModel with ChangeNotifier {
                 String base64Image = base64Encode(docFile.file!);
                 FileResponse fileData =
                     await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
+                  FileUploadRequest(
+                    file: base64Image,
+                    filename: docFile.filename!,
+                  ),
                 );
                 passportFileSelect = fileData.filename;
               } catch (e) {
@@ -1240,8 +1244,10 @@ class MedicalVisaModel with ChangeNotifier {
                 String base64Image = base64Encode(docFile.file!);
                 FileResponse fileData =
                     await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
+                  FileUploadRequest(
+                    file: base64Image,
+                    filename: docFile.filename!,
+                  ),
                 );
                 letterOfGuaranteeFileSelect = fileData.filename;
               } catch (e) {
@@ -1291,8 +1297,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               treatmentScheduleFileSelect = fileData.filename;
             } catch (e) {
@@ -1320,8 +1328,10 @@ class MedicalVisaModel with ChangeNotifier {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             statementOfReasonsFileSelect = fileData.filename;
           } catch (e) {
@@ -1343,8 +1353,10 @@ class MedicalVisaModel with ChangeNotifier {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             travelCompanionListFileSelect = fileData.filename;
           } catch (e) {
@@ -1366,8 +1378,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               landingPermitFileSelect = fileData.filename;
             } catch (e) {
@@ -1385,8 +1399,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               returnFlightTicketFileSelect = fileData.filename;
             } catch (e) {
@@ -1458,8 +1474,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               landingPermitFileName = fileData.filename;
             } catch (e) {
@@ -1489,8 +1507,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               planeTicketForYourVisitToJapanFileName = fileData.filename;
             } catch (e) {
@@ -1519,8 +1539,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               returnFlightTicketFileName = fileData.filename;
             } catch (e) {
@@ -1548,8 +1570,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               boardingPassForReturnFlightFileName = fileData.filename;
             } catch (e) {
@@ -1580,8 +1604,10 @@ class MedicalVisaModel with ChangeNotifier {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             certificateOfEligibilityFileName = fileData.filename;
           } catch (e) {
@@ -1615,8 +1641,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               landingPermitFileSelect = fileData.filename;
             } catch (e) {
@@ -1634,8 +1662,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               returnFlightTicketFileSelect = fileData.filename;
             } catch (e) {
@@ -1682,8 +1712,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               visaPageFileName = fileData.filename;
             } catch (e) {
@@ -1701,8 +1733,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               landingPermitFileName = fileData.filename;
             } catch (e) {
@@ -1758,8 +1792,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               letterOfGuaranteeFileSelect = fileData.filename;
             } catch (e) {
@@ -1776,8 +1812,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               passportFileSelect = fileData.filename;
             } catch (e) {
@@ -1821,8 +1859,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               treatmentScheduleFileSelect = fileData.filename;
             } catch (e) {
@@ -1850,8 +1890,10 @@ class MedicalVisaModel with ChangeNotifier {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             necessaryStatementOfReasonsFileSelect = fileData.filename;
           } catch (e) {
@@ -1873,8 +1915,10 @@ class MedicalVisaModel with ChangeNotifier {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             necessaryTravelCompanionListFileSelect = fileData.filename;
           } catch (e) {
@@ -1911,8 +1955,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               visaPageFileName = fileData.filename;
             } catch (e) {
@@ -1930,8 +1976,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               landingPermitFileName = fileData.filename;
             } catch (e) {
@@ -1961,8 +2009,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               planeTicketForYourVisitToJapanFileName = fileData.filename;
             } catch (e) {
@@ -1991,8 +2041,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               returnFlightTicketFileName = fileData.filename;
             } catch (e) {
@@ -2021,8 +2073,10 @@ class MedicalVisaModel with ChangeNotifier {
             try {
               String base64Image = base64Encode(docFile.file!);
               FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
+                FileUploadRequest(
+                  file: base64Image,
+                  filename: docFile.filename!,
+                ),
               );
               boardingPassForReturnFlightFileName = fileData.filename;
             } catch (e) {
@@ -2053,8 +2107,10 @@ class MedicalVisaModel with ChangeNotifier {
           try {
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
+              FileUploadRequest(
+                file: base64Image,
+                filename: docFile.filename!,
+              ),
             );
             certificateOfEligibilityFileNameFinal = fileData.filename;
           } catch (e) {

@@ -23,10 +23,18 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<FileResponse> uploadFileBase64(
-    String file,
-    String filename,
-  ) async =>
-      await remote.uploadFileBase64(file, filename);
+    FileUploadRequest fileUploadRequest,
+  ) async {
+    print('DEBUG: uploadFileBase64 called with filename: ${fileUploadRequest.filename}');
+    try {
+      final response = await remote.uploadFileBase64(fileUploadRequest);
+      print('DEBUG: uploadFileBase64 response: ${response.toJson()}');
+      return response;
+    } catch (e) {
+      print('DEBUG: uploadFileBase64 error: $e');
+      rethrow;
+    }
+  }
 
   //GET_PRE_PATIENTS
 
@@ -235,8 +243,16 @@ class PatientRepositoryIml extends PatientRepository {
   Future<PatientPassport> putPatientPassport(
     String id,
     PatientPassportRequest patientPassport,
-  ) {
-    return remote.putPatientPassport(id, patientPassport);
+  ) async {
+    print('DEBUG: putPatientPassport called with: ${patientPassport.toJson()}');
+    try {
+      final response = await remote.putPatientPassport(id, patientPassport);
+      print('DEBUG: putPatientPassport response: ${response.toJson()}');
+      return response;
+    } catch (e) {
+      print('DEBUG: putPatientPassport error: $e');
+      rethrow;
+    }
   }
 
   @override
