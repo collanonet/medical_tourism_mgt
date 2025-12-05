@@ -13,6 +13,7 @@ class PatientPassport {
   String visaType;
   String? visaCategory;
   bool? underConfirmation;
+  @JsonKey(name: 'passportImageName')
   String? passportImage;
   String patient;
   final DateTime createdAt;

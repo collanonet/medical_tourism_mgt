@@ -11,7 +11,8 @@ class PatientPassportRequest {
    String? visaType;
    String? visaCategory;
    bool? underConfirmation;
-  String? passportImage;
+   @JsonKey(name: 'passportImageName')
+   String? passportImage;
    String? patient;
 
   PatientPassportRequest({

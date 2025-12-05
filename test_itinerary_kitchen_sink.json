@@ -1,0 +1,14 @@
+{
+    "patientId": "68428297bdd35753cdd3b031",
+    "patientName": "CamelCase",
+    "patient_name": "SnakeCase",
+    "PatientName": "PascalCase",
+    "medicalInstitutionName": "CamelCaseHospital",
+    "medical_institution_name": "SnakeCaseHospital",
+    "MedicalInstitutionName": "PascalCaseHospital",
+    "Medical_institution_name": "FormKeyHospital",
+    "consultationDateAndTime": "CamelTime",
+    "consultation_date_and_time": "SnakeTime",
+    "ConsultationDateAndTime": "PascalTime",
+    "Consultation_date_and_time": "FormTime"
+}

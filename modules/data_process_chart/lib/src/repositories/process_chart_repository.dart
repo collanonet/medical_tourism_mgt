@@ -6,20 +6,21 @@ abstract class ProcessChartRepository {
     PatientFilterRequst patientFilterRequst,
   );
 
-  Future<ItineraryTitleResponse> getItineraryTitle();
+  Future<ItineraryTitleResponse> getItineraryTitle(String? patientId);
 
   Future<ItineraryTitleResponse> postItineraryTitle(
     ItineraryTitleRequest itineraryTitleRequest,
   );
 
-  Future<ItineraryExplanationResponse> getInfoItineraryExamination();
+  Future<ItineraryExplanationResponse> getInfoItineraryExamination(
+      String? patientId);
 
   Future<ItineraryExplanationResponse> postItineraryExplanation(
     ItineraryExplanationRequest itineraryExplanationRequest,
   );
 
   Future<ItineraryInterpreterOrGuideInputResponse>
-      getItineraryInterpretorOrGuideInput();
+      getItineraryInterpretorOrGuideInput(String? patientId);
 
   Future<ItineraryInterpreterOrGuideInputResponse>
       postItineraryInterpretorOrGuideInput(
@@ -27,7 +28,8 @@ abstract class ProcessChartRepository {
         itineraryInterpreterOrGuideInputRequest,
   );
 
-  Future<ItineraryTransferInputResponse> getItineraryTransferInput();
+  Future<ItineraryTransferInputResponse> getItineraryTransferInput(
+      String? patientId);
 
   Future<ItineraryTransferInputResponse> postItineraryTransferInput(
     ItineraryTransferInputRequest itineraryTransferInputRequest,

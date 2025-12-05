@@ -7,19 +7,21 @@ part of 'itinerary_simplified_title_response.dart';
 // **************************************************************************
 
 ItineraryTitleResponse _$ItineraryTitleResponseFromJson(
-        Map<String, dynamic> json) =>
-    ItineraryTitleResponse(
-      id: json['_id'] as String,
-      patientName: json['patientName'] as String?,
-      medicalInstitutionName: json['medicalInstitutionName'] as String?,
-      consultationDateAndTime: json['consultationDateAndTime'] as String?,
-      startTime: json['startTime'] as String?,
-      endingTimePlanned: json['endingTimePlanned'] as String?,
-      healthCheckupPackage: json['healthCheckupPackage'] as String?,
-      addOptions: (json['addOptions'] as List<dynamic>?)
-          ?.map((e) => AddOption.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+        Map<String, dynamic> json) {
+  final titleData = json['title'] as Map<String, dynamic>? ?? json;
+  return ItineraryTitleResponse(
+    id: json['_id'] as String,
+    patientName: titleData['patientName'] as String?,
+    medicalInstitutionName: titleData['medicalInstitutionName'] as String?,
+    consultationDateAndTime: titleData['consultationDateAndTime'] as String?,
+    startTime: titleData['startTime'] as String?,
+    endingTimePlanned: titleData['endingTimePlanned'] as String?,
+    healthCheckupPackage: titleData['healthCheckupPackage'] as String?,
+    addOptions: (titleData['addOptions'] as List<dynamic>?)
+        ?.map((e) => AddOption.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  );
+}
 
 Map<String, dynamic> _$ItineraryTitleResponseToJson(
         ItineraryTitleResponse instance) =>

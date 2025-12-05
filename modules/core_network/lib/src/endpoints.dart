@@ -149,12 +149,12 @@ class EndPoints {
 
   //E1 - E7
   static const FILTER_PROCESS_CHART_PATIENT = '/filter-process-chart-patient';
-  static const ITINERARY_SIMPLE_TITLE = '/itinerary-simple-title';
-  static const ITINERARY_SIMPLE_EXPLANATION = '/itinerary-simple-explanation';
+  static const ITINERARY_SIMPLE_TITLE = '/simple-itinerary/itinerary-simple-title';
+  static const ITINERARY_SIMPLE_EXPLANATION = '/simple-itinerary/itinerary-simple-explanation';
   static const ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE =
-      '/itinerary-simple-interpretor-or-guide';
+      '/simple-itinerary/itinerary-simple-interpretor-or-guide';
   static const ITINERARY_SIMPLE_TRANSFER_INPUT =
-      '/itinerary-simple-transfer-input';
+      '/simple-itinerary/itinerary-simple-transfer-input';
   static const DETAIL_FACILITY_HOSPITAL = '/facility';
   static const DETAIL_FACILITY_DROP_IN_FACILITY =
       '/stopover-facilities';
@@ -168,11 +168,11 @@ class EndPoints {
   static const DETAIL_RELATED_EMERGENCY_CONTACT =
       '/emergency-contact';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_TITLE =
-      '/detail-itinerary-simple-versoin-title';
+      '/simple-itinerary/detail-itinerary-simple-version-title';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION =
-      '/detail-itinerary-simple-veraion-explanation';
+      '/simple-itinerary/detail-itinerary-simple-version-explanation';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_INTERPRETER =
-      '/detail-itineray-simple-version-interpreter';
+      '/simple-itinerary/detail-itinerary-simple-version-interpreter';
   static const DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP =
       '/detail-itinerary-simple-version-pick-up';
   static const DETAIL_ITINERARY = '/tour';

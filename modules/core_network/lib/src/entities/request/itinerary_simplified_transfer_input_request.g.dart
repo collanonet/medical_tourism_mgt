@@ -14,6 +14,7 @@ ItineraryTransferInputRequest _$ItineraryTransferInputRequestFromJson(
       time: json['time'] as String?,
       place: json['place'] as String?,
       driverInCharge: json['driverInCharge'] as String?,
+      patientId: json['patientId'] as String?,
     );
 
 Map<String, dynamic> _$ItineraryTransferInputRequestToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$ItineraryTransferInputRequestToJson(
       'time': instance.time,
       'place': instance.place,
       'driverInCharge': instance.driverInCharge,
+      'patientId': instance.patientId,
     };

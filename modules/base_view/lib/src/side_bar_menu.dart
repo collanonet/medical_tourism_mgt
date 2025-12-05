@@ -39,10 +39,7 @@ class SideBarMenu extends StatelessWidget {
         title: context.l10n.labelWebAppointment,
         route: Routes.webAppointmentsRoute,
       ),
-      Menu(
-        title: context.l10n.labelProcessChart,
-        route: Routes.processChartsRoute,
-      ),
+
       Menu(
         title: context.l10n.labelHospitals,
         route: Routes.hospitalsRoute,

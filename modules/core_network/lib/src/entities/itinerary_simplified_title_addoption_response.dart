@@ -4,7 +4,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'itinerary_simplified_title_addoption_response.g.dart';
 @JsonSerializable()
 class AddOption {
+  @JsonKey(name: 'option_name')
   String? optionName;
+  @JsonKey(name: 'medical_examination_day')
   String? medicalExaminationDay;
   String? date;
   String? time;

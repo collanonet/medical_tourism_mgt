@@ -1,0 +1,10 @@
+{
+    "patientName": "Test Patient",
+    "medicalInstitutionName": "Test Hospital",
+    "consultationDateAndTime": "2023-12-01 10:00",
+    "startTime": "10:00",
+    "endingTimePlanned": "12:00",
+    "healthCheckupPackage": "Basic Checkup",
+    "patientId": "68428297bdd35753cdd3b031",
+    "addOptions": []
+}

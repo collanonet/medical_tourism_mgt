@@ -1,0 +1,3 @@
+{"patientName":"Test Patient","medicalInstitutionName":null,"consultationDateAndTime":null,"startTime":null,"endingTimePlanned":null,"healthCheckupPackage":null,"patientId":null,"addOptions":[{"option_name":"Test Option","medical_examination_day":"2025-01-01","date":"2025-01-01","time":"10:00"}]}
+Decoded optionName: Snake Option
+Decoded medicalExaminationDay: 2025-02-02
