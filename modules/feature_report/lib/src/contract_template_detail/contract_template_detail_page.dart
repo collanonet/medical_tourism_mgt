@@ -20,21 +20,21 @@ class ContractDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveFormBuilder(
-      form: () => contractTemplatebasicInformation()..markAllAsTouched(),
-      builder: (context, formGroup, child) {
-        return ReactiveFormConfig(
-          validationMessages: validationMessages,
-          child: LayoutView(
-            selectedIndex: 9,
-            page: Provider(
+    return LayoutView(
+      selectedIndex: 8,
+      page: ReactiveFormConfig(
+        validationMessages: validationMessages,
+        child: ReactiveFormBuilder(
+          form: () => contractTemplatebasicInformation(),
+          builder: (context, formGroup, child) {
+            return Provider(
               create: (context) => GetIt.I<ContractTemplateModel>()
                 ..fetchContractTemplateBasicInfo(formGroup),
               child: const ContractDetailScreen(),
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }

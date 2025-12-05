@@ -26,7 +26,7 @@ class HospitalModel with ChangeNotifier {
       await hospitalRepository
           .getHospitals(
         hospitalNameChinese: form?.control('hospitalName').value,
-        hospitalNameKatakana: form?.control('hospitalName').value,
+        hospitalNameKatakana: null,
         healthCheckup: form?.control('type').value != null
             ? form?.control('type').value == '健診'
             : null,
@@ -46,6 +46,7 @@ class HospitalModel with ChangeNotifier {
             ? form?.control('type').value == '美容'
             : null,
         rHave: form?.control('rHave').value,
+        location: form?.control('location').value,
         universityHospitalType:
             form?.control('universityHospitalType').value != null
                 ? form?.control('universityHospitalType').value

@@ -86,6 +86,7 @@ class WebAppointmentScreen extends StatelessWidget {
                             ),
                           ),
                           HeaderTableData(
+                            flex: 2,
                             titleHeader: const Text(
                               '状況',
                               style: TextStyle(
@@ -146,19 +147,29 @@ class WebAppointmentScreen extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 4),
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xff98A6B5),
-                                                borderRadius:
-                                                    BorderRadius.circular(4)),
-                                            child: Text(
-                                              item.patient?.progress ?? '-',
-                                              style: const TextStyle(
-                                                  fontFamily: 'NotoSansJP',
-                                                  package: 'core_ui',
-                                                  color: Colors.white),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Tooltip(
+                                                message: item.patient?.progress ?? '-',
+                                                child: Container(
+                                                  padding: const EdgeInsets.symmetric(
+                                                      horizontal: 8, vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(0xff98A6B5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(4)),
+                                                  child: Text(
+                                                    item.patient?.progress ?? '-',
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: const TextStyle(
+                                                        fontFamily: 'NotoSansJP',
+                                                        package: 'core_ui',
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ],

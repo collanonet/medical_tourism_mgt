@@ -20,6 +20,6 @@ FormGroup materialsForm(
     'brochureName': FormControl<String>(),
     'author': FormControl<String>(),
     'dateOfIssue': FormControl<DateTime>(),
-    'share': FormControl<String>(),
+    'share': FormControl<bool>(value: false),
   });
 }

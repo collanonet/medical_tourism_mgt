@@ -23,7 +23,7 @@ class AgentDetailPage extends StatelessWidget {
     return Provider(
       create: (context) => GetIt.I<AgentDetailModel>(),
       child: LayoutView(
-        selectedIndex: 6,
+        selectedIndex: 5,
         page: AgentDetailScreen(id: id),
       ),
     );

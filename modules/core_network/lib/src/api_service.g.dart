@@ -4476,7 +4476,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-versoin-title',
+              '/simple-itinerary/detail-itinerary-simple-version-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4506,7 +4506,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-versoin-title',
+              '/simple-itinerary/detail-itinerary-simple-version-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4534,7 +4534,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-veraion-explanation',
+              '/simple-itinerary/detail-itinerary-simple-version-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4566,7 +4566,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-veraion-explanation',
+              '/simple-itinerary/detail-itinerary-simple-version-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4595,7 +4595,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itineray-simple-version-interpreter',
+              '/simple-itinerary/detail-itinerary-simple-version-interpreter',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4627,7 +4627,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itineray-simple-version-interpreter',
+              '/simple-itinerary/detail-itinerary-simple-version-interpreter',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -8797,8 +8797,6 @@ class _ApiService implements ApiService {
         .toList();
     return _value;
   }
-
-
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&

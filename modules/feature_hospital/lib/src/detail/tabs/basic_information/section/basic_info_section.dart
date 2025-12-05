@@ -301,7 +301,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                     fillColor: Colors.white,
                                     filled: true,
                                     label: Text(
-                                      '電話番号',
+                                      '電話番号（半角）',
                                     ),
                                   ),
                                   inputFormatters: [

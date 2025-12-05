@@ -26,7 +26,7 @@ class _InvoicePageState extends State<InvoicePage> {
     return Provider(
       create: (context) => GetIt.I<InvoiceModel>()..fetchInvoices(),
       child: const LayoutView(
-        selectedIndex: 7,
+        selectedIndex: 6,
         page: InvoiceScreen(),
       ),
     );

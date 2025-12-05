@@ -306,7 +306,8 @@ class _QAndANewRegistrationSectionState
                                                     onPressed: () {
                                                       context
                                                           .read<QAndAModel>()
-                                                          .resetEditData();
+                                                          .resetEditData(
+                                                              formGroup);
                                                     },
                                                     child: Text(
                                                       'キャンセル',

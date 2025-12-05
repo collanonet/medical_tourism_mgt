@@ -60,6 +60,7 @@ class QAndAModel {
   Future<void> edite(
       FormGroup formGroup, NewRegistrationHospitalResponse response) async {
     editData.value = AsyncData(data: response, loading: true);
+    editData.value = AsyncData(data: response, loading: true);
     formGroup.control('_id').value = response.id;
     formGroup.control('hospital').value = response.hospital;
     formGroup.control('updatedDate').value = response.updatedDate;
@@ -74,8 +75,9 @@ class QAndAModel {
     });
   }
 
-   void resetEditData() {
+   void resetEditData(FormGroup formGroup) {
     editData.value = const AsyncData();
+    formGroup.reset();
   }
 
   ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> submit =
@@ -99,8 +101,9 @@ class QAndAModel {
             formGroup.control('_id').value, request);
         submit.value = AsyncData(data: response);
         newRegistrationHospitalData.value = AsyncData(data: [
-          ...newRegistrationHospitalData.value.data ?? [],
-          response,
+          ...newRegistrationHospitalData.value.data
+                  ?.map((e) => e.id == response.id ? response : e) ??
+              [],
         ]);
       } else {
         final response =

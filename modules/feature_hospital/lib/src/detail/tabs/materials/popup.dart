@@ -127,25 +127,18 @@ class Popup extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '共有',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName: 'share',
-                      decoration: const InputDecoration(
-                        hintText: '共有',
-                      ),
+                child: Row(
+                  children: [
+                    Text(
+                      '共有',
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
-                  ),
-                ],
-              ),
+                    const SizedBox(width: 8),
+                    ReactiveCheckbox(
+                      formControlName: 'share',
+                    ),
+                  ],
+                ),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,

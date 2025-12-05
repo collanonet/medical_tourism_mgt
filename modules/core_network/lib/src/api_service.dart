@@ -1156,9 +1156,6 @@ abstract class ApiService {
     @Query('clinicType') bool? clinicType,
   });
 
-  /// end get basic information of hospital C3 Page
-
-  /// G2
   @GET(EndPoints.SALE_DEARD_INFO)
   Future<HeadInfoResponse> getHeadInfo();
 

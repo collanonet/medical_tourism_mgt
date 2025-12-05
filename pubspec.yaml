@@ -198,3 +198,63 @@ import_sorter:
     - \/lib\/generated\/
     - \/lib\/resources\/
     - \/lib\/l10n\/
+
+dependency_overrides:
+  base_view:
+    path: modules/base_view
+  core_l10n:
+    path: modules/core_l10n
+  core_network:
+    path: modules/core_network
+  core_storage:
+    path: modules/core_storage
+  core_ui:
+    path: modules/core_ui
+  core_utils:
+    path: modules/core_utils
+  data_agent:
+    path: modules/data_agent
+  data_auth:
+    path: modules/data_auth
+  data_chats:
+    path: modules/data_chats
+  data_hospital:
+    path: modules/data_hospital
+  data_invoice:
+    path: modules/data_invoice
+  data_medical_visa:
+    path: modules/data_medical_visa
+  data_patient:
+    path: modules/data_patient
+  data_process_chart:
+    path: modules/data_process_chart
+  data_report:
+    path: modules/data_report
+  data_sale:
+    path: modules/data_sale
+  data_web_appointment:
+    path: modules/data_web_appointment
+  feature_agent:
+    path: modules/feature_agent
+  feature_auth:
+    path: modules/feature_auth
+  feature_chats:
+    path: modules/feature_chats
+  feature_hospital:
+    path: modules/feature_hospital
+  feature_invoice:
+    path: modules/feature_invoice
+  feature_medical_visa:
+    path: modules/feature_medical_visa
+  feature_patient:
+    path: modules/feature_patient
+  feature_process_chart:
+    path: modules/feature_process_chart
+  feature_report:
+    path: modules/feature_report
+  feature_sale:
+    path: modules/feature_sale
+  feature_web_appointment:
+    path: modules/feature_web_appointment
+  socket_chat:
+    path: modules/socket_chat
