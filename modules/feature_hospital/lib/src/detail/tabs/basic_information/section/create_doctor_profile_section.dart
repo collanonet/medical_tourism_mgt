@@ -663,6 +663,9 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                     width: 300,
                     child: ReactiveTextField(
                       formControlName: 'telephoneNumber',
+                      inputFormatters: [
+                        CustomPhoneFormatter(),
+                      ],
                       decoration: const InputDecoration(
                         fillColor: Colors.white,
                         filled: true,

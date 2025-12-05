@@ -77,7 +77,7 @@ class _ReservationHistorySectionState extends State<ReservationHistorySection> {
                             ],
                           ),
                           Text(
-                            data.hospital?.hospitalNameKatakana ?? '',
+                            data.hospital?.hospitalNameChinese ?? '',
                             style: context.textTheme.titleLarge?.copyWith(
                                 color: context.appTheme.primaryColor),
                           ),

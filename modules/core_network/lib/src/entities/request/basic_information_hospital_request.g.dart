@@ -69,6 +69,8 @@ BasicInformationHospitalRequest _$BasicInformationHospitalRequestFromJson(
       shift2Fri: json['shift2Fri'] as String?,
       shift2Sat: json['shift2Sat'] as String?,
       shift2Sun: json['shift2Sun'] as String?,
+      shift1End: json['shift1End'] as String?,
+      shift2End: json['shift2End'] as String?,
       memo: json['memo'] as String?,
       supportLanguageRemark: json['supportLanguageRemark'] as String?,
     );
@@ -135,6 +137,8 @@ Map<String, dynamic> _$BasicInformationHospitalRequestToJson(
       'shift2Fri': instance.shift2Fri,
       'shift2Sat': instance.shift2Sat,
       'shift2Sun': instance.shift2Sun,
+      'shift1End': instance.shift1End,
+      'shift2End': instance.shift2End,
       'memo': instance.memo,
       'supportLanguageRemark': instance.supportLanguageRemark,
     };

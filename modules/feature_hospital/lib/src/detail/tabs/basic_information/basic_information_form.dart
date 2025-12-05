@@ -94,7 +94,13 @@ FormGroup basicInformationForm() {
       'shift1': FormControl<String>(
         value: '',
       ),
+      'shift1End': FormControl<String>(
+        value: '',
+      ),
       'shift2': FormControl<String>(
+        value: '',
+      ),
+      'shift2End': FormControl<String>(
         value: '',
       ),
       'shift1Mon': FormControl<String>(value: '×'),
