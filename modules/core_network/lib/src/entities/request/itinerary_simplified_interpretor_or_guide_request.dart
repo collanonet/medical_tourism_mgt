@@ -8,12 +8,14 @@ class ItineraryInterpreterOrGuideInputRequest {
   String? date;
   String? time;
   String? meetingPlace;
+  String? patientId;
 
   ItineraryInterpreterOrGuideInputRequest({
      this.interpreterOrGuide,
      this.date,
      this.time,
      this.meetingPlace,
+     this.patientId,
   });
 
   factory ItineraryInterpreterOrGuideInputRequest.fromJson(Map<String,dynamic> json){

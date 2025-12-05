@@ -10,6 +10,7 @@ class ItineraryTransferInputRequest {
   String? time;
   String? place;
   String? driverInCharge;
+  String? patientId;
 
   ItineraryTransferInputRequest({
      this.transfer,
@@ -17,6 +18,7 @@ class ItineraryTransferInputRequest {
      this.time,
      this.place,
      this.driverInCharge,
+     this.patientId,
   });
 
   factory ItineraryTransferInputRequest.fromJson(Map<String,dynamic> json){

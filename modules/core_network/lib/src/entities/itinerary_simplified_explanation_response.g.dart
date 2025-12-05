@@ -7,19 +7,22 @@ part of 'itinerary_simplified_explanation_response.dart';
 // **************************************************************************
 
 ItineraryExplanationResponse _$ItineraryExplanationResponseFromJson(
-        Map<String, dynamic> json) =>
-    ItineraryExplanationResponse(
-      id: json['_id'] as String,
-      explanationOfVariousTests: json['explanationOfVariousTests'] as String?,
-      explanationOfVariousTestsNote:
-          json['explanationOfVariousTestsNote'] as String?,
-      mealsBeforeAndOnTheDayOfTheTest:
-          json['mealsBeforeAndOnTheDayOfTheTest'] as String?,
-      aboutTakingMedicine: json['aboutTakingMedicine'] as String?,
-      whatToBringOnTheDayOfTheMedicalExamination:
-          json['whatToBringOnTheDayOfTheMedicalExamination'] as String?,
-      otherConsiderations: json['otherConsiderations'] as String?,
-    );
+        Map<String, dynamic> json) {
+  final explanationData = json['explanation'] as Map<String, dynamic>? ?? json;
+  return ItineraryExplanationResponse(
+    id: json['_id'] as String,
+    explanationOfVariousTests:
+        explanationData['explanationOfVariousTests'] as String?,
+    explanationOfVariousTestsNote:
+        explanationData['explanationOfVariousTestsNote'] as String?,
+    mealsBeforeAndOnTheDayOfTheTest:
+        explanationData['mealsBeforeAndOnTheDayOfTheTest'] as String?,
+    aboutTakingMedicine: explanationData['aboutTakingMedicine'] as String?,
+    whatToBringOnTheDayOfTheMedicalExamination:
+        explanationData['whatToBringOnTheDayOfTheMedicalExamination'] as String?,
+    otherConsiderations: explanationData['otherConsiderations'] as String?,
+  );
+}
 
 Map<String, dynamic> _$ItineraryExplanationResponseToJson(
         ItineraryExplanationResponse instance) =>

@@ -24,7 +24,7 @@ class _ProcessChartPageState extends State<ProcessChartPage> {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<ProcessChartModel>()..fetchItinerary(),
       child: const LayoutView(
-        selectedIndex: 4,
+        selectedIndex: -1,
         page: ProcessChartScreen(),
       ),
     );

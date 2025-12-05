@@ -18,6 +18,7 @@ ItineraryExplanationRequest _$ItineraryExplanationRequestFromJson(
       whatToBringOnTheDayOfTheMedicalExamination:
           json['whatToBringOnTheDayOfTheMedicalExamination'] as String?,
       otherConsiderations: json['otherConsiderations'] as String?,
+      patientId: json['patientId'] as String?,
     );
 
 Map<String, dynamic> _$ItineraryExplanationRequestToJson(
@@ -31,4 +32,5 @@ Map<String, dynamic> _$ItineraryExplanationRequestToJson(
       'whatToBringOnTheDayOfTheMedicalExamination':
           instance.whatToBringOnTheDayOfTheMedicalExamination,
       'otherConsiderations': instance.otherConsiderations,
+      'patientId': instance.patientId,
     };

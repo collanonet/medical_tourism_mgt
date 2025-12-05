@@ -24,7 +24,7 @@ class HospitalDetailPage extends StatelessWidget {
     return Provider(
       create: (_) => GetIt.I<HospitalDetailModel>(),
       child: LayoutView(
-        selectedIndex: 5,
+        selectedIndex: 4,
         page: HospitalDetailScreen(hospitalId: id),
       ),
     );

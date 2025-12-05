@@ -36,6 +36,7 @@ FormGroup basicInformationForm() {
       ),
       'phoneNumber': FormControl<String>(
         value: '',
+        validators: [Validators.pattern(RegExp(r'^[0-9+\-]+$'))],
       ),
       'faxNumber': FormControl<String>(
         value: '',
@@ -93,7 +94,13 @@ FormGroup basicInformationForm() {
       'shift1': FormControl<String>(
         value: '',
       ),
+      'shift1End': FormControl<String>(
+        value: '',
+      ),
       'shift2': FormControl<String>(
+        value: '',
+      ),
+      'shift2End': FormControl<String>(
         value: '',
       ),
       'shift1Mon': FormControl<String>(value: '×'),
@@ -131,7 +138,9 @@ FormGroup basicInformationForm() {
             // validators: [Validators.required],
             ),
         'nameKana': FormControl<String>(),
-        'telephoneNumber': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(
+          validators: [Validators.pattern(RegExp(r'^[0-9+\-]+$'))],
+        ),
         'email': FormControl<String>(
           validators: [
             // Validators.required,
@@ -177,7 +186,9 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
-        'telephoneNumber': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(
+          validators: [Validators.pattern(RegExp(r'^[0-9+\-]+$'))],
+        ),
         'faxNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [

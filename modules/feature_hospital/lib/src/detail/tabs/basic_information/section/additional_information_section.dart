@@ -136,7 +136,10 @@ class _AdditionalInformationSectionState
                                                     e.filename ??
                                                         'File Input .....',
                                                     style: context
-                                                        .textTheme.bodySmall,
+                                                        .textTheme.bodySmall
+                                                        ?.copyWith(
+                                                            color: Colors
+                                                                .lightBlue),
                                                   ),
                                                 ],
                                               ),
@@ -145,34 +148,17 @@ class _AdditionalInformationSectionState
                                               width: context.appTheme.spacing
                                                   .marginExtraSmall,
                                             ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                filePicker().then((value) {
-                                                  if (value != null) {
-                                                    int? index = control.value
-                                                        ?.indexWhere(
-                                                            (element) =>
-                                                                element
-                                                                    .filename ==
-                                                                e.filename);
-                                                    if (index != null) {
-                                                      List<FileSelect> data =
-                                                          control.value ?? [];
-                                                      data[index] = value;
-                                                      control.value = data;
-                                                      setState(() {});
-                                                    }
-                                                  }
-                                                });
+                                            IconButton(
+                                              onPressed: () {
+                                                List<FileSelect> data =
+                                                    control.value ?? [];
+                                                data.remove(e);
+                                                control.value = [...data];
+                                                setState(() {});
                                               },
-                                              child: Chip(
-                                                label: const Text('変更する'),
-                                                labelStyle: TextStyle(
-                                                  color: context.appTheme
-                                                      .secondaryBackgroundColor,
-                                                ),
-                                                backgroundColor: context
-                                                    .appTheme.primaryColor,
+                                              icon: const Icon(
+                                                Icons.delete_outline,
+                                                color: Colors.red,
                                               ),
                                             ),
                                           ],

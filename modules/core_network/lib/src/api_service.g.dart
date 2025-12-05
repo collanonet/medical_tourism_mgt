@@ -3569,9 +3569,9 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ItineraryTitleResponse> getItineraryTitle() async {
+  Future<ItineraryTitleResponse> getItineraryTitle(String patientId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'patientId': patientId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -3582,7 +3582,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-title',
+              '/simple-itinerary/itinerary-simple-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3611,7 +3611,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-title',
+              '/simple-itinerary/itinerary-simple-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3625,9 +3625,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ItineraryExplanationResponse> getItineraryExplanation() async {
+  Future<ItineraryExplanationResponse> getItineraryExplanation(
+      String patientId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'patientId': patientId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -3638,7 +3639,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-explanation',
+              '/simple-itinerary/itinerary-simple-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3667,7 +3668,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-explanation',
+              '/simple-itinerary/itinerary-simple-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3682,9 +3683,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<ItineraryInterpreterOrGuideInputResponse>
-      getItineraryInterpretorOrGuideInput() async {
+      getItineraryInterpretorOrGuideInput(String patientId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'patientId': patientId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -3695,7 +3696,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-interpretor-or-guide',
+              '/simple-itinerary/itinerary-simple-interpretor-or-guide',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3727,7 +3728,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-interpretor-or-guide',
+              '/simple-itinerary/itinerary-simple-interpretor-or-guide',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3742,9 +3743,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ItineraryTransferInputResponse> getItineraryTransferInput() async {
+  Future<ItineraryTransferInputResponse> getItineraryTransferInput(
+      String patientId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'patientId': patientId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -3755,7 +3757,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-transfer-input',
+              '/simple-itinerary/itinerary-simple-transfer-input',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3784,7 +3786,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/itinerary-simple-transfer-input',
+              '/simple-itinerary/itinerary-simple-transfer-input',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4474,7 +4476,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-versoin-title',
+              '/simple-itinerary/detail-itinerary-simple-version-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4504,7 +4506,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-versoin-title',
+              '/simple-itinerary/detail-itinerary-simple-version-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4532,7 +4534,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-veraion-explanation',
+              '/simple-itinerary/detail-itinerary-simple-version-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4564,7 +4566,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-veraion-explanation',
+              '/simple-itinerary/detail-itinerary-simple-version-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4593,7 +4595,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itineray-simple-version-interpreter',
+              '/simple-itinerary/detail-itinerary-simple-version-interpreter',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4625,7 +4627,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itineray-simple-version-interpreter',
+              '/simple-itinerary/detail-itinerary-simple-version-interpreter',
               queryParameters: queryParameters,
               data: _data,
             )

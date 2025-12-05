@@ -16,8 +16,8 @@ class ProcessChartRemoteProvider {
     return apiService.postFilterpatientChart(patientFilterRequst);
   }
 
-  Future<ItineraryTitleResponse> getItineraryTitle() async {
-    return apiService.getItineraryTitle();
+  Future<ItineraryTitleResponse> getItineraryTitle(String? patientId) async {
+    return apiService.getItineraryTitle(patientId!);
   }
 
   Future<ItineraryTitleResponse> postItineraryTitle(
@@ -25,8 +25,9 @@ class ProcessChartRemoteProvider {
     return apiService.postItineraryTitle(itineraryTitleRequest);
   }
 
-  Future<ItineraryExplanationResponse> getInfoMedicalExamination() async {
-    return await apiService.getItineraryExplanation();
+  Future<ItineraryExplanationResponse> getInfoMedicalExamination(
+      String? patientId) async {
+    return await apiService.getItineraryExplanation(patientId!);
   }
 
   Future<ItineraryExplanationResponse> postItineraryExplanation(
@@ -36,8 +37,8 @@ class ProcessChartRemoteProvider {
   }
 
   Future<ItineraryInterpreterOrGuideInputResponse>
-      getItineraryInterpretorOrGuideInput() async {
-    return await apiService.getItineraryInterpretorOrGuideInput();
+      getItineraryInterpretorOrGuideInput(String? patientId) async {
+    return await apiService.getItineraryInterpretorOrGuideInput(patientId!);
   }
 
   Future<ItineraryInterpreterOrGuideInputResponse>
@@ -48,8 +49,9 @@ class ProcessChartRemoteProvider {
         itineraryInterpreterOrGuideInputRequest);
   }
 
-  Future<ItineraryTransferInputResponse> getItineraryTransferInput() async {
-    return await apiService.getItineraryTransferInput();
+  Future<ItineraryTransferInputResponse> getItineraryTransferInput(
+      String? patientId) async {
+    return await apiService.getItineraryTransferInput(patientId!);
   }
 
   Future<ItineraryTransferInputResponse> postItineraryTransferInput(

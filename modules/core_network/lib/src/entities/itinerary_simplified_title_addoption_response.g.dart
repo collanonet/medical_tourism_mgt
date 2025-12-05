@@ -7,15 +7,15 @@ part of 'itinerary_simplified_title_addoption_response.dart';
 // **************************************************************************
 
 AddOption _$AddOptionFromJson(Map<String, dynamic> json) => AddOption(
-      optionName: json['optionName'] as String?,
-      medicalExaminationDay: json['medicalExaminationDay'] as String?,
+      optionName: json['option_name'] as String?,
+      medicalExaminationDay: json['medical_examination_day'] as String?,
       date: json['date'] as String?,
       time: json['time'] as String?,
     );
 
 Map<String, dynamic> _$AddOptionToJson(AddOption instance) => <String, dynamic>{
-      'optionName': instance.optionName,
-      'medicalExaminationDay': instance.medicalExaminationDay,
+      'option_name': instance.optionName,
+      'medical_examination_day': instance.medicalExaminationDay,
       'date': instance.date,
       'time': instance.time,
     };

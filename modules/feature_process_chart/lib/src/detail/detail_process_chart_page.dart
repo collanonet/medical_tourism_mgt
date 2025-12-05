@@ -21,9 +21,9 @@ class DetailProcessChartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider(
       create: (context) => GetIt.I<DetailProcessChartModel>(),
-      child: LayoutView(
-        selectedIndex: 4,
-        page: DetailProcessChartScreen(id: id),
+      child: const LayoutView(
+        selectedIndex: -1,
+        page: DetailProcessChartScreen(),
       ),
     );
   }

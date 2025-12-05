@@ -44,70 +44,7 @@ class MaterialSectionState extends State<MaterialSection> {
                     separatorBuilder: (BuildContext context, int index) =>
                         SizedBox(height: context.appTheme.spacing.formSpacing),
                     children: [
-                      // Memo
-                      ValueListenableBuilder(
-                        valueListenable:
-                            context.read<MaterialsModel>().memoMaterialsData,
-                        builder: (context, value, _) {
-                          return Skeletonizer(
-                            enabled: value.loading,
-                            child: Column(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'メモ',
-                                    ),
-                                    ReactiveTextField(
-                                      formControlName: 'memo',
-                                      maxLines: 6,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: context.appTheme.spacing.marginMedium,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    // Make as a copy button
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        // todo: copy memo to clipboard
-                                      },
-                                      child: const Text(
-                                        'コピーする',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    // Save button
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        context
-                                            .read<MaterialsModel>()
-                                            .submitMemoData(formGroup);
-                                      },
-                                      child: const Text(
-                                        '保存する',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                      // Memo removed
 
                       Column(
                         children: [

@@ -70,6 +70,9 @@ class BasicInformationHospitalResponse {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  String? shift1End;
+  String? shift2End;
+
   BasicInformationHospitalResponse({
     required this.id,
     this.hospitalNameChinese,
@@ -134,6 +137,8 @@ class BasicInformationHospitalResponse {
     this.supportLanguageRemark,
     required this.createdAt,
     required this.updatedAt,
+    this.shift1End,
+    this.shift2End,
   });
 
   factory BasicInformationHospitalResponse.fromJson(

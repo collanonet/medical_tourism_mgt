@@ -723,7 +723,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.ITINERARY_SIMPLE_TITLE)
-  Future<ItineraryTitleResponse> getItineraryTitle();
+  Future<ItineraryTitleResponse> getItineraryTitle(
+    @Query('patientId') String patientId,
+  );
 
   @POST(EndPoints.ITINERARY_SIMPLE_TITLE)
   Future<ItineraryTitleResponse> postItineraryTitle(
@@ -731,7 +733,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.ITINERARY_SIMPLE_EXPLANATION)
-  Future<ItineraryExplanationResponse> getItineraryExplanation();
+  Future<ItineraryExplanationResponse> getItineraryExplanation(
+    @Query('patientId') String patientId,
+  );
 
   @POST(EndPoints.ITINERARY_SIMPLE_EXPLANATION)
   Future<ItineraryExplanationResponse> postItineraryExplanation(
@@ -740,7 +744,9 @@ abstract class ApiService {
 
   @GET(EndPoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
   Future<ItineraryInterpreterOrGuideInputResponse>
-      getItineraryInterpretorOrGuideInput();
+      getItineraryInterpretorOrGuideInput(
+    @Query('patientId') String patientId,
+  );
 
   @POST(EndPoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
   Future<ItineraryInterpreterOrGuideInputResponse>
@@ -751,7 +757,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.ITINERARY_SIMPLE_TRANSFER_INPUT)
-  Future<ItineraryTransferInputResponse> getItineraryTransferInput();
+  Future<ItineraryTransferInputResponse> getItineraryTransferInput(
+    @Query('patientId') String patientId,
+  );
 
   @POST(EndPoints.ITINERARY_SIMPLE_TRANSFER_INPUT)
   Future<ItineraryTransferInputResponse> postItineraryTransferInput(
@@ -1148,9 +1156,6 @@ abstract class ApiService {
     @Query('clinicType') bool? clinicType,
   });
 
-  /// end get basic information of hospital C3 Page
-
-  /// G2
   @GET(EndPoints.SALE_DEARD_INFO)
   Future<HeadInfoResponse> getHeadInfo();
 

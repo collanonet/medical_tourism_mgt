@@ -21,7 +21,7 @@ class AgentPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<AgentModel>()..getAgent(),
       child: const LayoutView(
-        selectedIndex: 6,
+        selectedIndex: 5,
         page: AgentScreen(),
       ),
     );

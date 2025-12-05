@@ -96,7 +96,7 @@ class WebAppointmentDetailModel {
 
       if (hospital.value.hasData) {
         formGroup.control('medicalInstitutionName').value =
-            hospital.value.requireData.hospitalNameKatakana;
+            hospital.value.requireData.hospitalNameChinese;
         insertHospitalSchedule();
         getDoctorsByHospitalId(hospital.value.requireData.id);
       }
@@ -125,7 +125,7 @@ class WebAppointmentDetailModel {
   void insertHospitalSchedule() {
     var data = hospital.value.requireData;
     formGroup.control('medicalInstitutionName').value =
-        data.hospitalNameKatakana;
+        data.hospitalNameChinese;
     formGroup.control('department1').value = data.department1;
     formGroup.control('department2').value = data.department2;
     formGroup.control('shift1').value = data.shift1;
@@ -358,6 +358,40 @@ class WebAppointmentDetailModel {
     }
   }
 
+  Future<void> cancelReservation() async {
+    if (webBooking.value.hasData) {
+      // For cancellation, we don't need to validate/use the form data strictly
+      // Just send the cancellation status and message if any
+      List<MessageFrom> messageFrom = webBooking.value.data!.messageFrom ?? [];
+
+      if (formGroup.control('message').value != null) {
+        messageFrom.add(MessageFrom(
+          message: formGroup.control('message').value,
+          from: 'Admin',
+        ));
+      }
+
+      var request = WebBookingMedicalRecordRequest(
+        patientName:
+            '${patient.value.data?.firstNameRomanized ?? '-'} ${patient.value.data?.middleNameRomanized ?? '-'} ${patient.value.data?.familyNameRomanized ?? '-'}',
+        patient: patient.value.data?.id,
+        hospital: hospital.value.data?.id,
+        doctor: doctorSelected.value.data?.id,
+        proposedDates: webBooking.value.data?.proposedDates, // Keep existing dates
+        messageFrom: messageFrom,
+        isClosed: true, // Set to closed
+        timeZoneConfirmationTo: webBooking.value.data?.timeZoneConfirmationTo,
+        timeZoneConfirmationFrom:
+            webBooking.value.data?.timeZoneConfirmationFrom,
+        reservationConfirmationDate:
+            webBooking.value.data?.reservationConfirmationDate,
+        testCallDate: webBooking.value.data?.testCallDate, // Keep existing
+        testCallTime: webBooking.value.data?.testCallTime, // Keep existing
+      );
+      updateReservation(webBooking.value.requireData.id, request);
+    }
+  }
+
   ValueNotifier<AsyncData<List<WebBookingMedicalRecordResponse>>> webBookings =
       ValueNotifier(const AsyncData());
 
@@ -400,7 +434,7 @@ class WebAppointmentDetailModel {
           desiredDate1: formGroup.control('preferredDate1').value,
           desiredDate2: formGroup.control('preferredDate2').value,
           desiredDate3: formGroup.control('preferredDate3').value,
-          medicalName: hospital.value.requireData.hospitalNameKatakana,
+          medicalName: hospital.value.requireData.hospitalNameChinese,
           reason: formGroup.control('remarks').value,
         );
       } else {
@@ -408,7 +442,7 @@ class WebAppointmentDetailModel {
           desiredDate1: formGroup.control('preferredDate1').value,
           desiredDate2: formGroup.control('preferredDate2').value,
           desiredDate3: formGroup.control('preferredDate3').value,
-          medicalName: hospital.value.requireData.hospitalNameKatakana,
+          medicalName: hospital.value.requireData.hospitalNameChinese,
           reason: formGroup.control('remarks').value,
         );
       }

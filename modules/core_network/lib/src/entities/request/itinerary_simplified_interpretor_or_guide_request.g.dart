@@ -14,6 +14,7 @@ ItineraryInterpreterOrGuideInputRequest
           date: json['date'] as String?,
           time: json['time'] as String?,
           meetingPlace: json['meetingPlace'] as String?,
+          patientId: json['patientId'] as String?,
         );
 
 Map<String, dynamic> _$ItineraryInterpreterOrGuideInputRequestToJson(
@@ -23,4 +24,5 @@ Map<String, dynamic> _$ItineraryInterpreterOrGuideInputRequestToJson(
       'date': instance.date,
       'time': instance.time,
       'meetingPlace': instance.meetingPlace,
+      'patientId': instance.patientId,
     };

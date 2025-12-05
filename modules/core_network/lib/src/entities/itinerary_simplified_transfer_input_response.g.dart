@@ -7,15 +7,17 @@ part of 'itinerary_simplified_transfer_input_response.dart';
 // **************************************************************************
 
 ItineraryTransferInputResponse _$ItineraryTransferInputResponseFromJson(
-        Map<String, dynamic> json) =>
-    ItineraryTransferInputResponse(
-      id: json['_id'] as String,
-      transfer: json['transfer'] as String?,
-      date: json['date'] as String?,
-      time: json['time'] as String?,
-      place: json['place'] as String?,
-      driverInCharge: json['driverInCharge'] as String?,
-    );
+        Map<String, dynamic> json) {
+  final transferData = json['transferInput'] as Map<String, dynamic>? ?? json;
+  return ItineraryTransferInputResponse(
+    id: json['_id'] as String,
+    transfer: transferData['transfer'] as String?,
+    date: transferData['date'] as String?,
+    time: transferData['time'] as String?,
+    place: transferData['place'] as String?,
+    driverInCharge: transferData['driverInCharge'] as String?,
+  );
+}
 
 Map<String, dynamic> _$ItineraryTransferInputResponseToJson(
         ItineraryTransferInputResponse instance) =>

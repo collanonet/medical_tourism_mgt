@@ -1019,15 +1019,11 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                         ReactiveFormConsumer(
                                             builder: (context, form, _) {
                                           return OutlinedButton(
-                                            onPressed: form.invalid
-                                                ? null
-                                                : () {
+                                            onPressed: () {
                                                     context
                                                         .read<
                                                             WebAppointmentDetailModel>()
-                                                        .submitData(
-                                                          isClosed: true,
-                                                        );
+                                                        .cancelReservation();
                                                   },
                                             child: const Text('キャンセルして病院へ回答する'),
                                           );

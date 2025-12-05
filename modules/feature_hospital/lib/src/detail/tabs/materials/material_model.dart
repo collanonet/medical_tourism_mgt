@@ -103,7 +103,7 @@ class MaterialsModel {
           brochureName: formGroup.control('brochureName').value,
           author: formGroup.control('author').value,
           dateOfIssue: formGroup.control('dateOfIssue').value,
-          share: formGroup.control('share').value,
+          share: formGroup.control('share').value?.toString(),
           hospitalRecord: formGroup.control('hospitalRecord').value,
         ),
       );

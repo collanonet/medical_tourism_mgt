@@ -2,6 +2,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,6 +45,14 @@ class MedicalVisaModel with ChangeNotifier {
       final response = await patientRepository.getMedicalRecordVisa(id);
       insertData(formGroup, response);
       medicalRecordVisaData.value = AsyncData(data: response);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        logger.d('MedicalRecordVisaData not found (404), treating as new entry.');
+        medicalRecordVisaData.value = const AsyncData(data: null);
+      } else {
+        logger.d(e);
+        medicalRecordVisaData.value = AsyncData(error: e);
+      }
     } catch (e) {
       logger.d(e);
       medicalRecordVisaData.value = AsyncData(error: e);

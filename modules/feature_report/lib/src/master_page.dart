@@ -16,7 +16,7 @@ class MasterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const LayoutView(
-      selectedIndex: 9,
+      selectedIndex: 8,
       page: MasterScreen(),
     );
   }

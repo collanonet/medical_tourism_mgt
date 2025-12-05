@@ -24,13 +24,14 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<ItineraryExplanationResponse> getInfoItineraryExamination() {
-    return remote.getInfoMedicalExamination();
+  Future<ItineraryExplanationResponse> getInfoItineraryExamination(
+      String? patientId) {
+    return remote.getInfoMedicalExamination(patientId);
   }
 
   @override
-  Future<ItineraryTitleResponse> getItineraryTitle() {
-    return remote.getItineraryTitle();
+  Future<ItineraryTitleResponse> getItineraryTitle(String? patientId) {
+    return remote.getItineraryTitle(patientId);
   }
 
   @override
@@ -47,13 +48,14 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<ItineraryInterpreterOrGuideInputResponse>
-      getItineraryInterpretorOrGuideInput() {
-    return remote.getItineraryInterpretorOrGuideInput();
+      getItineraryInterpretorOrGuideInput(String? patientId) {
+    return remote.getItineraryInterpretorOrGuideInput(patientId);
   }
 
   @override
-  Future<ItineraryTransferInputResponse> getItineraryTransferInput() {
-    return remote.getItineraryTransferInput();
+  Future<ItineraryTransferInputResponse> getItineraryTransferInput(
+      String? patientId) {
+    return remote.getItineraryTransferInput(patientId);
   }
 
   @override

@@ -26,7 +26,7 @@ class _HospitalPageState extends State<HospitalPage> {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<HospitalModel>()..fetchHospitals(),
       child: const LayoutView(
-        selectedIndex: 5,
+        selectedIndex: 4,
         page: HospitalScreen(),
       ),
     );

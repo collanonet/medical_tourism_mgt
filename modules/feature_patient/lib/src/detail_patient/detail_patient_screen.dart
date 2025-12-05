@@ -17,6 +17,7 @@ import 'domestic_medical_data/domestic_medical_data_page.dart';
 import 'medical_payment_details/medical_payment_details_page.dart';
 import 'medical_summary/medical_summary_page.dart';
 import 'medical_visa/medical_visa_page.dart';
+import 'itinerary/patient_itinerary_page.dart';
 import 'overseas_medical_data/overseas_medical_data_page.dart';
 import 'patient_response_data/patient_response_page.dart';
 import 'progress_list/progress_list_page.dart';
@@ -75,6 +76,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                               '請求書', // Statement
                               '精算履歴', // billing
                               '診療報酬明細', // billing details
+                              '行程表', // Itinerary
                               '医療ビザ', // medical visa
                               'Web予約', // Web reservation
                             ],
@@ -135,6 +137,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                           MedicalPaymentDetailsPage(
                             patient: patientData.requireData,
                             id: patientData.requireData.id,
+                          ),
+                          PatientItineraryPage(
+                            patient: patientData.requireData,
                           ),
                           MedicalVisaPage(
                             patient: patientData.requireData,

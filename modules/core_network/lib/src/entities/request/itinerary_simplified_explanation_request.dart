@@ -10,6 +10,7 @@ class ItineraryExplanationRequest {
   String? aboutTakingMedicine;
   String? whatToBringOnTheDayOfTheMedicalExamination;
   String? otherConsiderations;
+  String? patientId;
 
   ItineraryExplanationRequest({
      this.explanationOfVariousTests,
@@ -18,6 +19,7 @@ class ItineraryExplanationRequest {
      this.aboutTakingMedicine,
      this.whatToBringOnTheDayOfTheMedicalExamination,
      this.otherConsiderations,
+     this.patientId,
   });
 
   factory ItineraryExplanationRequest.fromJson(Map<String,dynamic> json){

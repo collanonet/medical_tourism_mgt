@@ -301,7 +301,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                     fillColor: Colors.white,
                                     filled: true,
                                     label: Text(
-                                      '電話番号',
+                                      '電話番号（半角）',
                                     ),
                                   ),
                                   inputFormatters: [
@@ -1052,7 +1052,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               const SizedBox(
-                                width: 150,
+                                width: 180,
                                 child: Text(
                                   '診療時間',
                                   style: TextStyle(
@@ -1163,9 +1163,67 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               SizedBox(
-                                width: 150,
-                                child: ReactiveTextField(
-                                  formControlName: 'shift1',
+                                width: 180,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: 75,
+                                      child: ReactiveTextField<String>(
+                                        formControlName: 'shift1',
+                                        readOnly: true,
+                                        onTap: (control) async {
+                                          final time = await showTimePicker(
+                                            context: context,
+                                            initialTime: const TimeOfDay(
+                                                hour: 9, minute: 0),
+                                            builder: (context, child) {
+                                              return MediaQuery(
+                                                data: MediaQuery.of(context)
+                                                    .copyWith(
+                                                        alwaysUse24HourFormat:
+                                                            true),
+                                                child: child!,
+                                              );
+                                            },
+                                          );
+                                          if (time != null) {
+                                            control.value =
+                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    const Text('~'),
+                                    SizedBox(
+                                      width: 75,
+                                      child: ReactiveTextField<String>(
+                                        formControlName: 'shift1End',
+                                        readOnly: true,
+                                        onTap: (control) async {
+                                          final time = await showTimePicker(
+                                            context: context,
+                                            initialTime: const TimeOfDay(
+                                                hour: 17, minute: 0),
+                                            builder: (context, child) {
+                                              return MediaQuery(
+                                                data: MediaQuery.of(context)
+                                                    .copyWith(
+                                                        alwaysUse24HourFormat:
+                                                            true),
+                                                child: child!,
+                                              );
+                                            },
+                                          );
+                                          if (time != null) {
+                                            control.value =
+                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(
@@ -1318,9 +1376,67 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               SizedBox(
-                                width: 150,
-                                child: ReactiveTextField(
-                                  formControlName: 'shift2',
+                                width: 180,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: 75,
+                                      child: ReactiveTextField<String>(
+                                        formControlName: 'shift2',
+                                        readOnly: true,
+                                        onTap: (control) async {
+                                          final time = await showTimePicker(
+                                            context: context,
+                                            initialTime: const TimeOfDay(
+                                                hour: 9, minute: 0),
+                                            builder: (context, child) {
+                                              return MediaQuery(
+                                                data: MediaQuery.of(context)
+                                                    .copyWith(
+                                                        alwaysUse24HourFormat:
+                                                            true),
+                                                child: child!,
+                                              );
+                                            },
+                                          );
+                                          if (time != null) {
+                                            control.value =
+                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    const Text('~'),
+                                    SizedBox(
+                                      width: 75,
+                                      child: ReactiveTextField<String>(
+                                        formControlName: 'shift2End',
+                                        readOnly: true,
+                                        onTap: (control) async {
+                                          final time = await showTimePicker(
+                                            context: context,
+                                            initialTime: const TimeOfDay(
+                                                hour: 17, minute: 0),
+                                            builder: (context, child) {
+                                              return MediaQuery(
+                                                data: MediaQuery.of(context)
+                                                    .copyWith(
+                                                        alwaysUse24HourFormat:
+                                                            true),
+                                                child: child!,
+                                              );
+                                            },
+                                          );
+                                          if (time != null) {
+                                            control.value =
+                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(

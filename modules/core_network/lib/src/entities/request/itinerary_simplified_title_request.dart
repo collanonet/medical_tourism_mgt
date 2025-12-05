@@ -10,6 +10,7 @@ class ItineraryTitleRequest {
   String? startTime;
   String? endingTimePlanned;
   String? healthCheckupPackage;
+  String? patientId;
   List<AddOption>? addOptions;
 
   ItineraryTitleRequest({
@@ -19,6 +20,7 @@ class ItineraryTitleRequest {
      this.startTime,
      this.endingTimePlanned,
      this.healthCheckupPackage,
+     this.patientId,
      this.addOptions,
   });
 
@@ -35,7 +37,9 @@ class ItineraryTitleRequest {
 
 @JsonSerializable()
 class AddOption {
+  @JsonKey(name: 'option_name')
   String? optionName;
+  @JsonKey(name: 'medical_examination_day')
   String? medicalExaminationDay;
   String? date;
   String? time;

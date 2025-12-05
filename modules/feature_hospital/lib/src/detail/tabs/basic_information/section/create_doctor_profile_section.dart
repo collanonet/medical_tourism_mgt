@@ -585,32 +585,46 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                     formControlName: 'fileDoctor',
                                     builder: (context, control, _) {
                                       final file = control.value;
-                                      return InkWell(
-                                        onTap: () {
-                                          final url = file?.url;
-                                          if (url != null && url.isNotEmpty) {
-                                            openUrlInBrowser(fileName: url);
-                                          } else if (file?.file != null &&
-                                              file?.filename != null) {
-                                            downloadFile(
-                                              fileName:
-                                                  file!.filename ?? 'file',
-                                              downloadName:
-                                                  file.filename ?? 'file',
-                                            );
-                                          }
-                                        },
-                                        child: Text(
-                                          file == null
-                                              ? 'File Input .....'
-                                              : file.url != null
+                                      if (file == null) {
+                                        return const SizedBox.shrink();
+                                      }
+                                      return Row(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              final url = file.url;
+                                              if (url != null &&
+                                                  url.isNotEmpty) {
+                                                openUrlInBrowser(fileName: url);
+                                              } else if (file.file != null &&
+                                                  file.filename != null) {
+                                                downloadFile(
+                                                  fileName:
+                                                      file.filename ?? 'file',
+                                                  downloadName:
+                                                      file.filename ?? 'file',
+                                                );
+                                              }
+                                            },
+                                            child: Text(
+                                              file.url != null
                                                   ? file.url!
-                                                  : file.filename ??
-                                                      'File Input .....',
-                                          style: context.textTheme.bodySmall
-                                              ?.copyWith(
-                                                  color: Colors.lightBlue),
-                                        ),
+                                                  : file.filename ?? '',
+                                              style: context.textTheme.bodySmall
+                                                  ?.copyWith(
+                                                      color: Colors.lightBlue),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              control.value = null;
+                                            },
+                                            icon: const Icon(
+                                              Icons.delete_outline,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
                                       );
                                     }),
                               ]),
@@ -649,11 +663,14 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                     width: 300,
                     child: ReactiveTextField(
                       formControlName: 'telephoneNumber',
+                      inputFormatters: [
+                        CustomPhoneFormatter(),
+                      ],
                       decoration: const InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
                         label: Text(
-                          '電話番号',
+                          '電話番号（半角）',
                         ),
                       ),
                     ),
@@ -756,7 +773,9 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
             'name': FormControl<String>(),
           })
         ]),
-        'telephoneNumber': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(
+          validators: [Validators.pattern(RegExp(r'^[0-9+\-]+$'))],
+        ),
         'faxNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [

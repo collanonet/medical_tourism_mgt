@@ -173,7 +173,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                                 fillColor: Colors.white,
                                                 filled: true,
                                                 label: Text(
-                                                  '電話番号',
+                                                  '電話番号（半角）',
                                                 ),
                                               ),
                                             ),
@@ -248,7 +248,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           // validators: [Validators.required],
                           ),
                       'nameKana': FormControl<String>(),
-                      'telephoneNumber': FormControl<String>(),
+                      'telephoneNumber': FormControl<String>(
+                        validators: [Validators.pattern(RegExp(r'^[0-9+\-]+$'))],
+                      ),
                       'email': FormControl<String>(
                         validators: [
                           // Validators.required,
