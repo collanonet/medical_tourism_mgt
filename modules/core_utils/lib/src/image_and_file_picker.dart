@@ -53,14 +53,18 @@ Future<FileSelect?> filePicker() async {
     allowMultiple: false,
     type: FileType.custom,
     allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'],
+    withData: true, // Webでbytesを取得するために必要
   );
 
   try {
     if (result != null) {
-      // File file = File(result.files.single.path!);
+      final file = result.files.single;
+      if (file.bytes == null) {
+        throw 'ファイルの読み込みに失敗しました。bytesがnullです。';
+      }
       return FileSelect(
-        filename: result.files.single.name,
-        file: result.files.single.bytes!,
+        filename: file.name,
+        file: file.bytes!,
       );
     } else {
       // User canceled the picker
