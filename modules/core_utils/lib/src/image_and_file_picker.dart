@@ -51,6 +51,7 @@ Future<List<File>?> imageMultiplePicker() async {
 Future<FileSelect?> filePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: false,
+    withData: true,
     type: FileType.custom,
     allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg', 'doc', 'docx', 'xls', 'xlsx', 'mp4'],
     withData: true, // Webでbytesを取得するために必要

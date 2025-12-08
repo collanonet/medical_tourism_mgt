@@ -11,6 +11,7 @@ class MedicalRecordAgent {
   String? company;
   String? nameInKanji;
   String? nameInKana;
+  @JsonKey(name: 'agent_type')
   String? agentType;
   String medicalRecord;
   final DateTime createdAt;
