@@ -51,7 +51,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
 
             if (value.hasError) {
               snackBarWidget(
-                message: '保存できませんでした。 もう一度試してください。',
+                message: '保存できませんでした: ${value.error}',
                 backgroundColor: Colors.red,
                 prefixIcon: const Icon(Icons.error, color: Colors.white),
               );

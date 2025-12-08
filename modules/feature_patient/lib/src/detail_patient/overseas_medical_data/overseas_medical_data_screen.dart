@@ -274,11 +274,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                   });
                                 },
                               ),
-                              Expanded(
-                                  child: Text(
-                                '入手日',
-                                style: context.textTheme.bodySmall,
-                              )),
+
                               Expanded(
                                   flex: 3,
                                   child: Text(
@@ -374,11 +370,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                               });
                                             },
                                           ),
-                                          Expanded(
-                                              child: Text(data.acquisitionDate != null
-                                                  ? Dates.formShortDate(
-                                                      data.acquisitionDate)
-                                                  : '--')),
+
                                           Expanded(
                                               flex: 3,
                                               child: Row(
