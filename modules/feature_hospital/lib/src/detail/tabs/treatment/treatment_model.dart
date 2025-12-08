@@ -189,12 +189,21 @@ class TreatmentModel {
       List<TreatmentMenuResponse> dataList = treatmentMenuData.value.data ?? [];
       submitTreatmentMenudata.value = const AsyncData(loading: true);
 
-      await formGroup.control('treatmentMenu').value.forEach((element) async {
+      for (var element in formGroup.control('treatmentMenu').value) {
         List<TaxModel> treatmentCostTax = [];
         for (var elementx in element['treatmentCostTax']) {
           int index = element['treatmentCostTax'].indexOf(elementx);
           // get tax rate from header
-          int? taxRate = formGroup.control('tax').value[index]['tax'];
+          // Robust check: ensure index is within bounds of header tax array
+          int? taxRate;
+          var headerTaxControl = formGroup.control('tax');
+          if (headerTaxControl.value is List && index < headerTaxControl.value.length) {
+             taxRate = headerTaxControl.value[index]['tax'];
+          } else {
+             // Fallback: use existing tax or default if header missing
+             taxRate = elementx['tax'] ?? 0;
+          }
+          
           treatmentCostTax.add(TaxModel(
             cost: elementx['cost'] ?? 0,
             tax: taxRate ?? 0,
@@ -226,7 +235,7 @@ class TreatmentModel {
           response = await hospitalRepository.postTreatmentMenu(request);
           dataList.add(response);
         }
-      });
+      }
 
       submitTreatmentMenudata.value = AsyncData(data: dataList);
       treatmentMenuData.value = AsyncData(data: dataList);
@@ -246,10 +255,7 @@ class TreatmentModel {
       List<TreatmentTeleMenuResponse> dataList =
           treatmentMenuTeleData.value.data ?? [];
       submitTreatmentMenuTeledata.value = const AsyncData(loading: true);
-      await formGroup
-          .control('telemedicineMenu')
-          .value
-          .forEach((element) async {
+      for (var element in formGroup.control('telemedicineMenu').value) {
         TreatmentTeleMenuRequest request = TreatmentTeleMenuRequest(
           hospital: hospitalId.value,
           project: element['project'],
@@ -271,7 +277,7 @@ class TreatmentModel {
           response = await hospitalRepository.postTreatmentTeleMenu(request);
           dataList.add(response);
         }
-      });
+      }
 
       if (treatmentMenuTeleId.value.isNotEmpty) {
         for (var id in treatmentMenuTeleId.value) {
