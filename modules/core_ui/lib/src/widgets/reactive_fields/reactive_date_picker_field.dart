@@ -1,3 +1,5 @@
+import 'dart:async';
+
 // Flutter imports:
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,13 +73,12 @@ class ReactiveDatePickerField extends StatefulWidget {
 }
 
 class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
-  final dateFormat = DateFormat('yyyy/MM/dd');
   final TextEditingController _dateController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  final String _datePattern =
-      r'^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])$';
+  final _formKey = GlobalKey<FormState>();
+  final String _datePattern = r'^\d{4}/\d{2}/\d{2}$';
+  final DateFormat dateFormat = DateFormat('yyyy/MM/dd');
   bool _isRequired = false;
+  StreamSubscription? _subscription;
 
   @override
   void initState() {
@@ -103,7 +104,7 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
       _dateController.text = dateFormat.format(currentValue);
     }
 
-    control.valueChanges.listen((value) {
+    _subscription = control.valueChanges.listen((value) {
       if (value != null) {
         _dateController.text = dateFormat.format(value);
       } else {
@@ -248,6 +249,7 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
 
   @override
   void dispose() {
+    _subscription?.cancel();
     _dateController.dispose();
     super.dispose();
   }

@@ -205,6 +205,7 @@ class TreatmentModel {
           }
           
           treatmentCostTax.add(TaxModel(
+            id: elementx['_id'],
             cost: elementx['cost'] ?? 0,
             tax: taxRate ?? 0,
           ));
@@ -234,6 +235,8 @@ class TreatmentModel {
         } else {
           response = await hospitalRepository.postTreatmentMenu(request);
           dataList.add(response);
+          // Patch the ID back to the form control so subsequent saves are updates
+          (element as AbstractControl).patchValue({'_id': response.id});
         }
       }
 

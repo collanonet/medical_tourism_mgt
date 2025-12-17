@@ -5,7 +5,7 @@ part 'treatment_menu_tax.g.dart';
 
 @JsonSerializable()
 class TaxModel {
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', includeIfNull: false)
   String? id;
   double cost;
   int tax;

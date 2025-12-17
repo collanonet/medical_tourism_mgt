@@ -65,11 +65,11 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 '_id': FormControl<String>(),
                                 'hospitalId': FormControl<String>(
                                     value: widget.hospitalId),
-                                'project': FormControl<String>(),
+                                'project': FormControl<String>(validators: [Validators.required]),
                                 'treatmentCostExcludingTax':
-                                    FormControl<double>(),
+                                    FormControl<double>(validators: [Validators.required]),
                                 'treatmentCostTaxIncluded':
-                                    FormControl<double>(),
+                                    FormControl<double>(validators: [Validators.required]),
                                 'remark': FormControl<String>(),
                                 'treatmentCostTax': FormArray([
                                   FormGroup({
@@ -153,7 +153,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                     fillColor: Colors.white,
                                     filled: true,
                                   ),
-                                  valueAccessor: DoubleValueAccessor(),
+                                  valueAccessor: CurrencyValueAccessor(),
                                   inputFormatters: [
                                     CustomCurrencyFormatter(),
                                     // FilteringTextInputFormatter.allow(
@@ -165,7 +165,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 flex: 1,
                                 child: ReactiveTextField<double>(
                                   keyboardType: TextInputType.number,
-                                  valueAccessor: DoubleValueAccessor(),
+                                  valueAccessor: CurrencyValueAccessor(),
                                   inputFormatters: [
                                     CustomCurrencyFormatter(),
                                     // FilteringTextInputFormatter.allow(
@@ -186,7 +186,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                           child: ReactiveTextField(
                                             keyboardType: TextInputType.number,
                                             valueAccessor:
-                                                DoubleValueAccessor(),
+                                                CurrencyValueAccessor(),
                                             inputFormatters: [
                                               CustomCurrencyFormatter(),
                                               // FilteringTextInputFormatter.allow(

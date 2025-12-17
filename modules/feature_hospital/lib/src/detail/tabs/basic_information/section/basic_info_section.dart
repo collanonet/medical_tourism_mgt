@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
@@ -197,8 +198,9 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Wrap(
+                            spacing: context.appTheme.spacing.marginMedium,
+                            runSpacing: context.appTheme.spacing.marginMedium,
                             children: [
                               SizedBox(
                                 width: 300,
@@ -212,9 +214,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
                               ),
                               SizedBox(
                                 width: 300,
@@ -296,7 +295,11 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'phoneNumber',
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.phone,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9+\-]')),
+                                  ],
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -304,9 +307,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                       '電話番号（半角）',
                                     ),
                                   ),
-                                  inputFormatters: [
-                                    CustomPhoneFormatter(),
-                                  ],
                                 ),
                               ),
                               SizedBox(
@@ -397,17 +397,9 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   const Text(
                                     '対応メニュー', //
                                   ),
-                                  RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      );
-                                    },
+                                  Wrap(
+                                    spacing: context.appTheme.spacing.marginMedium,
+                                    runSpacing: context.appTheme.spacing.marginMedium,
                                     children: <Widget>[
                                       IntrinsicWidth(
                                         child: ReactiveCheckboxListTile(
@@ -541,17 +533,9 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   const Text(
                                     '連絡方法', //
                                   ),
-                                  RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      );
-                                    },
+                                  Wrap(
+                                    spacing: context.appTheme.spacing.marginMedium,
+                                    runSpacing: context.appTheme.spacing.marginMedium,
                                     children: <Widget>[
                                       IntrinsicWidth(
                                         child: ReactiveCheckboxListTile(
@@ -658,17 +642,9 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                         const Text(
                                           '日本語以外に提出可能なサマリーの言語',
                                         ),
-                                        RowSeparated(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          separatorBuilder:
-                                              (BuildContext context, int index) =>
-                                                  SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
+                                        Wrap(
+                                          spacing: context.appTheme.spacing.marginMedium,
+                                          runSpacing: context.appTheme.spacing.marginMedium,
                                           children: [
                                             _languageCheckbox(
                                                 context, formGroup, '英語', 'english'),
@@ -1023,560 +999,564 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                         ],
                       ),
                     ),
-                    Container(
-                      padding:
-                          EdgeInsets.all(context.appTheme.spacing.marginMedium),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
+                      Container(
+                        padding:
+                            EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(
+                            context.appTheme.spacing.borderRadiusMedium,
+                          ),
+                        ),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 150,
+                                    child: Text(
+                                      '部門',
+                                      style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 180,
+                                    child: Text(
+                                      '診療時間',
+                                      style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                    child: boxText(
+                                      context,
+                                      '月',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                    child: boxText(
+                                      context,
+                                      '火',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                    child: boxText(
+                                      context,
+                                      '水',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                    child: boxText(
+                                      context,
+                                      '木',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                    child: boxText(
+                                      context,
+                                      '金',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                    child: boxText(
+                                      context,
+                                      '土',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                    child: boxText(
+                                      context,
+                                      '日',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: ReactiveTextField(
+                                      formControlName: 'department1',
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 180,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: 75,
+                                          child: ReactiveTextField<String>(
+                                            formControlName: 'shift1',
+                                            readOnly: true,
+                                            onTap: (control) async {
+                                              final time = await showTimePicker(
+                                                context: context,
+                                                initialTime: const TimeOfDay(
+                                                    hour: 9, minute: 0),
+                                                builder: (context, child) {
+                                                  return MediaQuery(
+                                                    data: MediaQuery.of(context)
+                                                        .copyWith(
+                                                            alwaysUse24HourFormat:
+                                                                true),
+                                                    child: child!,
+                                                  );
+                                                },
+                                              );
+                                              if (time != null) {
+                                                control.value =
+                                                    '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        const Text('~'),
+                                        SizedBox(
+                                          width: 75,
+                                          child: ReactiveTextField<String>(
+                                            formControlName: 'shift1End',
+                                            readOnly: true,
+                                            onTap: (control) async {
+                                              final time = await showTimePicker(
+                                                context: context,
+                                                initialTime: const TimeOfDay(
+                                                    hour: 17, minute: 0),
+                                                builder: (context, child) {
+                                                  return MediaQuery(
+                                                    data: MediaQuery.of(context)
+                                                        .copyWith(
+                                                            alwaysUse24HourFormat:
+                                                                true),
+                                                    child: child!,
+                                                  );
+                                                },
+                                              );
+                                              if (time != null) {
+                                                control.value =
+                                                    '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Mon',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Tue',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Wed',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Thu',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Fri',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Sat',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Sun',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: ReactiveTextField(
+                                      formControlName: 'department2',
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  SizedBox(
+                                    width: 180,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: 75,
+                                          child: ReactiveTextField<String>(
+                                            formControlName: 'shift2',
+                                            readOnly: true,
+                                            onTap: (control) async {
+                                              final time = await showTimePicker(
+                                                context: context,
+                                                initialTime: const TimeOfDay(
+                                                    hour: 9, minute: 0),
+                                                builder: (context, child) {
+                                                  return MediaQuery(
+                                                    data: MediaQuery.of(context)
+                                                        .copyWith(
+                                                            alwaysUse24HourFormat:
+                                                                true),
+                                                    child: child!,
+                                                  );
+                                                },
+                                              );
+                                              if (time != null) {
+                                                control.value =
+                                                    '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        const Text('~'),
+                                        SizedBox(
+                                          width: 75,
+                                          child: ReactiveTextField<String>(
+                                            formControlName: 'shift2End',
+                                            readOnly: true,
+                                            onTap: (control) async {
+                                              final time = await showTimePicker(
+                                                context: context,
+                                                initialTime: const TimeOfDay(
+                                                    hour: 17, minute: 0),
+                                                builder: (context, child) {
+                                                  return MediaQuery(
+                                                    data: MediaQuery.of(context)
+                                                        .copyWith(
+                                                            alwaysUse24HourFormat:
+                                                                true),
+                                                    child: child!,
+                                                  );
+                                                },
+                                              );
+                                              if (time != null) {
+                                                control.value =
+                                                    '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Mon',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Tue',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Wed',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Thu',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Fri',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Sat',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const SizedBox(
+                                    width: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Sun',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 150,
-                                child: Text(
-                                  '部門',
-                                  style: TextStyle(
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 180,
-                                child: Text(
-                                  '診療時間',
-                                  style: TextStyle(
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: boxText(
-                                  context,
-                                  '月',
-                                  textColor: Colors.white,
-                                  bg: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: boxText(
-                                  context,
-                                  '火',
-                                  textColor: Colors.white,
-                                  bg: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: boxText(
-                                  context,
-                                  '水',
-                                  textColor: Colors.white,
-                                  bg: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: boxText(
-                                  context,
-                                  '木',
-                                  textColor: Colors.white,
-                                  bg: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: boxText(
-                                  context,
-                                  '金',
-                                  textColor: Colors.white,
-                                  bg: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: boxText(
-                                  context,
-                                  '土',
-                                  textColor: Colors.white,
-                                  bg: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: boxText(
-                                  context,
-                                  '日',
-                                  textColor: Colors.white,
-                                  bg: context.appTheme.primaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 150,
-                                child: ReactiveTextField(
-                                  formControlName: 'department1',
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 180,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 75,
-                                      child: ReactiveTextField<String>(
-                                        formControlName: 'shift1',
-                                        readOnly: true,
-                                        onTap: (control) async {
-                                          final time = await showTimePicker(
-                                            context: context,
-                                            initialTime: const TimeOfDay(
-                                                hour: 9, minute: 0),
-                                            builder: (context, child) {
-                                              return MediaQuery(
-                                                data: MediaQuery.of(context)
-                                                    .copyWith(
-                                                        alwaysUse24HourFormat:
-                                                            true),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-                                          if (time != null) {
-                                            control.value =
-                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    const Text('~'),
-                                    SizedBox(
-                                      width: 75,
-                                      child: ReactiveTextField<String>(
-                                        formControlName: 'shift1End',
-                                        readOnly: true,
-                                        onTap: (control) async {
-                                          final time = await showTimePicker(
-                                            context: context,
-                                            initialTime: const TimeOfDay(
-                                                hour: 17, minute: 0),
-                                            builder: (context, child) {
-                                              return MediaQuery(
-                                                data: MediaQuery.of(context)
-                                                    .copyWith(
-                                                        alwaysUse24HourFormat:
-                                                            true),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-                                          if (time != null) {
-                                            control.value =
-                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift1Mon',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift1Tue',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift1Wed',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift1Thu',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift1Fri',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift1Sat',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift1Sun',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 150,
-                                child: ReactiveTextField(
-                                  formControlName: 'department2',
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              SizedBox(
-                                width: 180,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 75,
-                                      child: ReactiveTextField<String>(
-                                        formControlName: 'shift2',
-                                        readOnly: true,
-                                        onTap: (control) async {
-                                          final time = await showTimePicker(
-                                            context: context,
-                                            initialTime: const TimeOfDay(
-                                                hour: 9, minute: 0),
-                                            builder: (context, child) {
-                                              return MediaQuery(
-                                                data: MediaQuery.of(context)
-                                                    .copyWith(
-                                                        alwaysUse24HourFormat:
-                                                            true),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-                                          if (time != null) {
-                                            control.value =
-                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    const Text('~'),
-                                    SizedBox(
-                                      width: 75,
-                                      child: ReactiveTextField<String>(
-                                        formControlName: 'shift2End',
-                                        readOnly: true,
-                                        onTap: (control) async {
-                                          final time = await showTimePicker(
-                                            context: context,
-                                            initialTime: const TimeOfDay(
-                                                hour: 17, minute: 0),
-                                            builder: (context, child) {
-                                              return MediaQuery(
-                                                data: MediaQuery.of(context)
-                                                    .copyWith(
-                                                        alwaysUse24HourFormat:
-                                                            true),
-                                                child: child!,
-                                              );
-                                            },
-                                          );
-                                          if (time != null) {
-                                            control.value =
-                                                '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift2Mon',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift2Tue',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift2Wed',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift2Thu',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift2Fri',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift2Sat',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const SizedBox(
-                                width: 80,
-                                child: ReactiveDropdownFormField(
-                                  formControlName: 'shift2Sun',
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '×',
-                                      child: Text('×'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: '○',
-                                      child: Text('○'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
                     ReactiveTextField(
                       formControlName: 'memo',
                       maxLines: 6,

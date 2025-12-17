@@ -139,8 +139,11 @@ class _HospitalFilterState extends State<HospitalFilter> {
                       '病院種別',
                     ),
                     const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Wrap(
+                      spacing: 16,
+                      runSpacing: 8,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      alignment: WrapAlignment.start,
                       children: [
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
@@ -202,7 +205,6 @@ class _HospitalFilterState extends State<HospitalFilter> {
                             title: const Text('クリニック'),
                           ),
                         ),
-                        const Spacer(),
                         OutlinedButton(
                           onPressed: () {
                             model.fetchHospitals();
@@ -210,7 +212,6 @@ class _HospitalFilterState extends State<HospitalFilter> {
                           },
                           child: const Text('クリア'),
                         ),
-                        SizedBox(width: 16),
                         ElevatedButton(
                           onPressed: () {
                             model.fetchHospitals(form: formGroup);

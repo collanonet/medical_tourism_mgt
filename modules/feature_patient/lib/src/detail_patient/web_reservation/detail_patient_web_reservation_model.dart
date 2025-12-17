@@ -16,7 +16,16 @@ import 'detail_patient_web_reservation_form.dart';
 class DetailPatientWebReservationModel {
   DetailPatientWebReservationModel({
     required this.repository,
-  });
+  }) {
+    getHospitals();
+    formGroup.control('hospitalSelect').valueChanges.listen((hospital) {
+      if (hospital is BasicInformationHospitalResponse) {
+        this.hospital.value = AsyncData(data: hospital);
+        insertHospitalSchedule();
+        getDoctorsByHospitalId(hospital.id);
+      }
+    });
+  }
 
   final PatientRepository repository;
 
@@ -109,12 +118,35 @@ class DetailPatientWebReservationModel {
       if (hospital.value.hasData) {
         formGroup.control('medicalInstitutionName').value =
             hospital.value.requireData.hospitalNameKatakana;
+        
+        if (hospitals.value.hasData) {
+          try {
+            final selectedHospital = hospitals.value.requireData.firstWhere(
+              (element) => element.id == hospital.value.requireData.id,
+            );
+            formGroup.control('hospitalSelect').value = selectedHospital;
+          } catch (e) {
+            logger.e('Selected hospital not found in the list: $e');
+          }
+        }
+
         insertHospitalSchedule();
         getDoctorsByHospitalId(hospital.value.requireData.id);
       }
     } catch (e) {
       logger.e(e);
       hospital.value = AsyncData(error: e);
+    }
+  }
+
+  void getHospitals() async {
+    try {
+      hospitals.value = const AsyncData(loading: true);
+      final result = await repository.webBookingSearchHospital(search: '');
+      hospitals.value = AsyncData(data: result);
+    } catch (e) {
+      logger.e(e);
+      hospitals.value = AsyncData(error: e);
     }
   }
 
@@ -136,8 +168,9 @@ class DetailPatientWebReservationModel {
 
   void selectHospital(BasicInformationHospitalResponse selectedHospital) {
     hospital.value = AsyncData(data: selectedHospital);
-    formGroup.control('medicalInstitutionName').value =
-        selectedHospital.hospitalNameChinese;
+    formGroup.control('hospitalSelect').value = selectedHospital;
+    // formGroup.control('medicalInstitutionName').value =
+    //     selectedHospital.hospitalNameChinese;
     insertHospitalSchedule();
     getDoctorsByHospitalId(selectedHospital.id);
     // 検索結果リストを非表示にする

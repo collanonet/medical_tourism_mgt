@@ -35,6 +35,7 @@ FormGroup formWebAppointment() => FormGroup({
       'medicalInstitutionName': FormControl<String>(
         validators: [Validators.required],
       ), // 医療機関名
+      'hospitalSelect': FormControl<BasicInformationHospitalResponse>(), // 医療機関選択
       'doctorName': FormControl<DoctorProfileHospitalResponse>(
         validators: [Validators.required],
       ), // 医師名

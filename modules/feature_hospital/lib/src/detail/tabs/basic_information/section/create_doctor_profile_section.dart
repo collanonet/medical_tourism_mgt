@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
@@ -663,8 +664,9 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                     width: 300,
                     child: ReactiveTextField(
                       formControlName: 'telephoneNumber',
+                      keyboardType: TextInputType.phone,
                       inputFormatters: [
-                        CustomPhoneFormatter(),
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9+\-]')),
                       ],
                       decoration: const InputDecoration(
                         fillColor: Colors.white,

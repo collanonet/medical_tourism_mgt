@@ -326,24 +326,7 @@ class MaterialSectionState extends State<MaterialSection> {
                               ));
                         }),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (sels.isNotEmpty) {
-                        showDetailDialog(
-                          context,
-                          context
-                              .read<MaterialsModel>()
-                              .materialsData
-                              .value
-                              .requireData
-                              .where((element) {
-                            return sels.contains(element.id);
-                          }).toList(),
-                        );
-                      }
-                    },
-                    child: const Text('閲覧する'),
-                  ),
+
                   ElevatedButton(
                     onPressed: sels.length == 1 ? () {
                       var data = context

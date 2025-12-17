@@ -55,4 +55,14 @@ class DoctorProfileHospitalResponse {
   factory DoctorProfileHospitalResponse.fromJson(Map<String, dynamic> json) =>
       _$DoctorProfileHospitalResponseFromJson(json);
   Map<String, dynamic> toJson() => _$DoctorProfileHospitalResponseToJson(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is DoctorProfileHospitalResponse && other.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
