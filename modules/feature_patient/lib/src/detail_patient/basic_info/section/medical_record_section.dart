@@ -14,6 +14,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 // Project imports:
 import '../../detail_patient_model.dart';
 import '../basic_info_model.dart';
+import 'medical_record_nationality_section.dart';
 
 class MedicalRecordSection extends StatefulWidget {
   const MedicalRecordSection({
@@ -249,6 +250,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         ),
                       ],
                     ),
+                    const MedicalRecordQrSection(isEmbedded: true),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

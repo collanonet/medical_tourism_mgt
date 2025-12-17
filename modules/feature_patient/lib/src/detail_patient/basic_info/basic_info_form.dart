@@ -47,9 +47,7 @@ FormGroup basicInfoForm({
             ),
           ],
         ),
-        'proposalNumber': FormControl<String>(validators: [
-          Validators.required,
-        ]),
+        'proposalNumber': FormControl<String>(),
         'receptionDate': FormControl<DateTime>(
           validators: [
             Validators.pattern(

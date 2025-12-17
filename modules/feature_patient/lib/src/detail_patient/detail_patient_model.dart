@@ -25,6 +25,10 @@ class DetailPatientModel {
     this.medicalRecord.value = AsyncData(data: medicalRecord);
   }
 
+  void updatePatient(Patient patient) {
+    patientData.value = AsyncData(data: patient);
+  }
+
   Future<void> initialData({Patient? patient, String? id}) async {
     if (patient != null || id != null) {
       patientData.value = const AsyncData<Patient>(loading: true);
