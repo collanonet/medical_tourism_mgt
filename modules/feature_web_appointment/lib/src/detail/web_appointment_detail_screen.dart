@@ -298,55 +298,31 @@ class _WebAppointmentDetailScreenState
                                           .watch<WebAppointmentDetailModel>()
                                           .hospital,
                                       builder: (context, value, _) {
-                                        return ReactiveTextField<String>(
-                                          formControlName:
-                                              'medicalInstitutionName',
-                                          onSubmitted: (value) {
-                                            logger.d(value);
-                                            if (value.isNotNullOrEmpty) {
-                                              context
-                                                  .read<
-                                                      WebAppointmentDetailModel>()
-                                                  .searchHospital(
-                                                      search: value.value);
-                                            }
-                                          },
-                                          decoration: InputDecoration(
-                                            label: const Text('医療機関名'),
-                                            suffixIcon: value.loading
-                                                ? const SizedBox(
-                                                    height: 30,
-                                                    width: 30,
-                                                    child:
-                                                        CircularProgressIndicator())
-                                                : ReactiveValueListenableBuilder<
-                                                        String>(
-                                                    formControlName:
-                                                        'medicalInstitutionName',
-                                                    builder:
-                                                        (context, control, _) {
-                                                      return IconButton(
-                                                        onPressed: () {
-                                                          if (control.value !=
-                                                                  null &&
-                                                              control.value!
-                                                                  .isNotEmpty) {
-                                                            context
-                                                                .read<
-                                                                    WebAppointmentDetailModel>()
-                                                                .searchHospital(
-                                                                    search: control
-                                                                        .value);
-                                                          }
-                                                        },
-                                                        icon: const Icon(
-                                                          Icons.search,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      );
-                                                    }),
-                                          ),
-                                        );
+                                          return ReactiveDropdownField<
+                                              BasicInformationHospitalResponse>(
+                                            formControlName: 'hospitalSelect',
+                                            decoration: const InputDecoration(
+                                              labelText: '医療機関名',
+                                            ),
+                                            items: context
+                                                    .watch<
+                                                        WebAppointmentDetailModel>()
+                                                    .hospitals
+                                                    .value
+                                                    .data
+                                                    ?.map((e) => DropdownMenuItem(
+                                                          value: e,
+                                                          child: Text((e
+                                                                          .hospitalNameChinese
+                                                                          ?.isNotEmpty ??
+                                                                      false)
+                                                                  ? e.hospitalNameChinese!
+                                                                  : e.hospitalNameKatakana ??
+                                                                      'NoName'),
+                                                        ))
+                                                    .toList() ??
+                                                [],
+                                          );
                                       }),
                                 ),
                               ),

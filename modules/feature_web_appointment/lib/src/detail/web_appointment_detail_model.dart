@@ -15,10 +15,33 @@ import 'web_appointment_detail_form.dart';
 class WebAppointmentDetailModel {
   WebAppointmentDetailModel({
     required this.repository,
-  });
+  }) {
+    getHospitals();
+    formGroup.control('hospitalSelect').valueChanges.listen((hospital) {
+      if (hospital is BasicInformationHospitalResponse) {
+        this.hospital.value = AsyncData(data: hospital);
+        insertHospitalSchedule();
+        getDoctorsByHospitalId(hospital.id);
+      }
+    });
+  }
 
   final WebAppointmentRepository repository;
   FormGroup formGroup = formWebAppointment();
+
+  ValueNotifier<AsyncData<List<BasicInformationHospitalResponse>>> hospitals =
+      ValueNotifier(const AsyncData());
+
+  Future<void> getHospitals() async {
+    try {
+      hospitals.value = const AsyncData(loading: true);
+      final result = await repository.webBookingSearchHospital(search: '');
+      hospitals.value = AsyncData(data: result);
+    } catch (e) {
+      logger.e(e);
+      hospitals.value = AsyncData(error: e);
+    }
+  }
 
   ValueNotifier<AsyncData<Patient>> patient = ValueNotifier(const AsyncData());
 
@@ -97,6 +120,18 @@ class WebAppointmentDetailModel {
       if (hospital.value.hasData) {
         formGroup.control('medicalInstitutionName').value =
             hospital.value.requireData.hospitalNameKatakana;
+
+        if (hospitals.value.hasData) {
+          try {
+            final selectedHospital = hospitals.value.requireData.firstWhere(
+              (element) => element.id == hospital.value.requireData.id,
+            );
+            formGroup.control('hospitalSelect').value = selectedHospital;
+          } catch (e) {
+            logger.e('Selected hospital not found in the list: $e');
+          }
+        }
+
         insertHospitalSchedule();
         getDoctorsByHospitalId(hospital.value.requireData.id);
       }

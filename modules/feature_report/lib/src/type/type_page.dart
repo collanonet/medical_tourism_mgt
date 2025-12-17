@@ -26,7 +26,7 @@ class ReportTypePage extends StatelessWidget {
           form: () => typeForm(),
           builder: (_, formGroup, child) {
             return LayoutView(
-              selectedIndex: 9,
+              selectedIndex: 7,
               page: Provider(
                   create: (context) =>
                       GetIt.I<TypeModel>()..getTypes(formGroup),

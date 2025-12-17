@@ -26,7 +26,7 @@ class EstimateMasterPage extends StatelessWidget {
           form: () => estimateMasterForm(),
           builder: (_, formGroup, child) {
             return LayoutView(
-              selectedIndex: 9,
+              selectedIndex: 7,
               page: Provider(
                 create: (context) => GetIt.I<EstimateMasterModel>()
                   ..fetchEstimateMasterData(formGroup),

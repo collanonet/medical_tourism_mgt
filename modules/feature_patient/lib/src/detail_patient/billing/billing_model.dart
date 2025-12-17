@@ -135,8 +135,9 @@ class BillingModel {
       }
 
       BillingRequest request = BillingRequest(
-        deposit: formGroup.control('deposit').value,
-        settlementFee: formGroup.control('settlementFee').value,
+        deposit: _sanitizeAmountDouble(formGroup.control('deposit').value),
+        settlementFee:
+            _sanitizeAmountDouble(formGroup.control('settlementFee').value),
         treatmentCost: treatmentCos,
         remarks: formGroup.control('remarks').value,
         medicalRecord: medicalRecord.value.requireData.id,
@@ -174,5 +175,22 @@ class BillingModel {
       return null;
     }
     return numericText;
+  }
+
+  double? _sanitizeAmountDouble(dynamic amount) {
+    if (amount == null) {
+      return null;
+    }
+    if (amount is num) {
+      return amount.toDouble();
+    }
+    if (amount is String) {
+      final numericText = amount.replaceAll(RegExp(r'[^0-9]'), '');
+      if (numericText.isEmpty) {
+        return null;
+      }
+      return double.tryParse(numericText);
+    }
+    return null;
   }
 }

@@ -65,11 +65,11 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 '_id': FormControl<String>(),
                                 'hospitalId': FormControl<String>(
                                     value: widget.hospitalId),
-                                'project': FormControl<String>(),
+                                'project': FormControl<String>(validators: [Validators.required]),
                                 'treatmentCostExcludingTax':
-                                    FormControl<double>(),
+                                    FormControl<double>(validators: [Validators.required]),
                                 'treatmentCostTaxIncluded':
-                                    FormControl<double>(),
+                                    FormControl<double>(validators: [Validators.required]),
                                 'remark': FormControl<String>(),
                                 'treatmentCostTax': FormArray([
                                   FormGroup({
@@ -153,7 +153,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                     fillColor: Colors.white,
                                     filled: true,
                                   ),
-                                  valueAccessor: DoubleValueAccessor(),
+                                  valueAccessor: CurrencyValueAccessor(),
                                   inputFormatters: [
                                     CustomCurrencyFormatter(),
                                     // FilteringTextInputFormatter.allow(
@@ -165,7 +165,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 flex: 1,
                                 child: ReactiveTextField<double>(
                                   keyboardType: TextInputType.number,
-                                  valueAccessor: DoubleValueAccessor(),
+                                  valueAccessor: CurrencyValueAccessor(),
                                   inputFormatters: [
                                     CustomCurrencyFormatter(),
                                     // FilteringTextInputFormatter.allow(
@@ -186,7 +186,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                           child: ReactiveTextField(
                                             keyboardType: TextInputType.number,
                                             valueAccessor:
-                                                DoubleValueAccessor(),
+                                                CurrencyValueAccessor(),
                                             inputFormatters: [
                                               CustomCurrencyFormatter(),
                                               // FilteringTextInputFormatter.allow(
@@ -201,13 +201,30 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 return ValueListenableListener(
                                   valueListenable: addIncludeTax,
                                   onListen: () {
-                                    // add into row of treatment
-                                    formArray.add(
-                                      FormGroup({
-                                        'cost': FormControl<double>(value: 0),
-                                        'tax': FormControl<int>(value: 15),
-                                      }),
-                                    );
+                                    final currentLen = formArray.controls.length;
+                                    final targetLen = addIncludeTax.value;
+                                    if (targetLen > currentLen) {
+                                      // Add columns
+                                      for (var i = 0;
+                                          i < targetLen - currentLen;
+                                          i++) {
+                                        formArray.add(
+                                          FormGroup({
+                                            'cost':
+                                                FormControl<double>(value: 0),
+                                            'tax': FormControl<int>(value: 15),
+                                          }),
+                                        );
+                                      }
+                                    } else if (targetLen < currentLen) {
+                                      // Remove columns
+                                      for (var i = 0;
+                                          i < currentLen - targetLen;
+                                          i++) {
+                                        formArray.removeAt(
+                                            formArray.controls.length - 1);
+                                      }
+                                    }
                                   },
                                   child: RowSeparated(
                                     separatorBuilder: (context, index) =>
@@ -236,49 +253,84 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
           ),
         ),
         SizedBox(
-            width: 50,
+            width: 120,
             child: ValueListenableBuilder<int>(
               valueListenable: addIncludeTax,
               builder: (context, value, _) {
-                final isDisabled = value >= 3;
-                return InkWell(
-                  onTap: isDisabled
-                      ? null
-                      : () {
-                          addIncludeTax.value += 1;
-                          taxRateFormArray.add(
-                            FormGroup({
-                              'tax': FormControl<int>(
-                                value: 0,
-                              ),
-                            }),
-                          );
-                        },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.add_circle,
-                        color: isDisabled
-                            ? Colors.grey
-                            : context.appTheme.primaryColor,
-                      ),
-                      SizedBox(
-                        height: context.appTheme.spacing.marginSmall,
-                      ),
-                      RotatedBox(
-                        quarterTurns: 1,
-                        child: Text(
-                          '行を追加',
-                          style: TextStyle(
-                            color: isDisabled
+                final isAddDisabled = value >= 3;
+                final isRemoveDisabled = value <= 1;
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Add Column Button
+                    InkWell(
+                      onTap: isAddDisabled
+                          ? null
+                          : () {
+                              addIncludeTax.value += 1;
+                              taxRateFormArray.add(
+                                FormGroup({
+                                  'tax': FormControl<int>(
+                                    value: 0,
+                                  ),
+                                }),
+                              );
+                            },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_circle,
+                            color: isAddDisabled
                                 ? Colors.grey
                                 : context.appTheme.primaryColor,
                           ),
-                        ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          Text(
+                            '列を追加',
+                            style: TextStyle(
+                              color: isAddDisabled
+                                  ? Colors.grey
+                                  : context.appTheme.primaryColor,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: context.appTheme.spacing.marginSmall),
+                    // Remove Column Button
+                    InkWell(
+                      onTap: isRemoveDisabled
+                          ? null
+                          : () {
+                              addIncludeTax.value -= 1;
+                              taxRateFormArray.removeAt(
+                                  taxRateFormArray.controls.length - 1);
+                            },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.remove_circle,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          const Text(
+                            '列を削除',
+                            style: TextStyle(
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 );
               },
             )),
@@ -312,8 +364,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 color: Colors.red,
                               ),
                               onPressed: () {
-                                formArray.removeAt(
-                                    formArray.controls.indexOf(control));
+                                formArray.remove(control);
                               },
                             ),
                           ),
@@ -394,7 +445,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
           ),
         ),
         const SizedBox(
-          width: 50,
+          width: 120,
         ),
         IntrinsicWidth(
             stepWidth: 350,

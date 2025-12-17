@@ -48,10 +48,10 @@ class SideBarMenu extends StatelessWidget {
         title: context.l10n.labelAgents,
         route: Routes.agentsRoute,
       ),
-      Menu(
-        title: '${context.l10n.labelQuotations}/${context.l10n.labelInvoice}',
-        route: Routes.invoicesRoute,
-      ),
+      // Menu(
+      //   title: '${context.l10n.labelQuotations}/${context.l10n.labelInvoice}',
+      //   route: Routes.invoicesRoute,
+      // ),
       Menu(
         title: context.l10n.labelSalesManagement,
         route: Routes.salesRoute,
