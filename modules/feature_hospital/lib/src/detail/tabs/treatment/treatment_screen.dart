@@ -19,9 +19,14 @@ class TreatmentScreen extends StatefulWidget {
   State<TreatmentScreen> createState() => _TreatmentScreenState();
 }
 
-class _TreatmentScreenState extends State<TreatmentScreen> {
+class _TreatmentScreenState extends State<TreatmentScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(

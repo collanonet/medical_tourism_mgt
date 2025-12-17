@@ -1702,6 +1702,8 @@ abstract class ApiService {
   Future<List<Message>> getMessagesByChatId(
     @Path('chatId') String chatId,
   );
+
+
 }
 
 extension ApiServiceExts on ApiService {

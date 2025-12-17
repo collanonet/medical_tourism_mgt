@@ -218,7 +218,7 @@ class EndPoints {
   static const HEALTH_CHECKUP = '/hospital-health-checkups';
   static const CONTRACT = '/hospital-contacts';
   static const TREATMENT_MENU = '/treatment-menu';
-  static const TREATMENT_TELE_MENU = '/hospital-tele-medicine-menu';
+  static const TREATMENT_TELE_MENU = '/hospital-tele-medicine-menu'; // Correct endpoint
 
   // Agent
   static const CONTRANT_AGENT = '/agent-contracts';

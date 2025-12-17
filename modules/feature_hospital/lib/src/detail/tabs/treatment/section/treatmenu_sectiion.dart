@@ -253,87 +253,8 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
           ),
         ),
         SizedBox(
-            width: 120,
-            child: ValueListenableBuilder<int>(
-              valueListenable: addIncludeTax,
-              builder: (context, value, _) {
-                final isAddDisabled = value >= 3;
-                final isRemoveDisabled = value <= 1;
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Add Column Button
-                    InkWell(
-                      onTap: isAddDisabled
-                          ? null
-                          : () {
-                              addIncludeTax.value += 1;
-                              taxRateFormArray.add(
-                                FormGroup({
-                                  'tax': FormControl<int>(
-                                    value: 0,
-                                  ),
-                                }),
-                              );
-                            },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add_circle,
-                            color: isAddDisabled
-                                ? Colors.grey
-                                : context.appTheme.primaryColor,
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          Text(
-                            '列を追加',
-                            style: TextStyle(
-                              color: isAddDisabled
-                                  ? Colors.grey
-                                  : context.appTheme.primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: context.appTheme.spacing.marginSmall),
-                    // Remove Column Button
-                    InkWell(
-                      onTap: isRemoveDisabled
-                          ? null
-                          : () {
-                              addIncludeTax.value -= 1;
-                              taxRateFormArray.removeAt(
-                                  taxRateFormArray.controls.length - 1);
-                            },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.remove_circle,
-                            color: Colors.red,
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          const Text(
-                            '列を削除',
-                            style: TextStyle(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              },
-            )),
+          width: 120,
+        ),
         SizedBox(
           width: 350,
           child: ReactiveFormArray(
@@ -363,9 +284,21 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 Icons.remove_circle,
                                 color: Colors.red,
                               ),
-                              onPressed: () {
-                                formArray.remove(control);
-                              },
+                                onPressed: () {
+                                  final id =
+                                      (control as FormGroup).control('_id').value;
+                                  if (id != null) {
+                                    final currentList = context
+                                        .read<TreatmentModel>()
+                                        .treatmentMenuId
+                                        .value;
+                                    context
+                                        .read<TreatmentModel>()
+                                        .treatmentMenuId
+                                        .value = [...currentList, id];
+                                  }
+                                  formArray.remove(control);
+                                },
                             ),
                           ),
                       ],
@@ -383,6 +316,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
 
   Row header(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Expanded(
           child: RowSeparated(
@@ -444,9 +378,93 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
             ],
           ),
         ),
-        const SizedBox(
-          width: 120,
-        ),
+        SizedBox(
+            width: 120,
+            child: ValueListenableBuilder<int>(
+              valueListenable: addIncludeTax,
+              builder: (context, value, _) {
+                final isAddDisabled = value >= 3;
+                final isRemoveDisabled = value <= 1;
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Add Column Button
+                    InkWell(
+                      onTap: isAddDisabled
+                          ? null
+                          : () {
+                              addIncludeTax.value += 1;
+                              final formArray =
+                                  (ReactiveForm.of(context) as FormGroup)
+                                      .control('tax') as FormArray;
+                              formArray.add(
+                                FormGroup({
+                                  'tax': FormControl<int>(
+                                    value: 0,
+                                  ),
+                                }),
+                              );
+                            },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_circle,
+                            color: isAddDisabled
+                                ? Colors.grey
+                                : context.appTheme.primaryColor,
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          Text(
+                            '列を追加',
+                            style: TextStyle(
+                              color: isAddDisabled
+                                  ? Colors.grey
+                                  : context.appTheme.primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: context.appTheme.spacing.marginSmall),
+                    // Remove Column Button
+                    InkWell(
+                      onTap: isRemoveDisabled
+                          ? null
+                          : () {
+                              addIncludeTax.value -= 1;
+                              final formArray =
+                                  (ReactiveForm.of(context) as FormGroup)
+                                      .control('tax') as FormArray;
+                              formArray.removeAt(formArray.controls.length - 1);
+                            },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.remove_circle,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          const Text(
+                            '列を削除',
+                            style: TextStyle(
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            )),
         IntrinsicWidth(
             stepWidth: 350,
             child: Row(
