@@ -14,6 +14,8 @@ import '../../../feature_patient.dart';
 import 'basic_info_model.dart';
 import 'basic_info_section.dart';
 
+import '../detail_patient_model.dart';
+
 class BasicInformationScreen extends StatelessWidget {
   const BasicInformationScreen({
     super.key,
@@ -73,7 +75,7 @@ class BasicInformationScreen extends StatelessWidget {
                                         value: context
                                             .read<BasicInformationModel>(),
                                         child: AlertDialog(
-                                          title: const Text('患者情報削除すか？'),
+                                          title: const Text('患者情報を削除しますか？'),
                                           content:
                                               const Text('この操作は取り消すことができません。'),
                                           actions: [
@@ -132,6 +134,13 @@ class BasicInformationScreen extends StatelessWidget {
                     context.read<BasicInformationModel>().loading.value;
                 if (value.hasData) {
                   logger.d('loading');
+                  final patientData =
+                      context.read<BasicInformationModel>().patientData.value;
+                  if (patientData.hasData) {
+                    context
+                        .read<DetailPatientModel>()
+                        .updatePatient(patientData.requireData);
+                  }
                   snackBarWidget(
                     message: '正常に保存されました',
                     prefixIcon:

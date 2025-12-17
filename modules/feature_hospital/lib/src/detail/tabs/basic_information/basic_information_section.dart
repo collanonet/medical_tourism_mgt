@@ -114,7 +114,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                                         value: context
                                             .read<BasicInformationModel>(),
                                         child: AlertDialog(
-                                          title: const Text('病院情報削除すか？'),
+                                          title: const Text('病院情報を削除しますか？'),
                                           content:
                                               const Text('この操作は取り消すことができません。'),
                                           actions: [

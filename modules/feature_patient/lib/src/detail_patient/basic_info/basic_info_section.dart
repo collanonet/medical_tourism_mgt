@@ -67,11 +67,8 @@ class BasicInfoSection extends StatelessWidget {
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  const MedicalRecordQrSection(),
-                  SizedBox(
-                    height: context.appTheme.spacing.marginMedium,
-                  ),
                   const MedicalRecordSection(showHeader: false),
+
                   Divider(
                     color: Colors.grey,
                     height: 0,

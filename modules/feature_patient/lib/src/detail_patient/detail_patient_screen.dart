@@ -66,7 +66,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                           selectedIndex: value,
                           menu: [
                             '基本情報', // basic information
-                            if (medicalRecord.hasData) ...[
+                            if (medicalRecord.hasData && patientData.hasData) ...[
                               '進捗一覧', // progress list
                               '患者回答データ', // Patient Response Data
                               '海外診療データ', // Overseas medical data
@@ -106,7 +106,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                         BasicInformationPage(
                           patient: widget.patient ?? patientData.data,
                         ),
-                        if (medicalRecord.hasData) ...[
+                        if (medicalRecord.hasData && patientData.hasData) ...[
                           ProgressListPage(
                             patient: patientData.requireData,
                           ),

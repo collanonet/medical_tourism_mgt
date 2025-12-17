@@ -151,7 +151,12 @@ class MedicalRecordNationalitySection extends StatelessWidget {
 }
 
 class MedicalRecordQrSection extends StatelessWidget {
-  const MedicalRecordQrSection({super.key});
+  const MedicalRecordQrSection({
+    super.key,
+    this.isEmbedded = false,
+  });
+
+  final bool isEmbedded;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +166,8 @@ class MedicalRecordQrSection extends StatelessWidget {
       builder: (context, value, _) {
         final formGroup = (ReactiveForm.of(context) as FormGroup)
             .control('PATIENT_NATIONALITIES') as FormGroup;
-        return Column(
+
+        final content = Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
@@ -290,6 +296,7 @@ class MedicalRecordQrSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                       context.appTheme.spacing.borderRadiusMedium,
                     ),
+                    color: Colors.white,
                   ),
                   child: Image.asset(
                     Images.sampleQr,
@@ -300,6 +307,21 @@ class MedicalRecordQrSection extends StatelessWidget {
               ],
             ),
           ],
+        );
+
+        if (isEmbedded) {
+          return content;
+        }
+
+        return Container(
+          padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.zero,
+            ),
+            color: const Color(0xffF8F8D9),
+          ),
+          child: content,
         );
       },
     );
