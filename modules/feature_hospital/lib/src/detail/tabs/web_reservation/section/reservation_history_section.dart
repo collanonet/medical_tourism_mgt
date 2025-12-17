@@ -39,7 +39,7 @@ class _ReservationHistorySectionState extends State<ReservationHistorySection> {
                       titleHeader: const Text('状況'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('医療機関'),
+                      titleHeader: const Text('患者'),
                     ),
                     HeaderTableData(
                       titleHeader: const Text('予約日'),
@@ -77,7 +77,7 @@ class _ReservationHistorySectionState extends State<ReservationHistorySection> {
                             ],
                           ),
                           Text(
-                            data.hospital?.hospitalNameChinese ?? '',
+                            data.patientName ?? '',
                             style: context.textTheme.titleLarge?.copyWith(
                                 color: context.appTheme.primaryColor),
                           ),
