@@ -160,10 +160,12 @@ class TreatmentModel {
   void insertTreatmentMenuTele(
       FormGroup formGroup, List<TreatmentTeleMenuResponse> data) {
     var treatmentTeleMenu = formGroup.control('telemedicineMenu') as FormArray;
+    
+    if (data.isNotEmpty) {
+      treatmentTeleMenu.clear();
+    }
+    
     for (var element in data) {
-      if (data.isNotEmpty) {
-        treatmentTeleMenu.clear();
-      }
       treatmentTeleMenu.add(
         FormGroup({
           '_id': FormControl<String>(value: element.id),
@@ -189,26 +191,36 @@ class TreatmentModel {
       List<TreatmentMenuResponse> dataList = treatmentMenuData.value.data ?? [];
       submitTreatmentMenudata.value = const AsyncData(loading: true);
 
-      for (var element in formGroup.control('treatmentMenu').value) {
+      // Fix: Iterate controls, not values
+      final formArray = formGroup.control('treatmentMenu') as FormArray;
+      for (var control in formArray.controls) {
+        final element = control.value as Map<String, dynamic>;
+
         List<TaxModel> treatmentCostTax = [];
-        for (var elementx in element['treatmentCostTax']) {
-          int index = element['treatmentCostTax'].indexOf(elementx);
-          // get tax rate from header
-          // Robust check: ensure index is within bounds of header tax array
-          int? taxRate;
-          var headerTaxControl = formGroup.control('tax');
-          if (headerTaxControl.value is List && index < headerTaxControl.value.length) {
-             taxRate = headerTaxControl.value[index]['tax'];
-          } else {
-             // Fallback: use existing tax or default if header missing
-             taxRate = elementx['tax'] ?? 0;
+        // element['treatmentCostTax'] is List<Map>
+        if (element['treatmentCostTax'] != null) {
+          int index = 0;
+          for (var elementx in (element['treatmentCostTax'] as List)) {
+             // Robust check for tax rate
+            int? taxRate;
+            try {
+              var headerTaxControl = formGroup.control('tax');
+              if (headerTaxControl.value is List && index < (headerTaxControl.value as List).length) {
+                 taxRate = (headerTaxControl.value as List)[index]['tax'];
+              }
+            } catch (e) {
+               // ignore
+            }
+             // Fallback
+            taxRate ??= elementx['tax'] ?? 0;
+            
+            treatmentCostTax.add(TaxModel(
+              id: elementx['_id'],
+              cost: elementx['cost'] ?? 0,
+              tax: taxRate ?? 0,
+            ));
+            index++;
           }
-          
-          treatmentCostTax.add(TaxModel(
-            id: elementx['_id'],
-            cost: elementx['cost'] ?? 0,
-            tax: taxRate ?? 0,
-          ));
         }
 
         logger.d('testtype $element');
@@ -235,9 +247,24 @@ class TreatmentModel {
         } else {
           response = await hospitalRepository.postTreatmentMenu(request);
           dataList.add(response);
-          // Patch the ID back to the form control so subsequent saves are updates
-          (element as AbstractControl).patchValue({'_id': response.id});
+          // Patch the ID back to the form control
+          control.patchValue({'_id': response.id});
         }
+      }
+
+      if (treatmentMenuId.value.isNotEmpty) {
+        for (var id in treatmentMenuId.value) {
+          try {
+            await hospitalRepository.deleteTreatmentMenu(id: id);
+            dataList = dataList
+                .where((element) => !treatmentMenuId.value.contains(element.id))
+                .toList();
+          } catch (e) {
+            logger.d(e);
+          }
+        }
+        // Clear the list after successful deletion
+        treatmentMenuId.value = [];
       }
 
       submitTreatmentMenudata.value = AsyncData(data: dataList);
@@ -258,7 +285,22 @@ class TreatmentModel {
       List<TreatmentTeleMenuResponse> dataList =
           treatmentMenuTeleData.value.data ?? [];
       submitTreatmentMenuTeledata.value = const AsyncData(loading: true);
-      for (var element in formGroup.control('telemedicineMenu').value) {
+
+      final formArray = formGroup.control('telemedicineMenu') as FormArray;
+      for (var control in formArray.controls) {
+        final element = control.value as Map<String, dynamic>;
+
+        // Skip empty rows (only for new records where _id is null)
+        if (element['_id'] == null &&
+            (element['project'] == null ||
+                element['project'].toString().trim().isEmpty) &&
+            element['treatmentCostExcludingTax'] == null &&
+            element['treatmentCostTaxIncluded'] == null &&
+            (element['remark'] == null ||
+                element['remark'].toString().trim().isEmpty)) {
+          continue;
+        }
+
         TreatmentTeleMenuRequest request = TreatmentTeleMenuRequest(
           hospital: hospitalId.value,
           project: element['project'],
@@ -279,6 +321,8 @@ class TreatmentModel {
         } else {
           response = await hospitalRepository.postTreatmentTeleMenu(request);
           dataList.add(response);
+          // Patch the ID back to the form control
+          control.patchValue({'_id': response.id});
         }
       }
 
@@ -288,12 +332,14 @@ class TreatmentModel {
             await hospitalRepository.deleteTreatmentTeleMenu(id);
             dataList = dataList
                 .where(
-                    (element) => treatmentMenuTeleId.value.contains(element.id))
+                    (element) => !treatmentMenuTeleId.value.contains(element.id))
                 .toList();
           } catch (e) {
             logger.d(e);
           }
         }
+        // Clear list
+        treatmentMenuTeleId.value = [];
       }
 
       submitTreatmentMenuTeledata.value = AsyncData(data: dataList);

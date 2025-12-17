@@ -89,35 +89,38 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                             context.appTheme.spacing.borderRadiusMedium),
                         color: Colors.white,
                       ),
-                      child: [
-                        BasicInformationScreen(hospitalId: widget.hospitalId),
-                        if (value.hasData) ...[
-                          MaterialsScreen(
-                            id: value.requireData.id,
-                          ),
-                          QAndAScreen(
-                            hospitalId: value.requireData.id,
-                          ),
-                          FacilityPhotoScreen(
-                            id: value.requireData.id,
-                          ),
-                          WebReservationScreen(
-                            hospitalId: value.requireData.id,
-                          ),
-                          HealthCheckupScreen(
-                            id: value.requireData.id,
-                          ),
-                          TreatmentScreen(
-                            hospitalId: value.requireData.id,
-                          ),
-                          DocumentScreen(
-                            id: value.requireData.id,
-                          ),
-                          ContractScreen(
-                            id: value.requireData.id,
-                          ),
-                        ]
-                      ][index],
+                      child: IndexedStack(
+                        index: index,
+                        children: [
+                          BasicInformationScreen(hospitalId: widget.hospitalId),
+                          if (value.hasData) ...[
+                            MaterialsScreen(
+                              id: value.requireData.id,
+                            ),
+                            QAndAScreen(
+                              hospitalId: value.requireData.id,
+                            ),
+                            FacilityPhotoScreen(
+                              id: value.requireData.id,
+                            ),
+                            WebReservationScreen(
+                              hospitalId: value.requireData.id,
+                            ),
+                            HealthCheckupScreen(
+                              id: value.requireData.id,
+                            ),
+                            TreatmentScreen(
+                              hospitalId: value.requireData.id,
+                            ),
+                            DocumentScreen(
+                              id: value.requireData.id,
+                            ),
+                            ContractScreen(
+                              id: value.requireData.id,
+                            ),
+                          ]
+                        ],
+                      ),
                     ),
                   );
                 },

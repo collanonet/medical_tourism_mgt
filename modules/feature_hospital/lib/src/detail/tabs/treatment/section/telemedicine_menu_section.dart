@@ -111,7 +111,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                         formControlName:
                                             'treatmentCostExcludingTax',
                                         keyboardType: TextInputType.number,
-                                        valueAccessor: DoubleValueAccessor(),
+                                        valueAccessor: CurrencyValueAccessor(),
                                         inputFormatters: [
                                           CustomCurrencyFormatter(),
                                           // FilteringTextInputFormatter.allow(
@@ -125,7 +125,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                         formControlName:
                                             'treatmentCostTaxIncluded',
                                         keyboardType: TextInputType.number,
-                                        valueAccessor: DoubleValueAccessor(),
+                                        valueAccessor: CurrencyValueAccessor(),
                                         inputFormatters: [
                                           CustomCurrencyFormatter(),
                                           // FilteringTextInputFormatter.allow(
