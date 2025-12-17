@@ -21,7 +21,7 @@ class ContractDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutView(
-      selectedIndex: 8,
+      selectedIndex: 7,
       page: ReactiveFormConfig(
         validationMessages: validationMessages,
         child: ReactiveFormBuilder(

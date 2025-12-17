@@ -25,7 +25,7 @@ class ContractPage extends StatelessWidget {
         return ChangeNotifierProvider(
           create: (context) => GetIt.I<ContractModel>()..contractFilter(),
           child: const LayoutView(
-            selectedIndex: 9,
+            selectedIndex: 7,
             page: ContractScreen(),
           ),
         );

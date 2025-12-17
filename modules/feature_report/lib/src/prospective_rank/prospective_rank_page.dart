@@ -26,7 +26,7 @@ class ProspectivePankPage extends StatelessWidget {
           form: () => prospectivePankForm(),
           builder: (_, formGroup, child) {
             return LayoutView(
-              selectedIndex: 9,
+              selectedIndex: 7,
               page: Provider(
                 create: (context) => GetIt.I<ProspectiveRankModel>()
                   ..fetchProsiveRank(formGroup),
