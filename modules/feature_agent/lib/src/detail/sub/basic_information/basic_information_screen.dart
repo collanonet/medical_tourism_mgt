@@ -160,6 +160,28 @@ class _AgentBasicInformationScreenState
                                           },
                                           children: [
                                             Text(
+                                              '国',
+                                              style:
+                                                  context.textTheme.bodyMedium,
+                                            ),
+                                            ReactiveTextField(
+                                              formControlName: 'area', // Keep form control name as 'area' but display '国'
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 300,
+                                        child: ColumnSeparated(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          separatorBuilder:
+                                              (BuildContext context,
+                                                  int index) {
+                                            return const SizedBox(height: 8);
+                                          },
+                                          children: [
+                                            Text(
                                               '郵便番号',
                                               style:
                                                   context.textTheme.bodyMedium,
@@ -181,45 +203,12 @@ class _AgentBasicInformationScreenState
                                           },
                                           children: [
                                             Text(
-                                              '所在地',
+                                              '住所',
                                               style:
                                                   context.textTheme.bodyMedium,
                                             ),
                                             ReactiveTextField(
                                               formControlName: 'address',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return const SizedBox(width: 16);
-                                    },
-                                    children: [
-                                      SizedBox(
-                                        width: 300,
-                                        child: ColumnSeparated(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                  int index) {
-                                            return const SizedBox(height: 8);
-                                          },
-                                          children: [
-                                            Text(
-                                              '地域',
-                                              style:
-                                                  context.textTheme.bodyMedium,
-                                            ),
-                                            ReactiveTextField(
-                                              formControlName: 'area',
                                             ),
                                           ],
                                         ),
@@ -253,14 +242,18 @@ class _AgentBasicInformationScreenState
                                             ),
                                             ReactiveTextField(
                                               formControlName: 'phoneNumber',
-                                              keyboardType: TextInputType.phone,
+                                              keyboardType: TextInputType.number,
                                               decoration: const InputDecoration(
-                                                hintText: '+XXX-XXXX-XXXX',
-                                                prefixText: '',
+                                                prefixText: '+ ',
                                               ),
                                               inputFormatters: [
-                                                CustomPhoneFormatter(),
+                                                FilteringTextInputFormatter.allow(
+                                                    RegExp(r'[0-9\uFF10-\uFF19]')),
                                               ],
+                                              validationMessages: {
+                                                ValidationMessage.pattern:
+                                                    (error) => '半角で入力してください',
+                                              },
                                             ),
                                           ],
                                         ),
@@ -335,7 +328,7 @@ class _AgentBasicInformationScreenState
                                                   },
                                                   children: [
                                                     Text(
-                                                      '紹介手数料名',
+                                                      '紹介手数料項目',
                                                       style: context
                                                           .textTheme.bodyMedium,
                                                     ),
@@ -780,12 +773,19 @@ class _AgentBasicInformationScreenState
                                                       'phoneNumber',
                                                   keyboardType:
                                                       TextInputType.number,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    prefixText: '+ ',
+                                                  ),
                                                   inputFormatters: [
-                                                    CustomPhoneFormatter(),
-                                                    // FilteringTextInputFormatter
-                                                    //     .allow(
-                                                    //         RegExp(r'[0-9]')),
+                                                    FilteringTextInputFormatter
+                                                        .allow(RegExp(
+                                                            r'[0-9\uFF10-\uFF19]')),
                                                   ],
+                                                  validationMessages: {
+                                                    ValidationMessage.pattern:
+                                                        (error) => '半角で入力してください',
+                                                  },
                                                 ),
                                               ],
                                             ),
@@ -821,189 +821,11 @@ class _AgentBasicInformationScreenState
                                           ),
                                         ],
                                       ),
-                                      ReactiveFormArray(
-                                        formArrayName: 'contactMethods',
-                                        builder: (context, formArray, child) {
-                                          var rows = formArray.controls
-                                              .map((control) =>
-                                                  control as FormGroup)
-                                              .map((currentForm) {
-                                            return ReactiveForm(
-                                              formGroup: currentForm,
-                                              child: RowSeparated(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                separatorBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return const SizedBox(
-                                                      width: 16);
-                                                },
-                                                children: [
-                                                  SizedBox(
-                                                    width: 300,
-                                                    child: ColumnSeparated(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
-                                                      separatorBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        return const SizedBox(
-                                                            height: 8);
-                                                      },
-                                                      children: [
-                                                        Text(
-                                                          '連絡方法',
-                                                          style: context
-                                                              .textTheme
-                                                              .bodyMedium,
-                                                        ),
-                                                        ValueListenableBuilder(
-                                                            valueListenable: context
-                                                                .read<
-                                                                    AgentBasicInformationModel>()
-                                                                .contactList,
-                                                            builder: (context,
-                                                                value, _) {
-                                                              return ReactiveDropdownFormField(
-                                                                formControlName:
-                                                                    'howToContact',
-                                                                items: value
-                                                                    .map((e) =>
-                                                                        DropdownMenuItem(
-                                                                          value:
-                                                                              e.value,
-                                                                          child:
-                                                                              Text(
-                                                                            e.value,
-                                                                          ),
-                                                                        ))
-                                                                    .toList(),
-                                                              );
-                                                            }),
-
-                                                        // ReactiveTextField(
-                                                        //   formControlName:
-                                                        //       'howToContact',
-                                                        // ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 300,
-                                                    child: ColumnSeparated(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
-                                                      separatorBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        return const SizedBox(
-                                                            height: 8);
-                                                      },
-                                                      children: [
-                                                        Text(
-                                                          '連絡方法QRコード',
-                                                          style: context
-                                                              .textTheme
-                                                              .bodyMedium,
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 300,
-                                                              child:
-                                                                  ReactiveTextField(
-                                                                formControlName:
-                                                                    'howToContactQrCode',
-                                                              ),
-                                                            ),
-                                                            if (formArray
-                                                                    .controls
-                                                                    .indexOf(
-                                                                        currentForm) !=
-                                                                0)
-                                                              IconButton(
-                                                                icon:
-                                                                    const Icon(
-                                                                  Icons.delete,
-                                                                  color: Colors
-                                                                      .red,
-                                                                ),
-                                                                onPressed: () {
-                                                                  formArray.removeAt(formArray
-                                                                      .controls
-                                                                      .indexOf(
-                                                                          currentForm));
-                                                                },
-                                                              ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          }).toList();
-
-                                          return ColumnSeparated(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            separatorBuilder:
-                                                (BuildContext context,
-                                                    int index) {
-                                              return const SizedBox(height: 8);
-                                            },
-                                            children: [
-                                              ...rows,
-                                              InkWell(
-                                                onTap: () {
-                                                  formArray.add(
-                                                    FormGroup({
-                                                      '_id':
-                                                          FormControl<String>(),
-                                                      'howToContact':
-                                                          FormControl<String>(),
-                                                      'howToContactQrCode':
-                                                          FormControl<String>(),
-                                                    }),
-                                                  );
-                                                },
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.add_circle,
-                                                      color: context.appTheme
-                                                          .primaryColor,
-                                                    ),
-                                                    SizedBox(
-                                                      width: context.appTheme
-                                                          .spacing.marginSmall,
-                                                    ),
-                                                    Text(
-                                                      '連絡方法を追加',
-                                                      style: TextStyle(
-                                                          color: context
-                                                              .appTheme
-                                                              .primaryColor),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
+
                             );
                           });
                     }).toList();
@@ -1033,17 +855,9 @@ class _AgentBasicInformationScreenState
                                 'phoneNumber': FormControl<String>(),
                                 'email': FormControl<String>(
                                   validators: [
-                                    Validators.required,
                                     Validators.email,
                                   ],
                                 ),
-                                'contactMethods': FormArray([
-                                  FormGroup({
-                                    '_id': FormControl<String>(),
-                                    'howToContact': FormControl<String>(),
-                                    'howToContactQrCode': FormControl<String>(),
-                                  }),
-                                ]),
                               })
                                 ..markAllAsTouched(),
                             );

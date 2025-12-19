@@ -116,6 +116,10 @@ class BasicInformationModel {
     FormGroup formGroup,
     BasicInformationHospitalResponse data,
   ) {
+    if (data.phoneNumber != null) {
+      data.phoneNumber =
+          data.phoneNumber!.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), '');
+    }
     formGroup.patchValue(data.toJson());
   }
 
@@ -166,7 +170,8 @@ class BasicInformationModel {
               value: item.nameKana ?? '',
             ),
             'telephoneNumber': FormControl<String>(
-              value: item.telephoneNumber ?? '',
+              value: item.telephoneNumber?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), '') ??
+                  '',
             ),
             'email': FormControl<String>(
               validators: [

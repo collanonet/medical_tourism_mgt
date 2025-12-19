@@ -82,7 +82,8 @@ class AgentBasicInformationModel {
     basicInformationAgentForm.control('address').value = response.address;
     basicInformationAgentForm.control('area').value = response.area;
     basicInformationAgentForm.control('phoneNumber').value =
-        response.phoneNumber;
+        response.phoneNumber?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), '');
+
     basicInformationAgentForm.control('transactionStartDate').value =
         response.transactionStartDate;
     basicInformationAgentForm.control('howToMainPayment').value =
@@ -175,29 +176,6 @@ class AgentBasicInformationModel {
     manager.clear();
     if (response.isNotEmpty) {
       for (var element in response) {
-        FormArray contactMethods = FormArray([
-          FormGroup({
-            '_id': FormControl<String>(),
-            'howToContact': FormControl<String>(),
-            'howToContactQrCode': FormControl<String>(),
-          }),
-        ]);
-
-        if (element.contactMethods != null &&
-            element.contactMethods!.isNotEmpty) {
-          contactMethods.clear();
-          for (var e in element.contactMethods!) {
-            contactMethods.add(
-              FormGroup({
-                '_id': FormControl<String>(value: e.id),
-                'howToContact': FormControl<String>(value: e.howToContact),
-                'howToContactQrCode':
-                    FormControl<String>(value: e.howToContactQrCode),
-              }),
-            );
-          }
-        }
-
         manager.add(
           FormGroup({
             '_id': FormControl<String>(value: element.id),
@@ -215,19 +193,18 @@ class AgentBasicInformationModel {
                 value: element.fullNameJapaneseKanjiChineseOnly),
             'fullNameKana': FormControl<String>(value: element.fullNameKana),
             'phoneNumber': FormControl<String>(
-              value: element.phoneNumber ?? '',
+              value: element.phoneNumber?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), '') ??
+                  '',
               validators: [
-                Validators.required,
+                Validators.pattern(RegExp(r'^[0-9]+$')),
               ],
             ),
             'email': FormControl<String>(
               value: element.email,
               validators: [
-                Validators.required,
                 Validators.email,
               ],
             ),
-            'contactMethods': contactMethods,
           }),
         );
       }
@@ -244,21 +221,15 @@ class AgentBasicInformationModel {
           'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
           'fullNameKana': FormControl<String>(),
           'phoneNumber': FormControl<String>(
-            validators: [Validators.required],
+            validators: [
+              Validators.pattern(RegExp(r'^[0-9]+$')),
+            ],
           ),
           'email': FormControl<String>(
             validators: [
-              Validators.required,
               Validators.email,
             ],
           ),
-          'contactMethods': FormArray([
-            FormGroup({
-              '_id': FormControl<String>(),
-              'howToContact': FormControl<String>(),
-              'howToContactQrCode': FormControl<String>(),
-            }),
-          ]),
         }),
       );
     }
@@ -270,30 +241,22 @@ class AgentBasicInformationModel {
       List<AgentManagerResponse> managers = agentManager.value.data ?? [];
       agentManager.value = const AsyncData(loading: true);
 
-      await formGroup.control('manager').value.forEach((element) async {
-        List<AgentManagerContactRequest> contactMethods = [];
-        element['contactMethods'].forEach((e) {
-          contactMethods.add(
-            AgentManagerContactRequest(
-              // id: e['_id'],
-              howToContact: e['howToContact'],
-              howToContactQrCode: e['howToContactQrCode'],
-            ),
-          );
-        });
-
+      for (var element in formGroup.control('manager').value) {
         String? file;
         if (element['nameCardDragDrop'] != null) {
           FileSelect docFile = element['nameCardDragDrop'];
           if (docFile.file != null) {
             try {
               String base64Image = base64Encode(docFile.file!);
+              logger.d('Uploading imageBase64: ${docFile.filename}');
               FileResponse fileData = await authRepository.uploadFileBase64(
                 base64Image,
                 docFile.filename!,
               );
               file = fileData.filename;
+              logger.d('Upload success. Filename: $file');
             } catch (e) {
+              logger.e('Upload failed: $e');
               logger.e(e);
             }
           } else {
@@ -312,7 +275,7 @@ class AgentBasicInformationModel {
           fullNameKana: element['fullNameKana'],
           phoneNumber: element['phoneNumber'],
           email: element['email'],
-          contactMethods: contactMethods,
+          contactMethods: [],
           agentRecord: id,
         );
         logger.d('Manager= ${manager.toJson()}');
@@ -325,7 +288,7 @@ class AgentBasicInformationModel {
           var result = await authRepository.postAgentManager(manager);
           managers.add(result);
         }
-      });
+      }
 
       agentManager.value = AsyncData(data: managers);
     } catch (error) {
@@ -334,14 +297,6 @@ class AgentBasicInformationModel {
           agentManager.value.copyWith(error: error, loading: false);
     }
   }
-
-  ValueNotifier<List<Contact>> contactList = ValueNotifier([
-    Contact(value: 'WeChat'),
-    Contact(value: 'Line'),
-    Contact(value: 'Telegram'),
-    Contact(value: 'Messenger'),
-    Contact(value: 'WhatsApp'),
-  ]);
 
   ValueNotifier<AsyncData<bool>> deleteAgent = ValueNotifier(const AsyncData());
 
@@ -357,7 +312,4 @@ class AgentBasicInformationModel {
   }
 }
 
-class Contact {
-  String value;
-  Contact({required this.value});
-}
+

@@ -3,6 +3,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -97,9 +98,19 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'phoneNumber',
+                                  keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     labelText: '電話番号',
+                                    prefixText: '+ ',
                                   ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9\uFF10-\uFF19]')),
+                                  ],
+                                  validationMessages: {
+                                    ValidationMessage.pattern: (error) =>
+                                        '半角で入力してください',
+                                  },
                                 ),
                               ),
                               SizedBox(

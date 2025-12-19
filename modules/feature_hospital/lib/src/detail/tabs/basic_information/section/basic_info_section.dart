@@ -295,18 +295,23 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'phoneNumber',
-                                  keyboardType: TextInputType.phone,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9+\-]')),
-                                  ],
+                                  keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
                                     label: Text(
-                                      '電話番号（半角）',
+                                      '電話番号',
                                     ),
+                                    prefixText: '+ ',
                                   ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9\uFF10-\uFF19]')),
+                                  ],
+                                  validationMessages: {
+                                    ValidationMessage.pattern: (error) =>
+                                        '半角で入力してください',
+                                  },
                                 ),
                               ),
                               SizedBox(
