@@ -289,12 +289,16 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                           label: Text(
                                             '携帯番号（患者様）',
                                           ),
+                                          prefixText: '+ ',
                                         ),
-                                        keyboardType: TextInputType.phone,
+                                        keyboardType: TextInputType.number,
                                         inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
+                                          FilteringTextInputFormatter.digitsOnly,
                                         ],
+                                        validationMessages: {
+                                          ValidationMessage.pattern: (error) =>
+                                              '半角で入力してください',
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -308,12 +312,16 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                           label: Text(
                                             '携帯番号（国内可）',
                                           ),
+                                          prefixText: '+ ',
                                         ),
-                                        keyboardType: TextInputType.phone,
+                                        keyboardType: TextInputType.number,
                                         inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
+                                          FilteringTextInputFormatter.digitsOnly,
                                         ],
+                                        validationMessages: {
+                                          ValidationMessage.pattern: (error) =>
+                                              '半角で入力してください',
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -805,11 +813,20 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'mobileNumber',
+                                  keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     label: Text(
                                       '電話番号',
                                     ),
+                                    prefixText: '+ ',
                                   ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ],
+                                  validationMessages: {
+                                    ValidationMessage.pattern: (error) =>
+                                        '半角で入力してください',
+                                  },
                                 ),
                               ),
                               SizedBox(
@@ -867,11 +884,16 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                     label: Text(
                                       '緊急連絡先',
                                     ),
+                                    prefixText: '+ ',
                                   ),
-                                  keyboardType: TextInputType.phone,
+                                  keyboardType: TextInputType.number,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
                                   ],
+                                  validationMessages: {
+                                    ValidationMessage.pattern: (error) =>
+                                        '半角で入力してください',
+                                  },
                                 ),
                               ),
                               SizedBox(

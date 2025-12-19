@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
+import 'package:data_agent/data_agent.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -15,9 +16,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 class BasicInformationModel {
   BasicInformationModel({
     required this.patientRepository,
+    required this.agentRepository,
   });
 
   final PatientRepository patientRepository;
+  final AgentRepository agentRepository;
 
   ValueNotifier<AsyncData<Patient>> patientData =
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
@@ -27,6 +30,9 @@ class BasicInformationModel {
 
   ValueNotifier<AsyncData<User>> userAccount =
       ValueNotifier<AsyncData<User>>(const AsyncData());
+
+  ValueNotifier<AsyncData<List<AgentResponse>>> agents =
+      ValueNotifier<AsyncData<List<AgentResponse>>>(const AsyncData());
 
   Future<void> initialData({
     Patient? patient,
@@ -43,7 +49,9 @@ class BasicInformationModel {
         getPatientNationalities(patientId: patient.id, formGroup: formGroup);
         getPatientPassports(patientId: patient.id, formGroup: formGroup);
         // get medical info
+        // get medical info
         getMedicalRecords(patientId: patient.id, formGroup: formGroup);
+        getAgents();
 
         loading.value = const AsyncData();
       } catch (error) {
@@ -148,6 +156,18 @@ class BasicInformationModel {
   void insertUserAccount({required User data, required FormGroup formGroup}) {
     formGroup.control('loginId').value = data.idNumber;
     formGroup.control('isClosed').value = data.isClosed;
+    formGroup.control('isClosed').value = data.isClosed;
+  }
+
+  // GET AGENTS
+  Future<void> getAgents() async {
+    agents.value = const AsyncData(loading: true);
+    try {
+      final result = await agentRepository.getAgents();
+      agents.value = AsyncData(data: result);
+    } catch (e) {
+      agents.value = AsyncData(error: e);
+    }
   }
 
   // //GET_PATIENT_NAMES
@@ -330,7 +350,8 @@ class BasicInformationModel {
     ].where((element) => element != null && element!.isNotEmpty).join(' ').trim();
     formGroup.control('residentialArea').value = combinedAddress;
     formGroup.control('currentAddress').value = combinedAddress;
-    formGroup.control('mobileNumber').value = data.mobileNumber;
+    formGroup.control('mobileNumber').value =
+        data.mobileNumber?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), '');
     formGroup.control('patient').value = data.patient;
     formGroup.control('email').value = data.email;
 
@@ -799,8 +820,12 @@ class BasicInformationModel {
     medicalRecordAgents.value = const AsyncData(loading: true);
     MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
       company: form.control('company').value ?? '',
-      nameInKanji: form.control('nameInKanji').value ?? '',
-      nameInKana: form.control('nameInKana').value ?? '',
+      nameInKanji: (form.control('nameInKanji').value as String?)?.isNotEmpty == true
+          ? form.control('nameInKanji').value
+          : '-',
+      nameInKana: (form.control('nameInKana').value as String?)?.isNotEmpty == true
+          ? form.control('nameInKana').value
+          : '-',
       agentType: form.control('agentType').value ?? '',
       medicalRecord: medicalRecordId.value.requireData,
     );
@@ -1178,7 +1203,8 @@ class BasicInformationModel {
                 value: !(element.gender == true),
               ),
               'mobileNumber': FormControl<String?>(
-                value: element.mobileNumber,
+                value: element.mobileNumber
+                    ?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), ''),
               ),
               'email': FormControl<String?>(
                 value: element.email,

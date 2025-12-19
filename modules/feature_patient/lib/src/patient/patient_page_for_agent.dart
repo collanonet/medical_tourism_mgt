@@ -22,7 +22,7 @@ class _PatientPageState extends State<PatientPageFormAgent> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<PatientModel>()..patients(),
+      create: (context) => GetIt.I<PatientModel>()..patients(agentId: widget.id),
       child: const SingleChildScrollView(child: PatientScreenForAgent()),
     );
   }
