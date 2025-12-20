@@ -914,31 +914,53 @@ class _AgentBasicInformationScreenState
                 color: context.appTheme.primaryColor,
               ),
             ),
-            child: file != null && file.file != null
-                ? Image.memory(
-                    file.file!,
-                    fit: BoxFit.fill,
-                  )
-                : file != null && file.url != null
-                    ? Avatar.network(
-                        file.url,
-                        placeholder: const AssetImage(
-                          Images.logoMadical,
-                          package: 'core_ui',
-                        ),
-                        shape: BoxShape.rectangle,
-                        customSize: const Size(200, 380),
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.copy_all_rounded,
-                            size: 50,
-                            color: context.appTheme.primaryColor,
+            child: file != null &&
+                    (file.file != null ||
+                        (file.url != null && file.url!.isNotEmpty))
+                ? Stack(
+                    children: [
+                      Positioned.fill(
+                        child: file.file != null
+                            ? Image.memory(
+                                file.file!,
+                                fit: BoxFit.fill,
+                              )
+                            : Avatar.network(
+                                file.url,
+                                placeholder: const AssetImage(
+                                  Images.logoMadical,
+                                  package: 'core_ui',
+                                ),
+                                shape: BoxShape.rectangle,
+                                customSize: const Size(200, 380),
+                              ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: IconButton(
+                          onPressed: () {
+                            currentForm.control('nameCardDragDrop').value =
+                                null;
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.red,
                           ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.copy_all_rounded,
+                        size: 50,
+                        color: context.appTheme.primaryColor,
+                      ),
                           SizedBox(
                             height: context.appTheme.spacing.marginMedium,
                           ),

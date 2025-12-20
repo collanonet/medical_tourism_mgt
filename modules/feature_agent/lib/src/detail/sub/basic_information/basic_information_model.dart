@@ -1,10 +1,13 @@
 // Dart imports:
 import 'dart:convert';
 
+
+
 // Flutter imports:
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
+import 'package:dio/dio.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_agent/data_agent.dart';
@@ -113,8 +116,7 @@ class AgentBasicInformationModel {
         ));
       });
 
-      logger.d('referralCommissions $referralCommissions');
-      logger.d('referralCommissions ${referralCommissions.length}');
+
 
       var agentRequest = AgentRequest(
         memo: formGroup.control('basicInformationAgent.memo').value,
@@ -145,6 +147,7 @@ class AgentBasicInformationModel {
         response = await authRepository.postAgent(agentRequest);
         submitAgent.value = AsyncData(data: response);
         agent.value = AsyncData(data: response);
+        formGroup.control('basicInformationAgent._id').patchValue(response.id);
       }
 
       await createOrUpdateAgentManager(response.id, formGroup);
@@ -200,7 +203,9 @@ class AgentBasicInformationModel {
               ],
             ),
             'email': FormControl<String>(
-              value: element.email,
+              value: element.email?.contains('@placeholder.com') == true
+                  ? ''
+                  : element.email,
               validators: [
                 Validators.email,
               ],
@@ -241,31 +246,52 @@ class AgentBasicInformationModel {
       List<AgentManagerResponse> managers = agentManager.value.data ?? [];
       agentManager.value = const AsyncData(loading: true);
 
-      for (var element in formGroup.control('manager').value) {
+      FormArray managerArray = formGroup.control('manager') as FormArray;
+
+      // Use a standard for loop to handle async operations sequentially and cleanly
+      for (var i = 0; i < managerArray.controls.length; i++) {
+        var control = managerArray.controls[i];
+        var element = control.value;
+
+        // 1. Image Upload Logic
         String? file;
         if (element['nameCardDragDrop'] != null) {
           FileSelect docFile = element['nameCardDragDrop'];
+          // Only upload if it's a new file (file object is present)
           if (docFile.file != null) {
             try {
               String base64Image = base64Encode(docFile.file!);
-              logger.d('Uploading imageBase64: ${docFile.filename}');
               FileResponse fileData = await authRepository.uploadFileBase64(
                 base64Image,
                 docFile.filename!,
               );
               file = fileData.filename;
-              logger.d('Upload success. Filename: $file');
             } catch (e) {
-              logger.e('Upload failed: $e');
-              logger.e(e);
+              logger.e('Image Upload failed: $e');
+              // Continue saving manager even if image upload fails, or handle strict if needed
             }
           } else {
+            // Keep existing URL if no new file
             file = docFile.url;
           }
         }
 
-        AgentManagerRequest manager = AgentManagerRequest(
-          nameCardDragDrop: file,
+        // 2. Prepare Payload
+        // Handle empty strings for optional fields if backend requires null,
+        // or ensure strings are strictly passed.
+        // Spec: email/phone can be empty string or null, but unique constraint applies if value exists.
+        String? email = element['email'];
+        if (email != null && email.trim().isEmpty) {
+          email = null; // Send null to avoid unique constraint on empty string if sparse index is used
+        }
+
+        String? phoneNumber = element['phoneNumber'];
+        if (phoneNumber != null && phoneNumber.trim().isEmpty) {
+          phoneNumber = null;
+        }
+
+        AgentManagerRequest managerRequest = AgentManagerRequest(
+          nameCardDragDrop: file ?? '',
           departmentName: element['departmentName'],
           fullNameRomanji: element['fullNameRomanji'],
           fullNameChineseKanjiVietnameseNotation:
@@ -273,20 +299,60 @@ class AgentBasicInformationModel {
           fullNameJapaneseKanjiChineseOnly:
               element['fullNameJapaneseKanjiChineseOnly'],
           fullNameKana: element['fullNameKana'],
-          phoneNumber: element['phoneNumber'],
-          email: element['email'],
+          phoneNumber: phoneNumber,
+          email: email, // use processed email (null or valid string)
           contactMethods: [],
           agentRecord: id,
         );
-        logger.d('Manager= ${manager.toJson()}');
 
-        if (element['_id'] != null) {
-          var result =
-              await authRepository.putAgentManager(element['_id'], manager);
-          managers.map((e) => e.id == result.id ? result : e).toList();
-        } else {
-          var result = await authRepository.postAgentManager(manager);
-          managers.add(result);
+        // 3. Create or Update Logic
+        try {
+          if (element['_id'] != null && element['_id'].toString().isNotEmpty) {
+            // UPDATE
+            var result = await authRepository.putAgentManager(
+                element['_id'], managerRequest);
+            // Update local list
+            managers =
+                managers.map((e) => e.id == result.id ? result : e).toList();
+          } else {
+            // CREATE
+            var result = await authRepository.postAgentManager(managerRequest);
+            managers.add(result);
+            // CRITICAL: Patch the ID back to the form control immediately
+            control.patchValue({'_id': result.id});
+          }
+        } catch (e) {
+          // 4. Detailed Error Handling within the loop
+          if (e is DioException) {
+            if (e.response?.statusCode == 400) {
+              // Handle known validation errors (e.g. Email duplicate)
+              // Propagate message to user
+              throw e; 
+            } else if (e.response?.statusCode == 500) {
+              // Handle "Duplicate Key" hidden in 500 (e.g. Phone duplicate)
+              if (e.response?.data.toString().contains('E11000') == true ||
+                  e.response?.data.toString().contains('duplicate key') ==
+                      true) {
+                // Manually map to a friendly error
+                // We rethrow a formatted error or handle UI feedback here
+                 throw DioException(
+                  requestOptions: e.requestOptions,
+                  response: Response(
+                    requestOptions: e.requestOptions,
+                    statusCode: 400, // Pretend it's a 400 for the UI
+                    statusMessage: 'Duplicate Entry',
+                     data: {
+                      'message': e.response?.data.toString().contains('phoneNumber') == true
+                          ? 'Phone number already exists.'
+                          : 'Duplicate entry detected.'
+                    } 
+                  ),
+                  type: DioExceptionType.badResponse,
+                );
+              }
+            }
+          }
+          rethrow; // Re-throw other errors to stop process
         }
       }
 
@@ -295,6 +361,7 @@ class AgentBasicInformationModel {
       logger.e(error);
       agentManager.value =
           agentManager.value.copyWith(error: error, loading: false);
+      rethrow; // Ensure UI knows about the failure
     }
   }
 
