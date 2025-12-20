@@ -894,7 +894,10 @@ class _AgentBasicInformationScreenState
     final file = currentForm.control('nameCardDragDrop').value as FileSelect?;
     return Row(
       children: [
-        InkWell(
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            InkWell(
           onTap: () {
             filePicker().then((value) {
               currentForm.control('nameCardDragDrop').value = value;
@@ -919,36 +922,21 @@ class _AgentBasicInformationScreenState
                         (file.url != null && file.url!.isNotEmpty))
                 ? Stack(
                     children: [
-                      Positioned.fill(
-                        child: file.file != null
-                            ? Image.memory(
-                                file.file!,
-                                fit: BoxFit.fill,
-                              )
-                            : Avatar.network(
-                                file.url,
-                                placeholder: const AssetImage(
-                                  Images.logoMadical,
-                                  package: 'core_ui',
-                                ),
-                                shape: BoxShape.rectangle,
-                                customSize: const Size(200, 380),
+                      file.file != null
+                          ? Image.memory(
+                              file.file!,
+                              fit: BoxFit.fill,
+                            )
+                          : Avatar.network(
+                              file.url,
+                              placeholder: const AssetImage(
+                                Images.logoMadical,
+                                package: 'core_ui',
                               ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: IconButton(
-                          onPressed: () {
-                            currentForm.control('nameCardDragDrop').value =
-                                null;
-                          },
-                          icon: const Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
+                              shape: BoxShape.rectangle,
+                              customSize: const Size(200, 380),
+                            ),
+
                     ],
                   )
                 : Column(
@@ -991,6 +979,31 @@ class _AgentBasicInformationScreenState
                         ],
                       ),
           ),
+        ),
+            if (file != null &&
+                (file.file != null ||
+                    (file.url != null && file.url!.isNotEmpty)))
+              Positioned(
+                top: -10,
+                right: -10,
+                child: IconButton(
+                  onPressed: () {
+                    currentForm.control('nameCardDragDrop').value = null;
+                  },
+                  icon: Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: const Icon(
+                      Icons.cancel,
+                      color: Colors.red,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ],
     );
