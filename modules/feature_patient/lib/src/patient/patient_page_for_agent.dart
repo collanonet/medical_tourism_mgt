@@ -10,8 +10,8 @@ import 'patient_model.dart';
 import 'patient_screen_for_agent.dart';
 
 class PatientPageFormAgent extends StatefulWidget {
-  const PatientPageFormAgent({super.key, this.id});
-  final String? id;
+  const PatientPageFormAgent({super.key, this.agentName});
+  final String? agentName;
   @override
   State<PatientPageFormAgent> createState() => _PatientPageState();
 }
@@ -22,8 +22,9 @@ class _PatientPageState extends State<PatientPageFormAgent> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<PatientModel>()..patients(agentId: widget.id),
-      child: const SingleChildScrollView(child: PatientScreenForAgent()),
+      create: (context) =>
+          GetIt.I<PatientModel>()..patients(agentId: widget.agentName),
+      child: const PatientScreenForAgent(),
     );
   }
 }
