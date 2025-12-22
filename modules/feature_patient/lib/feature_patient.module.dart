@@ -7,6 +7,7 @@
 import 'dart:async' as _i2;
 
 import 'package:data_patient/data_patient.dart' as _i4;
+import 'package:data_agent/data_agent.dart' as _i32;
 import 'package:injectable/injectable.dart' as _i1;
 
 import 'src/detail_patient/basic_info/basic_info_model.dart' as _i3;
@@ -60,7 +61,8 @@ class FeaturePatientPackageModule extends _i1.MicroPackageModule {
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.factory<_i3.BasicInformationModel>(() => _i3.BasicInformationModel(
-        patientRepository: gh<_i4.PatientRepository>()));
+        patientRepository: gh<_i4.PatientRepository>(),
+        agentRepository: gh<_i32.AgentRepository>()));
     gh.factory<_i5.BillingModel>(
         () => _i5.BillingModel(patientRepository: gh<_i4.PatientRepository>()));
     gh.factory<_i6.DetailPatientModel>(() =>

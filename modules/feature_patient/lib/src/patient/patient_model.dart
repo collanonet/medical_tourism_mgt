@@ -20,7 +20,8 @@ class PatientModel with ChangeNotifier {
 
   AsyncData<Paginated<Patient>> get patientData => _patientData;
 
-  Future<void> patients({FormGroup? form, String? progress}) async {
+  Future<void> patients(
+      {FormGroup? form, String? progress, String? agentId}) async {
     _patientData = const AsyncData(loading: true);
     notifyListeners();
 
@@ -31,9 +32,10 @@ class PatientModel with ChangeNotifier {
       patientName: form?.control('patientName').value == null
           ? null
           : form!.control('patientName').value,
-      companyAGENTS: form?.control('companyAGENTS').value == null
-          ? null
-          : form!.control('companyAGENTS').value,
+      companyAGENTS: agentId ??
+          (form?.control('companyAGENTS').value == null
+              ? null
+              : form!.control('companyAGENTS').value),
       acceptingHospital: form?.control('acceptingHospital').value == null
           ? null
           : form!.control('acceptingHospital').value,

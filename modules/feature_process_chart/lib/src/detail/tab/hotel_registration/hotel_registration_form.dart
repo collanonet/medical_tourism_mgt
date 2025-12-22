@@ -7,7 +7,9 @@ FormGroup hotelRegistrationForm() => FormGroup({
       //'area': FormControl<String>(),
       'address': FormControl<String>(),
       'contactPersonName': FormControl<String>(),
-      'phoneNumber': FormControl<String>(),
+      'phoneNumber': FormControl<String>(
+        validators: [Validators.pattern(RegExp(r'^[0-9]+$'))],
+      ),
       'ratePerNight': FormControl<double>(),
       'accommodationMemo': FormControl<String>(),
       'isJapanese': FormControl<bool>(value: false),

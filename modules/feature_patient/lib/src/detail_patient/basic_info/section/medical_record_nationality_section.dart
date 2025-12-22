@@ -117,8 +117,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                   ),
                                 ),
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]')),
+                                  FilteringTextInputFormatter.digitsOnly,
                                 ],
                               ),
                             ),
@@ -246,7 +245,7 @@ class MedicalRecordQrSection extends StatelessWidget {
                             label: Text('携帯番号'),
                           ),
                           inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            FilteringTextInputFormatter.digitsOnly,
                           ],
                         ),
                       ),

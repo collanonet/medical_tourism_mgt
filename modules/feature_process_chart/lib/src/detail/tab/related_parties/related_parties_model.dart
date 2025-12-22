@@ -93,8 +93,9 @@ class RelatedPartiesModel {
                   value: element.guideNamaKanji), // ガイド名（漢字）
               'guideNameKana':
                   FormControl<String>(value: element.guideNameKana), // ガイド名（カナ）
-              'phoneNumber':
-                  FormControl<String>(value: element.phoneNumber), // 電話番号
+              'phoneNumber': FormControl<String>(
+                  value: element.phoneNumber?.replaceAll(
+                      RegExp(r'[^0-9\uFF10-\uFF19]'), '')), // 電話番号
               'qualification': FormControl<List<String>>(value: []), // 資格
               'report': FormControl<String>(value: element.report), // 報告書
               'accommodationAvailability': FormControl<String>(
@@ -102,8 +103,9 @@ class RelatedPartiesModel {
               'accommodationName':
                   FormControl<String>(value: element.accommodationName), // 施設名
               'address': FormControl<String>(value: element.address), // 所在地
-              'phoneNumber2':
-                  FormControl<String>(value: element.phoneNumber2), //
+              'phoneNumber2': FormControl<String>(
+                  value: element.phoneNumber2?.replaceAll(
+                      RegExp(r'[^0-9\uFF10-\uFF19]'), '')), //
               //qualification
               'itinerary_management': FormControl<bool>(value: value1),
               'guide_interpreter': FormControl<bool>(value: value2),
@@ -301,8 +303,9 @@ class RelatedPartiesModel {
                   value: element.driverNamaKanji), // ドライバー名（漢字）
               'driverNameKana': FormControl<String>(
                   value: element.driverNameKana), // ドライバー名（カナ）
-              'phoneNumber':
-                  FormControl<String>(value: element.phoneNumber), // 電話番号
+              'phoneNumber': FormControl<String>(
+                  value: element.phoneNumber?.replaceAll(
+                      RegExp(r'[^0-9\uFF10-\uFF19]'), '')), // 電話番号
               'language':
                   FormControl<List<String>>(value: element.language), // 対応言語
               'accommodationAvailability': FormControl<String>(
@@ -312,8 +315,9 @@ class RelatedPartiesModel {
               'accommodationName':
                   FormControl<String>(value: element.accommodationName), // 施設名
               'address': FormControl<String>(value: element.address), // 所在地
-              'phoneNumber2':
-                  FormControl<String>(value: element.phoneNumber2), //),
+              'phoneNumber2': FormControl<String>(
+                  value: element.phoneNumber2?.replaceAll(
+                      RegExp(r'[^0-9\uFF10-\uFF19]'), '')), //),
               //language
               'japanese': FormControl<bool>(value: japanese),
               'chinese': FormControl<bool>(value: chinese),
@@ -430,8 +434,9 @@ class RelatedPartiesModel {
                   value: item.contactPersonNamaKanji), // 担当者名（漢字）
               'contactPersonNameKana': FormControl<String>(
                   value: item.contactPersonNameKana), // 担当者名（カナ）
-              'phoneNumber':
-                  FormControl<String>(value: item.phoneNumber), // 電話番号
+              'phoneNumber': FormControl<String>(
+                  value: item.phoneNumber?.replaceAll(
+                      RegExp(r'[^0-9\uFF10-\uFF19]'), '')), // 電話番号
               'tour': FormControl<String>(value: item.tour),
             },
           ),

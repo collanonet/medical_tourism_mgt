@@ -106,7 +106,8 @@ class NormalSummaryModel {
     required FormGroup formGroup,
   }) {
     formGroup.control('currentAddress').value = data.currentAddress;
-    formGroup.control('mobileNumberPatient').value = data.mobileNumber;
+    formGroup.control('mobileNumberPatient').value = data.mobileNumber
+        ?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), '');
   }
 
   Future<void> getMedicalRecordSummary(FormGroup formGroup) async {
@@ -128,7 +129,8 @@ class NormalSummaryModel {
       '_id': result.id,
       'entryDate': result.entryDate,
       'currentAddress': result.currentAddress,
-      'mobileNumberDomestic': result.mobileNumberDomestic,
+      'mobileNumberDomestic': result.mobileNumberDomestic
+          ?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), ''),
       'diseaseName': result.diseaseName,
       'tissueType': result.tissueType,
       'diseaseNotices': result.diseaseNotices,
@@ -147,9 +149,11 @@ class NormalSummaryModel {
       'patientsWishes': result.patientsWishes,
       'agentName': result.agentName,
       'personInChargeName': result.personInChargeName,
-      'mobileNumber': result.mobileNumber,
+      'mobileNumber':
+          result.mobileNumber?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), ''),
       'patientsAddressStay': result.patientsAddressStay,
-      'emergencyContact': result.emergencyContact,
+      'emergencyContact': result.emergencyContact
+          ?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), ''),
       'remarks': result.remarks,
       'medicalRecord': medicalRecord.value.requireData.id,
     });

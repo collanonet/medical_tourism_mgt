@@ -36,7 +36,7 @@ FormGroup basicInformationForm() {
       ),
       'phoneNumber': FormControl<String>(
         value: '',
-        validators: [Validators.pattern(RegExp(r'^[0-9+\-]+$'))],
+        validators: [Validators.pattern(RegExp(r'^[0-9]+$'))],
       ),
       'faxNumber': FormControl<String>(
         value: '',

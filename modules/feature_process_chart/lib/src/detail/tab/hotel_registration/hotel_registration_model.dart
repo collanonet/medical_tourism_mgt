@@ -57,7 +57,10 @@ class HotelRegistrationModel {
         accommodationName: formGroup.control('accommodationName').value,
         address: formGroup.control('address').value,
         contactPersonName: formGroup.control('contactPersonName').value,
-        phoneNumber: formGroup.control('phoneNumber').value,
+        phoneNumber: formGroup
+            .control('phoneNumber')
+            .value
+            ?.replaceAll(RegExp(r'[^0-9\uFF10-\uFF19]'), ''),
         ratePerNight: formGroup.control('ratePerNight').value,
         accommodationMemo: formGroup.control('accommodationMemo').value,
         isJapanese: formGroup.control('isJapanese').value,

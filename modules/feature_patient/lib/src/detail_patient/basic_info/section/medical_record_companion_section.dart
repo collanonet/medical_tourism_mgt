@@ -606,15 +606,18 @@ class _MedicalRecordCompanionSectionState
                                           formControlName: 'mobileNumber',
                                           keyboardType: TextInputType.number,
                                           decoration: const InputDecoration(
-                                            prefixText: '+',
+                                            prefixText: '+ ',
                                             label: Text(
                                               '携帯番号',
                                             ),
                                           ),
                                           inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9]')),
+                                            FilteringTextInputFormatter.digitsOnly,
                                           ],
+                                          validationMessages: {
+                                            ValidationMessage.pattern:
+                                                (error) => '半角で入力してください',
+                                          },
                                         ),
                                       ),
                                       Expanded(

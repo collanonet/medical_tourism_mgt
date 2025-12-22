@@ -16,7 +16,12 @@ FormGroup formBasicInformation() {
       'postalCode': FormControl<String>(value: ''),
       'address': FormControl<String>(value: ''),
       'area': FormControl<String>(value: ''),
-      'phoneNumber': FormControl<String>(value: ''),
+      'phoneNumber': FormControl<String>(
+        value: '',
+        validators: [
+          Validators.pattern(RegExp(r'^[0-9]+$')),
+        ],
+      ),
       'transactionStartDate': FormControl<DateTime>(
         value: DateTime.now(),
       ),
@@ -43,21 +48,16 @@ FormGroup formBasicInformation() {
         'fullNameJapaneseKanjiChineseOnly': FormControl<String>(value: ''),
         'fullNameKana': FormControl<String>(value: ''),
         'phoneNumber': FormControl<String>(
-          validators: [Validators.required],
+          validators: [
+            Validators.pattern(RegExp(r'^[0-9]+$')),
+          ],
         ),
         'email': FormControl<String>(
           validators: [
-            Validators.required,
             Validators.email,
           ],
         ),
-        'contactMethods': FormArray([
-          FormGroup({
-            '_id': FormControl<String>(),
-            'howToContact': FormControl<String>(value: ''),
-            'howToContactQrCode': FormControl<String>(value: ''),
-          }),
-        ]),
+
       }),
     ]),
   });

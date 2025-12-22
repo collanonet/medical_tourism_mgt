@@ -106,7 +106,8 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
                       child: <Widget>[
                         BasicInformationPage(id: widget.id),
                         if (value.hasData) ...[
-                          PatientPageFormAgent(id: value.requireData.id),
+                          PatientPageFormAgent(
+                              agentName: value.requireData.companyName),
                           ContractPage(id: value.requireData.id),
                           EstimateInvoicePage(id: value.requireData.id),
                         ]

@@ -3,6 +3,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -177,11 +178,21 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'phoneNumber',
+                                            keyboardType: TextInputType.number,
                                             decoration: const InputDecoration(
                                               label: Text(
                                                 '電話番号',
                                               ),
+                                              prefixText: '+ ',
                                             ),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'[0-9\uFF10-\uFF19]')),
+                                            ],
+                                            validationMessages: {
+                                              ValidationMessage.pattern:
+                                                  (error) => '半角で入力してください',
+                                            },
                                           )),
                                           SizedBox(
                                             width: context
@@ -314,9 +325,19 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'phoneNumber2',
+                                            keyboardType: TextInputType.number,
                                             decoration: const InputDecoration(
                                               label: Text('電話番号'),
+                                              prefixText: '+ ',
                                             ),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'[0-9\uFF10-\uFF19]')),
+                                            ],
+                                            validationMessages: {
+                                              ValidationMessage.pattern:
+                                                  (error) => '半角で入力してください',
+                                              },
                                           )),
                                         ],
                                       ),
@@ -363,8 +384,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     'guideNameKana':
                                         FormControl<String>(value: ''),
                                     // ガイド名（カナ）
-                                    'phoneNumber':
-                                        FormControl<String>(value: ''),
+                                    'phoneNumber': FormControl<String>(
+                                        value: '',
+                                        validators: [
+                                          Validators.pattern(
+                                              RegExp(r'^[0-9]+$'))
+                                        ]),
                                     // 電話番号
                                     'qualification':
                                         FormControl<List<String>>(value: []),
@@ -379,8 +404,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     // 施設名
                                     'address': FormControl<String>(value: ''),
                                     // 所在地
-                                    'phoneNumber2':
-                                        FormControl<String>(value: ''),
+                                    'phoneNumber2': FormControl<String>(
+                                        value: '',
+                                        validators: [
+                                          Validators.pattern(
+                                              RegExp(r'^[0-9]+$'))
+                                        ]),
                                     //qualification
                                     'itinerary_management':
                                         FormControl<bool>(value: false),
@@ -696,11 +725,21 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'phoneNumber',
+                                            keyboardType: TextInputType.number,
                                             decoration: const InputDecoration(
                                               label: Text(
                                                 '電話番号',
                                               ),
+                                              prefixText: '+ ',
                                             ),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'[0-9\uFF10-\uFF19]')),
+                                            ],
+                                            validationMessages: {
+                                              ValidationMessage.pattern:
+                                                  (error) => '半角で入力してください',
+                                            },
                                           )),
                                         ],
                                       ),
@@ -913,9 +952,19 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'phoneNumber2',
+                                            keyboardType: TextInputType.number,
                                             decoration: const InputDecoration(
                                               label: Text('電話番号'),
+                                              prefixText: '+ ',
                                             ),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'[0-9\uFF10-\uFF19]')),
+                                            ],
+                                            validationMessages: {
+                                              ValidationMessage.pattern:
+                                                  (error) => '半角で入力してください',
+                                              },
                                           )),
                                         ],
                                       )
@@ -960,8 +1009,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     'driverNameKana':
                                         FormControl<String>(value: ''),
                                     // ドライバー名（カナ）
-                                    'phoneNumber':
-                                        FormControl<String>(value: ''),
+                                    'phoneNumber': FormControl<String>(
+                                        value: '',
+                                        validators: [
+                                          Validators.pattern(
+                                              RegExp(r'^[0-9]+$'))
+                                        ]),
                                     // 電話番号
                                     'language':
                                         FormControl<List<String>>(value: []),
@@ -977,8 +1030,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     // 施設名
                                     'address': FormControl<String>(value: ''),
                                     // 所在地
-                                    'phoneNumber2':
-                                        FormControl<String>(value: ''),
+                                    'phoneNumber2': FormControl<String>(
+                                        value: '',
+                                        validators: [
+                                          Validators.pattern(
+                                              RegExp(r'^[0-9]+$'))
+                                        ]),
                                     //language
                                     'japanese': FormControl<bool>(value: false),
                                     'chinese': FormControl<bool>(value: false),
@@ -1159,12 +1216,24 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                 ReactiveTextField(
                                                   formControlName:
                                                       'phoneNumber',
+                                                  keyboardType:
+                                                      TextInputType.number,
                                                   decoration:
                                                       const InputDecoration(
                                                     label: Text(
                                                       '電話番号',
                                                     ),
+                                                    prefixText: '+ ',
                                                   ),
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .allow(RegExp(
+                                                            r'[0-9\uFF10-\uFF19]')),
+                                                  ],
+                                                  validationMessages: {
+                                                    ValidationMessage.pattern:
+                                                        (error) => '半角で入力してください',
+                                                  },
                                                 ),
                                               ],
                                             ),
@@ -1207,8 +1276,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     'contactPersonNameKana':
                                         FormControl<String>(value: ''),
                                     // 担当者名（カナ）
-                                    'phoneNumber':
-                                        FormControl<String>(value: ''),
+                                    'phoneNumber': FormControl<String>(
+                                        value: '',
+                                        validators: [
+                                          Validators.pattern(
+                                              RegExp(r'^[0-9]+$'))
+                                        ]),
                                     // 電話番号
                                     'tour': FormControl<String>(),
                                   },

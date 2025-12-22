@@ -40,7 +40,9 @@ FormGroup normalSummaryForm() {
     'mobileNumberPatient': FormControl<String>(
       disabled: true,
     ),
-    'mobileNumberDomestic': FormControl<String>(),
+    'mobileNumberDomestic': FormControl<String>(
+      validators: [Validators.pattern(RegExp(r'^[0-9]+$'))],
+    ),
     'diseaseName': FormControl<String>(),
     'tissueType': FormControl<String>(),
     'diseaseNotices': FormControl<bool>(),
@@ -57,9 +59,13 @@ FormGroup normalSummaryForm() {
     'patientsWishes': FormControl<String>(),
     'agentName': FormControl<String>(),
     'personInChargeName': FormControl<String>(),
-    'mobileNumber': FormControl<String>(),
+    'mobileNumber': FormControl<String>(
+      validators: [Validators.pattern(RegExp(r'^[0-9]+$'))],
+    ),
     'patientsAddressStay': FormControl<String>(),
-    'emergencyContact': FormControl<String>(),
+    'emergencyContact': FormControl<String>(
+      validators: [Validators.pattern(RegExp(r'^[0-9]+$'))],
+    ),
     'remarks': FormControl<String>(),
     'attachDocuments': FormArray([
       FormGroup({

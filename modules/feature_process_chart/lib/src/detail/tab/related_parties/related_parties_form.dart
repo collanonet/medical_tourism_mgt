@@ -13,14 +13,18 @@ FormGroup relatedPartiesForm() => FormGroup(
                 'dateTo': FormControl<DateTime>(), // 年月日（至）
                 'guideNamaKanji': FormControl<String>(value: ''), // ガイド名（漢字）
                 'guideNameKana': FormControl<String>(value: ''), // ガイド名（カナ）
-                'phoneNumber': FormControl<String>(value: ''), // 電話番号
+                'phoneNumber': FormControl<String>(
+                    value: '',
+                    validators: [Validators.pattern(RegExp(r'^[0-9]+$'))]), // 電話番号
                 'qualification': FormControl<List<String>>(value: []), // 資格
                 'report': FormControl<String>(value: ''), // 報告書
                 'accommodationAvailability':
                     FormControl<String>(value: ''), // 同宿可否
                 'accommodationName': FormControl<String>(value: ''), // 施設名
                 'address': FormControl<String>(value: ''), // 所在地
-                'phoneNumber2': FormControl<String>(value: ''),
+                'phoneNumber2': FormControl<String>(
+                    value: '',
+                    validators: [Validators.pattern(RegExp(r'^[0-9]+$'))]),
                  //qualification
                 'itinerary_management': FormControl<bool>(value: false),
                 'guide_interpreter': FormControl<bool>(value: false),
@@ -54,14 +58,18 @@ FormGroup relatedPartiesForm() => FormGroup(
                     FormControl<String>(value: ''), // ドライバー名（漢字）
                 'driverNameKana':
                     FormControl<String>(value: ''), // ドライバー名（カナ）
-                'phoneNumber': FormControl<String>(value: ''), // 電話番号
+                'phoneNumber': FormControl<String>(
+                    value: '',
+                    validators: [Validators.pattern(RegExp(r'^[0-9]+$'))]), // 電話番号
                 'language': FormControl<List<String>>(value: []), // 対応言語
                 'accommodationAvailability':
                     FormControl<String>(value: ''), // 同宿可否
                 'hotelArrangement': FormControl<String>(value: ''), // ホテル手配
                 'accommodationName': FormControl<String>(value: ''), // 施設名
                 'address': FormControl<String>(value: ''), // 所在地
-                'phoneNumber2': FormControl<String>(value: ''),
+                'phoneNumber2': FormControl<String>(
+                    value: '',
+                    validators: [Validators.pattern(RegExp(r'^[0-9]+$'))]),
                  //language
                 'japanese': FormControl<bool>(value: false),
                 'chinese': FormControl<bool>(value: false),
@@ -86,7 +94,9 @@ FormGroup relatedPartiesForm() => FormGroup(
                     FormControl<String>(value: ''), // 担当者名（漢字）
                 'contactPersonNameKana':
                     FormControl<String>(value: ''), // 担当者名（カナ）
-                'phoneNumber': FormControl<String>(value: ''), // 電話番号
+                'phoneNumber': FormControl<String>(
+                    value: '',
+                    validators: [Validators.pattern(RegExp(r'^[0-9]+$'))]), // 電話番号
                 'tour': FormControl<String>(),
               },
             )
