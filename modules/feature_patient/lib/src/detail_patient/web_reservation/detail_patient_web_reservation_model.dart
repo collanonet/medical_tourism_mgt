@@ -87,13 +87,73 @@ class DetailPatientWebReservationModel {
         formGroup.control('noDesiredDate').value = noDesiredDate;
         formGroup.control('remarks').value =
             bookingByPatient.value.requireData.reason;
+
+        // 候補日が空の場合、患者の希望日を自動セットする
+        FormArray candidateDate =
+            formGroup.control('candidateDate') as FormArray;
+        
+        bool isCandidateEmpty = candidateDate.value == null || candidateDate.value!.isEmpty;
+        // デフォルトの空行（1行かつpreferredDateがnull）の場合も空とみなす
+        if (!isCandidateEmpty && candidateDate.value!.length == 1) {
+           var first = candidateDate.value![0] as Map<String, dynamic>?;
+           if (first != null && first['preferredDate'] == null) {
+             isCandidateEmpty = true;
+             candidateDate.clear(); // プレースホルダーを削除
+           }
+        }
+        
+        if (isCandidateEmpty) {
+          var dates = [
+            bookingByPatient.value.requireData.desiredDate1,
+            bookingByPatient.value.requireData.desiredDate2,
+            bookingByPatient.value.requireData.desiredDate3
+          ];
+
+          for (var date in dates) {
+            if (date != null) {
+              candidateDate.add(FormGroup({
+                '_id': FormControl<String>(),
+                'preferredDate': FormControl<DateTime>(
+                  value: date,
+                ),
+                'choice': FormControl<String>(value: '午前'),
+                'timePeriodFrom': FormControl<String>(validators: [
+                ]),
+                'timePeriodTo': FormControl<String>(validators: [
+                ]),
+              }));
+            }
+          }
+
+          if (candidateDate.controls.isEmpty) {
+             candidateDate.add(FormGroup({
+              '_id': FormControl<String>(),
+              'preferredDate': FormControl<DateTime>(
+                validators: [
+                  Validators.required,
+                ],
+              ), // 第一希望
+              'choice': FormControl<String>(value: '午前'), // 午前, 午後, 終日
+              'timePeriodFrom': FormControl<String>(
+                validators: [
+                  Validators.required,
+                ],
+              ), // 時間帯（自）
+              'timePeriodTo': FormControl<String>(
+                validators: [
+                  Validators.required,
+                ],
+              ), // 時間帯（至）
+            }));
+          }
+        }
       } else {
         formGroup.control('noDesiredDate').value = true;
       }
     } catch (e) {
       logger.e(e);
       formGroup.control('noDesiredDate').value = true;
-      
+
       // 404エラーの場合は、データが存在しないだけなので、エラーとして扱わない
       if (e is DioException && e.response?.statusCode == 404) {
         bookingByPatient.value = const AsyncData(); // データなし（正常）
@@ -184,7 +244,9 @@ class DetailPatientWebReservationModel {
     formGroup.control('department1').value = data.department1;
     formGroup.control('department2').value = data.department2;
     formGroup.control('shift1').value = data.shift1;
+    formGroup.control('shift1End').value = data.shift1End;
     formGroup.control('shift2').value = data.shift2;
+    formGroup.control('shift2End').value = data.shift2End;
     formGroup.control('shift1Mon').value = data.shift1Mon;
     formGroup.control('shift1Tue').value = data.shift1Tue;
     formGroup.control('shift1Wed').value = data.shift1Wed;
@@ -270,11 +332,6 @@ class DetailPatientWebReservationModel {
           '_id': FormControl<String>(value: e.id),
           'preferredDate': FormControl<DateTime>(
             value: e.proposedDate,
-            validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
-              ),
-            ],
           ),
           'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
           'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
@@ -357,6 +414,10 @@ class DetailPatientWebReservationModel {
             webBooking.value.data?.reservationConfirmationDate,
         testCallDate: formGroup.control('testCallDate').value,
         testCallTime: formGroup.control('testCallTime').value,
+        desiredDate1: formGroup.control('preferredDate1').value,
+        desiredDate2: formGroup.control('preferredDate2').value,
+        desiredDate3: formGroup.control('preferredDate3').value,
+        reason: formGroup.control('remarks').value,
       );
       updateReservation(webBooking.value.requireData.id, request);
     } else {
@@ -389,6 +450,10 @@ class DetailPatientWebReservationModel {
         messageFrom: messageFrom,
         testCallDate: formGroup.control('testCallDate').value,
         testCallTime: formGroup.control('testCallTime').value,
+        desiredDate1: formGroup.control('preferredDate1').value,
+        desiredDate2: formGroup.control('preferredDate2').value,
+        desiredDate3: formGroup.control('preferredDate3').value,
+        reason: formGroup.control('remarks').value,
       );
       submitReservation(request);
     }
@@ -404,6 +469,17 @@ class DetailPatientWebReservationModel {
         patientId: patient.value.requireData.id,
       );
       webBookings.value = AsyncData(data: result);
+      
+      // Populate webBooking (singular) from first item for editing
+      if (result.isNotEmpty) {
+        webBooking.value = AsyncData(data: result.first);
+        insertWebBooking();
+        formGroup.control('testCallDate').value = result.first.testCallDate;
+        formGroup.control('testCallTime').value = result.first.testCallTime;
+        if (result.first.hospital?.id != null) {
+          getHospitalById(result.first.hospital!.id);
+        }
+      }
     } catch (e) {
       logger.e(e);
       webBookings.value = AsyncData(error: e);
@@ -443,5 +519,112 @@ class DetailPatientWebReservationModel {
     } catch (e) {
       logger.e(e);
     }
+  }
+
+  int generateCandidateDates() {
+    if (!hospital.value.hasData) {
+      logger.d('generateCandidateDates: No hospital data');
+      return 0;
+    }
+
+    final preferredDates = [
+      formGroup.control('preferredDate1').value as DateTime?,
+      formGroup.control('preferredDate2').value as DateTime?,
+      formGroup.control('preferredDate3').value as DateTime?,
+    ];
+
+    if (preferredDates.every((element) => element == null)) {
+      logger.d('generateCandidateDates: No preferred dates selected');
+      return 0;
+    }
+
+    final data = hospital.value.requireData;
+    final candidateDate = formGroup.control('candidateDate') as FormArray;
+    candidateDate.clear(updateParent: true);
+
+    int addedCount = 0;
+    for (var date in preferredDates) {
+      if (date == null) continue;
+
+      // 曜日を取得 (Monday=1, ..., Sunday=7)
+      final weekday = date.weekday;
+
+      // シフト1の確認
+      if (_isShiftOpen(data, 1, weekday)) {
+        _addCandidate(candidateDate, date, data.shift1 ?? '', '午前');
+        addedCount++;
+      } 
+
+      // シフト2の確認
+      if (_isShiftOpen(data, 2, weekday)) {
+        _addCandidate(candidateDate, date, data.shift2 ?? '', '午後');
+        addedCount++;
+      }
+    }
+
+    return addedCount;
+  }
+
+  String? _getShiftStatus(BasicInformationHospitalResponse data, int shiftType, int weekday) {
+     switch (weekday) {
+      case DateTime.monday:
+        return shiftType == 1 ? data.shift1Mon : data.shift2Mon;
+      case DateTime.tuesday:
+        return shiftType == 1 ? data.shift1Tue : data.shift2Tue;
+      case DateTime.wednesday:
+        return shiftType == 1 ? data.shift1Wed : data.shift2Wed;
+      case DateTime.thursday:
+        return shiftType == 1 ? data.shift1Thu : data.shift2Thu;
+      case DateTime.friday:
+        return shiftType == 1 ? data.shift1Fri : data.shift2Fri;
+      case DateTime.saturday:
+        return shiftType == 1 ? data.shift1Sat : data.shift2Sat;
+      case DateTime.sunday:
+        return shiftType == 1 ? data.shift1Sun : data.shift2Sun;
+    }
+    return null;
+  }
+
+  bool _isShiftOpen(
+      BasicInformationHospitalResponse data, int shiftType, int weekday) {
+    
+    final status = _getShiftStatus(data, shiftType, weekday);
+    // '○', '〇', 'O', 'o' などを許可
+    const validStatuses = ['○', '〇', 'O', 'o', 'true'];
+    return status != null && validStatuses.contains(status);
+  }
+
+  void _addCandidate(
+      FormArray candidateDate, DateTime date, String shiftTime, String choice) {
+    String start = '';
+    String end = '';
+    // shiftTime e.g. "09:00〜12:00" or "09:00-12:00"
+    if (shiftTime.isNotEmpty) {
+      // 共通の区切り文字で分割を試みる
+      final split = shiftTime.split(RegExp(r'[〜\-]'));
+      if (split.length >= 2) {
+        start = split[0].trim();
+        end = split[1].trim();
+      }
+    }
+
+    final group = FormGroup({
+      '_id': FormControl<String>(),
+      'preferredDate': FormControl<DateTime>(
+        value: date,
+        validators: [Validators.required],
+      ),
+      'choice': FormControl<String>(value: choice),
+      'timePeriodFrom': FormControl<String>(
+        value: start,
+        validators: [Validators.required],
+      ),
+      'timePeriodTo': FormControl<String>(
+        value: end,
+        validators: [Validators.required],
+      ),
+    });
+    
+    candidateDate.add(group);
   }
 }

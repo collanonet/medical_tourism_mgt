@@ -20,6 +20,10 @@ class WebBookingMedicalRecordRequest {
   bool? isClosed;
   DateTime? testCallDate;
   String? testCallTime;
+  DateTime? desiredDate1;
+  DateTime? desiredDate2;
+  DateTime? desiredDate3;
+  String? reason;
 
   WebBookingMedicalRecordRequest({
     this.patientName,
@@ -34,6 +38,10 @@ class WebBookingMedicalRecordRequest {
     this.isClosed,
     this.testCallDate,
     this.testCallTime,
+    this.desiredDate1,
+    this.desiredDate2,
+    this.desiredDate3,
+    this.reason,
   });
 
   factory WebBookingMedicalRecordRequest.fromJson(Map<String, dynamic> json) {

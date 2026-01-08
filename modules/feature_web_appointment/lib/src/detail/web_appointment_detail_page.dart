@@ -27,18 +27,24 @@ class WebAppointmentDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutView(
       selectedIndex: 3,
-      page: ReactiveFormConfig(
-        validationMessages: validationMessages,
-        child: ReactiveFormBuilder(
-          form: () => formWebAppointment(),
-          builder: (context, formGroup, child) {
-            return Provider(
-              create: (context) => GetIt.I<WebAppointmentDetailModel>()
-                ..getReservationById(id: id),
+      page: Provider(
+        create: (context) {
+          final model = GetIt.I<WebAppointmentDetailModel>();
+          if (id != null) {
+            model.getReservationById(id: id);
+          }
+          return model;
+        },
+        builder: (context, child) {
+          final model = context.read<WebAppointmentDetailModel>();
+          return ReactiveFormConfig(
+            validationMessages: validationMessages,
+            child: ReactiveForm(
+              formGroup: model.formGroup,
               child: const WebAppointmentDetailScreen(),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

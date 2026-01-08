@@ -48,7 +48,13 @@ FormGroup formWebAppointment() => FormGroup({
       'shift1': FormControl<String>(
         disabled: true,
       ),
+      'shift1End': FormControl<String>(
+        disabled: true,
+      ),
       'shift2': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2End': FormControl<String>(
         disabled: true,
       ),
       'shift1Mon': FormControl<String>(
