@@ -28,6 +28,16 @@ class _DetailPatientWebReservationScreenState
     extends State<DetailPatientWebReservationScreen> {
   final formatter = InputFormatter();
 
+  List<String> get timeOptions {
+    List<String> options = [];
+    for (int i = 0; i < 24; i++) {
+      String hour = i.toString().padLeft(2, '0');
+      options.add('$hour:00');
+      options.add('$hour:30');
+    }
+    return options;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -48,6 +58,628 @@ class _DetailPatientWebReservationScreenState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+
+                        Text(
+                          '医療機関',
+                          style: context.textTheme.titleLarge,
+                        ),
+                        SizedBox(
+                          height: context.appTheme.spacing.marginMedium,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ValueListenableListener(
+                                valueListenable: context
+                                    .read<DetailPatientWebReservationModel>()
+                                    .hospitals,
+                                onListen: () {
+                                  var data = context
+                                      .read<DetailPatientWebReservationModel>()
+                                      .hospitals
+                                      .value;
+
+                                  if (data.hasError) {
+                                    snackBarWidget(
+                                        message: '病院が見つからない。',
+                                        backgroundColor: Colors.red);
+                                  }
+                                },
+                                child: ValueListenableBuilder(
+                                    valueListenable: context
+                                        .watch<
+                                            DetailPatientWebReservationModel>()
+                                        .hospitals,
+                                    builder: (context, hospitalsList, _) {
+                                      return ReactiveDropdownField<
+                                          BasicInformationHospitalResponse>(
+                                        formControlName: 'hospitalSelect',
+                                        decoration: const InputDecoration(
+                                          labelText: '医療機関名',
+                                        ),
+                                        items: hospitalsList.data
+                                                ?.map((e) => DropdownMenuItem(
+                                                      value: e,
+                                                        child: Text((e
+                                                                        .hospitalNameChinese
+                                                                        ?.isNotEmpty ??
+                                                                    false)
+                                                                ? e.hospitalNameChinese!
+                                                                : e.hospitalNameKatakana ??
+                                                                    'NoName'),
+                                                    ))
+                                                .toList() ??
+                                            [],
+                                      );
+                                    }),
+                              ),
+                            ),
+                            SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                            Expanded(
+                              child: ValueListenableListener(
+                                valueListenable: context
+                                    .read<DetailPatientWebReservationModel>()
+                                    .doctors,
+                                onListen: () {
+                                  var data = context
+                                      .read<DetailPatientWebReservationModel>()
+                                      .doctors
+                                      .value;
+
+                                  if (data.hasData &&
+                                      data.requireData.isEmpty) {
+                                    snackBarWidget(
+                                        message: 'この病院には医者が登録されていません。医師名なしで保存できます。',
+                                        backgroundColor: Colors.orange);
+                                  }
+
+                                  if (data.hasError) {
+                                    snackBarWidget(
+                                        message: '医者情報を取得できませんでした。',
+                                        backgroundColor: Colors.orange);
+                                  }
+                                },
+                                child: ValueListenableBuilder(
+                                    valueListenable: context
+                                        .watch<
+                                            DetailPatientWebReservationModel>()
+                                        .doctors,
+                                    builder: (context, value, _) {
+                                      return Skeletonizer(
+                                        enabled: value.loading,
+                                        child: ReactiveDropdownField<
+                                            DoctorProfileHospitalResponse>(
+                                          formControlName: 'doctorName',
+                                          decoration: const InputDecoration(
+                                            labelText: '医者',
+                                          ),
+                                          items: value.data
+                                                  ?.map((e) => DropdownMenuItem(
+                                                        value: e,
+                                                        child: Text(
+                                                            e.nameKanji ??
+                                                                'NoName'),
+                                                        onTap: () {
+                                                          context
+                                                              .read<
+                                                                  DetailPatientWebReservationModel>()
+                                                              .selectDoctor(e);
+                                                        },
+                                                      ))
+                                                  .toList() ??
+                                              [
+                                                const DropdownMenuItem(
+                                                  value: null,
+                                                  child: Text('NoName'),
+                                                )
+                                              ],
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: context.appTheme.spacing.marginMedium,
+                        ),
+                        Text(
+                          '診療時間',
+                          style: context.textTheme.titleMedium,
+                        ),
+                        SizedBox(
+                          height: context.appTheme.spacing.marginMedium,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(
+                              context.appTheme.spacing.marginMedium),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(
+                              context.appTheme.spacing.borderRadiusMedium,
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                children: [
+                                  const IntrinsicWidth(
+                                    stepWidth: 150,
+                                    child: Text(
+                                      '部門',
+                                      style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 200,
+                                    child: Text(
+                                      '診療時間',
+                                      style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: boxText(
+                                      context,
+                                      '月',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: boxText(
+                                      context,
+                                      '火',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: boxText(
+                                      context,
+                                      '水',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: boxText(
+                                      context,
+                                      '木',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: boxText(
+                                      context,
+                                      '金',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: boxText(
+                                      context,
+                                      '土',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: boxText(
+                                      context,
+                                      '日',
+                                      textColor: Colors.white,
+                                      bg: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
+                              ),
+                              Row(
+                                children: [
+                                  IntrinsicWidth(
+                                    stepWidth: 150,
+                                    child: ReactiveTextField(
+                                      formControlName: 'department1',
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 200,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName: 'shift1',
+                                          ),
+                                        ),
+                                        const Text(' ~ '),
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName: 'shift1End',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Mon',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Tue',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Wed',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Thu',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Fri',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Sat',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift1Sun',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
+                              ),
+                              Row(
+                                children: [
+                                  IntrinsicWidth(
+                                    stepWidth: 150,
+                                    child: ReactiveTextField(
+                                      formControlName: 'department2',
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 200,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName: 'shift2',
+                                          ),
+                                        ),
+                                        const Text(' ~ '),
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName: 'shift2End',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Mon',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Tue',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Wed',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Thu',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Fri',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Sat',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  const IntrinsicWidth(
+                                    stepWidth: 80,
+                                    child: ReactiveDropdownFormField(
+                                      formControlName: 'shift2Sun',
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '×',
+                                          child: Text('×'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '○',
+                                          child: Text('○'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Divider(),
                         const Text(
                           '患者',
                           style: TextStyle(
@@ -228,601 +860,27 @@ class _DetailPatientWebReservationScreenState
                                 );
                               }),
                         ),
-                        const Divider(),
-                        Text(
-                          '医療機関',
-                          style: context.textTheme.titleLarge,
-                        ),
                         SizedBox(
                           height: context.appTheme.spacing.marginMedium,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ValueListenableListener(
-                                valueListenable: context
-                                    .read<DetailPatientWebReservationModel>()
-                                    .hospitals,
-                                onListen: () {
-                                  var data = context
-                                      .read<DetailPatientWebReservationModel>()
-                                      .hospitals
-                                      .value;
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xffF08C67),
+                            ),
+                            onPressed: () {
+                              final count = context
+                                  .read<DetailPatientWebReservationModel>()
+                                  .generateCandidateDates();
 
-                                  if (data.hasError) {
-                                    snackBarWidget(
-                                        message: '病院が見つからない。',
-                                        backgroundColor: Colors.red);
-                                  }
-                                },
-                                child: ValueListenableBuilder(
-                                    valueListenable: context
-                                        .watch<
-                                            DetailPatientWebReservationModel>()
-                                        .hospitals,
-                                    builder: (context, hospitalsList, _) {
-                                      return ReactiveDropdownField<
-                                          BasicInformationHospitalResponse>(
-                                        formControlName: 'hospitalSelect',
-                                        decoration: const InputDecoration(
-                                          labelText: '医療機関名',
-                                        ),
-                                        items: hospitalsList.data
-                                                ?.map((e) => DropdownMenuItem(
-                                                      value: e,
-                                                        child: Text((e
-                                                                        .hospitalNameChinese
-                                                                        ?.isNotEmpty ??
-                                                                    false)
-                                                                ? e.hospitalNameChinese!
-                                                                : e.hospitalNameKatakana ??
-                                                                    'NoName'),
-                                                    ))
-                                                .toList() ??
-                                            [],
-                                      );
-                                    }),
-                              ),
-                            ),
-                            SizedBox(
-                              width: context.appTheme.spacing.marginMedium,
-                            ),
-                            Expanded(
-                              child: ValueListenableListener(
-                                valueListenable: context
-                                    .read<DetailPatientWebReservationModel>()
-                                    .doctors,
-                                onListen: () {
-                                  var data = context
-                                      .read<DetailPatientWebReservationModel>()
-                                      .doctors
-                                      .value;
-
-                                  if (data.hasData &&
-                                      data.requireData.isEmpty) {
-                                    snackBarWidget(
-                                        message: 'この病院には医者が登録されていません。医師名なしで保存できます。',
-                                        backgroundColor: Colors.orange);
-                                  }
-
-                                  if (data.hasError) {
-                                    snackBarWidget(
-                                        message: '医者情報を取得できませんでした。',
-                                        backgroundColor: Colors.orange);
-                                  }
-                                },
-                                child: ValueListenableBuilder(
-                                    valueListenable: context
-                                        .watch<
-                                            DetailPatientWebReservationModel>()
-                                        .doctors,
-                                    builder: (context, value, _) {
-                                      return Skeletonizer(
-                                        enabled: value.loading,
-                                        child: ReactiveDropdownField<
-                                            DoctorProfileHospitalResponse>(
-                                          formControlName: 'doctorName',
-                                          decoration: const InputDecoration(
-                                            labelText: '医者',
-                                          ),
-                                          items: value.data
-                                                  ?.map((e) => DropdownMenuItem(
-                                                        value: e,
-                                                        child: Text(
-                                                            e.nameKanji ??
-                                                                'NoName'),
-                                                        onTap: () {
-                                                          context
-                                                              .read<
-                                                                  DetailPatientWebReservationModel>()
-                                                              .selectDoctor(e);
-                                                        },
-                                                      ))
-                                                  .toList() ??
-                                              [
-                                                const DropdownMenuItem(
-                                                  value: null,
-                                                  child: Text('NoName'),
-                                                )
-                                              ],
-                                        ),
-                                      );
-                                    }),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: context.appTheme.spacing.marginMedium,
-                        ),
-                        Text(
-                          '診療時間',
-                          style: context.textTheme.titleMedium,
-                        ),
-                        SizedBox(
-                          height: context.appTheme.spacing.marginMedium,
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginMedium),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(
-                              context.appTheme.spacing.borderRadiusMedium,
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                children: [
-                                  const IntrinsicWidth(
-                                    stepWidth: 150,
-                                    child: Text(
-                                      '部門',
-                                      style: TextStyle(
-                                        fontFamily: 'NotoSansJP',
-                                        package: 'core_ui',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 150,
-                                    child: Text(
-                                      '診療時間',
-                                      style: TextStyle(
-                                        fontFamily: 'NotoSansJP',
-                                        package: 'core_ui',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: boxText(
-                                      context,
-                                      '月',
-                                      textColor: Colors.white,
-                                      bg: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: boxText(
-                                      context,
-                                      '火',
-                                      textColor: Colors.white,
-                                      bg: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: boxText(
-                                      context,
-                                      '水',
-                                      textColor: Colors.white,
-                                      bg: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: boxText(
-                                      context,
-                                      '木',
-                                      textColor: Colors.white,
-                                      bg: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: boxText(
-                                      context,
-                                      '金',
-                                      textColor: Colors.white,
-                                      bg: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: boxText(
-                                      context,
-                                      '土',
-                                      textColor: Colors.white,
-                                      bg: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: boxText(
-                                      context,
-                                      '日',
-                                      textColor: Colors.white,
-                                      bg: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: context.appTheme.spacing.marginMedium,
-                              ),
-                              Row(
-                                children: [
-                                  IntrinsicWidth(
-                                    stepWidth: 150,
-                                    child: ReactiveTextField(
-                                      formControlName: 'department1',
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 150,
-                                    child: ReactiveTextField(
-                                      formControlName: 'shift1',
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift1Mon',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift1Tue',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift1Wed',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift1Thu',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift1Fri',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift1Sat',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift1Sun',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: context.appTheme.spacing.marginMedium,
-                              ),
-                              Row(
-                                children: [
-                                  IntrinsicWidth(
-                                    stepWidth: 150,
-                                    child: ReactiveTextField(
-                                      formControlName: 'department2',
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  IntrinsicWidth(
-                                    stepWidth: 150,
-                                    child: ReactiveTextField(
-                                      formControlName: 'shift2',
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift2Mon',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift2Tue',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift2Wed',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift2Thu',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift2Fri',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift2Sat',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const IntrinsicWidth(
-                                    stepWidth: 80,
-                                    child: ReactiveDropdownFormField(
-                                      formControlName: 'shift2Sun',
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: '×',
-                                          child: Text('×'),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: '○',
-                                          child: Text('○'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                              if (count == 0) {
+                                snackBarWidget(
+                                  message: '指定された希望日では、医療機関の診療予定がありません。',
+                                  backgroundColor: Colors.orange,
+                                );
+                              }
+                            },
+                            child: const Text('候補日を自動作成'),
                           ),
                         ),
                         const Divider(),
@@ -896,9 +954,6 @@ class _DetailPatientWebReservationScreenState
                                                   FormControl<String>(
                                                 validators: [
                                                   Validators.required,
-                                                  Validators.pattern(
-                                                    ValidatorRegExp.time,
-                                                  ),
                                                 ],
                                               ), // 時間帯（自）
                                               'timePeriodTo':
@@ -906,9 +961,6 @@ class _DetailPatientWebReservationScreenState
                                                 validators: [
                                                   Validators.required,
                                                   // validate time format
-                                                  Validators.pattern(
-                                                    ValidatorRegExp.time,
-                                                  ),
                                                 ],
                                               ), // 時間帯（至）
                                             })
@@ -1074,19 +1126,14 @@ class _DetailPatientWebReservationScreenState
                                 child: ReactiveValueListenableBuilder<String>(
                                     formControlName: 'testCallTime',
                                     builder: (context, control, _) {
-                                      return ReactiveTextField<String>(
+                                      return ReactiveDropdownField<String>(
                                         formControlName: 'testCallTime',
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: [
-                                          formatter.timeFormatter,
-                                        ],
-                                        onChanged: (value) {
-                                          if (value.value != null) {
-                                            var time =
-                                                processTimeInput(value.value!);
-                                            control.value = time;
-                                          }
-                                        },
+                                        items: timeOptions
+                                            .map((e) => DropdownMenuItem(
+                                                  value: e,
+                                                  child: Text(e),
+                                                ))
+                                            .toList(),
                                         decoration: const InputDecoration(
                                           label: Text('時間'),
                                         ),
@@ -1098,6 +1145,32 @@ class _DetailPatientWebReservationScreenState
                         ),
                         SizedBox(
                           height: context.appTheme.spacing.marginMedium,
+                        ),
+                        // Debug Validation
+                        ReactiveFormConsumer(
+                          builder: (context, form, child) {
+                             if (form.invalid) {
+                               logger.d('Form Errors: ${form.errors}');
+                               form.controls.forEach((key, value) {
+                                 if (value.invalid) {
+                                   logger.d('Invalid Control: $key, Errors: ${value.errors}');
+                                 }
+                               });
+                               
+                               // Check FormArray
+                               final candidateDate = form.control('candidateDate') as FormArray;
+                               for (var i = 0; i < candidateDate.controls.length; i++) {
+                                  var group = candidateDate.controls[i] as FormGroup;
+                                  if (group.invalid) {
+                                     logger.d('Invalid Candidate Row $i: ${group.errors}');
+                                     group.controls.forEach((k, v) {
+                                        if (v.invalid) logger.d('Row $i Invalid Control: $k, Errors: ${v.errors}');
+                                     });
+                                  }
+                               }
+                             }
+                             return const SizedBox.shrink();
+                          },
                         ),
                       ],
                     ),
@@ -1245,9 +1318,54 @@ class _DetailPatientWebReservationScreenState
         });
   }
 
-  Row candidateBooking(BuildContext context, FormArray<Object?> formArray,
+  List<String> _generateTimeOptions(String? shiftTime) {
+    if (shiftTime == null || shiftTime.isEmpty) {
+      // デフォルト: 09:00 - 18:00 (あるいは全時間)
+      return timeOptions;
+    }
+
+    try {
+      final split = shiftTime.split(RegExp(r'[〜\-]'));
+      if (split.length < 2) return timeOptions;
+
+      final startStr = split[0].trim();
+      final endStr = split[1].trim();
+
+      final startParts = startStr.split(':');
+      final endParts = endStr.split(':');
+      
+      if (startParts.length < 2 || endParts.length < 2) return timeOptions;
+
+      int startHour = int.parse(startParts[0]);
+      int startMinute = int.parse(startParts[1]);
+      
+      int endHour = int.parse(endParts[0]);
+      int endMinute = int.parse(endParts[1]);
+
+      List<String> options = [];
+      
+      // Calculate start time in minutes
+      int currentMinutes = startHour * 60 + startMinute;
+      int endMinutes = endHour * 60 + endMinute;
+
+      while (currentMinutes <= endMinutes) {
+         int h = currentMinutes ~/ 60;
+         int m = currentMinutes % 60;
+         String timeStr = '${h.toString().padLeft(2, '0')}:${m.toString().padLeft(2, '0')}';
+         options.add(timeStr);
+         currentMinutes += 30;
+      }
+      return options;
+
+    } catch (e) {
+      return timeOptions;
+    }
+  }
+
+  Row candidateBooking(BuildContext context, FormArray formArray,
       FormGroup currentForm) {
     return Row(
+      key: ValueKey(currentForm),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
@@ -1259,72 +1377,71 @@ class _DetailPatientWebReservationScreenState
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        ReactiveValueListenableBuilder(
-            formControlName: 'choice',
-            builder: (context, control, _) {
-              return Row(
-                children: [
-                  boxText(
-                    context,
-                    '午前',
-                    textColor:
-                        control.value == '午前' ? Colors.white : Colors.black,
-                    bg: control.value == '午前'
-                        ? const Color(0xffF08C67)
-                        : Colors.white,
-                    borderC: const Color(0xffF08C67),
-                    onTap: () {
-                      control.value = '午前';
-                    },
+        Expanded(
+          child: ReactiveValueListenableBuilder<String>(
+              formControlName: 'choice',
+              builder: (context, control, _) {
+                final choice = control.value;
+                return SegmentedButton<String>(
+                  segments: const [
+                    ButtonSegment(
+                      value: '午前',
+                      label: Text('午前'),
+                    ),
+                    ButtonSegment(
+                      value: '午後',
+                      label: Text('午後'),
+                    ),
+                    ButtonSegment(
+                      value: '終日',
+                      label: Text('終日'),
+                    ),
+                  ],
+                  selected: {choice ?? '午前'},
+                  onSelectionChanged: (Set<String> newSelection) {
+                    control.value = newSelection.first;
+                  },
+                  style: ButtonStyle(
+                    visualDensity: VisualDensity.compact,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
                   ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  boxText(
-                    context,
-                    '午後',
-                    textColor:
-                        control.value == '午後' ? Colors.white : Colors.black,
-                    bg: control.value == '午後'
-                        ? const Color(0xffF08C67)
-                        : Colors.white,
-                    borderC: const Color(0xffF08C67),
-                    onTap: () {
-                      control.value = '午後';
-                    },
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  boxText(
-                    context,
-                    '終日',
-                    textColor:
-                        control.value == '終日' ? Colors.white : Colors.black,
-                    bg: control.value == '終日'
-                        ? const Color(0xffF08C67)
-                        : Colors.white,
-                    borderC: const Color(0xffF08C67),
-                    onTap: () {
-                      control.value = '終日';
-                    },
-                  ),
-                ],
-              );
-            }),
+                );
+              }),
+        ),
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
         Expanded(
           child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodFrom',
-              builder: (context, control, _) {
-                return ReactiveTextField<String>(
+              formControlName: 'choice', // choiceの変更で時刻リストを変えるため監視
+              builder: (context, choiceControl, _) {
+                
+                final choice = choiceControl.value;
+                final hospital = context.read<DetailPatientWebReservationModel>().hospital.value.data;
+                String shiftTime = '';
+                if (choice == '午前') {
+                  final start = hospital?.shift1 ?? '';
+                  final end = hospital?.shift1End ?? '';
+                  shiftTime = start.isNotEmpty && end.isNotEmpty ? '$start〜$end' : '';
+                } else if (choice == '午後') {
+                  final start = hospital?.shift2 ?? '';
+                  final end = hospital?.shift2End ?? '';
+                  shiftTime = start.isNotEmpty && end.isNotEmpty ? '$start〜$end' : '';
+                } else {
+                   shiftTime = ''; 
+                }
+                
+                final dynamicOptions = _generateTimeOptions(shiftTime);
+
+                return ReactiveDropdownField<String>(
                   formControlName: 'timePeriodFrom',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
+                  items: dynamicOptions
+                      .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e),
+                          ))
+                      .toList(),
                   decoration: const InputDecoration(
                     hintText: '00:00',
                     label: Text(
@@ -1337,20 +1454,40 @@ class _DetailPatientWebReservationScreenState
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        const Text('〜'),
+        const Padding(
+          padding: EdgeInsets.only(top: 15),
+          child: Text('〜'),
+        ),
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
         Expanded(
           child: ReactiveValueListenableBuilder<String>(
-              formControlName: 'timePeriodTo',
-              builder: (context, control, _) {
-                return ReactiveTextField<String>(
+              formControlName: 'choice',
+              builder: (context, choiceControl, _) {
+                 final choice = choiceControl.value;
+                final hospital = context.read<DetailPatientWebReservationModel>().hospital.value.data;
+                String shiftTime = '';
+                if (choice == '午前') {
+                  final start = hospital?.shift1 ?? '';
+                  final end = hospital?.shift1End ?? '';
+                  shiftTime = start.isNotEmpty && end.isNotEmpty ? '$start〜$end' : '';
+                } else if (choice == '午後') {
+                  final start = hospital?.shift2 ?? '';
+                  final end = hospital?.shift2End ?? '';
+                  shiftTime = start.isNotEmpty && end.isNotEmpty ? '$start〜$end' : '';
+                }
+                
+                final dynamicOptions = _generateTimeOptions(shiftTime);
+
+                return ReactiveDropdownField<String>(
                   formControlName: 'timePeriodTo',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    formatter.timeFormatter,
-                  ],
+                  items: dynamicOptions
+                      .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e),
+                          ))
+                      .toList(),
                   decoration: const InputDecoration(
                     label: Text(
                       '時間帯（至）',
@@ -1360,20 +1497,15 @@ class _DetailPatientWebReservationScreenState
                 );
               }),
         ),
-        Expanded(
-          child: Row(
-            children: [
-              if (formArray.controls.indexOf(currentForm) != 0) ...{
-                IconButton(
-                  icon: const Icon(Icons.delete_forever, color: Colors.red),
-                  onPressed: () => formArray.removeAt(
-                    formArray.controls.indexOf(currentForm),
-                  ),
-                ),
-              }
-            ],
+        IconButton(
+          onPressed: () {
+            formArray.remove(currentForm);
+          },
+          icon: const Icon(
+            Icons.delete_forever,
+            color: Colors.red,
           ),
-        ),
+        )
       ],
     );
   }

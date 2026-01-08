@@ -7,6 +7,9 @@ class Lists {
     E Function(int index) separator, {
     bool growable = true,
   }) {
+    if (length == 0) {
+      return [];
+    }
     return List.generate((length * 2) - 1, (index) {
       final itemIndex = index ~/ 2;
       if (index.isEven) {

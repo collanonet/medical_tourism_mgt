@@ -24,6 +24,11 @@ class WebBookingMedicalRecordResponse {
   bool? isClosed;
   DateTime? testCallDate;
   String? testCallTime;
+  DateTime? desiredDate1;
+  DateTime? desiredDate2;
+  DateTime? desiredDate3;
+  bool? noDesiredDate;
+  String? reason;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -41,6 +46,11 @@ class WebBookingMedicalRecordResponse {
     this.isClosed,
     this.testCallDate,
     this.testCallTime,
+    this.desiredDate1,
+    this.desiredDate2,
+    this.desiredDate3,
+    this.noDesiredDate,
+    this.reason,
     required this.createdAt,
     required this.updatedAt,
   });

@@ -29,6 +29,16 @@ WebBookingMedicalRecordRequest _$WebBookingMedicalRecordRequestFromJson(
           ? null
           : DateTime.parse(json['testCallDate'] as String),
       testCallTime: json['testCallTime'] as String?,
+      desiredDate1: json['desiredDate1'] == null
+          ? null
+          : DateTime.parse(json['desiredDate1'] as String),
+      desiredDate2: json['desiredDate2'] == null
+          ? null
+          : DateTime.parse(json['desiredDate2'] as String),
+      desiredDate3: json['desiredDate3'] == null
+          ? null
+          : DateTime.parse(json['desiredDate3'] as String),
+      reason: json['reason'] as String?,
     );
 
 Map<String, dynamic> _$WebBookingMedicalRecordRequestToJson(
@@ -47,4 +57,8 @@ Map<String, dynamic> _$WebBookingMedicalRecordRequestToJson(
       'isClosed': instance.isClosed,
       'testCallDate': instance.testCallDate?.toIso8601String(),
       'testCallTime': instance.testCallTime,
+      'desiredDate1': instance.desiredDate1?.toIso8601String(),
+      'desiredDate2': instance.desiredDate2?.toIso8601String(),
+      'desiredDate3': instance.desiredDate3?.toIso8601String(),
+      'reason': instance.reason,
     };

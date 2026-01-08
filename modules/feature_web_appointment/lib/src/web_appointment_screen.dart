@@ -48,8 +48,10 @@ class WebAppointmentScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {
-                context.router.push(WebAppointmentDetailRoute());
+              onPressed: () async {
+                await context.router.push(WebAppointmentDetailRoute());
+                // Always refresh to show new registrations
+                context.read<WebAppointmentModel>().getWebBookingAdmin();
               },
               child: Text(context.l10n.actionNewRegistration),
             ),
@@ -132,10 +134,12 @@ class WebAppointmentScreen extends StatelessWidget {
                                 (index) {
                                   var item = value.requireData[index];
                                   return RowTableData(
-                                    onTap: () {
-                                      context.router.push(
+                                    onTap: () async {
+                                      await context.router.push(
                                           WebAppointmentDetailRoute(
                                               id: item.id));
+                                      // Always refresh to ensure latest data (edits/deletes)
+                                      context.read<WebAppointmentModel>().getWebBookingAdmin();
                                     },
                                     cell: [
                                       Text(

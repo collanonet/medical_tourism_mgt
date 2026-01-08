@@ -276,6 +276,17 @@ WebBookingMedicalRecordResponse _$WebBookingMedicalRecordResponseFromJson(
           ? null
           : DateTime.parse(json['testCallDate'] as String),
       testCallTime: json['testCallTime'] as String?,
+      desiredDate1: json['desiredDate1'] == null
+          ? null
+          : DateTime.parse(json['desiredDate1'] as String),
+      desiredDate2: json['desiredDate2'] == null
+          ? null
+          : DateTime.parse(json['desiredDate2'] as String),
+      desiredDate3: json['desiredDate3'] == null
+          ? null
+          : DateTime.parse(json['desiredDate3'] as String),
+      noDesiredDate: json['noDesiredDate'] as bool?,
+      reason: json['reason'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -297,6 +308,11 @@ Map<String, dynamic> _$WebBookingMedicalRecordResponseToJson(
       'isClosed': instance.isClosed,
       'testCallDate': instance.testCallDate?.toIso8601String(),
       'testCallTime': instance.testCallTime,
+      'desiredDate1': instance.desiredDate1?.toIso8601String(),
+      'desiredDate2': instance.desiredDate2?.toIso8601String(),
+      'desiredDate3': instance.desiredDate3?.toIso8601String(),
+      'noDesiredDate': instance.noDesiredDate,
+      'reason': instance.reason,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
